@@ -1,0 +1,14 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"10-29042013-060348";"";
+"REFERENCE";"310-87-107-41-001101";"";
+"TraceParts.PartTitle";"Straight socket connector 2.54 mm, height 4.2 mm, solder tail, single row";"";
+"TraceParts.InstanceId";"10-29042013-0603489JBTJRXJLKFIZSLRRCJ22J6JA";"";
+"DESIGN";"Straight socket connector 2.54 mm, height 4.2 mm, solder tail, single row, 7 contacts, Tin / Flash Gold";"";
+"TraceParts.PartStatus";"Published";"";
+"TraceParts.PartStatusId";"";"";
+"SUPPLIER";"preci-dip";"";
+"TraceParts.PartVersion";"1.0.8";"";
+"TRACEPARTS";"TRACEPARTS";"";
+"TraceParts.PartLanguage";"en";"";
+"TraceParts.ClassPath";"PRECIDIP:10-29042013-060348";"";
+https://www.traceparts.com/els/digikey/en/product/precidip-straight-socket-connector-254-mm-height-42-mm-solder-tail-single-row-7-contacts-tin-flash-gold?Product=10-29042013-060348&PartNumber=310-87-107-41-001101

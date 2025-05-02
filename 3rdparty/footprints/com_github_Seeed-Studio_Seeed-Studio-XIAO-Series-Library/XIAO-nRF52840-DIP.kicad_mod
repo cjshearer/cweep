@@ -480,15 +480,37 @@
 		(uuid "6b725fd4-d6f0-46bf-b3e0-7ec07cc05622")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library/AMz3D.3dshapesXIAO-nRF52840-v3.step"
+	(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library/AMz3D.3dshapes/XIAO-nRF52840-v3.step"
 		(offset
-			(xyz 6.1 -1.75 0.25)
+			(xyz 6.1 -1.75 3)
 		)
 		(scale
 			(xyz 1 1 1)
 		)
 		(rotate
 			(xyz -90 -0 -90)
+		)
+	)
+	(model "${KIPRJMOD}/3rdparty/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
+		(offset
+			(xyz -7.6 0 -0.08)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 90)
+		)
+	)
+	(model "${KIPRJMOD}/3rdparty/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
+		(offset
+			(xyz 7.6 0 -0.08)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 90)
 		)
 	)
 )
