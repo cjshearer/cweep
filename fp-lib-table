@@ -1,6 +1,6 @@
 (fp_lib_table
   (version 7)
-  (lib (name "Seeed Studio XIAO Series Library")(type "KiCad")(uri "${KIPRJMOD}/3rdparty/footprints/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library")(options "")(descr ""))
-  (lib (name "Switch_Keyboard_Hotswap_Kailh")(type "KiCad")(uri "${KIPRJMOD}/3rdparty/footprints/com_github_perigoso_keyswitch-kicad-library/Switch_Keyboard_Hotswap_Kailh.pretty")(options "")(descr ""))
-  (lib (name "cweep")(type "KiCad")(uri "${KIPRJMOD}/3rdparty/footprints/cweep.pretty")(options "")(descr ""))
+  (lib (name "Seeed Studio XIAO Series Library")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library")(options "")(descr ""))
+  (lib (name "Switch_Keyboard_Hotswap_Kailh")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_github_perigoso_keyswitch-kicad-library/Switch_Keyboard_Hotswap_Kailh.pretty")(options "")(descr ""))
+  (lib (name "cweep")(type "KiCad")(uri "${KIPRJMOD}/footprints/cweep.pretty")(options "")(descr ""))
 )

@@ -1666,7 +1666,7 @@
 			(uuid "4410c892-76b1-4374-a876-8ce2946008e1")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1677,7 +1677,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1688,7 +1688,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -2883,7 +2883,7 @@
 			(uuid "9de06ba0-168f-4caa-91ac-5470ef559a77")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2894,7 +2894,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2905,7 +2905,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -4100,7 +4100,7 @@
 			(uuid "c3f27dd1-c75f-4c77-881c-072da455d575")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4111,7 +4111,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4122,7 +4122,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -5317,7 +5317,7 @@
 			(uuid "68fb1723-1f94-4858-9539-1b6b9dcebe25")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -5328,7 +5328,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -5339,7 +5339,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -8026,7 +8026,7 @@
 			(uuid "7a5bd861-1da4-4620-b056-438b9282b880")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8037,7 +8037,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8048,7 +8048,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -9989,7 +9989,7 @@
 			(uuid "6ad1633f-68a0-40b3-ab0f-a1cf0251bc8d")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10000,7 +10000,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10011,7 +10011,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -11206,7 +11206,7 @@
 			(uuid "f3736b74-0dc8-4056-a803-98e0bc5f3fc0")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11217,7 +11217,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11228,7 +11228,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -11810,7 +11810,7 @@
 			(uuid "80e14b2e-21f5-4028-8ac7-d64a2ff90418")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library/AMz3D.3dshapes/XIAO-nRF52840-v3.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library/AMz3D.3dshapes/XIAO-nRF52840-v3.step"
 			(offset
 				(xyz 6.1 -1.75 3)
 			)
@@ -11821,7 +11821,7 @@
 				(xyz -90 -0 -90)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
+		(model "${KIPRJMOD}/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
 			(offset
 				(xyz -7.6 0 -0.08)
 			)
@@ -11832,7 +11832,7 @@
 				(xyz -90 -0 90)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
+		(model "${KIPRJMOD}/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
 			(offset
 				(xyz 7.6 0 -0.08)
 			)
@@ -13027,7 +13027,7 @@
 			(uuid "f3a3a8c8-661d-4fa2-b087-8b34e53440c1")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13038,7 +13038,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13049,7 +13049,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -14244,7 +14244,7 @@
 			(uuid "827d0e63-4ecb-4655-a42f-03fe69ab85b7")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14255,7 +14255,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14266,7 +14266,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -15834,7 +15834,7 @@
 			(uuid "aa500be2-6312-4137-b303-00fdea3f5e27")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -15845,7 +15845,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -15856,7 +15856,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -17051,7 +17051,7 @@
 			(uuid "758689de-cc9e-43b2-95b6-d6ed35267a42")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -17062,7 +17062,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -17073,7 +17073,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -18641,7 +18641,7 @@
 			(uuid "6d3bddb2-59bf-4a99-8409-8fb1b023d5ca")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -18652,7 +18652,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -18663,7 +18663,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -20231,7 +20231,7 @@
 			(uuid "1c7b7d77-8904-417e-9fc8-17e9e223010f")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -20242,7 +20242,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -20253,7 +20253,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -22194,7 +22194,7 @@
 			(uuid "aef65078-8b32-4c21-99b5-ee627b5230ac")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -22205,7 +22205,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -22216,7 +22216,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -23411,7 +23411,7 @@
 			(uuid "4b0ceb2b-286f-47e9-b03a-6062d6d87c71")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -23422,7 +23422,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -23433,7 +23433,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -26120,7 +26120,7 @@
 			(uuid "f07af107-d681-4534-90ae-e522f3f82433")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -26131,7 +26131,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -26142,7 +26142,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
@@ -27337,7 +27337,7 @@
 			(uuid "f73316ba-a0f4-4b27-b71b-678c95db8a90")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
+		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -27348,7 +27348,7 @@
 				(xyz -0 -0 -0)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -27359,7 +27359,7 @@
 				(xyz -0 -0 180)
 			)
 		)
-		(model "${KIPRJMOD}/3rdparty/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
+		(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 			(offset
 				(xyz 50.6 5.35 0.7)
 			)
