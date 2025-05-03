@@ -278,7 +278,7 @@
 		(uuid "732f2b5e-a61b-4b45-ac91-faf23308aae2")
 	)
 	(fp_text user "reset"
-		(at -2.2394 -6.0285 270)
+		(at -2.25 -6.0285 270)
 		(layer "B.SilkS")
 		(uuid "6c902369-5c21-44d3-92ad-a3a792e370ef")
 		(effects
