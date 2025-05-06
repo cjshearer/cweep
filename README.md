@@ -12,10 +12,11 @@ This project is a custom wireless split keyboard in development, inspired by var
 - 34 × Kailh Low Profile Choc Switches (e.g., Sunset Tactile)
 - 34 × Kailh Choc Hotswap Sockets
 - 34 × 1U Kailh Choc Keycaps (e.g DDC Choc PBT Blanks)
-- 40 × 1N4148 Diodes (through-hole)
-- 1 × 40-Pin Machined IC Breakable Female Header Strip
-- 2 × 25-Pack Mill-Max Low Profile Controller Pins
-- 2 × 3-Pin 2-Position Switches (for on/off or other functionality)
+- 34 × 1N4148 Diodes (through-hole)
+- 4 × 7-Pin Machined IC Female Header Strips (buy larger strips and break to size)
+- 4 x 7 Mill-Max Low Profile Controller Pins (for MCU and female header strips)
+- 2 × 3-Pin 2-Position Switches
+- 4 x Mill-Max 0906-0-15-20-76-14-11-0 pogo pins (for battery and reset pads)
 - 2 × LiPo Batteries (e.g., ~15×22×7.5 mm)
 - 2 x Solar panel(s) sized to fit above the MCU
 
