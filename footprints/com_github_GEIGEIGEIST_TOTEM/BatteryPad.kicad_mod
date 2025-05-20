@@ -1,0 +1,52 @@
+(footprint "BatteryPad"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "J6"
+		(at 0 -1.778 0)
+		(layer "Dwgs.User")
+		(hide yes)
+		(uuid "fa8722c0-abb0-44e6-91fd-0168b936605a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "61ff5944-c30d-4d85-8490-65a5db8e553e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ac8de340-9186-4bcd-8fe8-bd4d4a602f43")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(pad "1" thru_hole circle
+		(at 0 0 270)
+		(size 2.5 2.5)
+		(drill 1.25)
+		(layers "*.Cu" "*.SilkS" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "96654f3a-1390-4502-a325-017647e97ee2")
+	)
+	(embedded_fonts no)
+)

@@ -1172,18 +1172,18 @@
 		(uuid "679b2f2f-8c1e-4425-ab8b-9f646f82456d")
 	)
 	(pad "1" smd roundrect
-		(at 3.5 6 180)
-		(size 2.55 2.5)
-		(layers "B.Cu" "B.Mask" "B.Paste")
-		(roundrect_rratio 0.1)
-		(uuid "51d33d9d-5407-4a53-963b-0b853e3f947e")
-	)
-	(pad "2" smd roundrect
 		(at -8.5 3.8 180)
 		(size 2.55 2.5)
 		(layers "B.Cu" "B.Mask" "B.Paste")
 		(roundrect_rratio 0.1)
 		(uuid "0bcaafad-e13f-4eb8-9aff-a6d70fb8d313")
+	)
+	(pad "2" smd roundrect
+		(at 3.5 6 180)
+		(size 2.55 2.5)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(roundrect_rratio 0.1)
+		(uuid "51d33d9d-5407-4a53-963b-0b853e3f947e")
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
