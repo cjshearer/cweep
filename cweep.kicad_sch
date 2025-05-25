@@ -1264,280 +1264,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Diode:1N4148"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "D"
-				(at 0 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "1N4148"
-				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "100V 0.15A standard switching diode, DO-35"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Device" "D"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Pins" "1=K 2=A"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "diode"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "D*DO?35*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "1N4148_0_1"
-				(polyline
-					(pts
-						(xy -1.27 1.27) (xy -1.27 -1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 0) (xy -1.27 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "1N4148_1_1"
-				(pin passive line
-					(at -3.81 0 0)
-					(length 2.54)
-					(name "K"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 3.81 0 180)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Mechanical:MountingHole_Pad"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom no)
-			(on_board yes)
-			(property "Reference" "H"
-				(at 0 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "MountingHole_Pad"
-				(at 0 4.445 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Mounting Hole with connection"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "mounting hole"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "MountingHole*Pad*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "MountingHole_Pad_0_1"
-				(circle
-					(center 0 1.27)
-					(radius 1.27)
-					(stroke
-						(width 1.27)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "MountingHole_Pad_1_1"
-				(pin input line
-					(at 0 -2.54 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Seeed Studio XIAO Series:XIAO-nRF52840"
 			(pin_names
 				(offset 1.016)
@@ -2151,6 +1877,175 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "cweep:1N4148"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at -2.54 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(property "Value" "1N4148"
+				(at -2.54 -1.27 0)
+				(effects
+					(font
+						(size 1.016 1.016)
+					)
+					(justify right)
+				)
+			)
+			(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+				(at -0.254 -18.034 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
+				(at 0 -11.938 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "100V 0.15A standard switching diode, DO-35"
+				(at -0.508 -14.732 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Device" "D"
+				(at 3.302 -0.254 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at -0.254 -19.812 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "D*DO?35*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "1N4148_0_1"
+				(polyline
+					(pts
+						(xy -1.27 1.27) (xy 1.27 1.27) (xy 0 -1.27) (xy -1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "1N4148_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers
@@ -2264,21 +2159,9 @@
 		)
 		(uuid "2d9fb37d-fa48-4aee-8526-d2950204dba8")
 	)
-	(text "Battery (R)"
-		(exclude_from_sim yes)
-		(at 178.816 51.816 0)
-		(effects
-			(font
-				(size 2.032 2.032)
-				(thickness 0.254)
-				(bold yes)
-			)
-		)
-		(uuid "2f6ffdc4-4069-4a0a-9e7d-a7e15149552e")
-	)
 	(text "Solar Charger (R)"
 		(exclude_from_sim yes)
-		(at 182.626 99.822 0)
+		(at 188.976 98.552 0)
 		(effects
 			(font
 				(size 2.032 2.032)
@@ -2290,7 +2173,7 @@
 	)
 	(text "Switch Matrix (R)"
 		(exclude_from_sim yes)
-		(at 244.094 19.05 0)
+		(at 218.694 17.78 0)
 		(effects
 			(font
 				(size 2.032 2.032)
@@ -2302,7 +2185,7 @@
 	)
 	(text "Microcontroller (R)"
 		(exclude_from_sim yes)
-		(at 249.682 104.902 0)
+		(at 249.428 98.552 0)
 		(effects
 			(font
 				(size 2.032 2.032)
@@ -2313,776 +2196,286 @@
 		(uuid "667a6e30-a10d-401b-ab79-6c125719df97")
 	)
 	(junction
-		(at 271.78 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "001c0ebd-c3e8-41f9-aacc-e157039e449d")
-	)
-	(junction
-		(at 271.78 60.96)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0409b3f7-17b0-4dfd-b5b1-378e501da67d")
-	)
-	(junction
-		(at 189.23 104.14)
+		(at 195.58 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "04136e70-318e-4c59-b347-be9604c67fbb")
 	)
 	(junction
-		(at 163.83 104.14)
+		(at 170.18 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "082ea518-9659-4432-81b9-38774e34a0c0")
 	)
 	(junction
-		(at 261.62 33.02)
+		(at 246.38 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0974db1d-4619-4eac-b5c8-0d70f1d69822")
+		(uuid "14cdd2b7-12ff-487c-bb42-0bbdfafb930e")
 	)
 	(junction
-		(at 185.42 64.77)
+		(at 220.98 39.37)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0aad6f86-d835-4233-8264-5355d786d427")
+		(uuid "16fbf886-9e83-4e66-ab4a-685337908fe8")
 	)
 	(junction
-		(at 210.82 33.02)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "10e77e77-699a-4e04-86e9-ede382f5e659")
-	)
-	(junction
-		(at 233.68 80.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "29759c29-88e0-4dc2-909b-3260db85ccb4")
-	)
-	(junction
-		(at 210.82 160.02)
+		(at 217.17 158.75)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2b1ec630-9531-46ef-b2e0-4b094cafef4e")
 	)
 	(junction
-		(at 199.39 130.81)
+		(at 205.74 129.54)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "307051f9-9fb6-4631-934c-c5af3827443f")
 	)
 	(junction
-		(at 210.82 71.12)
+		(at 233.68 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "33f759c8-5e11-4e9e-9348-cefed8fb5c95")
+		(uuid "338b4939-1698-4063-ab3d-acf1a939f946")
 	)
 	(junction
-		(at 261.62 52.07)
+		(at 236.22 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "35e1e2ed-13f8-4a00-97c2-a9b17fe30cd7")
 	)
 	(junction
-		(at 168.91 118.11)
+		(at 175.26 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3bb1a19d-e19e-48c8-bda5-40a0c4aad174")
 	)
 	(junction
-		(at 198.12 160.02)
+		(at 208.28 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "41b2d65d-b248-4d64-b19b-9f3e87574c4c")
+	)
+	(junction
+		(at 233.68 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4375f921-8a8a-4dd8-9dba-13af910315a0")
+	)
+	(junction
+		(at 204.47 158.75)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "475c6096-4385-4b24-b11e-30062d20e526")
 	)
 	(junction
-		(at 259.08 60.96)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4c2d61f7-e7a2-41dc-bec6-8351c26efd98")
-	)
-	(junction
-		(at 168.91 104.14)
+		(at 175.26 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4ff5cded-720c-4e63-8ed0-8d5c81889131")
 	)
 	(junction
-		(at 246.38 60.96)
+		(at 210.82 30.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "533dbccf-3640-4fd3-bd74-b2a4face2c75")
+		(uuid "51456641-a476-42f0-8369-58b58c346e6a")
 	)
 	(junction
-		(at 198.12 154.94)
+		(at 208.28 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "52279633-60a9-46c0-94dc-1d1e5d8add2f")
+	)
+	(junction
+		(at 185.42 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5588af61-f1c5-4fe1-89e3-2d4e2dd07079")
+	)
+	(junction
+		(at 204.47 153.67)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5f0c73c4-7485-4188-9e5b-765d2c2d6fcc")
 	)
 	(junction
-		(at 236.22 52.07)
+		(at 210.82 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "61a1996d-3dac-4a6a-98e1-9651f1ce3b7a")
 	)
 	(junction
-		(at 233.68 41.91)
+		(at 236.22 30.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "727ce453-db01-4c61-b4fb-261b93e166c3")
+		(uuid "64ea99c5-d8fc-448c-825d-65133ea10739")
 	)
 	(junction
-		(at 189.23 118.11)
+		(at 220.98 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6b5f0689-8d74-44cb-9342-864732e3bc52")
+	)
+	(junction
+		(at 242.57 156.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6c13a78c-782e-4be8-bd4e-68d42cb572eb")
+	)
+	(junction
+		(at 195.58 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "733f2398-b979-4ae7-8927-0548f9ac4013")
 	)
 	(junction
-		(at 236.22 33.02)
+		(at 246.38 39.37)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "764b16b9-e8f7-4f38-aeb8-762d2e18c9c5")
+		(uuid "7654406c-2619-4e94-a963-1698db22b8fc")
 	)
 	(junction
-		(at 161.29 104.14)
+		(at 220.98 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "807f19d5-d138-4a52-91c9-c66077d4c1fb")
+	)
+	(junction
+		(at 198.12 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84f67245-4e50-49a4-ae40-07482877f38a")
+	)
+	(junction
+		(at 208.28 39.37)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "884243e7-d6e0-4468-8c3b-8fb6cfb0b548")
+	)
+	(junction
+		(at 167.64 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "89748f19-5832-4b81-a07c-24c66b19eeda")
 	)
 	(junction
-		(at 223.52 52.07)
+		(at 198.12 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8978e9e1-ef35-4225-a5ee-f6fceaac31d7")
 	)
 	(junction
-		(at 259.08 41.91)
+		(at 246.38 57.15)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8d04bd2a-5cc4-4295-9b42-a6d8537c93d5")
+		(uuid "90968716-95f9-4c5c-8991-c66a8c42aaa8")
 	)
 	(junction
-		(at 233.68 60.96)
+		(at 233.68 39.37)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8dd0f8b2-fe0e-4b10-b6ef-d8eda01ce53d")
+		(uuid "90dadaea-3220-428a-9bd9-57c3bd270b05")
 	)
 	(junction
-		(at 246.38 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "970baa0b-02b2-4834-9f30-71ee5cb13137")
-	)
-	(junction
-		(at 210.82 52.07)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9ac51150-4645-4b34-b1d4-55a1110992e3")
-	)
-	(junction
-		(at 259.08 80.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9eab4fd0-8796-4add-96aa-bfc99d72a022")
-	)
-	(junction
-		(at 248.92 52.07)
+		(at 223.52 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9ef62855-e47d-44e3-b38c-b14838d49891")
 	)
 	(junction
-		(at 199.39 138.43)
+		(at 185.42 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a1156a3a-75cc-493b-a355-df8034b62371")
+	)
+	(junction
+		(at 205.74 137.16)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b452420e-7e5c-4632-91f0-14424582cebd")
 	)
 	(junction
-		(at 223.52 33.02)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b8dc45f8-6f39-4dec-ab62-6d5d353158b7")
-	)
-	(junction
-		(at 246.38 80.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bd52e4ec-2aaf-40ea-be29-eae312259a36")
-	)
-	(junction
-		(at 185.42 154.94)
+		(at 191.77 153.67)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bf94da85-a47a-407a-bc18-f16f6bde3563")
 	)
 	(junction
-		(at 248.92 33.02)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bfe97545-013a-4c82-947a-e63dd4db8852")
-	)
-	(junction
-		(at 233.68 99.06)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c4e87e83-0dcb-45d7-b87d-f74fff0b07cc")
-	)
-	(junction
-		(at 199.39 135.89)
+		(at 205.74 134.62)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c8b4b326-5c4d-457c-ad68-e14bf6142927")
 	)
 	(junction
-		(at 161.29 135.89)
+		(at 185.42 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8ee6c6b-75c4-40a5-a238-a314289cf904")
+	)
+	(junction
+		(at 208.28 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cbf3d710-7f3d-4162-aa29-228e8933acf1")
+	)
+	(junction
+		(at 167.64 134.62)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cf9e9b9d-4e17-4c58-bdcb-07a8aa910a9e")
 	)
 	(junction
-		(at 223.52 71.12)
+		(at 198.12 66.04)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ec845572-641e-4391-8459-8bce89a37050")
 	)
 	(junction
-		(at 271.78 80.01)
+		(at 223.52 30.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "eda53f33-6654-47d4-9fe5-5ce27d8ad943")
+		(uuid "f2bc42cf-0960-4215-9ed3-7bd6a120db13")
 	)
 	(junction
-		(at 199.39 118.11)
+		(at 205.74 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f6e89155-7d35-4d5d-a3cc-6abfd8692fee")
 	)
 	(no_connect
-		(at 196.85 133.35)
+		(at 203.2 132.08)
 		(uuid "21b3f556-fabe-4b94-980a-27b7a2aafb09")
 	)
 	(no_connect
-		(at 257.81 153.67)
+		(at 257.81 149.86)
 		(uuid "26ee8714-f615-4524-a358-c5f1c34058e1")
 	)
 	(no_connect
-		(at 252.73 153.67)
+		(at 252.73 149.86)
 		(uuid "30c30430-9abf-4384-a35c-e90bbd2c8a8d")
 	)
 	(no_connect
-		(at 245.11 109.22)
+		(at 245.11 105.41)
 		(uuid "673feb9a-842f-4f3c-9e40-f0d4adf6bb0b")
 	)
 	(no_connect
-		(at 228.6 139.7)
+		(at 228.6 135.89)
 		(uuid "90e8ea47-2267-430d-849d-e6d231983b32")
 	)
 	(no_connect
-		(at 256.54 109.22)
+		(at 256.54 105.41)
 		(uuid "9650253a-b89e-4e12-9912-586d6cf9f12b")
 	)
 	(no_connect
-		(at 247.65 153.67)
+		(at 247.65 149.86)
 		(uuid "9c203fc2-2b34-4f80-a7d0-9a7ea07facf4")
 	)
 	(no_connect
-		(at 228.6 143.51)
+		(at 228.6 139.7)
 		(uuid "e1ecb87d-281b-4c0d-9fe2-9154c6b57439")
 	)
 	(no_connect
-		(at 248.92 109.22)
+		(at 248.92 105.41)
 		(uuid "f2652631-83c7-46fa-a096-6a322725f0d6")
-	)
-	(wire
-		(pts
-			(xy 270.51 139.7) (xy 271.78 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "02cb0a43-8fc4-4770-b160-761d5e289f3c")
-	)
-	(wire
-		(pts
-			(xy 259.08 52.07) (xy 259.08 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "03e790af-9472-47e4-b256-c286e6848c7c")
-	)
-	(wire
-		(pts
-			(xy 168.91 115.57) (xy 168.91 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "08dbcacc-2613-4870-9f06-e27cdbdca909")
-	)
-	(wire
-		(pts
-			(xy 163.83 133.35) (xy 170.18 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "090f06a8-5c55-4580-ab34-c1fb502d6779")
-	)
-	(wire
-		(pts
-			(xy 168.91 118.11) (xy 179.07 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0cbd3ea0-576b-4651-873f-2558d7779eba")
-	)
-	(wire
-		(pts
-			(xy 271.78 71.12) (xy 271.78 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0db5d20c-ea95-42ab-aa2b-30d683e2d492")
-	)
-	(wire
-		(pts
-			(xy 259.08 60.96) (xy 271.78 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "128554d8-4dcd-425e-a273-e02bc9a51a94")
-	)
-	(wire
-		(pts
-			(xy 210.82 160.02) (xy 210.82 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "149c1833-d8e2-46c2-974d-d5ba88d704cf")
-	)
-	(wire
-		(pts
-			(xy 271.78 60.96) (xy 274.32 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "151f96f7-b8bf-4000-abb1-13d79091ffe9")
-	)
-	(wire
-		(pts
-			(xy 161.29 153.67) (xy 161.29 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b1ba457-7060-4a6e-96ec-743dbbe6d6d5")
-	)
-	(wire
-		(pts
-			(xy 199.39 106.68) (xy 199.39 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b331b8b-7f34-4c97-b459-247c9c044ca9")
-	)
-	(wire
-		(pts
-			(xy 177.8 151.13) (xy 177.8 163.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b5ea92c-4469-4217-8f35-5d859a3046a0")
-	)
-	(wire
-		(pts
-			(xy 185.42 62.23) (xy 185.42 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b61d822-6714-4539-bc5d-b8774ceb551b")
-	)
-	(wire
-		(pts
-			(xy 227.33 132.08) (xy 228.6 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1f107897-c068-4350-9d89-7f22d7ec68ba")
-	)
-	(wire
-		(pts
-			(xy 199.39 118.11) (xy 199.39 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1fa194da-962e-438b-bf5d-0b7ce85a1a25")
-	)
-	(wire
-		(pts
-			(xy 259.08 33.02) (xy 259.08 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "215edfdb-8125-4c77-9e04-159048c42d38")
-	)
-	(wire
-		(pts
-			(xy 210.82 24.13) (xy 210.82 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "21b8a375-b070-4e5e-9495-864d5ac6fcdc")
-	)
-	(wire
-		(pts
-			(xy 233.68 90.17) (xy 233.68 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "237afd5c-1f4b-4ee9-ae3b-492886a6548c")
-	)
-	(wire
-		(pts
-			(xy 210.82 52.07) (xy 210.82 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "24a1d5af-d568-4250-a3f3-8d2f273b3d37")
-	)
-	(wire
-		(pts
-			(xy 261.62 52.07) (xy 261.62 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "25243228-c396-4e74-bd00-5a73c2e56a53")
-	)
-	(wire
-		(pts
-			(xy 246.38 33.02) (xy 246.38 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "25c9a464-72e0-4daa-b4ad-134fa98261f4")
-	)
-	(wire
-		(pts
-			(xy 227.33 135.89) (xy 228.6 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "27006121-971f-474c-bd33-45ca0bcd5584")
-	)
-	(wire
-		(pts
-			(xy 270.51 124.46) (xy 278.13 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "29d051cd-6c6b-446d-9861-d3b7dc776e67")
-	)
-	(wire
-		(pts
-			(xy 166.37 118.11) (xy 168.91 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "29f45cb2-3eb2-4bb6-8658-148f69af05ac")
-	)
-	(wire
-		(pts
-			(xy 210.82 154.94) (xy 210.82 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2b2a64b2-b82b-4d7f-ab32-07dc286d346b")
-	)
-	(wire
-		(pts
-			(xy 271.78 33.02) (xy 271.78 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2da8a990-ac54-4f4f-8fb3-4cfd177be99e")
-	)
-	(wire
-		(pts
-			(xy 233.68 99.06) (xy 274.32 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2e25b394-ed77-4a78-9d25-1fe20d3f0932")
-	)
-	(wire
-		(pts
-			(xy 233.68 52.07) (xy 233.68 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ef65b2b-dc33-480c-8b44-bd8436fe2273")
-	)
-	(wire
-		(pts
-			(xy 220.98 33.02) (xy 220.98 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "31a082ad-1975-4768-8891-176ecd8a0545")
-	)
-	(wire
-		(pts
-			(xy 246.38 71.12) (xy 246.38 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3258cde4-d27a-4307-8b43-f8d662df0f68")
-	)
-	(wire
-		(pts
-			(xy 236.22 24.13) (xy 236.22 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "32f66c41-07e0-4ceb-9f0f-f209ef2bd63f")
-	)
-	(wire
-		(pts
-			(xy 233.68 60.96) (xy 246.38 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3488e291-4f08-4fe1-8f18-5aeea091d93b")
-	)
-	(wire
-		(pts
-			(xy 185.42 64.77) (xy 182.88 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "362ed5c2-1b51-4637-8a1e-86a0cf986850")
-	)
-	(wire
-		(pts
-			(xy 271.78 52.07) (xy 271.78 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3c094231-dfdb-4d10-a93a-1482a340a972")
-	)
-	(wire
-		(pts
-			(xy 223.52 52.07) (xy 223.52 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3c171df9-1649-406a-88f6-669350e4d46f")
-	)
-	(wire
-		(pts
-			(xy 227.33 128.27) (xy 228.6 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42a9376f-a986-4fb8-8957-8d4a29edf92a")
-	)
-	(wire
-		(pts
-			(xy 220.98 52.07) (xy 220.98 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42ee6f5f-7a05-463d-80e7-91a1d11067c7")
-	)
-	(wire
-		(pts
-			(xy 172.72 62.23) (xy 172.72 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "44df1d5b-e6bf-44b0-9f1e-4cbc7711b0f1")
-	)
-	(wire
-		(pts
-			(xy 198.12 151.13) (xy 198.12 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "451001ed-8cfc-49f3-ad7a-37827003a8fb")
-	)
-	(wire
-		(pts
-			(xy 185.42 154.94) (xy 185.42 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "45aee56b-454e-4fb5-b354-bdc048bf8c2f")
-	)
-	(wire
-		(pts
-			(xy 185.42 160.02) (xy 187.96 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "479e1a0b-8d74-42a4-abb5-51af751b27cb")
-	)
-	(wire
-		(pts
-			(xy 271.78 41.91) (xy 274.32 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "49e75a7c-2f61-4b06-8ccd-eb3c963426c3")
-	)
-	(wire
-		(pts
-			(xy 166.37 138.43) (xy 166.37 140.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a82809f-0471-4f9f-b26e-c931e9ea563d")
-	)
-	(wire
-		(pts
-			(xy 189.23 118.11) (xy 189.23 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a9fe12f-3b9b-463c-92f7-b19f37edb243")
-	)
-	(wire
-		(pts
-			(xy 187.96 64.77) (xy 185.42 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4aa45eb8-b2ef-4288-b218-7f0ae92419c8")
-	)
-	(wire
-		(pts
-			(xy 158.75 104.14) (xy 161.29 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4be20718-bbbb-44ed-b1b5-c4edf708bbd5")
-	)
-	(wire
-		(pts
-			(xy 193.04 151.13) (xy 198.12 151.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4d763a15-e689-49ea-9ced-0e1a482dca95")
-	)
-	(wire
-		(pts
-			(xy 185.42 154.94) (xy 185.42 151.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ec26cb6-db57-4748-aa19-9298b6c541af")
-	)
-	(wire
-		(pts
-			(xy 179.07 118.11) (xy 179.07 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "534bc838-a55a-4718-93ad-eddb901a7169")
 	)
 	(wire
 		(pts
@@ -3092,67 +2485,427 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "55bda237-97e7-4e28-a747-0e93e53ada51")
+		(uuid "02cb0a43-8fc4-4770-b160-761d5e289f3c")
 	)
 	(wire
 		(pts
-			(xy 233.68 80.01) (xy 246.38 80.01)
+			(xy 233.68 48.26) (xy 233.68 49.53)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "56204bf6-2eec-405d-a86d-723ef4bf713b")
+		(uuid "03e790af-9472-47e4-b256-c286e6848c7c")
 	)
 	(wire
 		(pts
-			(xy 246.38 41.91) (xy 233.68 41.91)
+			(xy 175.26 114.3) (xy 175.26 116.84)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "56dcc6eb-93f8-45df-a8a7-3d46e4f8036b")
+		(uuid "08dbcacc-2613-4870-9f06-e27cdbdca909")
 	)
 	(wire
 		(pts
-			(xy 210.82 71.12) (xy 210.82 90.17)
+			(xy 170.18 132.08) (xy 176.53 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "581b4c0f-69ed-4fa1-82a7-8977c9e8573a")
+		(uuid "090f06a8-5c55-4580-ab34-c1fb502d6779")
 	)
 	(wire
 		(pts
-			(xy 236.22 52.07) (xy 236.22 71.12)
+			(xy 175.26 116.84) (xy 185.42 116.84)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5eb6c091-0d51-415d-8963-0331ae393ed6")
+		(uuid "0cbd3ea0-576b-4651-873f-2558d7779eba")
 	)
 	(wire
 		(pts
-			(xy 261.62 24.13) (xy 261.62 33.02)
+			(xy 246.38 66.04) (xy 246.38 67.31)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5fab9628-96b2-4273-9770-196beac12c80")
+		(uuid "0db5d20c-ea95-42ab-aa2b-30d683e2d492")
 	)
 	(wire
 		(pts
-			(xy 161.29 104.14) (xy 163.83 104.14)
+			(xy 217.17 158.75) (xy 217.17 161.29)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6206a0d8-88d7-4e37-8a92-728dd845fca6")
+		(uuid "149c1833-d8e2-46c2-974d-d5ba88d704cf")
+	)
+	(wire
+		(pts
+			(xy 167.64 152.4) (xy 167.64 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b1ba457-7060-4a6e-96ec-743dbbe6d6d5")
+	)
+	(wire
+		(pts
+			(xy 205.74 105.41) (xy 205.74 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b331b8b-7f34-4c97-b459-247c9c044ca9")
+	)
+	(wire
+		(pts
+			(xy 184.15 149.86) (xy 184.15 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b5ea92c-4469-4217-8f35-5d859a3046a0")
+	)
+	(wire
+		(pts
+			(xy 195.58 39.37) (xy 208.28 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1cd71299-35fe-4c4e-b646-a49b7da2fdc4")
+	)
+	(wire
+		(pts
+			(xy 246.38 57.15) (xy 248.92 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1dd674a6-10bf-4da1-b9ab-d5e0b20f2dc2")
+	)
+	(wire
+		(pts
+			(xy 227.33 128.27) (xy 228.6 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f107897-c068-4350-9d89-7f22d7ec68ba")
+	)
+	(wire
+		(pts
+			(xy 205.74 116.84) (xy 205.74 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1fa194da-962e-438b-bf5d-0b7ce85a1a25")
+	)
+	(wire
+		(pts
+			(xy 233.68 30.48) (xy 233.68 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "215edfdb-8125-4c77-9e04-159048c42d38")
+	)
+	(wire
+		(pts
+			(xy 185.42 22.86) (xy 185.42 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21b8a375-b070-4e5e-9495-864d5ac6fcdc")
+	)
+	(wire
+		(pts
+			(xy 208.28 83.82) (xy 208.28 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "237afd5c-1f4b-4ee9-ae3b-492886a6548c")
+	)
+	(wire
+		(pts
+			(xy 185.42 48.26) (xy 185.42 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24a1d5af-d568-4250-a3f3-8d2f273b3d37")
+	)
+	(wire
+		(pts
+			(xy 236.22 48.26) (xy 236.22 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25243228-c396-4e74-bd00-5a73c2e56a53")
+	)
+	(wire
+		(pts
+			(xy 220.98 30.48) (xy 220.98 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25c9a464-72e0-4daa-b4ad-134fa98261f4")
+	)
+	(wire
+		(pts
+			(xy 227.33 132.08) (xy 228.6 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "27006121-971f-474c-bd33-45ca0bcd5584")
+	)
+	(wire
+		(pts
+			(xy 270.51 120.65) (xy 278.13 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29d051cd-6c6b-446d-9861-d3b7dc776e67")
+	)
+	(wire
+		(pts
+			(xy 172.72 116.84) (xy 175.26 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29f45cb2-3eb2-4bb6-8658-148f69af05ac")
+	)
+	(wire
+		(pts
+			(xy 217.17 153.67) (xy 217.17 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b2a64b2-b82b-4d7f-ab32-07dc286d346b")
+	)
+	(wire
+		(pts
+			(xy 185.42 30.48) (xy 185.42 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b74f053-743e-4a54-878f-42a1606210e5")
+	)
+	(wire
+		(pts
+			(xy 246.38 30.48) (xy 246.38 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2da8a990-ac54-4f4f-8fb3-4cfd177be99e")
+	)
+	(wire
+		(pts
+			(xy 208.28 48.26) (xy 208.28 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ef65b2b-dc33-480c-8b44-bd8436fe2273")
+	)
+	(wire
+		(pts
+			(xy 195.58 30.48) (xy 195.58 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31a082ad-1975-4768-8891-176ecd8a0545")
+	)
+	(wire
+		(pts
+			(xy 220.98 66.04) (xy 220.98 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3258cde4-d27a-4307-8b43-f8d662df0f68")
+	)
+	(wire
+		(pts
+			(xy 210.82 22.86) (xy 210.82 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32f66c41-07e0-4ceb-9f0f-f209ef2bd63f")
+	)
+	(wire
+		(pts
+			(xy 246.38 48.26) (xy 246.38 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c094231-dfdb-4d10-a93a-1482a340a972")
+	)
+	(wire
+		(pts
+			(xy 198.12 48.26) (xy 198.12 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c171df9-1649-406a-88f6-669350e4d46f")
+	)
+	(wire
+		(pts
+			(xy 227.33 124.46) (xy 228.6 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42a9376f-a986-4fb8-8957-8d4a29edf92a")
+	)
+	(wire
+		(pts
+			(xy 195.58 48.26) (xy 195.58 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42ee6f5f-7a05-463d-80e7-91a1d11067c7")
+	)
+	(wire
+		(pts
+			(xy 204.47 149.86) (xy 204.47 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "451001ed-8cfc-49f3-ad7a-37827003a8fb")
+	)
+	(wire
+		(pts
+			(xy 191.77 153.67) (xy 191.77 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "45aee56b-454e-4fb5-b354-bdc048bf8c2f")
+	)
+	(wire
+		(pts
+			(xy 191.77 158.75) (xy 194.31 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "479e1a0b-8d74-42a4-abb5-51af751b27cb")
+	)
+	(wire
+		(pts
+			(xy 172.72 137.16) (xy 172.72 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a82809f-0471-4f9f-b26e-c931e9ea563d")
+	)
+	(wire
+		(pts
+			(xy 195.58 116.84) (xy 195.58 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a9fe12f-3b9b-463c-92f7-b19f37edb243")
+	)
+	(wire
+		(pts
+			(xy 165.1 102.87) (xy 167.64 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4be20718-bbbb-44ed-b1b5-c4edf708bbd5")
+	)
+	(wire
+		(pts
+			(xy 199.39 149.86) (xy 204.47 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d763a15-e689-49ea-9ced-0e1a482dca95")
+	)
+	(wire
+		(pts
+			(xy 191.77 153.67) (xy 191.77 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ec26cb6-db57-4748-aa19-9298b6c541af")
+	)
+	(wire
+		(pts
+			(xy 185.42 116.84) (xy 185.42 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "534bc838-a55a-4718-93ad-eddb901a7169")
 	)
 	(wire
 		(pts
@@ -3162,11 +2915,71 @@
 			(width 0)
 			(type default)
 		)
+		(uuid "55bda237-97e7-4e28-a747-0e93e53ada51")
+	)
+	(wire
+		(pts
+			(xy 208.28 92.71) (xy 248.92 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e1f087f-3952-4225-9cc6-28769226c8e1")
+	)
+	(wire
+		(pts
+			(xy 210.82 48.26) (xy 210.82 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5eb6c091-0d51-415d-8963-0331ae393ed6")
+	)
+	(wire
+		(pts
+			(xy 236.22 22.86) (xy 236.22 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fab9628-96b2-4273-9770-196beac12c80")
+	)
+	(wire
+		(pts
+			(xy 167.64 102.87) (xy 170.18 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6206a0d8-88d7-4e37-8a92-728dd845fca6")
+	)
+	(wire
+		(pts
+			(xy 259.08 156.21) (xy 252.73 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65157de1-b3d8-4748-baad-334f105606e3")
+	)
+	(wire
+		(pts
+			(xy 270.51 128.27) (xy 271.78 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "661b9b51-42d0-4374-8adf-249112d25013")
 	)
 	(wire
 		(pts
-			(xy 186.69 118.11) (xy 186.69 120.65)
+			(xy 193.04 116.84) (xy 193.04 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3186,7 +2999,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 130.81) (xy 199.39 135.89)
+			(xy 205.74 129.54) (xy 205.74 134.62)
 		)
 		(stroke
 			(width 0)
@@ -3196,7 +3009,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 160.02) (xy 198.12 160.02)
+			(xy 201.93 158.75) (xy 204.47 158.75)
 		)
 		(stroke
 			(width 0)
@@ -3206,17 +3019,17 @@
 	)
 	(wire
 		(pts
-			(xy 261.62 33.02) (xy 261.62 52.07)
+			(xy 233.68 57.15) (xy 246.38 57.15)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6ab0abd6-524e-491d-9a1c-1e5c83921c1a")
+		(uuid "6e083524-c84b-4b2f-960f-a8f83080b58b")
 	)
 	(wire
 		(pts
-			(xy 220.98 99.06) (xy 233.68 99.06)
+			(xy 195.58 92.71) (xy 208.28 92.71)
 		)
 		(stroke
 			(width 0)
@@ -3226,7 +3039,7 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 104.14) (xy 181.61 104.14)
+			(xy 185.42 102.87) (xy 187.96 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3236,7 +3049,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 104.14) (xy 171.45 104.14)
+			(xy 175.26 102.87) (xy 177.8 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3246,27 +3059,17 @@
 	)
 	(wire
 		(pts
-			(xy 259.08 41.91) (xy 246.38 41.91)
+			(xy 208.28 57.15) (xy 220.98 57.15)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "796723bf-11c9-427e-a457-1da2b566d006")
+		(uuid "762c3557-be0e-468a-92a3-0141ba07a7f8")
 	)
 	(wire
 		(pts
-			(xy 246.38 80.01) (xy 259.08 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7bfca3b7-a916-4e45-82c5-93ec12844bba")
-	)
-	(wire
-		(pts
-			(xy 163.83 104.14) (xy 168.91 104.14)
+			(xy 170.18 102.87) (xy 175.26 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3276,27 +3079,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 64.77) (xy 187.96 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7ca6d6e7-0e14-489f-bc88-a05ec5949e7a")
-	)
-	(wire
-		(pts
-			(xy 223.52 33.02) (xy 223.52 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7f1b4334-4088-470a-b08b-120db2fe2e29")
-	)
-	(wire
-		(pts
-			(xy 248.92 24.13) (xy 248.92 33.02)
+			(xy 223.52 22.86) (xy 223.52 30.48)
 		)
 		(stroke
 			(width 0)
@@ -3306,7 +3089,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 163.83) (xy 198.12 163.83)
+			(xy 184.15 162.56) (xy 204.47 162.56)
 		)
 		(stroke
 			(width 0)
@@ -3316,7 +3099,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 24.13) (xy 223.52 33.02)
+			(xy 198.12 22.86) (xy 198.12 30.48)
 		)
 		(stroke
 			(width 0)
@@ -3326,7 +3109,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 130.81) (xy 170.18 130.81)
+			(xy 172.72 129.54) (xy 176.53 129.54)
 		)
 		(stroke
 			(width 0)
@@ -3336,7 +3119,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 154.94) (xy 208.28 154.94)
+			(xy 217.17 153.67) (xy 214.63 153.67)
 		)
 		(stroke
 			(width 0)
@@ -3346,7 +3129,17 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 104.14) (xy 199.39 104.14)
+			(xy 236.22 30.48) (xy 236.22 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "899c4f92-1879-4388-b49c-37d321f8028c")
+	)
+	(wire
+		(pts
+			(xy 195.58 102.87) (xy 205.74 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3356,7 +3149,17 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 52.07) (xy 248.92 71.12)
+			(xy 246.38 39.37) (xy 247.65 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c0d7dfe-3b2f-4802-a180-27a29341e026")
+	)
+	(wire
+		(pts
+			(xy 223.52 48.26) (xy 223.52 66.04)
 		)
 		(stroke
 			(width 0)
@@ -3366,7 +3169,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 104.14) (xy 168.91 107.95)
+			(xy 175.26 102.87) (xy 175.26 106.68)
 		)
 		(stroke
 			(width 0)
@@ -3376,7 +3179,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 121.92) (xy 168.91 118.11)
+			(xy 175.26 120.65) (xy 175.26 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3386,7 +3189,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 106.68) (xy 158.75 104.14)
+			(xy 165.1 105.41) (xy 165.1 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3396,7 +3199,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 80.01) (xy 233.68 80.01)
+			(xy 195.58 74.93) (xy 208.28 74.93)
 		)
 		(stroke
 			(width 0)
@@ -3406,7 +3209,47 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 163.83) (xy 198.12 160.02)
+			(xy 208.28 74.93) (xy 220.98 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "942eb2eb-ce10-45f8-9fcb-bce92832fcbf")
+	)
+	(wire
+		(pts
+			(xy 220.98 74.93) (xy 233.68 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "968b0114-d42a-49bf-86cb-05b912d16477")
+	)
+	(wire
+		(pts
+			(xy 208.28 39.37) (xy 220.98 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "98fe82ad-4b73-48f2-91ef-1a8825fd11ad")
+	)
+	(wire
+		(pts
+			(xy 220.98 39.37) (xy 233.68 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9bcca9f4-8f46-4a42-b496-0c9dd8eedcb0")
+	)
+	(wire
+		(pts
+			(xy 204.47 162.56) (xy 204.47 158.75)
 		)
 		(stroke
 			(width 0)
@@ -3416,7 +3259,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 153.67) (xy 173.99 151.13)
+			(xy 180.34 152.4) (xy 180.34 149.86)
 		)
 		(stroke
 			(width 0)
@@ -3426,7 +3269,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 90.17) (xy 220.98 91.44)
+			(xy 195.58 83.82) (xy 195.58 85.09)
 		)
 		(stroke
 			(width 0)
@@ -3436,7 +3279,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 135.89) (xy 199.39 138.43)
+			(xy 205.74 134.62) (xy 205.74 137.16)
 		)
 		(stroke
 			(width 0)
@@ -3446,17 +3289,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 33.02) (xy 210.82 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a2a67860-6f9a-4493-81e5-9dd34dad5df7")
-	)
-	(wire
-		(pts
-			(xy 195.58 154.94) (xy 198.12 154.94)
+			(xy 201.93 153.67) (xy 204.47 153.67)
 		)
 		(stroke
 			(width 0)
@@ -3466,27 +3299,17 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 33.02) (xy 248.92 52.07)
+			(xy 240.03 156.21) (xy 242.57 156.21)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a4b96746-521a-4aed-b4e3-d076ecdd83b9")
+		(uuid "a65b7919-e973-4e95-84cf-7c992d716a70")
 	)
 	(wire
 		(pts
-			(xy 274.32 80.01) (xy 271.78 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a75c9234-547c-4ed0-bdba-69ce6eff2ca6")
-	)
-	(wire
-		(pts
-			(xy 246.38 52.07) (xy 246.38 53.34)
+			(xy 220.98 48.26) (xy 220.98 49.53)
 		)
 		(stroke
 			(width 0)
@@ -3496,7 +3319,7 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 157.48) (xy 242.57 153.67)
+			(xy 242.57 149.86) (xy 242.57 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3506,7 +3329,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 71.12) (xy 220.98 72.39)
+			(xy 195.58 66.04) (xy 195.58 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3516,7 +3339,7 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 124.46) (xy 278.13 127)
+			(xy 278.13 120.65) (xy 278.13 123.19)
 		)
 		(stroke
 			(width 0)
@@ -3526,7 +3349,17 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 104.14) (xy 189.23 104.14)
+			(xy 242.57 156.21) (xy 245.11 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b09c2ff6-7ac1-414f-ad74-222be5574d9c")
+	)
+	(wire
+		(pts
+			(xy 190.5 102.87) (xy 195.58 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3536,7 +3369,17 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 118.11) (xy 166.37 130.81)
+			(xy 223.52 30.48) (xy 223.52 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b597a77d-5139-48f9-a3de-d0834c9b04fc")
+	)
+	(wire
+		(pts
+			(xy 172.72 116.84) (xy 172.72 129.54)
 		)
 		(stroke
 			(width 0)
@@ -3546,7 +3389,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 160.02) (xy 210.82 160.02)
+			(xy 214.63 158.75) (xy 217.17 158.75)
 		)
 		(stroke
 			(width 0)
@@ -3556,7 +3399,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 124.46) (xy 228.6 124.46)
+			(xy 227.33 120.65) (xy 228.6 120.65)
 		)
 		(stroke
 			(width 0)
@@ -3566,7 +3409,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 138.43) (xy 199.39 147.32)
+			(xy 205.74 137.16) (xy 205.74 146.05)
 		)
 		(stroke
 			(width 0)
@@ -3576,7 +3419,7 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 160.02) (xy 200.66 160.02)
+			(xy 204.47 158.75) (xy 207.01 158.75)
 		)
 		(stroke
 			(width 0)
@@ -3586,7 +3429,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 138.43) (xy 166.37 138.43)
+			(xy 176.53 137.16) (xy 172.72 137.16)
 		)
 		(stroke
 			(width 0)
@@ -3596,7 +3439,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 120.65) (xy 228.6 120.65)
+			(xy 227.33 116.84) (xy 228.6 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3606,7 +3449,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 60.96) (xy 233.68 60.96)
+			(xy 195.58 57.15) (xy 208.28 57.15)
 		)
 		(stroke
 			(width 0)
@@ -3616,7 +3459,17 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 148.59) (xy 166.37 153.67)
+			(xy 259.08 158.75) (xy 259.08 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7c6fc65-2a89-468f-9ebe-aa443d3cc087")
+	)
+	(wire
+		(pts
+			(xy 172.72 147.32) (xy 172.72 152.4)
 		)
 		(stroke
 			(width 0)
@@ -3626,7 +3479,17 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 104.14) (xy 161.29 121.92)
+			(xy 246.38 74.93) (xy 248.92 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9af0609-7608-45f6-95ed-33ea99b48980")
+	)
+	(wire
+		(pts
+			(xy 167.64 102.87) (xy 167.64 120.65)
 		)
 		(stroke
 			(width 0)
@@ -3636,27 +3499,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 41.91) (xy 233.68 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d4b58361-fba3-4408-81af-64361515ec41")
-	)
-	(wire
-		(pts
-			(xy 259.08 80.01) (xy 271.78 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "daac5768-9b1b-4119-bb5a-c499361b7666")
-	)
-	(wire
-		(pts
-			(xy 181.61 104.14) (xy 181.61 120.65)
+			(xy 187.96 102.87) (xy 187.96 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3666,7 +3509,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 104.14) (xy 189.23 106.68)
+			(xy 195.58 102.87) (xy 195.58 105.41)
 		)
 		(stroke
 			(width 0)
@@ -3676,7 +3519,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 118.11) (xy 199.39 118.11)
+			(xy 195.58 116.84) (xy 205.74 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3686,7 +3529,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 154.94) (xy 187.96 154.94)
+			(xy 191.77 153.67) (xy 194.31 153.67)
 		)
 		(stroke
 			(width 0)
@@ -3696,7 +3539,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 140.97) (xy 161.29 135.89)
+			(xy 167.64 139.7) (xy 167.64 134.62)
 		)
 		(stroke
 			(width 0)
@@ -3706,7 +3549,37 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 130.81) (xy 199.39 130.81)
+			(xy 233.68 74.93) (xy 246.38 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3165a5a-7684-4d21-b87f-9bc91986d11b")
+	)
+	(wire
+		(pts
+			(xy 198.12 30.48) (xy 198.12 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5db2db2-f8ff-4937-858b-a8eb0ea20700")
+	)
+	(wire
+		(pts
+			(xy 233.68 39.37) (xy 246.38 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e600357e-d33c-4cb6-8a23-70c4bd333636")
+	)
+	(wire
+		(pts
+			(xy 203.2 129.54) (xy 205.74 129.54)
 		)
 		(stroke
 			(width 0)
@@ -3716,7 +3589,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 135.89) (xy 170.18 135.89)
+			(xy 167.64 134.62) (xy 176.53 134.62)
 		)
 		(stroke
 			(width 0)
@@ -3726,7 +3599,17 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 135.89) (xy 199.39 135.89)
+			(xy 185.42 66.04) (xy 185.42 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea40f078-f634-42e2-a9eb-c21dede7e207")
+	)
+	(wire
+		(pts
+			(xy 203.2 134.62) (xy 205.74 134.62)
 		)
 		(stroke
 			(width 0)
@@ -3736,7 +3619,7 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 154.94) (xy 200.66 154.94)
+			(xy 204.47 153.67) (xy 207.01 153.67)
 		)
 		(stroke
 			(width 0)
@@ -3746,27 +3629,17 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 64.77) (xy 175.26 64.77)
+			(xy 220.98 57.15) (xy 233.68 57.15)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ebeec777-888e-4533-a7b2-94c54a7f5bb1")
+		(uuid "ee06aec1-651f-46f3-8c6e-0e404fcc089d")
 	)
 	(wire
 		(pts
-			(xy 246.38 60.96) (xy 259.08 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ef6d54e1-f36b-4fc1-9653-f5a628473947")
-	)
-	(wire
-		(pts
-			(xy 199.39 114.3) (xy 199.39 118.11)
+			(xy 205.74 113.03) (xy 205.74 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3776,7 +3649,7 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 138.43) (xy 199.39 138.43)
+			(xy 203.2 137.16) (xy 205.74 137.16)
 		)
 		(stroke
 			(width 0)
@@ -3786,7 +3659,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 104.14) (xy 163.83 133.35)
+			(xy 170.18 102.87) (xy 170.18 132.08)
 		)
 		(stroke
 			(width 0)
@@ -3796,7 +3669,7 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 104.14) (xy 184.15 120.65)
+			(xy 190.5 102.87) (xy 190.5 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3806,17 +3679,7 @@
 	)
 	(wire
 		(pts
-			(xy 259.08 41.91) (xy 271.78 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f86fa514-1e25-4dee-bae6-f54fb2c02369")
-	)
-	(wire
-		(pts
-			(xy 236.22 33.02) (xy 236.22 52.07)
+			(xy 210.82 30.48) (xy 210.82 48.26)
 		)
 		(stroke
 			(width 0)
@@ -3826,7 +3689,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 129.54) (xy 161.29 135.89)
+			(xy 167.64 128.27) (xy 167.64 134.62)
 		)
 		(stroke
 			(width 0)
@@ -3836,7 +3699,7 @@
 	)
 	(wire
 		(pts
-			(xy 233.68 71.12) (xy 233.68 72.39)
+			(xy 208.28 66.04) (xy 208.28 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3846,7 +3709,7 @@
 	)
 	(wire
 		(pts
-			(xy 259.08 71.12) (xy 259.08 72.39)
+			(xy 233.68 66.04) (xy 233.68 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3856,7 +3719,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 114.3) (xy 158.75 116.84)
+			(xy 165.1 113.03) (xy 165.1 115.57)
 		)
 		(stroke
 			(width 0)
@@ -3866,7 +3729,7 @@
 	)
 	(wire
 		(pts
-			(xy 233.68 33.02) (xy 233.68 34.29)
+			(xy 208.28 30.48) (xy 208.28 31.75)
 		)
 		(stroke
 			(width 0)
@@ -3876,7 +3739,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 114.3) (xy 189.23 118.11)
+			(xy 195.58 113.03) (xy 195.58 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3886,7 +3749,7 @@
 	)
 	(wire
 		(pts
-			(xy 270.51 143.51) (xy 271.78 143.51)
+			(xy 270.51 139.7) (xy 271.78 139.7)
 		)
 		(stroke
 			(width 0)
@@ -3896,7 +3759,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 71.12) (xy 223.52 90.17)
+			(xy 198.12 66.04) (xy 198.12 83.82)
 		)
 		(stroke
 			(width 0)
@@ -3905,7 +3768,7 @@
 		(uuid "ffd3b122-de69-47c9-872c-7e589b752331")
 	)
 	(label "BAT+"
-		(at 186.69 118.11 0)
+		(at 193.04 116.84 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3915,7 +3778,7 @@
 		(uuid "013b2b31-6ffb-4eac-99f5-8e4dd7908c51")
 	)
 	(label "column 0"
-		(at 210.82 24.13 0)
+		(at 185.42 22.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3925,7 +3788,7 @@
 		(uuid "20e45c00-6cb7-4d67-9fca-58e0d5d4932a")
 	)
 	(label "row 3"
-		(at 271.78 143.51 0)
+		(at 271.78 139.7 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3934,18 +3797,8 @@
 		)
 		(uuid "239eb003-03c2-40e4-99f1-66841279eb02")
 	)
-	(label "BAT+"
-		(at 242.57 157.48 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify top)
-		)
-		(uuid "25c0b145-3a01-4a19-a667-129aa43cbc0b")
-	)
 	(label "column 3"
-		(at 227.33 124.46 180)
+		(at 227.33 120.65 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3955,7 +3808,7 @@
 		(uuid "3509a3c0-2eb6-4191-a890-ca55366f7f7e")
 	)
 	(label "column 1"
-		(at 223.52 24.13 0)
+		(at 198.12 22.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3965,7 +3818,7 @@
 		(uuid "3b53e9a5-e0d1-4069-bd6c-b9001e938177")
 	)
 	(label "row 0"
-		(at 271.78 132.08 0)
+		(at 271.78 128.27 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3975,7 +3828,7 @@
 		(uuid "47101ec6-0631-48fa-93e1-0e1857099d8e")
 	)
 	(label "row 0"
-		(at 274.32 41.91 0)
+		(at 247.65 39.37 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3985,7 +3838,7 @@
 		(uuid "4e6aeca1-abc2-4be4-9935-2c74bd3ce973")
 	)
 	(label "row 1"
-		(at 274.32 60.96 0)
+		(at 248.92 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3994,8 +3847,18 @@
 		)
 		(uuid "90849044-a2da-47b2-976e-256e4a98fdfe")
 	)
+	(label "BAT+"
+		(at 240.03 156.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9a67f96a-6693-4cbf-8637-d28aaac8df4e")
+	)
 	(label "column 2"
-		(at 236.22 24.13 0)
+		(at 210.82 22.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4005,7 +3868,7 @@
 		(uuid "a0451533-b21d-4f7d-be07-5b6c21d65550")
 	)
 	(label "column 0"
-		(at 227.33 135.89 180)
+		(at 227.33 132.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4015,7 +3878,7 @@
 		(uuid "a5cbbfd5-fa08-4975-9205-ce3b55b3662b")
 	)
 	(label "row 3"
-		(at 274.32 99.06 0)
+		(at 248.92 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4025,7 +3888,7 @@
 		(uuid "a656e8ed-fdda-4c02-86b8-15393f076e47")
 	)
 	(label "row 2"
-		(at 274.32 80.01 0)
+		(at 248.92 74.93 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4035,7 +3898,7 @@
 		(uuid "a67c6f0c-8027-4d17-9e66-4e011523c4bf")
 	)
 	(label "column 3"
-		(at 248.92 24.13 0)
+		(at 223.52 22.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4045,7 +3908,7 @@
 		(uuid "af83dfb9-761d-4c4d-903d-d136b40c6951")
 	)
 	(label "row 1"
-		(at 271.78 135.89 0)
+		(at 271.78 132.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4055,7 +3918,7 @@
 		(uuid "b56acc14-46da-4a68-8e51-4d903bbc9f74")
 	)
 	(label "column 4"
-		(at 227.33 120.65 180)
+		(at 227.33 116.84 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4065,7 +3928,7 @@
 		(uuid "b9eba8c9-c39b-4236-b1dd-140bb562a5db")
 	)
 	(label "column 4"
-		(at 261.62 24.13 0)
+		(at 236.22 22.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4075,7 +3938,7 @@
 		(uuid "cacf4d77-89bd-46f7-ae7f-fcb8403575a7")
 	)
 	(label "row 2"
-		(at 271.78 139.7 0)
+		(at 271.78 135.89 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4085,7 +3948,7 @@
 		(uuid "cd8a90f4-eeec-4812-933a-01be192a42f5")
 	)
 	(label "column 1"
-		(at 227.33 132.08 180)
+		(at 227.33 128.27 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4095,7 +3958,7 @@
 		(uuid "ce2e6069-b440-410e-adde-608511208fba")
 	)
 	(label "column 2"
-		(at 227.33 128.27 180)
+		(at 227.33 124.46 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4104,19 +3967,9 @@
 		)
 		(uuid "f1794edb-733f-434e-bd3b-fd00e20b82fb")
 	)
-	(label "BAT+"
-		(at 172.72 64.77 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f4de1a1c-38b8-4268-9667-aea36f21fbd1")
-	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 241.3 33.02 0)
+		(at 215.9 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4125,7 +3978,7 @@
 		(fields_autoplaced yes)
 		(uuid "042144ef-555e-495e-a110-61d224719abb")
 		(property "Reference" "SW3"
-			(at 241.3 25.4 0)
+			(at 215.9 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4133,15 +3986,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 241.3 27.94 0)
+			(at 215.9 26.162 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 241.3 27.94 0)
+			(at 215.9 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4150,7 +4003,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 241.3 27.94 0)
+			(at 215.9 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4159,7 +4012,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 241.3 33.02 0)
+			(at 215.9 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4184,7 +4037,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 266.7 33.02 0)
+		(at 241.3 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4193,7 +4046,7 @@
 		(fields_autoplaced yes)
 		(uuid "0d1a4b1d-4bb1-4c37-8e3d-ab205fe6dfb2")
 		(property "Reference" "SW5"
-			(at 266.7 25.4 0)
+			(at 241.3 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4201,15 +4054,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 266.7 27.94 0)
+			(at 241.3 26.162 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 266.7 27.94 0)
+			(at 241.3 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4218,7 +4071,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 266.7 27.94 0)
+			(at 241.3 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4227,7 +4080,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 266.7 33.02 0)
+			(at 241.3 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4252,7 +4105,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 254 33.02 0)
+		(at 228.6 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4261,7 +4114,7 @@
 		(fields_autoplaced yes)
 		(uuid "16385ac5-05ff-4bad-8196-d237ad0ba98f")
 		(property "Reference" "SW4"
-			(at 254 25.4 0)
+			(at 228.6 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4269,15 +4122,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 254 27.94 0)
+			(at 228.6 26.162 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 254 27.94 0)
+			(at 228.6 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4286,7 +4139,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 254 27.94 0)
+			(at 228.6 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4295,7 +4148,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 254 33.02 0)
+			(at 228.6 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4319,34 +4172,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 233.68 38.1 90)
+		(lib_id "cweep:1N4148")
+		(at 208.28 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "175ee5c5-bf0b-4ac0-b3c7-2991b33156a1")
 		(property "Reference" "D2"
-			(at 231.648 36.83 90)
+			(at 205.74 34.2899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 231.648 39.37 90)
+			(at 205.74 36.8299 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 233.68 38.1 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 208.026 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4355,7 +4209,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 233.68 38.1 0)
+			(at 208.28 47.498 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4364,7 +4218,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 233.68 38.1 0)
+			(at 207.772 50.292 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4373,7 +4227,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 233.68 38.1 0)
+			(at 211.582 35.814 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4382,7 +4236,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 233.68 38.1 0)
+			(at 208.026 55.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4407,7 +4261,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 161.29 153.67 0)
+		(at 167.64 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4415,7 +4269,7 @@
 		(dnp no)
 		(uuid "1a08e56f-352c-437e-b00c-42f75aaa408f")
 		(property "Reference" "#PWR09"
-			(at 161.29 160.02 0)
+			(at 167.64 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4424,7 +4278,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 161.29 157.226 0)
+			(at 167.64 155.956 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -4433,7 +4287,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 161.29 153.67 0)
+			(at 167.64 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4442,7 +4296,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 161.29 153.67 0)
+			(at 167.64 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4451,7 +4305,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 161.29 153.67 0)
+			(at 167.64 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4473,7 +4327,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 241.3 71.12 0)
+		(at 215.9 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4482,7 +4336,7 @@
 		(fields_autoplaced yes)
 		(uuid "1c3b457e-e0b3-43a9-846a-f9c2add273e2")
 		(property "Reference" "SW13"
-			(at 241.3 63.5 0)
+			(at 215.9 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4490,15 +4344,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 241.3 66.04 0)
+			(at 215.9 61.722 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 241.3 66.04 0)
+			(at 215.9 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4507,7 +4361,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 241.3 66.04 0)
+			(at 215.9 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4516,7 +4370,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 241.3 71.12 0)
+			(at 215.9 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4541,7 +4395,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 266.7 71.12 0)
+		(at 241.3 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4550,7 +4404,7 @@
 		(fields_autoplaced yes)
 		(uuid "1c7a64e6-a351-4464-876b-3d12d1cc240f")
 		(property "Reference" "SW15"
-			(at 266.7 63.5 0)
+			(at 241.3 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4558,15 +4412,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 266.7 66.04 0)
+			(at 241.3 60.96 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 266.7 66.04 0)
+			(at 241.3 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4575,7 +4429,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 266.7 66.04 0)
+			(at 241.3 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4584,7 +4438,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 266.7 71.12 0)
+			(at 241.3 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4609,7 +4463,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 161.29 125.73 180)
+		(at 167.64 124.46 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4617,7 +4471,7 @@
 		(dnp no)
 		(uuid "1ee28fcb-3e96-45c2-929d-86716cc598d0")
 		(property "Reference" "ROC2"
-			(at 160.02 124.714 0)
+			(at 166.37 123.444 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4626,7 +4480,7 @@
 			)
 		)
 		(property "Value" "3.83M"
-			(at 160.02 126.492 0)
+			(at 166.37 125.222 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -4635,7 +4489,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 163.068 125.73 90)
+			(at 169.418 124.46 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4644,7 +4498,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 161.29 125.73 0)
+			(at 167.64 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4653,7 +4507,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 161.29 125.73 0)
+			(at 167.64 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4678,7 +4532,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 228.6 33.02 0)
+		(at 203.2 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4687,7 +4541,7 @@
 		(fields_autoplaced yes)
 		(uuid "298e4f5f-0ec1-4ff8-8d37-90f7b88b9f94")
 		(property "Reference" "SW2"
-			(at 228.6 25.4 0)
+			(at 203.2 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4695,15 +4549,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 228.6 27.94 0)
+			(at 203.2 26.162 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 228.6 27.94 0)
+			(at 203.2 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4712,7 +4566,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 27.94 0)
+			(at 203.2 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4721,7 +4575,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 228.6 33.02 0)
+			(at 203.2 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4746,7 +4600,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 199.39 147.32 0)
+		(at 205.74 146.05 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4754,7 +4608,7 @@
 		(dnp no)
 		(uuid "2d5048a0-4edc-4f83-88fa-3511e57404cd")
 		(property "Reference" "#PWR01"
-			(at 199.39 153.67 0)
+			(at 205.74 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4763,7 +4617,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 199.39 150.876 0)
+			(at 205.74 149.606 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -4772,7 +4626,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 199.39 147.32 0)
+			(at 205.74 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4781,7 +4635,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 199.39 147.32 0)
+			(at 205.74 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4790,7 +4644,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 199.39 147.32 0)
+			(at 205.74 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4811,34 +4665,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 246.38 38.1 90)
+		(lib_id "cweep:1N4148")
+		(at 220.98 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "2eedbc49-10be-48db-83eb-474acfeac4bb")
 		(property "Reference" "D3"
-			(at 244.348 36.83 90)
+			(at 218.44 34.2899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 244.348 39.37 90)
+			(at 218.44 36.8299 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 246.38 38.1 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 220.726 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4847,7 +4702,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 246.38 38.1 0)
+			(at 220.98 47.498 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4856,7 +4711,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 246.38 38.1 0)
+			(at 220.472 50.292 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4865,7 +4720,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 246.38 38.1 0)
+			(at 224.282 35.814 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4874,7 +4729,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 246.38 38.1 0)
+			(at 220.726 55.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4898,8 +4753,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 246.38 76.2 90)
+		(lib_id "cweep:1N4148")
+		(at 220.98 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4907,25 +4762,25 @@
 		(dnp no)
 		(uuid "3e9fe887-ff26-4c25-9f4e-e1d73e0803bb")
 		(property "Reference" "D13"
-			(at 244.348 74.93 90)
+			(at 218.186 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 244.348 77.47 90)
+			(at 218.186 72.39 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 246.38 76.2 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 220.726 89.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4934,7 +4789,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 246.38 76.2 0)
+			(at 220.98 83.058 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4943,7 +4798,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 246.38 76.2 0)
+			(at 220.472 85.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4952,7 +4807,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 246.38 76.2 0)
+			(at 224.282 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4961,7 +4816,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 246.38 76.2 0)
+			(at 220.726 90.932 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4986,7 +4841,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 228.6 71.12 0)
+		(at 203.2 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4995,7 +4850,7 @@
 		(fields_autoplaced yes)
 		(uuid "3f652db9-e68f-4842-a833-9ea98a89ab90")
 		(property "Reference" "SW12"
-			(at 228.6 63.5 0)
+			(at 203.2 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5003,15 +4858,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 228.6 66.04 0)
+			(at 203.2 61.722 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 228.6 66.04 0)
+			(at 203.2 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5020,7 +4875,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 66.04 0)
+			(at 203.2 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5029,7 +4884,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 228.6 71.12 0)
+			(at 203.2 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5054,7 +4909,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 266.7 52.07 0)
+		(at 241.3 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5063,7 +4918,7 @@
 		(fields_autoplaced yes)
 		(uuid "4fbf5928-a45f-40b0-9ebf-6d832c5f65a8")
 		(property "Reference" "SW10"
-			(at 266.7 44.45 0)
+			(at 241.3 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5071,15 +4926,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 266.7 46.99 0)
+			(at 241.3 43.942 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 266.7 46.99 0)
+			(at 241.3 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5088,7 +4943,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 266.7 46.99 0)
+			(at 241.3 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5097,7 +4952,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 266.7 52.07 0)
+			(at 241.3 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5122,7 +4977,7 @@
 	)
 	(symbol
 		(lib_id "Device:Battery_Cell")
-		(at 180.34 64.77 90)
+		(at 250.19 156.21 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5130,23 +4985,23 @@
 		(dnp no)
 		(uuid "50422967-18f3-4bc6-bbfd-986dcd0074a5")
 		(property "Reference" "BT1"
-			(at 178.816 61.468 90)
+			(at 248.666 152.908 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "3.7V 450mAh LiPo"
-			(at 178.816 68.072 90)
+		(property "Value" "3.7V LiPo"
+			(at 248.666 159.512 90)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 178.816 64.77 90)
+		(property "Footprint" "cweep:battery-13853-sparkfun-25x15x4"
+			(at 248.666 156.21 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5155,7 +5010,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 178.816 64.77 90)
+			(at 248.666 156.21 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5164,7 +5019,7 @@
 			)
 		)
 		(property "Description" "Single-cell battery"
-			(at 180.34 64.77 0)
+			(at 250.19 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5188,34 +5043,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 271.78 76.2 90)
+		(lib_id "cweep:1N4148")
+		(at 246.38 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "506c9bb1-f156-4382-9ad8-d946f91ce250")
 		(property "Reference" "D15"
-			(at 269.748 74.93 90)
+			(at 243.84 69.8499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 269.748 77.47 90)
+			(at 243.84 72.3899 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 271.78 76.2 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 246.126 89.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5224,7 +5080,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 271.78 76.2 0)
+			(at 246.38 83.058 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5233,7 +5089,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 271.78 76.2 0)
+			(at 245.872 85.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5242,7 +5098,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 271.78 76.2 0)
+			(at 249.682 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5251,7 +5107,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 271.78 76.2 0)
+			(at 246.126 90.932 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5275,34 +5131,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 246.38 57.15 90)
+		(lib_id "cweep:1N4148")
+		(at 220.98 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "513bbeeb-968e-4ed0-8444-aa869b51586c")
 		(property "Reference" "D8"
-			(at 244.348 55.88 90)
+			(at 218.44 52.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 244.348 58.42 90)
+			(at 218.44 54.6099 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 246.38 57.15 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 220.726 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5311,7 +5168,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 246.38 57.15 0)
+			(at 220.98 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5320,7 +5177,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 246.38 57.15 0)
+			(at 220.472 68.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5329,7 +5186,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 246.38 57.15 0)
+			(at 224.282 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5338,7 +5195,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 246.38 57.15 0)
+			(at 220.726 73.152 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5363,7 +5220,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 204.47 154.94 270)
+		(at 210.82 153.67 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5371,7 +5228,7 @@
 		(dnp no)
 		(uuid "583101a5-8dca-4527-ae67-b4ddac83d163")
 		(property "Reference" "RUV1"
-			(at 204.47 152.908 90)
+			(at 210.82 151.638 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5379,7 +5236,7 @@
 			)
 		)
 		(property "Value" "3.83M"
-			(at 204.47 154.94 90)
+			(at 210.82 153.67 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -5387,7 +5244,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 204.47 153.162 90)
+			(at 210.82 151.892 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5396,7 +5253,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 204.47 154.94 0)
+			(at 210.82 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5405,7 +5262,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 204.47 154.94 0)
+			(at 210.82 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5430,7 +5287,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 254 52.07 0)
+		(at 228.6 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5439,7 +5296,7 @@
 		(fields_autoplaced yes)
 		(uuid "59b75492-7b32-4eb9-9889-6747e4019ab6")
 		(property "Reference" "SW9"
-			(at 254 44.45 0)
+			(at 228.6 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5447,15 +5304,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 254 46.99 0)
+			(at 228.6 43.942 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 254 46.99 0)
+			(at 228.6 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5464,7 +5321,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 254 46.99 0)
+			(at 228.6 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5473,7 +5330,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 254 52.07 0)
+			(at 228.6 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5498,7 +5355,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 166.37 153.67 0)
+		(at 172.72 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5506,7 +5363,7 @@
 		(dnp no)
 		(uuid "5d0d5d33-d69c-4ba3-89b4-9c4b060777e3")
 		(property "Reference" "#PWR04"
-			(at 166.37 160.02 0)
+			(at 172.72 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5515,7 +5372,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 166.37 157.226 0)
+			(at 172.72 155.956 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -5524,7 +5381,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 166.37 153.67 0)
+			(at 172.72 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5533,7 +5390,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 166.37 153.67 0)
+			(at 172.72 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5542,7 +5399,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 166.37 153.67 0)
+			(at 172.72 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5564,7 +5421,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 215.9 71.12 0)
+		(at 190.5 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5573,7 +5430,7 @@
 		(fields_autoplaced yes)
 		(uuid "5dddd064-1349-4dd7-bb41-d1c7a65c9e5d")
 		(property "Reference" "SW11"
-			(at 215.9 63.5 0)
+			(at 190.5 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5581,15 +5438,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 215.9 66.04 0)
+			(at 190.5 61.722 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 215.9 66.04 0)
+			(at 190.5 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5598,7 +5455,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 215.9 66.04 0)
+			(at 190.5 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5607,7 +5464,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 215.9 71.12 0)
+			(at 190.5 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5632,7 +5489,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 204.47 160.02 270)
+		(at 210.82 158.75 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5640,7 +5497,7 @@
 		(dnp no)
 		(uuid "5e03a2af-3f99-4deb-b8f7-175706d1815e")
 		(property "Reference" "ROV1"
-			(at 204.47 157.988 90)
+			(at 210.82 156.718 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5648,7 +5505,7 @@
 			)
 		)
 		(property "Value" "4.42M"
-			(at 204.47 160.02 90)
+			(at 210.82 158.75 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -5656,7 +5513,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 204.47 158.242 90)
+			(at 210.82 156.972 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5665,7 +5522,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 204.47 160.02 0)
+			(at 210.82 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5674,7 +5531,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 204.47 160.02 0)
+			(at 210.82 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5699,7 +5556,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 215.9 52.07 0)
+		(at 190.5 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5708,7 +5565,7 @@
 		(fields_autoplaced yes)
 		(uuid "6053a1bb-733c-439e-9a62-a1230a2a6522")
 		(property "Reference" "SW6"
-			(at 215.9 44.45 0)
+			(at 190.5 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5716,15 +5573,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 215.9 46.99 0)
+			(at 190.5 43.942 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 215.9 46.99 0)
+			(at 190.5 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5733,7 +5590,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 215.9 46.99 0)
+			(at 190.5 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5742,7 +5599,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 215.9 52.07 0)
+			(at 190.5 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5767,7 +5624,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 173.99 153.67 0)
+		(at 180.34 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5775,7 +5632,7 @@
 		(dnp no)
 		(uuid "662c2578-128d-45a4-bfad-e1f02da50bcd")
 		(property "Reference" "#PWR03"
-			(at 173.99 160.02 0)
+			(at 180.34 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5784,7 +5641,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 173.99 157.226 0)
+			(at 180.34 155.956 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -5793,7 +5650,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 173.99 153.67 0)
+			(at 180.34 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5802,7 +5659,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 173.99 153.67 0)
+			(at 180.34 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5811,7 +5668,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 173.99 153.67 0)
+			(at 180.34 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5832,8 +5689,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 233.68 76.2 90)
+		(lib_id "cweep:1N4148")
+		(at 208.28 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5841,25 +5698,25 @@
 		(dnp no)
 		(uuid "6b20f964-8f2e-4110-beba-4685ac867205")
 		(property "Reference" "D12"
-			(at 231.648 74.93 90)
+			(at 205.74 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 231.648 77.47 90)
+			(at 205.74 72.39 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 233.68 76.2 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 208.026 89.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5868,7 +5725,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 233.68 76.2 0)
+			(at 208.28 83.058 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5877,7 +5734,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 233.68 76.2 0)
+			(at 207.772 85.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5886,7 +5743,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 233.68 76.2 0)
+			(at 211.582 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5895,7 +5752,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 233.68 76.2 0)
+			(at 208.026 90.932 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5919,74 +5776,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
-		(at 185.42 59.69 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(uuid "6bd358b6-500e-4371-9b99-cdf061bffe5f")
-		(property "Reference" "BAT-1"
-			(at 185.42 55.372 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at 187.96 59.6899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "TOTEM:BatteryPad"
-			(at 185.42 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 185.42 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole with connection"
-			(at 185.42 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "793d2af4-02cd-4407-a8e7-270d0ead6c10")
-		)
-		(instances
-			(project ""
-				(path "/639fa181-da29-4b09-bbdd-4ee6b511df9a"
-					(reference "BAT-1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
-		(at 210.82 162.56 0)
+		(at 217.17 161.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5994,7 +5785,7 @@
 		(dnp no)
 		(uuid "6e7456c9-f924-4bc3-8a46-42cfc7c6020c")
 		(property "Reference" "#PWR07"
-			(at 210.82 168.91 0)
+			(at 217.17 167.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6003,7 +5794,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 210.82 166.116 0)
+			(at 217.17 164.846 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -6012,7 +5803,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 210.82 162.56 0)
+			(at 217.17 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6021,7 +5812,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 210.82 162.56 0)
+			(at 217.17 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6030,7 +5821,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 210.82 162.56 0)
+			(at 217.17 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6051,34 +5842,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 271.78 57.15 90)
+		(lib_id "cweep:1N4148")
+		(at 246.38 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "747c2412-d61f-45da-963a-063964096a15")
 		(property "Reference" "D10"
-			(at 269.748 55.88 90)
+			(at 243.84 52.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 269.748 58.42 90)
+			(at 243.84 54.6099 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 271.78 57.15 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 246.126 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6087,7 +5879,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 271.78 57.15 0)
+			(at 246.38 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6096,7 +5888,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 271.78 57.15 0)
+			(at 245.872 68.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6105,7 +5897,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 271.78 57.15 0)
+			(at 249.682 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6114,7 +5906,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 271.78 57.15 0)
+			(at 246.126 73.152 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6139,7 +5931,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 168.91 111.76 0)
+		(at 175.26 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6147,7 +5939,7 @@
 		(dnp no)
 		(uuid "7bc25ae2-c749-46bb-a7f0-fcffa7d6f815")
 		(property "Reference" "CHVR1"
-			(at 168.91 108.458 0)
+			(at 175.26 107.188 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6156,7 +5948,7 @@
 			)
 		)
 		(property "Value" "4.7uF"
-			(at 168.91 109.982 0)
+			(at 175.26 108.712 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -6165,7 +5957,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 169.8752 115.57 0)
+			(at 176.2252 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6174,7 +5966,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 168.91 111.76 0)
+			(at 175.26 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6183,7 +5975,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 168.91 111.76 0)
+			(at 175.26 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6208,7 +6000,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 161.29 144.78 180)
+		(at 167.64 143.51 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6216,7 +6008,7 @@
 		(dnp no)
 		(uuid "82ed391f-7ed8-40d5-a00b-64e7f2eb7701")
 		(property "Reference" "ROC1"
-			(at 160.02 143.764 0)
+			(at 166.37 142.494 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6225,7 +6017,7 @@
 			)
 		)
 		(property "Value" "16M"
-			(at 160.02 145.542 0)
+			(at 166.37 144.272 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -6234,7 +6026,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 163.068 144.78 90)
+			(at 169.418 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6243,7 +6035,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 161.29 144.78 0)
+			(at 167.64 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6252,7 +6044,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 161.29 144.78 0)
+			(at 167.64 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6277,7 +6069,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 228.6 90.17 0)
+		(at 203.2 83.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6286,7 +6078,7 @@
 		(fields_autoplaced yes)
 		(uuid "844a45b3-d996-4824-bf02-f1becf876eba")
 		(property "Reference" "SW17"
-			(at 228.6 82.55 0)
+			(at 203.2 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6294,15 +6086,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 228.6 85.09 0)
+			(at 203.2 79.502 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 228.6 85.09 0)
+			(at 203.2 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6311,7 +6103,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 85.09 0)
+			(at 203.2 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6320,7 +6112,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 228.6 90.17 0)
+			(at 203.2 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6345,7 +6137,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 241.3 52.07 0)
+		(at 215.9 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6354,7 +6146,7 @@
 		(fields_autoplaced yes)
 		(uuid "95476607-d851-4a94-91f9-72d6e1e8ab98")
 		(property "Reference" "SW8"
-			(at 241.3 44.45 0)
+			(at 215.9 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6362,15 +6154,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 241.3 46.99 0)
+			(at 215.9 43.942 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 241.3 46.99 0)
+			(at 215.9 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6379,7 +6171,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 241.3 46.99 0)
+			(at 215.9 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6388,7 +6180,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 241.3 52.07 0)
+			(at 215.9 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6412,8 +6204,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 259.08 76.2 90)
+		(lib_id "cweep:1N4148")
+		(at 233.68 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6421,25 +6213,25 @@
 		(dnp no)
 		(uuid "972970e1-6a74-4251-b73a-9c2d75079459")
 		(property "Reference" "D14"
-			(at 257.048 74.93 90)
+			(at 230.886 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 257.048 77.47 90)
+			(at 230.886 72.39 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 259.08 76.2 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 233.426 89.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6448,7 +6240,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 259.08 76.2 0)
+			(at 233.68 83.058 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6457,7 +6249,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 259.08 76.2 0)
+			(at 233.172 85.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6466,7 +6258,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 259.08 76.2 0)
+			(at 236.982 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6475,7 +6267,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 259.08 76.2 0)
+			(at 233.426 90.932 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6499,34 +6291,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 259.08 57.15 90)
+		(lib_id "cweep:1N4148")
+		(at 233.68 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "99917954-4760-41b6-b0ba-df4c27433cbe")
 		(property "Reference" "D9"
-			(at 257.048 55.88 90)
+			(at 231.14 52.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 257.048 58.42 90)
+			(at 231.14 54.6099 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 259.08 57.15 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 233.426 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6535,7 +6328,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 259.08 57.15 0)
+			(at 233.68 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6544,7 +6337,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 259.08 57.15 0)
+			(at 233.172 68.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6553,7 +6346,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 259.08 57.15 0)
+			(at 236.982 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6562,7 +6355,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 259.08 57.15 0)
+			(at 233.426 73.152 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6586,34 +6379,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 220.98 76.2 90)
+		(lib_id "cweep:1N4148")
+		(at 195.58 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "9c5ab641-f52b-42de-b421-e5a32c1e4017")
 		(property "Reference" "D11"
-			(at 218.948 74.93 90)
+			(at 193.04 69.8499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 218.948 77.47 90)
+			(at 193.04 72.3899 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 220.98 76.2 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 195.326 89.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6622,7 +6416,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 220.98 76.2 0)
+			(at 195.58 83.058 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6631,7 +6425,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 220.98 76.2 0)
+			(at 195.072 85.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6640,7 +6434,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 220.98 76.2 0)
+			(at 198.882 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6649,7 +6443,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 220.98 76.2 0)
+			(at 195.326 90.932 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6674,7 +6468,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 158.75 116.84 0)
+		(at 165.1 115.57 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6682,7 +6476,7 @@
 		(dnp no)
 		(uuid "a12c1cab-eff6-4770-9e50-97eccfb4bd49")
 		(property "Reference" "#PWR010"
-			(at 158.75 123.19 0)
+			(at 165.1 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6691,7 +6485,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 158.75 120.396 0)
+			(at 165.1 119.126 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -6700,7 +6494,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 158.75 116.84 0)
+			(at 165.1 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6709,7 +6503,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 158.75 116.84 0)
+			(at 165.1 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6718,7 +6512,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 158.75 116.84 0)
+			(at 165.1 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6740,7 +6534,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 187.96 68.58 0)
+		(at 259.08 158.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6749,7 +6543,7 @@
 		(fields_autoplaced yes)
 		(uuid "a132bd7c-df2b-46af-81fb-7e428d4ea3f1")
 		(property "Reference" "#PWR05"
-			(at 187.96 74.93 0)
+			(at 259.08 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6758,7 +6552,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 187.96 73.66 0)
+			(at 259.08 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6767,7 +6561,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 187.96 68.58 0)
+			(at 259.08 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6776,7 +6570,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 187.96 68.58 0)
+			(at 259.08 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6785,7 +6579,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 187.96 68.58 0)
+			(at 259.08 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6807,7 +6601,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 189.23 110.49 0)
+		(at 195.58 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6815,7 +6609,7 @@
 		(dnp no)
 		(uuid "a388b40c-2ed7-46b4-ad04-b787b658492c")
 		(property "Reference" "CBYP1"
-			(at 189.23 107.188 0)
+			(at 195.58 105.918 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6824,7 +6618,7 @@
 			)
 		)
 		(property "Value" "10nF"
-			(at 189.23 108.712 0)
+			(at 195.58 107.442 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -6833,7 +6627,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 190.1952 114.3 0)
+			(at 196.5452 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6842,7 +6636,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 189.23 110.49 0)
+			(at 195.58 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6851,7 +6645,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 189.23 110.49 0)
+			(at 195.58 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6875,74 +6669,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
-		(at 172.72 59.69 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(uuid "a8d30f8f-cf5c-477d-8d82-1c68b9829461")
-		(property "Reference" "BAT+1"
-			(at 172.72 55.372 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at 175.26 59.6899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "TOTEM:BatteryPad"
-			(at 172.72 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 172.72 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole with connection"
-			(at 172.72 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e128dc99-b1e4-4fc1-9712-563a0ad7ff2f")
-		)
-		(instances
-			(project ""
-				(path "/639fa181-da29-4b09-bbdd-4ee6b511df9a"
-					(reference "BAT+1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
-		(at 191.77 154.94 270)
+		(at 198.12 153.67 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6950,7 +6678,7 @@
 		(dnp no)
 		(uuid "aa0d3e1e-6eb3-4030-a199-e52e86f5a0bd")
 		(property "Reference" "RUV2"
-			(at 191.77 152.908 90)
+			(at 198.12 151.638 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6958,7 +6686,7 @@
 			)
 		)
 		(property "Value" "6.04M"
-			(at 191.77 154.94 90)
+			(at 198.12 153.67 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -6966,7 +6694,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 191.77 153.162 90)
+			(at 198.12 151.892 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6975,7 +6703,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 191.77 154.94 0)
+			(at 198.12 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6984,7 +6712,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 191.77 154.94 0)
+			(at 198.12 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7009,7 +6737,7 @@
 	)
 	(symbol
 		(lib_id "Device:Solar_Cell")
-		(at 158.75 111.76 0)
+		(at 165.1 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7017,7 +6745,7 @@
 		(dnp no)
 		(uuid "af07a845-73a8-4530-a165-8ef9bd3844a2")
 		(property "Reference" "SC1"
-			(at 158.75 105.156 0)
+			(at 165.1 103.886 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7026,7 +6754,7 @@
 			)
 		)
 		(property "Value" "SM141K04LV"
-			(at 158.75 106.68 0)
+			(at 165.1 105.41 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -7035,7 +6763,7 @@
 			)
 		)
 		(property "Footprint" "cweep:SM141K04LV"
-			(at 158.75 110.236 90)
+			(at 165.1 108.966 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7044,7 +6772,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 158.75 110.236 90)
+			(at 165.1 108.966 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7053,7 +6781,7 @@
 			)
 		)
 		(property "Description" "Single solar cell"
-			(at 158.75 111.76 0)
+			(at 165.1 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7078,7 +6806,7 @@
 	)
 	(symbol
 		(lib_id "Device:L")
-		(at 175.26 104.14 90)
+		(at 181.61 102.87 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7086,7 +6814,7 @@
 		(dnp no)
 		(uuid "b4e3eaf3-cb40-42bd-bfd2-47d688a09b56")
 		(property "Reference" "LBST1"
-			(at 175.26 105.156 90)
+			(at 181.61 103.886 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7094,7 +6822,7 @@
 			)
 		)
 		(property "Value" "22uH"
-			(at 175.26 106.68 90)
+			(at 181.61 105.41 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -7102,7 +6830,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 175.26 104.14 0)
+			(at 181.61 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7111,7 +6839,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 175.26 104.14 0)
+			(at 181.61 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7120,7 +6848,7 @@
 			)
 		)
 		(property "Description" "Inductor"
-			(at 175.26 104.14 0)
+			(at 181.61 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7145,7 +6873,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 228.6 52.07 0)
+		(at 203.2 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7154,7 +6882,7 @@
 		(fields_autoplaced yes)
 		(uuid "ba37b602-324f-4039-aecc-37b332566874")
 		(property "Reference" "SW7"
-			(at 228.6 44.45 0)
+			(at 203.2 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7162,15 +6890,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 228.6 46.99 0)
+			(at 203.2 43.942 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 228.6 46.99 0)
+			(at 203.2 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7179,7 +6907,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 46.99 0)
+			(at 203.2 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7188,7 +6916,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 228.6 52.07 0)
+			(at 203.2 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7213,7 +6941,7 @@
 	)
 	(symbol
 		(lib_id "Seeed Studio XIAO Series:XIAO-nRF52840")
-		(at 231.14 151.13 0)
+		(at 231.14 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7221,7 +6949,7 @@
 		(dnp no)
 		(uuid "ba52ea96-fbb5-44bd-8423-e43418c5f682")
 		(property "Reference" "U1"
-			(at 265.176 110.998 0)
+			(at 265.176 107.188 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7230,7 +6958,7 @@
 			)
 		)
 		(property "Value" "XIAO-nRF52840"
-			(at 247.65 127.508 0)
+			(at 247.65 123.698 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -7239,7 +6967,7 @@
 			)
 		)
 		(property "Footprint" "Seeed Studio XIAO Series Library:XIAO-nRF52840"
-			(at 239.6333 128.27 0)
+			(at 239.6333 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7249,7 +6977,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 222.25 146.05 0)
+			(at 222.25 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7258,7 +6986,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 231.14 151.13 0)
+			(at 231.14 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7343,7 +7071,7 @@
 	)
 	(symbol
 		(lib_id "BQ25504RGTR:BQ25504RGTR")
-		(at 172.72 163.83 0)
+		(at 179.07 162.56 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7351,7 +7079,7 @@
 		(dnp no)
 		(uuid "c0a96e03-a7f9-4167-98c4-482e56fa5b4d")
 		(property "Reference" "U2"
-			(at 192.532 122.174 0)
+			(at 198.882 120.904 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -7359,7 +7087,7 @@
 			)
 		)
 		(property "Value" "BQ25504RGTR"
-			(at 183.134 130.81 0)
+			(at 189.484 129.54 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -7367,7 +7095,7 @@
 			)
 		)
 		(property "Footprint" "BQ25504RGTR:RGT16_1P7X1P7"
-			(at 172.72 163.83 0)
+			(at 179.07 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7377,7 +7105,7 @@
 			)
 		)
 		(property "Datasheet" "BQ25504RGTR"
-			(at 172.72 163.83 0)
+			(at 179.07 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7387,7 +7115,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 172.72 163.83 0)
+			(at 179.07 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7456,8 +7184,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 220.98 95.25 90)
+		(lib_id "cweep:1N4148")
+		(at 195.58 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7465,25 +7193,25 @@
 		(dnp no)
 		(uuid "c42fdd89-38bd-4aa2-94a7-b76540c6213f")
 		(property "Reference" "D16"
-			(at 218.948 93.98 90)
+			(at 192.786 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 218.948 96.52 90)
+			(at 192.786 90.17 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 220.98 95.25 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 195.326 106.934 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7492,7 +7220,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 220.98 95.25 0)
+			(at 195.58 100.838 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7501,7 +7229,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 220.98 95.25 0)
+			(at 195.072 103.632 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7510,7 +7238,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 220.98 95.25 0)
+			(at 198.882 89.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7519,7 +7247,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 220.98 95.25 0)
+			(at 195.326 108.712 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7543,34 +7271,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 271.78 38.1 90)
+		(lib_id "cweep:1N4148")
+		(at 246.38 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "c6dd1df9-6a92-4d5d-aa3c-532412fe3399")
 		(property "Reference" "D5"
-			(at 269.748 36.83 90)
+			(at 243.84 34.2899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 269.748 39.37 90)
+			(at 243.84 36.8299 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 271.78 38.1 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 246.126 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7579,7 +7308,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 271.78 38.1 0)
+			(at 246.38 47.498 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7588,7 +7317,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 271.78 38.1 0)
+			(at 245.872 50.292 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7597,7 +7326,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 271.78 38.1 0)
+			(at 249.682 35.814 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7606,7 +7335,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 271.78 38.1 0)
+			(at 246.126 55.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7630,8 +7359,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 233.68 95.25 90)
+		(lib_id "cweep:1N4148")
+		(at 208.28 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7639,25 +7368,25 @@
 		(dnp no)
 		(uuid "c6eeec3d-e3a0-453a-8df2-63adaf62f17f")
 		(property "Reference" "D17"
-			(at 231.648 93.98 90)
+			(at 205.486 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 231.648 96.52 90)
+			(at 205.486 90.17 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 233.68 95.25 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 208.026 106.934 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7666,7 +7395,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 233.68 95.25 0)
+			(at 208.28 100.838 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7675,7 +7404,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 233.68 95.25 0)
+			(at 207.772 103.632 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7684,7 +7413,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 233.68 95.25 0)
+			(at 211.582 89.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7693,7 +7422,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 233.68 95.25 0)
+			(at 208.026 108.712 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7718,7 +7447,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 254 71.12 0)
+		(at 228.6 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7727,7 +7456,7 @@
 		(fields_autoplaced yes)
 		(uuid "c8691ade-37b7-4a5e-9831-64d490bcef00")
 		(property "Reference" "SW14"
-			(at 254 63.5 0)
+			(at 228.6 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7735,15 +7464,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 254 66.04 0)
+			(at 228.6 61.722 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 254 66.04 0)
+			(at 228.6 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7752,7 +7481,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 254 66.04 0)
+			(at 228.6 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7761,7 +7490,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 254 71.12 0)
+			(at 228.6 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7785,34 +7514,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 259.08 38.1 90)
+		(lib_id "cweep:1N4148")
+		(at 233.68 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "ca213812-0175-4152-9a16-9b00f91803d8")
 		(property "Reference" "D4"
-			(at 257.048 36.83 90)
+			(at 231.14 34.2899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 257.048 39.37 90)
+			(at 231.14 36.8299 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 259.08 38.1 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 233.426 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7821,7 +7551,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 259.08 38.1 0)
+			(at 233.68 47.498 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7830,7 +7560,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 259.08 38.1 0)
+			(at 233.172 50.292 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7839,7 +7569,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 259.08 38.1 0)
+			(at 236.982 35.814 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7848,7 +7578,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 259.08 38.1 0)
+			(at 233.426 55.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7872,34 +7602,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 233.68 57.15 90)
+		(lib_id "cweep:1N4148")
+		(at 208.28 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "d2f66fe7-d2ba-408d-8333-eb354dfcb26a")
 		(property "Reference" "D7"
-			(at 231.648 55.88 90)
+			(at 205.74 52.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 231.648 58.42 90)
+			(at 205.74 54.6099 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 233.68 57.15 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 208.026 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7908,7 +7639,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 233.68 57.15 0)
+			(at 208.28 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7917,7 +7648,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 233.68 57.15 0)
+			(at 207.772 68.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7926,7 +7657,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 233.68 57.15 0)
+			(at 211.582 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7935,7 +7666,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 233.68 57.15 0)
+			(at 208.026 73.152 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7960,7 +7691,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 168.91 121.92 0)
+		(at 175.26 120.65 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7968,7 +7699,7 @@
 		(dnp no)
 		(uuid "dd47bf3b-6383-444d-aebb-0350f1804e49")
 		(property "Reference" "#PWR06"
-			(at 168.91 128.27 0)
+			(at 175.26 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7977,7 +7708,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 168.91 125.476 0)
+			(at 175.26 124.206 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -7986,7 +7717,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 168.91 121.92 0)
+			(at 175.26 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7995,7 +7726,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 168.91 121.92 0)
+			(at 175.26 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8004,7 +7735,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 168.91 121.92 0)
+			(at 175.26 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8026,7 +7757,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 278.13 127 0)
+		(at 278.13 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8035,7 +7766,7 @@
 		(fields_autoplaced yes)
 		(uuid "e0bb662c-7a12-475a-a92e-a8ef7d418b80")
 		(property "Reference" "#PWR02"
-			(at 278.13 133.35 0)
+			(at 278.13 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8044,7 +7775,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 278.13 132.08 0)
+			(at 278.13 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8053,7 +7784,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 278.13 127 0)
+			(at 278.13 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8062,7 +7793,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 278.13 127 0)
+			(at 278.13 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8071,7 +7802,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 278.13 127 0)
+			(at 278.13 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8092,34 +7823,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 220.98 38.1 90)
+		(lib_id "cweep:1N4148")
+		(at 195.58 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "e1a3cac2-7f50-40c4-8396-f54023b2a3e3")
 		(property "Reference" "D1"
-			(at 218.948 36.83 90)
+			(at 193.04 34.2899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 218.948 39.37 90)
+			(at 193.04 36.8299 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 220.98 38.1 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 195.326 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8128,7 +7860,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 220.98 38.1 0)
+			(at 195.58 47.498 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8137,7 +7869,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 220.98 38.1 0)
+			(at 195.072 50.292 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8146,7 +7878,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 220.98 38.1 0)
+			(at 198.882 35.814 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8155,7 +7887,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 220.98 38.1 0)
+			(at 195.326 55.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8180,7 +7912,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 166.37 144.78 0)
+		(at 172.72 143.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8188,7 +7920,7 @@
 		(dnp no)
 		(uuid "e4f67ced-63da-4496-9a36-aba67eaaec50")
 		(property "Reference" "CREF1"
-			(at 166.37 141.478 0)
+			(at 172.72 140.208 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8197,7 +7929,7 @@
 			)
 		)
 		(property "Value" "10nF"
-			(at 166.37 143.002 0)
+			(at 172.72 141.732 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -8206,7 +7938,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 167.3352 148.59 0)
+			(at 173.6852 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8215,7 +7947,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 166.37 144.78 0)
+			(at 172.72 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8224,7 +7956,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 166.37 144.78 0)
+			(at 172.72 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8249,15 +7981,16 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 191.77 160.02 270)
+		(at 198.12 158.75 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "eecb12de-3b73-4e6b-8609-e6f7a0816bcf")
 		(property "Reference" "ROV2"
-			(at 191.77 157.988 90)
+			(at 198.12 156.718 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8265,7 +7998,7 @@
 			)
 		)
 		(property "Value" "5.49M"
-			(at 191.77 160.02 90)
+			(at 198.12 158.75 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -8273,7 +8006,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 191.77 158.242 90)
+			(at 198.12 156.972 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8282,7 +8015,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 191.77 160.02 0)
+			(at 198.12 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8291,7 +8024,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 191.77 160.02 0)
+			(at 198.12 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8316,7 +8049,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 215.9 90.17 0)
+		(at 190.5 83.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8325,7 +8058,7 @@
 		(fields_autoplaced yes)
 		(uuid "f5886a28-824c-490a-9733-ac5e3939a820")
 		(property "Reference" "SW16"
-			(at 215.9 82.55 0)
+			(at 190.5 77.216 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8333,15 +8066,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 215.9 85.09 0)
+			(at 190.5 79.502 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 215.9 85.09 0)
+			(at 190.5 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8350,7 +8083,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 215.9 85.09 0)
+			(at 190.5 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8359,7 +8092,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 215.9 90.17 0)
+			(at 190.5 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8384,7 +8117,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 215.9 33.02 0)
+		(at 190.5 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8393,7 +8126,7 @@
 		(fields_autoplaced yes)
 		(uuid "f886c83c-8266-4077-8092-e0cb8c8a684f")
 		(property "Reference" "SW1"
-			(at 215.9 25.4 0)
+			(at 190.5 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8401,15 +8134,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 215.9 27.94 0)
+			(at 190.5 26.162 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
 		(property "Footprint" "Switch_Keyboard_Hotswap_Kailh:SW_Hotswap_Kailh_Choc_V1_1.00u"
-			(at 215.9 27.94 0)
+			(at 190.5 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8418,7 +8151,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 215.9 27.94 0)
+			(at 190.5 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8427,7 +8160,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 215.9 33.02 0)
+			(at 190.5 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8452,7 +8185,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 199.39 110.49 0)
+		(at 205.74 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8460,7 +8193,7 @@
 		(dnp no)
 		(uuid "f97bd05f-0da4-4a6a-9e95-198ba56e28d7")
 		(property "Reference" "CSTOR1"
-			(at 199.39 107.188 0)
+			(at 205.74 105.918 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8469,7 +8202,7 @@
 			)
 		)
 		(property "Value" "4.7uF"
-			(at 199.39 108.712 0)
+			(at 205.74 107.442 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -8478,7 +8211,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 200.3552 114.3 0)
+			(at 206.7052 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8487,7 +8220,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 199.39 110.49 0)
+			(at 205.74 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8496,7 +8229,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 199.39 110.49 0)
+			(at 205.74 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8520,34 +8253,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148")
-		(at 220.98 57.15 90)
+		(lib_id "cweep:1N4148")
+		(at 195.58 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "fb9747a7-35bf-43ca-97d0-958c979a9cba")
 		(property "Reference" "D6"
-			(at 218.948 55.88 90)
+			(at 193.04 52.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1N4148"
-			(at 218.948 58.42 90)
+			(at 193.04 54.6099 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "cweep:D_DO-35_SOD27_P7.62mm_Horizontal"
-			(at 220.98 57.15 0)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 195.326 71.374 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8556,7 +8290,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf"
-			(at 220.98 57.15 0)
+			(at 195.58 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8565,7 +8299,7 @@
 			)
 		)
 		(property "Description" "100V 0.15A standard switching diode, DO-35"
-			(at 220.98 57.15 0)
+			(at 195.072 68.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8574,7 +8308,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 220.98 57.15 0)
+			(at 198.882 53.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8583,7 +8317,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 220.98 57.15 0)
+			(at 195.326 73.152 0)
 			(effects
 				(font
 					(size 1.27 1.27)
