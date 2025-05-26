@@ -4,5 +4,4 @@
   (lib (name "Switch_Keyboard_Hotswap_Kailh")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_github_perigoso_keyswitch-kicad-library/Switch_Keyboard_Hotswap_Kailh.pretty")(options "")(descr ""))
   (lib (name "cweep")(type "KiCad")(uri "${KIPRJMOD}/footprints/cweep.pretty")(options "")(descr ""))
   (lib (name "BQ25504RGTR")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_ultralibrariam_TI_BQ25504RGTR.pretty")(options "")(descr ""))
-  (lib (name "TOTEM")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_github_GEIGEIGEIST_TOTEM")(options "")(descr ""))
 )
