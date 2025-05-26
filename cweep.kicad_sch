@@ -2455,6 +2455,10 @@
 		(uuid "f6e89155-7d35-4d5d-a3cc-6abfd8692fee")
 	)
 	(no_connect
+		(at 270.51 124.46)
+		(uuid "01af1572-a8f6-42e2-9b96-6a3a9e38cc87")
+	)
+	(no_connect
 		(at 203.2 132.08)
 		(uuid "21b3f556-fabe-4b94-980a-27b7a2aafb09")
 	)
@@ -2467,12 +2471,20 @@
 		(uuid "30c30430-9abf-4384-a35c-e90bbd2c8a8d")
 	)
 	(no_connect
+		(at 228.6 135.89)
+		(uuid "5d1c780b-056b-4774-b08b-e98505faab92")
+	)
+	(no_connect
 		(at 245.11 105.41)
 		(uuid "673feb9a-842f-4f3c-9e40-f0d4adf6bb0b")
 	)
 	(no_connect
-		(at 228.6 135.89)
-		(uuid "90e8ea47-2267-430d-849d-e6d231983b32")
+		(at 270.51 116.84)
+		(uuid "8241687c-bf1d-4694-9563-4662178791b9")
+	)
+	(no_connect
+		(at 228.6 139.7)
+		(uuid "8c411368-6b4b-4fb6-8a06-50153e63f41b")
 	)
 	(no_connect
 		(at 256.54 105.41)
@@ -2481,10 +2493,6 @@
 	(no_connect
 		(at 247.65 149.86)
 		(uuid "9c203fc2-2b34-4f80-a7d0-9a7ea07facf4")
-	)
-	(no_connect
-		(at 228.6 139.7)
-		(uuid "e1ecb87d-281b-4c0d-9fe2-9154c6b57439")
 	)
 	(no_connect
 		(at 248.92 105.41)
@@ -2612,16 +2620,6 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 128.27) (xy 228.6 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1f107897-c068-4350-9d89-7f22d7ec68ba")
-	)
-	(wire
-		(pts
 			(xy 205.74 116.84) (xy 205.74 129.54)
 		)
 		(stroke
@@ -2689,16 +2687,6 @@
 			(type default)
 		)
 		(uuid "25c9a464-72e0-4daa-b4ad-134fa98261f4")
-	)
-	(wire
-		(pts
-			(xy 227.33 132.08) (xy 228.6 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "27006121-971f-474c-bd33-45ca0bcd5584")
 	)
 	(wire
 		(pts
@@ -2932,6 +2920,16 @@
 	)
 	(wire
 		(pts
+			(xy 227.33 128.27) (xy 228.6 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "58dab0e5-1d2b-4c4e-9e42-9cac7a8ff704")
+	)
+	(wire
+		(pts
 			(xy 208.28 92.71) (xy 248.92 92.71)
 		)
 		(stroke
@@ -3059,6 +3057,16 @@
 			(type default)
 		)
 		(uuid "762c3557-be0e-468a-92a3-0141ba07a7f8")
+	)
+	(wire
+		(pts
+			(xy 227.33 132.08) (xy 228.6 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7849de50-1a09-42f5-acce-310611297ffc")
 	)
 	(wire
 		(pts
