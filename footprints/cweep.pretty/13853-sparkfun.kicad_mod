@@ -19,7 +19,7 @@
 	(property "Value" "13853-sparkfun"
 		(at 0 0 0)
 		(unlocked yes)
-		(layer "F.SilkS")
+		(layer "Dwgs.User")
 		(uuid "d4bfb7ba-bbe2-4c1e-babe-49e0a4733610")
 		(effects
 			(font
