@@ -7,18 +7,28 @@ This project is a custom wireless split keyboard in development, inspired by var
 > [!NOTE]
 > This is a preliminary list of components needed for the keyboard. The final list may change as the design evolves.
 
+Microcontroller:
 - 2 × Seeed Xiao nRF52840
+- 2 × 3.7V LiPo batteries (13853)
+  - ~6 week battery life (ignoring solar charging)
+  - built-in over/under voltage and current protection
+  - fits in 25mm x 15mm x 4mm space
+- 4 × 7-Pin straight socket connectors (310-87-107-41-001101)
+- 4 x 7 Mill-Max Low Profile Controller Pins (TODO: find part number and ensure pin thickness is compatible with socket)
+- 4 x pogo pins (0906-0-15-20-76-14-11-0)
+- 2 × 3-Pin 2-Position Switches (TODO: find part number)
+- 2 reset buttons (TODO: find part number)
 - Optional additional dongle for host devices without native BLE
+
+Switch Matrix:
 - 34 × Kailh Low Profile Choc Switches (e.g., Sunset Tactile)
 - 34 × Kailh Choc Hotswap Sockets
 - 34 × 1U Kailh Choc Keycaps (e.g DDC Choc PBT Blanks)
 - 34 × 1N4148 Diodes (through-hole)
-- 4 × 7-Pin Machined IC Female Header Strips (buy larger strips and break to size)
-- 4 x 7 Mill-Max Low Profile Controller Pins (for MCU and female header strips)
-- 2 × 3-Pin 2-Position Switches
-- 4 x Mill-Max 0906-0-15-20-76-14-11-0 pogo pins (for battery and reset pads)
-- 2 × LiPo Batteries (e.g., ~15×22×7.5 mm)
-- 2 x Solar panel(s) sized to fit above the MCU
+
+Solar Charger:
+- 2 x solar cells (SM141K04LV)
+- TODO: the other components for the solar charger circuit
 
 ## Project Status
 

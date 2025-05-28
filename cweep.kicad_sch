@@ -2148,14 +2148,14 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "TODO: review bat datasheet to see if I need UV, OV, and if bat dimensions are correct\n\nVREF_SAMP: enable input voltage regulation -> CREF = 10 nF\nOT_PROG: stop charging when junction temperature > 65 C\nVBAT_OV: ROV1 = 4.42 MOhm, ROV2 = 5.49 MOhm -> VBAT_OV = 4.26V (should be 4.2V)\nVBAT_UV: RUV1 = 3.83 MOhm, RUV2 = 6.04 MOhm -> VBAT_UV = 3.22V (should be 2.8V)\n\nUsing SM1414KLV panels: V_OC = 2.76 V, V_MPP = 2.23 V\nROC1 = 2.23 V / 2.76 V * 19.8 MOhm = 16 MOhm\nROC2 = 19.8 MOhm - 16 MOhm = 3.8 MOhm -> 3.83 MOhm\nMPP = ROC1 / (ROC1 + ROC2) = 0.81 % - V_MPP / V_OC"
+	(text "TODO: 13853 has built in UV, OV, OC protection; eliminate unnecessary solar charge protection, \nTODO: 13853 dimensions are at max 15.5mm x 27mm x 4.2mm, which may not fit\n\nVREF_SAMP: enable input voltage regulation -> CREF = 10 nF\nOT_PROG: stop charging when junction temperature > 65 C\nVBAT_OV: ROV1 = 4.42 MOhm, ROV2 = 5.49 MOhm -> VBAT_OV = 4.26V (should be 4.2V)\nVBAT_UV: RUV1 = 3.83 MOhm, RUV2 = 6.04 MOhm -> VBAT_UV = 3.22V (should be 2.8V)\n\nUsing SM1414KLV panels: V_OC = 2.76 V, V_MPP = 2.23 V\nROC1 = 2.23 V / 2.76 V * 19.8 MOhm = 16 MOhm\nROC2 = 19.8 MOhm - 16 MOhm = 3.8 MOhm -> 3.83 MOhm\nMPP = ROC1 / (ROC1 + ROC2) = 0.81 % - V_MPP / V_OC"
 		(exclude_from_sim no)
-		(at 12.446 186.69 0)
+		(at 12.7 197.612 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
 		(uuid "2d9fb37d-fa48-4aee-8526-d2950204dba8")
 	)
