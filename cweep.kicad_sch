@@ -2495,10 +2495,6 @@
 		(uuid "9c203fc2-2b34-4f80-a7d0-9a7ea07facf4")
 	)
 	(no_connect
-		(at 237.49 154.94)
-		(uuid "f00a7066-8f46-4495-a0fa-10736633d0d7")
-	)
-	(no_connect
 		(at 248.92 105.41)
 		(uuid "f2652631-83c7-46fa-a096-6a322725f0d6")
 	)
