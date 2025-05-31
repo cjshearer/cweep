@@ -4,7 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
-		(at -10 -7.5 0)
+		(at 0 -8.1 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "caff4f46-d60e-4cdc-80a9-f3d645151b42")
@@ -56,20 +56,31 @@
 	)
 	(attr smd)
 	(fp_rect
-		(start -12.5 -7.5)
-		(end 12.5 7.5)
+		(start -12.85 -7.85)
+		(end 12.85 7.85)
 		(stroke
 			(width 0.1)
 			(type default)
 		)
 		(fill no)
-		(layer "F.SilkS")
+		(layer "Dwgs.User")
+		(uuid "532629de-cc67-407c-8e82-fc62a7aa05f9")
+	)
+	(fp_rect
+		(start -12.6 -7.6)
+		(end 12.6 7.6)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
 		(uuid "d08025a0-9a31-4881-baa6-ca14de1f43d1")
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/cweep/battery-13853-sparkfun-25x15x4.step"
 		(offset
-			(xyz 0 0 1.99)
+			(xyz 0 0 -1.50)
 		)
 		(scale
 			(xyz 1 1 1)

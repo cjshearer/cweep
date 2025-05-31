@@ -54,12 +54,12 @@
       "diff_pair_dimensions": [],
       "drc_exclusions": [
         [
-          "silk_overlap|224775000|105169000|afbda176-7d3b-43d3-ae54-1e601592c2f7|c86006bb-72ec-4e31-a593-3b89ba3311b6",
-          "battery-end will barely fit under MCU"
+          "silk_edge_clearance|223669413|105974999|84907ab7-86a8-45aa-abdd-26c34fbd4e0a|ed27f4ec-6c67-4bd1-a9bf-72b00db1bb62",
+          ""
         ],
         [
-          "silk_overlap|224775000|96170399|a9e480a7-dbd5-449d-98de-7ff9075cdbff|afbda176-7d3b-43d3-ae54-1e601592c2f7",
-          "battery-end will barely fit under MCU"
+          "silk_edge_clearance|224667000|94125000|84907ab7-86a8-45aa-abdd-26c34fbd4e0a|5d6bfea2-fd1a-4f9d-80e5-426aad742d85",
+          ""
         ]
       ],
       "meta": {
