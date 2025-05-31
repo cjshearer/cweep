@@ -10259,7 +10259,7 @@
 		)
 		(fp_poly
 			(pts
-				(xy -2.499999 -6.275001) (xy 2.5 -6.275) (xy 2.499999 -3.124999) (xy -2.5 -3.125)
+				(xy -2.499999 -6.275001) (xy 2.5 -6.275) (xy 2.499999 -3.124998) (xy -2.5 -3.125)
 			)
 			(stroke
 				(width 0.1)
@@ -10381,7 +10381,7 @@
 		)
 		(fp_line
 			(start -2.546 7.282)
-			(end -2.633 6.844)
+			(end -2.633001 6.844)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -10390,7 +10390,7 @@
 			(uuid "8f4446ba-43ca-467c-8321-3cd807eb72d9")
 		)
 		(fp_line
-			(start -2.633 6.844)
+			(start -2.633001 6.844)
 			(end -2.877 6.477)
 			(stroke
 				(width 0.12)
@@ -10410,7 +10410,7 @@
 			(uuid "db723b4e-576d-462a-bcfa-3a6fb32d79a4")
 		)
 		(fp_line
-			(start -1.671 8.266001)
+			(start -1.671 8.266)
 			(end -2.013 8.037)
 			(stroke
 				(width 0.12)
@@ -10421,7 +10421,7 @@
 		)
 		(fp_line
 			(start -1.267999 8.346001)
-			(end -1.671 8.266001)
+			(end -1.671 8.266)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -11192,8 +11192,8 @@
 			(uuid "36f92cef-c8c2-4a10-b692-93dc4ad8467f")
 		)
 		(fp_line
-			(start -2.611999 2.729001)
-			(end -2.257999 3.203)
+			(start -2.611998 2.729001)
+			(end -2.258 3.203)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -11203,7 +11203,7 @@
 		)
 		(fp_line
 			(start -2.769 2.158)
-			(end -2.611999 2.729001)
+			(end -2.611998 2.729001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -11222,7 +11222,7 @@
 			(uuid "597cf4cc-67c9-4a60-85dc-44719a74c9b8")
 		)
 		(fp_line
-			(start -2.257999 3.203)
+			(start -2.258 3.203)
 			(end -1.756 3.516)
 			(stroke
 				(width 0.1)
@@ -18625,7 +18625,7 @@
 				)
 			)
 		)
-		(property "Description" "Single-cell battery"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -18651,12 +18651,12 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "afbda176-7d3b-43d3-ae54-1e601592c2f7")
+			(uuid "f66ab29b-915b-4e3a-9337-f565fe8a4479")
 		)
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/cweep/battery-13853-sparkfun-25x15x4.step"
 			(offset
-				(xyz 0 0 1.9)
+				(xyz 0 0 1.99)
 			)
 			(scale
 				(xyz 1 1 1)

@@ -69,7 +69,7 @@
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/cweep/battery-13853-sparkfun-25x15x4.step"
 		(offset
-			(xyz 0 0 1.9)
+			(xyz 0 0 1.99)
 		)
 		(scale
 			(xyz 1 1 1)
