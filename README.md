@@ -2,9 +2,9 @@
 
 A compact 34 key, solar powered, split keyboard.
 
-<img align="center" alt="keyboard back" src="https://github.com/user-attachments/assets/a6f44060-76dd-44ea-beb3-6cd05df484a0" width="33%" />
-<img align="center" alt="keyboard front" src="https://github.com/user-attachments/assets/9f854a35-250d-4e65-bede-7c7884c4b16a" width="33%" />
-<img align="center" alt="keyboard side" src="https://github.com/user-attachments/assets/529ec742-61d4-4a02-b278-078a31938a43" width="33%" />
+<img align="center" alt="keyboard back" src="https://github.com/user-attachments/assets/a6f44060-76dd-44ea-beb3-6cd05df484a0" width="30%" />
+<img align="center" alt="keyboard front" src="https://github.com/user-attachments/assets/9f854a35-250d-4e65-bede-7c7884c4b16a" width="30%" />
+<img align="center" alt="keyboard side" src="https://github.com/user-attachments/assets/529ec742-61d4-4a02-b278-078a31938a43" width="30%" />
 
 <details>
   <summary>
