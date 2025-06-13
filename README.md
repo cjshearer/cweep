@@ -11,8 +11,8 @@ A compact 34 key, solar powered, split keyboard.
     PCB and Schematic
   </summary>
   
-  ![schematic](https://github.com/user-attachments/assets/6b148011-84a5-4fe5-a476-e5f340b6ac8b)
-  ![PCB](https://github.com/user-attachments/assets/7d266270-ecd6-4ce9-ad74-49bbcba39a54)
+  [![schematic](https://github.com/user-attachments/assets/6b148011-84a5-4fe5-a476-e5f340b6ac8b)](https://github.com/user-attachments/assets/6b148011-84a5-4fe5-a476-e5f340b6ac8b)
+  [![PCB](https://github.com/user-attachments/assets/7d266270-ecd6-4ce9-ad74-49bbcba39a54)](https://github.com/user-attachments/assets/7d266270-ecd6-4ce9-ad74-49bbcba39a54)
 </details>
 
 ## Status
