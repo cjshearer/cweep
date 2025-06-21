@@ -53,7 +53,7 @@ Power: Exploring solar panel options for battery charging.
 
 | Description | Count | Value | Source |
 |-------------|-------|-------|--------|
-| Solar Cells | 2 | SM141K04LV | [Octopart](https://octopart.com/sm141k04lv-anysolar-120091681) |
+| Solar Cells | 2 | [SM141K04LV](https://waf-e.dubudisk.com/anysolar.dubuplus.com/techsupport@anysolar.biz/O18Ae0B/DubuDisk/www/Gen3/SM141K04LV%20DATA%20SHEET%20202007.pdf) | [Octopart](https://octopart.com/sm141k04lv-anysolar-120091681) |
 | Boost Converter | 2 | [BQ25504](https://www.ti.com/document-viewer/bq25504/datasheet) | [Octopart](https://octopart.com/bq25504rgtr-texas+instruments-20530455) |
 
 TODO: the other components for the solar charger circuit
