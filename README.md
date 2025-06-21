@@ -2,17 +2,17 @@
 
 A compact 34 key, solar powered, split keyboard.
 
-<img align="center" alt="keyboard back" src="https://github.com/user-attachments/assets/a6f44060-76dd-44ea-beb3-6cd05df484a0" width="30%" />
-<img align="center" alt="keyboard front" src="https://github.com/user-attachments/assets/9f854a35-250d-4e65-bede-7c7884c4b16a" width="30%" />
-<img align="center" alt="keyboard side" src="https://github.com/user-attachments/assets/529ec742-61d4-4a02-b278-078a31938a43" width="30%" />
+<img align="center" alt="keyboard back" src="https://github.com/user-attachments/assets/03c862e9-76a9-4d78-ac7e-4f69d2b9a411" width="30%" />
+<img align="center" alt="keyboard front" src="https://github.com/user-attachments/assets/12838771-191e-4807-98d7-0a500454265f" width="30%" />
+<img align="center" alt="keyboard side" src="https://github.com/user-attachments/assets/019f1173-e050-47f8-b5f8-ad332712b6a1" width="30%" />
 
 <details>
   <summary>
     PCB and Schematic
   </summary>
   
-  [![schematic](https://github.com/user-attachments/assets/6b148011-84a5-4fe5-a476-e5f340b6ac8b)](https://github.com/user-attachments/assets/6b148011-84a5-4fe5-a476-e5f340b6ac8b)
-  [![PCB](https://github.com/user-attachments/assets/7d266270-ecd6-4ce9-ad74-49bbcba39a54)](https://github.com/user-attachments/assets/7d266270-ecd6-4ce9-ad74-49bbcba39a54)
+  [![schematic](https://github.com/user-attachments/assets/ef03d05c-f5cb-4878-8143-b153b7e96af6)](https://github.com/user-attachments/assets/ef03d05c-f5cb-4878-8143-b153b7e96af6)
+  [![PCB](https://github.com/user-attachments/assets/2090d4e2-3f3c-40de-934b-bc438d648ae2)](https://github.com/user-attachments/assets/2090d4e2-3f3c-40de-934b-bc438d648ae2)
 </details>
 
 ## Status
