@@ -25,7 +25,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RGT16_1P7X1P7"
+		(property "Footprint" "BQ25504RGTR:RGT16_1P7X1P7"
 			(at 26.416 15.748 0)
 			(effects
 				(font

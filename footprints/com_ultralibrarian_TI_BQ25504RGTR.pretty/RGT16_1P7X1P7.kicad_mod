@@ -1620,7 +1620,7 @@
 		(uuid "80bd955d-f5f9-40aa-800d-2a87a0386aef")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/3dmodels/com_ultralibrariam_TI_BQ25504RGTR/RGT0016C.stp"
+	(model "${KIPRJMOD}/3dmodels/com_ultralibrarian_TI_BQ25504RGTR/RGT0016C.stp"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -32430,7 +32430,7 @@
 				(justify right top mirror)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "BQ25504RGTR"
 			(at 0 0 270)
 			(layer "B.Fab")
 			(hide yes)
@@ -34095,7 +34095,7 @@
 			(uuid "f047c12a-0e80-4fc3-8d32-b4e7f565658c")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3dmodels/com_ultralibrariam_TI_BQ25504RGTR/RGT0016C.stp"
+		(model "${KIPRJMOD}/3dmodels/com_ultralibrarian_TI_BQ25504RGTR/RGT0016C.stp"
 			(offset
 				(xyz 0 0 0)
 			)
