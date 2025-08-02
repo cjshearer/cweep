@@ -4,20 +4,20 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
-		(at 0 -22.5 0)
+		(at 0 -22.9 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "1ed4c281-37f0-44c8-8a69-f6cea7ea61bf")
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
 			(justify bottom)
 		)
 	)
 	(property "Value" "SM141K04LV"
-		(at 0 0.2 0)
+		(at 0 21.7 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "143926f4-e0b2-4c4b-b8b6-f0f6279d891c")
@@ -117,16 +117,6 @@
 		(layer "F.SilkS")
 		(uuid "b6c3823c-2fec-41d9-b6b0-ab3a150d1432")
 	)
-	(fp_line
-		(start 0 14)
-		(end 0 17)
-		(stroke
-			(width 0.12)
-			(type solid)
-		)
-		(layer "B.SilkS")
-		(uuid "3d7d96ea-ad5f-4adf-8fc6-f73edae09097")
-	)
 	(fp_circle
 		(center 0 -19.5)
 		(end 0 -18.3356)
@@ -193,28 +183,28 @@
 		(layer "F.Fab")
 		(uuid "4a32d26b-25b5-4b8b-a3a1-ea22e4182e66")
 	)
-	(fp_text user "-"
-		(at 0 20.6 180)
-		(layer "B.SilkS")
+	(fp_text user "SOL-"
+		(at 0 17.9356 180)
+		(layer "F.SilkS")
 		(uuid "771ac9c4-dc17-4081-8cf2-18e0c945fc1b")
 		(effects
 			(font
 				(size 1 1)
 				(thickness 0.15)
 			)
-			(justify top mirror)
+			(justify bottom)
 		)
 	)
-	(fp_text user "+"
-		(at 0 -20.7 180)
-		(layer "B.SilkS")
+	(fp_text user "SOL+"
+		(at 0 -21.0644 180)
+		(layer "F.SilkS")
 		(uuid "b43bf34d-d592-47f2-ab8c-5bf173657140")
 		(effects
 			(font
 				(size 1 1)
 				(thickness 0.15)
 			)
-			(justify bottom mirror)
+			(justify bottom)
 		)
 	)
 	(pad "1" thru_hole circle

@@ -4,21 +4,19 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
-		(at 0 -12.9 0)
-		(unlocked yes)
+		(at 0 -13.3 0)
 		(layer "F.SilkS")
 		(uuid "caff4f46-d60e-4cdc-80a9-f3d645151b42")
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
 			(justify bottom)
 		)
 	)
 	(property "Value" "13853-sparkfun"
 		(at 0 0 0)
-		(unlocked yes)
 		(layer "Dwgs.User")
 		(uuid "d4bfb7ba-bbe2-4c1e-babe-49e0a4733610")
 		(effects
@@ -56,48 +54,48 @@
 	)
 	(attr smd)
 	(fp_rect
-		(start -7.6 -12.6)
-		(end 7.6 12.6)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(fill no)
-		(layer "Edge.Cuts")
-		(uuid "d08025a0-9a31-4881-baa6-ca14de1f43d1")
-	)
-	(fp_rect
-		(start -7.85 -12.85)
-		(end 7.85 12.85)
+		(start -7.6 -12.87)
+		(end 7.6 12.87)
 		(stroke
 			(width 0.1)
 			(type default)
 		)
 		(fill no)
 		(layer "B.CrtYd")
-		(uuid "532629de-cc67-407c-8e82-fc62a7aa05f9")
+		(uuid "d08025a0-9a31-4881-baa6-ca14de1f43d1")
 	)
 	(fp_rect
-		(start -7.85 -12.85)
-		(end 7.85 12.85)
+		(start -7.6 -12.87)
+		(end 7.6 12.87)
 		(stroke
 			(width 0.1)
 			(type default)
 		)
 		(fill no)
 		(layer "F.CrtYd")
-		(uuid "0a21876f-0c9b-41af-a620-b77db97e69aa")
+		(uuid "57415c82-3469-4274-9507-db03eb0466f2")
+	)
+	(fp_rect
+		(start -7.5 -12.5)
+		(end 7.5 12.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "B.Fab")
+		(uuid "25ada7e6-d184-427d-8990-072d0824991e")
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/cweep/battery-13853-sparkfun-25x15x4.step"
 		(offset
-			(xyz 0 0 -1.5)
+			(xyz 0 0 0.38)
 		)
 		(scale
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz -0 -0 90)
+			(xyz -0 -0 -90)
 		)
 	)
 )
