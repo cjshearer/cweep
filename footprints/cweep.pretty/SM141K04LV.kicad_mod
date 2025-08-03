@@ -228,7 +228,7 @@
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/com_github_PeakSat_COMMSBoard_PCB/SM141K04LV.step"
 		(offset
-			(xyz 0 0 3)
+			(xyz 0 0 8)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -437,169 +437,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:Conn_01x02_Pin"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 0 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x02_Pin"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x02, script generated"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_locked" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Conn_01x02_Pin_1_1"
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 0) (xy 0.8636 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 3.81)
-					(name "Pin_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:Battery_Cell"
 			(pin_numbers
 				(hide yes)
@@ -1584,113 +1421,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Mechanical:MountingHole_Pad"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom no)
-			(on_board yes)
-			(property "Reference" "H"
-				(at 0 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "MountingHole_Pad"
-				(at 0 4.445 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Mounting Hole with connection"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "mounting hole"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "MountingHole*Pad*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "MountingHole_Pad_0_1"
-				(circle
-					(center 0 1.27)
-					(radius 1.27)
-					(stroke
-						(width 1.27)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "MountingHole_Pad_1_1"
-				(pin input line
-					(at 0 -2.54 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2916,12 +2646,6 @@
 		(uuid "92ce65ca-be4d-43a2-a3d0-0b2472e511eb")
 	)
 	(junction
-		(at 240.03 104.14)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "98f9664d-32fa-425b-a05d-dccd88336f05")
-	)
-	(junction
 		(at 189.23 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3138,16 +2862,6 @@
 			(type default)
 		)
 		(uuid "0db5d20c-ea95-42ab-aa2b-30d683e2d492")
-	)
-	(wire
-		(pts
-			(xy 242.57 104.14) (xy 240.03 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0eede49f-02e7-4033-abb3-786f246f3321")
 	)
 	(wire
 		(pts
@@ -3651,16 +3365,6 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 91.44) (xy 240.03 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6c126165-ad33-41ac-a1c9-b56fe8566a27")
-	)
-	(wire
-		(pts
 			(xy 161.29 163.83) (xy 173.99 163.83)
 		)
 		(stroke
@@ -3668,16 +3372,6 @@
 			(type default)
 		)
 		(uuid "6eafe534-a7d3-443c-add2-8e7a9a53d8f0")
-	)
-	(wire
-		(pts
-			(xy 240.03 101.6) (xy 240.03 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "70faab1d-8ad3-470d-8026-de20736a3f52")
 	)
 	(wire
 		(pts
@@ -4051,6 +3745,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 93.98) (xy 240.03 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b601fc1b-b57a-41b8-80ef-719f89d3396d")
+	)
+	(wire
+		(pts
 			(xy 170.18 36.83) (xy 170.18 49.53)
 		)
 		(stroke
@@ -4241,16 +3945,6 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 91.44) (xy 240.03 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e3a2face-698a-4345-a345-364f6fe07584")
-	)
-	(wire
-		(pts
 			(xy 163.83 101.6) (xy 163.83 119.38)
 		)
 		(stroke
@@ -4261,7 +3955,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 104.14) (xy 240.03 106.68)
+			(xy 240.03 101.6) (xy 240.03 104.14)
 		)
 		(stroke
 			(width 0)
@@ -4648,72 +4342,6 @@
 			(justify right)
 		)
 		(uuid "f1794edb-733f-434e-bd3b-fd00e20b82fb")
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
-		(at 245.11 104.14 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(uuid "0103c448-5a6a-49bf-8768-3042bc048d44")
-		(property "Reference" "H2"
-			(at 250.19 102.87 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at 250.19 104.775 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "cweep:UL3302AWG#26"
-			(at 245.11 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 245.11 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole with connection"
-			(at 245.11 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b168746b-0cc4-4ba3-b021-7fc2fd231dcc")
-		)
-		(instances
-			(project "cweep"
-				(path "/639fa181-da29-4b09-bbdd-4ee6b511df9a"
-					(reference "H2")
-					(unit 1)
-				)
-			)
-		)
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
@@ -5499,72 +5127,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
-		(at 245.11 91.44 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(uuid "38d01519-aee9-4d72-8d73-6e2c92623b04")
-		(property "Reference" "H1"
-			(at 250.19 90.17 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at 250.19 92.075 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "cweep:UL3302AWG#26"
-			(at 245.11 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 245.11 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole with connection"
-			(at 245.11 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "cfe0925a-6bca-4630-8e30-c435d305afc4")
-		)
-		(instances
-			(project ""
-				(path "/639fa181-da29-4b09-bbdd-4ee6b511df9a"
-					(reference "H1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Diode:1N4148")
 		(at 186.69 142.24 90)
 		(unit 1)
@@ -5933,7 +5495,7 @@
 		(dnp no)
 		(uuid "50422967-18f3-4bc6-bbfd-986dcd0074a5")
 		(property "Reference" "BTR1"
-			(at 242.824 96.774 0)
+			(at 243.078 97.028 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5941,8 +5503,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "13853 sparkfun"
-			(at 242.824 98.806 0)
+		(property "Value" "BATTERY LITH-ION 3.7V AAA"
+			(at 243.078 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5950,7 +5512,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "cweep:13853-sparkfun"
+		(property "Footprint" "com_snapeda_Keystone:BatteryHolder_Keystone_230-1_1xAAA"
 			(at 240.03 97.536 90)
 			(effects
 				(font
@@ -7750,74 +7312,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Pin")
-		(at 242.57 118.11 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b3a5fdc3-8a7b-428b-9733-55eab9250896")
-		(property "Reference" "J1"
-			(at 243.205 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x02_Pin"
-			(at 243.205 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
-			(at 242.57 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 242.57 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 242.57 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a5efb4f5-10e9-4be3-a583-285567dab7b2")
-		)
-		(pin "2"
-			(uuid "1bed2a22-660b-4e14-9b39-7d07fc04a2f1")
-		)
-		(instances
-			(project ""
-				(path "/639fa181-da29-4b09-bbdd-4ee6b511df9a"
-					(reference "J1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:L")
 		(at 179.07 22.86 90)
 		(unit 1)
@@ -8921,7 +8415,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 240.03 106.68 0)
+		(at 240.03 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8930,7 +8424,7 @@
 		(fields_autoplaced yes)
 		(uuid "e3008cdb-7680-41f7-ada3-4334464f0a73")
 		(property "Reference" "#PWR08"
-			(at 240.03 113.03 0)
+			(at 240.03 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8939,7 +8433,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 240.03 111.76 0)
+			(at 240.03 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8948,7 +8442,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 240.03 106.68 0)
+			(at 240.03 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8957,7 +8451,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 240.03 106.68 0)
+			(at 240.03 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8966,7 +8460,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 240.03 106.68 0)
+			(at 240.03 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
