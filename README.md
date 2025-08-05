@@ -2,17 +2,22 @@
 
 A compact 34 key, solar powered, split keyboard.
 
-<img align="center" alt="keyboard back" src="https://github.com/user-attachments/assets/03c862e9-76a9-4d78-ac7e-4f69d2b9a411" width="30%" />
-<img align="center" alt="keyboard front" src="https://github.com/user-attachments/assets/12838771-191e-4807-98d7-0a500454265f" width="30%" />
-<img align="center" alt="keyboard side" src="https://github.com/user-attachments/assets/019f1173-e050-47f8-b5f8-ad332712b6a1" width="30%" />
+<img align="center" alt="keyboard back" src="https://github.com/user-attachments/assets/03c862e9-76a9-4d78-ac7e-4f69d2b9a411" width="49%" />
+<img align="center" alt="keyboard front" src="https://github.com/user-attachments/assets/12838771-191e-4807-98d7-0a500454265f" width="49%" />
+
+<img align="center" alt="keyboard front-side" src="https://github.com/user-attachments/assets/019f1173-e050-47f8-b5f8-ad332712b6a1" width="49%" />
+<img align="center" alt="keyboard back-side" src="https://github.com/user-attachments/assets/6138324a-51f2-4719-a4b2-fb13cf5bc30f" width="49%" />
 
 <details>
   <summary>
     PCB and Schematic
   </summary>
   
-  [![schematic](https://github.com/user-attachments/assets/ef03d05c-f5cb-4878-8143-b153b7e96af6)](https://github.com/user-attachments/assets/ef03d05c-f5cb-4878-8143-b153b7e96af6)
-  [![PCB](https://github.com/user-attachments/assets/2090d4e2-3f3c-40de-934b-bc438d648ae2)](https://github.com/user-attachments/assets/2090d4e2-3f3c-40de-934b-bc438d648ae2)
+  [![schematic](https://github.com/user-attachments/assets/93175371-afd3-4a5e-992b-67b3fb679a46)](https://github.com/user-attachments/assets/93175371-afd3-4a5e-992b-67b3fb679a46)
+
+  [![PCB Front](https://github.com/user-attachments/assets/2acacbb4-3fb7-4c87-8a3b-99fdd11451e7)](https://github.com/user-attachments/assets/2acacbb4-3fb7-4c87-8a3b-99fdd11451e7)
+
+  [![PCB Back](https://github.com/user-attachments/assets/59bc9859-23e0-42a9-bc12-234bab32bd54)](https://github.com/user-attachments/assets/59bc9859-23e0-42a9-bc12-234bab32bd54)
 </details>
 
 ## Status
