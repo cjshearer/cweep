@@ -5818,7 +5818,7 @@
 		(dnp no)
 		(uuid "50422967-18f3-4bc6-bbfd-986dcd0074a5")
 		(property "Reference" "BTR1"
-			(at 243.078 97.028 0)
+			(at 245.11 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5826,8 +5826,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "BATTERY LITH-ION 3.7V AAA"
-			(at 243.078 99.06 0)
+		(property "Value" "BATTERY\nLITH-ION\n3.7V\nAAA"
+			(at 242.824 100.584 0)
 			(effects
 				(font
 					(size 1.27 1.27)

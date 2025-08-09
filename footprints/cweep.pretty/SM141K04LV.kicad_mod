@@ -6,7 +6,7 @@
 	(property "Reference" "REF**"
 		(at 0 -22.9 0)
 		(unlocked yes)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "1ed4c281-37f0-44c8-8a69-f6cea7ea61bf")
 		(effects
 			(font
@@ -17,7 +17,7 @@
 		)
 	)
 	(property "Value" "SM141K04LV"
-		(at 0 21.7 0)
+		(at 0 -19.9 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "143926f4-e0b2-4c4b-b8b6-f0f6279d891c")
@@ -62,7 +62,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "a80d5145-f0ae-47cb-8bcd-6251851f2bfc")
 	)
 	(fp_line
@@ -72,7 +72,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "b129b885-b7cb-4b0b-b0f5-283e2dff31f5")
 	)
 	(fp_line
@@ -82,7 +82,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "6ee875d5-797f-4ba6-a411-3f3a6577b665")
 	)
 	(fp_line
@@ -92,7 +92,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "dc7aa689-9f1b-40b5-9250-e4c94a951007")
 	)
 	(embedded_fonts no)
