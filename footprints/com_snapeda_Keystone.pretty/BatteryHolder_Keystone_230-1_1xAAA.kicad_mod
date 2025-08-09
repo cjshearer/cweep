@@ -17,7 +17,7 @@
 		)
 	)
 	(property "Value" "BatteryHolder_Keystone_230-1_1xAAA"
-		(at 0 0 90)
+		(at -7.5 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "31426848-ba19-46e8-b30b-bbfae20eacd1")
@@ -26,6 +26,7 @@
 				(size 1 1)
 				(thickness 0.15)
 			)
+			(justify right)
 		)
 	)
 	(property "Datasheet" ""

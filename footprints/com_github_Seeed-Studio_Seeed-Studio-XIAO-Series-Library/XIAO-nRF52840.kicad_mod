@@ -4,7 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
-		(at 0 -11 0)
+		(at 0 -10.9 0)
 		(layer "F.SilkS")
 		(uuid "a9f5f5dd-597c-45dd-b31d-a35c3963eed2")
 		(effects
@@ -279,7 +279,7 @@
 		(uuid "19e1fb09-e8a2-4a98-aa67-9aca60c1cd86")
 	)
 	(fp_text user "7"
-		(at 9 -7.774 180)
+		(at 5.8 -7.774 180)
 		(layer "B.SilkS")
 		(uuid "0c36fe19-3783-4ed9-ba07-4e83296ffcbf")
 		(effects
@@ -291,7 +291,7 @@
 		)
 	)
 	(fp_text user "6"
-		(at 9 -5.234 180)
+		(at 5.8 -5.234 180)
 		(layer "B.SilkS")
 		(uuid "279b5051-64d7-4314-a84d-959824c0b944")
 		(effects
@@ -303,7 +303,7 @@
 		)
 	)
 	(fp_text user "reset"
-		(at 1.235 4.5 180)
+		(at 0 5.7 180)
 		(layer "B.SilkS")
 		(uuid "6c902369-5c21-44d3-92ad-a3a792e370ef")
 		(effects
@@ -311,11 +311,11 @@
 				(size 1 1)
 				(thickness 0.15)
 			)
-			(justify bottom mirror)
+			(justify left mirror)
 		)
 	)
 	(fp_text user "9"
-		(at -6.3 -5.234 180)
+		(at -10.376191 -5.234 180)
 		(layer "B.SilkS")
 		(uuid "71b07f13-0db2-4d4e-8bba-de6ecdcbff5a")
 		(effects
@@ -327,7 +327,7 @@
 		)
 	)
 	(fp_text user "3"
-		(at 9 2.386 180)
+		(at 5.8 2.386 180)
 		(layer "B.SilkS")
 		(uuid "75ba09f3-ee15-4e6b-9f25-8eaef756a378")
 		(effects
@@ -339,7 +339,7 @@
 		)
 	)
 	(fp_text user "13"
-		(at -5.823809 4.926 180)
+		(at -9.9 4.926 180)
 		(layer "B.SilkS")
 		(uuid "76b1c3e9-eb92-4428-a5d7-bbd1045ac0f4")
 		(effects
@@ -351,7 +351,7 @@
 		)
 	)
 	(fp_text user "10"
-		(at -5.823809 -2.694 180)
+		(at -9.9 -2.694 180)
 		(layer "B.SilkS")
 		(uuid "7a865d30-35b5-4226-96bc-dc2988240a1a")
 		(effects
@@ -363,7 +363,7 @@
 		)
 	)
 	(fp_text user "2"
-		(at 9 4.926 180)
+		(at 5.8 4.926 180)
 		(layer "B.SilkS")
 		(uuid "7b164c83-e50e-4a92-bd1a-c5a3b3694bee")
 		(effects
@@ -375,7 +375,7 @@
 		)
 	)
 	(fp_text user "5"
-		(at 9 -2.694 180)
+		(at 5.8 -2.694 180)
 		(layer "B.SilkS")
 		(uuid "85898c32-b0e3-4cab-b48b-e06fecf5da74")
 		(effects
@@ -387,7 +387,7 @@
 		)
 	)
 	(fp_text user "8"
-		(at -6.3 -7.774 180)
+		(at -10.376191 -7.774 180)
 		(layer "B.SilkS")
 		(uuid "8cc42ec9-65d3-43dc-9ad9-6d9993ad877c")
 		(effects
@@ -399,7 +399,7 @@
 		)
 	)
 	(fp_text user "1"
-		(at 9 7.466 180)
+		(at 5.8 7.466 180)
 		(layer "B.SilkS")
 		(uuid "9225aea1-66d4-49a2-9267-6b8d6a9d1121")
 		(effects
@@ -411,7 +411,7 @@
 		)
 	)
 	(fp_text user "14"
-		(at -5.823809 7.466 180)
+		(at -9.9 7.466 180)
 		(layer "B.SilkS")
 		(uuid "a4676641-d0cb-40bb-94aa-9a969d2b35c3")
 		(effects
@@ -423,7 +423,7 @@
 		)
 	)
 	(fp_text user "11"
-		(at -5.823809 -0.154 180)
+		(at -9.9 -0.154 180)
 		(layer "B.SilkS")
 		(uuid "b31d5d71-fbac-40f0-a68e-3fc3a124d7ba")
 		(effects
@@ -435,7 +435,7 @@
 		)
 	)
 	(fp_text user "4"
-		(at 9 -0.154 180)
+		(at 5.8 -0.154 180)
 		(layer "B.SilkS")
 		(uuid "bd0929ec-8bf3-4bdb-b46c-d740ea8e250d")
 		(effects
@@ -447,7 +447,7 @@
 		)
 	)
 	(fp_text user "battery"
-		(at 4.41 -1 180)
+		(at 3.2 0 180)
 		(layer "B.SilkS")
 		(uuid "bd96069f-dfbd-4129-ae0d-94ace0808c2a")
 		(effects
@@ -455,11 +455,11 @@
 				(size 1 1)
 				(thickness 0.15)
 			)
-			(justify bottom mirror)
+			(justify left mirror)
 		)
 	)
 	(fp_text user "12"
-		(at -5.823809 2.386 180)
+		(at -9.9 2.386 180)
 		(layer "B.SilkS")
 		(uuid "e958ebde-2234-424f-a400-5f1455535682")
 		(effects
@@ -603,7 +603,40 @@
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library/AMz3D.3dshapes/XIAO-nRF52840-v3.step"
 		(offset
-			(xyz -1.87 -6.03 3)
+			(xyz -6.16 1.9 3)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 90)
+		)
+	)
+	(model "${KIPRJMOD}/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
+		(offset
+			(xyz 7.586 0.17 -0.08)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -90)
+		)
+	)
+	(model "${KIPRJMOD}/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
+		(offset
+			(xyz -7.65 0.17 -0.08)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -90)
+		)
+	)
+	(model "${KIPRJMOD}/3dmodels/com_snapeda_Mill-Max_0906-0-15-20-76-14-11-0/0906-0-15-20-76-14-11-0.STEP"
+		(offset
+			(xyz 1.24 -5.9 0)
 		)
 		(scale
 			(xyz 1 1 1)
@@ -612,42 +645,9 @@
 			(xyz -90 -0 -0)
 		)
 	)
-	(model "${KIPRJMOD}/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
-		(offset
-			(xyz -0.1 7.7 -0.08)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz -90 -0 180)
-		)
-	)
-	(model "${KIPRJMOD}/3dmodels/com_traceparts_preci-dip_straight-socket-connector/pcb_connector_310-87-107-41-001101.stp"
-		(offset
-			(xyz -0.1 -7.55 -0.08)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz -90 -0 180)
-		)
-	)
 	(model "${KIPRJMOD}/3dmodels/com_snapeda_Mill-Max_0906-0-15-20-76-14-11-0/0906-0-15-20-76-14-11-0.STEP"
 		(offset
-			(xyz 5.9 1.35 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz -90 -0 -0)
-		)
-	)
-	(model "${KIPRJMOD}/3dmodels/com_snapeda_Mill-Max_0906-0-15-20-76-14-11-0/0906-0-15-20-76-14-11-0.STEP"
-		(offset
-			(xyz 0.175 4.5285 0)
+			(xyz 4.4 -0.15 0)
 		)
 		(scale
 			(xyz 1 1 1)
