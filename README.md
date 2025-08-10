@@ -1,23 +1,22 @@
 ## Overview
 
-A compact 34 key, solar powered, split keyboard.
+A compact, 34 key, solar powered, split keyboard.
 
-<img align="center" alt="keyboard back" src="https://github.com/user-attachments/assets/08d26f60-5293-400a-8db6-a099c1b210f5" width="49%" />
-<img align="center" alt="keyboard front" src="https://github.com/user-attachments/assets/97830304-6824-4fde-b3c6-4bff0ad895fe" width="49%" />
+<img width="49%" alt="bottom" src="https://github.com/user-attachments/assets/c8329a46-f3e5-4f25-a8a2-339172839555" />
+<img width="49%" alt="top" src="https://github.com/user-attachments/assets/4fc40650-b64b-4d59-8e73-ec2571f9aa10" />
 
-<img align="center" alt="keyboard front-side" src="https://github.com/user-attachments/assets/842aa3bc-77ea-46a7-9424-d811fd66559c" width="49%" />
-<img align="center" alt="keyboard back-side" src="https://github.com/user-attachments/assets/6138324a-51f2-4719-a4b2-fb13cf5bc30f" width="49%" />
+<img width="49%" alt="B_Cu" src="https://github.com/user-attachments/assets/c26093d8-f3e7-4a7d-a30f-303f3c635c93" />
+<img width="49%" alt="F_Cu" src="https://github.com/user-attachments/assets/fa411918-0815-4199-8f95-43fc10f712b4" />
+
+<img width="49%" alt="top-zoom-out-3-zcw3-xcw3" src="https://github.com/user-attachments/assets/6fd5548f-e36d-4018-b9a2-e0769077f58f" />
+<img width="49%" alt="top-zoom-out-3-zccw15-xcw4" src="https://github.com/user-attachments/assets/5da62548-fc56-4f94-b4f0-1e69b9bb80f9" />
 
 <details>
   <summary>
-    PCB and Schematic
+    Schematic
   </summary>
-  
-  [![schematic](https://github.com/user-attachments/assets/93175371-afd3-4a5e-992b-67b3fb679a46)](https://github.com/user-attachments/assets/93175371-afd3-4a5e-992b-67b3fb679a46)
 
-  [![PCB Front](https://github.com/user-attachments/assets/2acacbb4-3fb7-4c87-8a3b-99fdd11451e7)](https://github.com/user-attachments/assets/2acacbb4-3fb7-4c87-8a3b-99fdd11451e7)
-
-  [![PCB Back](https://github.com/user-attachments/assets/59bc9859-23e0-42a9-bc12-234bab32bd54)](https://github.com/user-attachments/assets/59bc9859-23e0-42a9-bc12-234bab32bd54)
+  <img alt="schematic" src="https://github.com/user-attachments/assets/b370edf5-2cb7-4d84-97d4-b6aa28b78579" />
 </details>
 
 ## Status
