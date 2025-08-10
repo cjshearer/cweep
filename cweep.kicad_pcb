@@ -5897,8 +5897,7 @@
 			(members "14bb0b98-3410-4a3d-9f36-fc7cd21f990e" "1997bc06-50d2-4d99-9669-5789edc7dba4"
 				"44a76257-2f84-4a82-9a69-83215b80a1e5" "a6afc009-186e-4d6e-bf1c-3e55a8687d1b"
 				"b2be529b-072d-4dfe-9bd6-702b46e3ad1f" "bc06cc3f-2fa1-467a-b516-8f8d737d7d5e"
-				"c495fd8b-dd26-48b1-8510-a4bf1290be76" "d2050685-1373-4db2-bf7d-f2cfa4355426"
-				"f509d91b-f799-4680-ae24-b814b7c09dbc"
+				"d2050685-1373-4db2-bf7d-f2cfa4355426" "f509d91b-f799-4680-ae24-b814b7c09dbc"
 			)
 		)
 		(embedded_fonts no)
@@ -23232,7 +23231,7 @@
 			(uuid "e9feacd7-aff2-44b5-afe5-e6adbd0d7672")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Button_Switch_THT.3dshapes/SW_TH_Tactile_Omron_B3F-10xx.stpZ"
+		(model "${KIPRJMOD}/3dmodels/com_gitlab_kicad-packages3D/Button_Switches_THT.3dshapes/SW_TH_Tactile_Omron_B3F-102x.step"
 			(offset
 				(xyz 0 0 0)
 			)
