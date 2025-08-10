@@ -14159,7 +14159,7 @@
 			)
 		)
 		(property "Value" "SM141K04LV"
-			(at 0 -19.9 0)
+			(at 0 -17.6 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "94d5d154-16a4-4d8c-87eb-3a9f858a8566")
@@ -14208,7 +14208,7 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "04ab6e52-c87f-4623-9d47-40dd84bbc6f7")
+			(uuid "57c92ab9-c5d2-4e0b-8a82-e3cc3ac29186")
 		)
 		(fp_line
 			(start 7.5 -22.5)
@@ -14218,7 +14218,7 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "98eb77ac-898a-445d-84b6-928c7f045774")
+			(uuid "db1fec35-39b9-4ed6-a5c0-af3ba98c6051")
 		)
 		(fp_line
 			(start 7.5 -22.5)
@@ -14228,7 +14228,7 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "a40d9ad3-c8c5-404c-97a4-bde8adee1cbc")
+			(uuid "6feaadae-38cb-4b41-801a-75cccc8bde9f")
 		)
 		(fp_line
 			(start 7.5 22.5)
@@ -14238,7 +14238,53 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "2e7232e7-36c0-44eb-a0cd-0b7310eb8bdb")
+			(uuid "909ec198-fb3e-4405-b22a-2e9cb0a2e1a6")
+		)
+		(fp_circle
+			(center 0 -19.5)
+			(end 0 -20.25)
+			(stroke
+				(width 0.2)
+				(type default)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "9e1abace-bfba-483f-926a-ac0019615839")
+		)
+		(fp_circle
+			(center 0 19.5)
+			(end 0 18.75)
+			(stroke
+				(width 0.2)
+				(type default)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "d9189962-833b-473f-b58e-949cb9fdf52b")
+		)
+		(fp_text user "-"
+			(at 0 19.42 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "25b5bdf8-81c2-4aac-a374-e6b7f8d2681f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.1)
+				)
+			)
+		)
+		(fp_text user "+"
+			(at 0 -19.6 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "d1fb35f1-e5c5-42fa-b0c9-da4f7cdcd35f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.1)
+				)
+			)
 		)
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_PeakSat_COMMSBoard_PCB/SM141K04LV.step"

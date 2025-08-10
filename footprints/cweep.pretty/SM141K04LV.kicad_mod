@@ -17,7 +17,7 @@
 		)
 	)
 	(property "Value" "SM141K04LV"
-		(at 0 -19.9 0)
+		(at 0 -17.6 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "143926f4-e0b2-4c4b-b8b6-f0f6279d891c")
@@ -94,6 +94,52 @@
 		)
 		(layer "F.Fab")
 		(uuid "dc7aa689-9f1b-40b5-9250-e4c94a951007")
+	)
+	(fp_circle
+		(center 0 -19.5)
+		(end 0 -20.25)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "e8095f9f-999d-4767-8e03-013d7ee44896")
+	)
+	(fp_circle
+		(center 0 19.5)
+		(end 0 18.75)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "f030a687-da92-4499-8f9d-bf39f0f83fda")
+	)
+	(fp_text user "-"
+		(at 0 19.42 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "1f1537f6-37ce-4519-bf51-380d5fcf27c0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(fp_text user "+"
+		(at 0 -19.6 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "6b6284a0-229c-4822-95dd-ca892dfdd2c0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/com_github_PeakSat_COMMSBoard_PCB/SM141K04LV.step"
