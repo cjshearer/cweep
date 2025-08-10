@@ -4,7 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
-		(at -2.8 -22.9 0)
+		(at -0.89 -22.9 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "5ce4f867-83a4-4476-984f-252870776288")
@@ -17,7 +17,7 @@
 		)
 	)
 	(property "Value" "BatteryHolder_Keystone_230-1_1xAAA"
-		(at -7.5 0 0)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "31426848-ba19-46e8-b30b-bbfae20eacd1")
@@ -26,7 +26,6 @@
 				(size 1 1)
 				(thickness 0.15)
 			)
-			(justify right)
 		)
 	)
 	(property "Datasheet" ""
