@@ -14160,7 +14160,7 @@
 			)
 		)
 		(property "Value" "SM141K04LV"
-			(at 0 -17.6 0)
+			(at 0 -16.7 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "94d5d154-16a4-4d8c-87eb-3a9f858a8566")
@@ -14209,7 +14209,7 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "57c92ab9-c5d2-4e0b-8a82-e3cc3ac29186")
+			(uuid "d4570c17-3470-428a-9cf9-19bbcb1f120c")
 		)
 		(fp_line
 			(start 7.5 -22.5)
@@ -14219,7 +14219,7 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "db1fec35-39b9-4ed6-a5c0-af3ba98c6051")
+			(uuid "6844edb4-f3e0-492c-957b-be89196cfeb8")
 		)
 		(fp_line
 			(start 7.5 -22.5)
@@ -14229,7 +14229,7 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "6feaadae-38cb-4b41-801a-75cccc8bde9f")
+			(uuid "acfcbf12-8cf8-4610-8458-be093ff0e378")
 		)
 		(fp_line
 			(start 7.5 22.5)
@@ -14239,29 +14239,29 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "909ec198-fb3e-4405-b22a-2e9cb0a2e1a6")
+			(uuid "dc8013c8-d3a3-440c-af1b-cdf070427e3d")
 		)
 		(fp_circle
 			(center 0 -19.5)
-			(end 0 -20.25)
+			(end 1.5 -19.5)
 			(stroke
-				(width 0.2)
+				(width 0.1)
 				(type default)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "9e1abace-bfba-483f-926a-ac0019615839")
+			(uuid "f5c27a12-5bf6-496f-99cf-473ebc395ff5")
 		)
 		(fp_circle
 			(center 0 19.5)
-			(end 0 18.75)
+			(end 1.5 19.5)
 			(stroke
-				(width 0.2)
+				(width 0.1)
 				(type default)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "d9189962-833b-473f-b58e-949cb9fdf52b")
+			(uuid "2869add3-b03b-43e5-ba00-b4cdf8ed0b8d")
 		)
 		(fp_text user "-"
 			(at 0 19.42 0)

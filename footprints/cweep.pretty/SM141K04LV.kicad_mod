@@ -17,7 +17,7 @@
 		)
 	)
 	(property "Value" "SM141K04LV"
-		(at 0 -17.6 0)
+		(at 0 -16.7 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "143926f4-e0b2-4c4b-b8b6-f0f6279d891c")
@@ -97,9 +97,9 @@
 	)
 	(fp_circle
 		(center 0 -19.5)
-		(end 0 -20.25)
+		(end 1.5 -19.5)
 		(stroke
-			(width 0.2)
+			(width 0.1)
 			(type default)
 		)
 		(fill no)
@@ -108,9 +108,9 @@
 	)
 	(fp_circle
 		(center 0 19.5)
-		(end 0 18.75)
+		(end 1.5 19.5)
 		(stroke
-			(width 0.2)
+			(width 0.1)
 			(type default)
 		)
 		(fill no)
