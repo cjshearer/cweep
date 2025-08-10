@@ -2,14 +2,23 @@
 
 A compact, 34 key, solar powered, split keyboard.
 
-<img width="49%" alt="bottom" src="https://github.com/user-attachments/assets/c8329a46-f3e5-4f25-a8a2-339172839555" />
-<img width="49%" alt="top" src="https://github.com/user-attachments/assets/4fc40650-b64b-4d59-8e73-ec2571f9aa10" />
+<img width="45%" alt="bottom" src="https://github.com/user-attachments/assets/c8329a46-f3e5-4f25-a8a2-339172839555" />
+<img width="45%" alt="top" src="https://github.com/user-attachments/assets/4fc40650-b64b-4d59-8e73-ec2571f9aa10" />
 
-<img width="49%" alt="B_Cu" src="https://github.com/user-attachments/assets/c26093d8-f3e7-4a7d-a30f-303f3c635c93" />
-<img width="49%" alt="F_Cu" src="https://github.com/user-attachments/assets/fa411918-0815-4199-8f95-43fc10f712b4" />
+<a href="https://github.com/user-attachments/assets/c26093d8-f3e7-4a7d-a30f-303f3c635c93">
+  <img width="45%" alt="B_Cu" src="https://github.com/user-attachments/assets/c26093d8-f3e7-4a7d-a30f-303f3c635c93" />
+</a>
+<a href="https://github.com/user-attachments/assets/fa411918-0815-4199-8f95-43fc10f712b4">
+  <img width="45%" alt="F_Cu" src="https://github.com/user-attachments/assets/fa411918-0815-4199-8f95-43fc10f712b4" />
+</a>
 
-<img width="49%" alt="top-zoom-out-3-zccw15-xcw4" src="https://github.com/user-attachments/assets/5da62548-fc56-4f94-b4f0-1e69b9bb80f9" />
-<img width="49%" alt="top-zoom-out-3-zcw3-xcw3" src="https://github.com/user-attachments/assets/6fd5548f-e36d-4018-b9a2-e0769077f58f" />
+
+<a href="https://github.com/user-attachments/assets/5da62548-fc56-4f94-b4f0-1e69b9bb80f9">
+  <img width="45%" alt="top-zoom-out-3-zccw15-xcw4" src="https://github.com/user-attachments/assets/5da62548-fc56-4f94-b4f0-1e69b9bb80f9" />
+</a>
+<a href="https://github.com/user-attachments/assets/6fd5548f-e36d-4018-b9a2-e0769077f58f">
+  <img width="45%" alt="top-zoom-out-3-zcw3-xcw3" src="https://github.com/user-attachments/assets/6fd5548f-e36d-4018-b9a2-e0769077f58f" />
+</a>
 
 <details>
   <summary>
