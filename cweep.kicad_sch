@@ -6016,7 +6016,7 @@
 				(justify top)
 			)
 		)
-		(property "Value" "BATTERY\nLITH-ION\n3.7V\nAAA"
+		(property "Value" "10440"
 			(at 259.207 93.091 90)
 			(effects
 				(font
