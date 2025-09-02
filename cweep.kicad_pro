@@ -522,7 +522,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "cweep.glb",
       "svg": "",
       "vrml": ""
     },

@@ -116,6 +116,66 @@
 		(uuid "82f50221-93a4-489d-a2df-77c6becc5519")
 	)
 	(fp_line
+		(start 5.099994 21.399838)
+		(end 5.1 21.599833)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "e0d482e0-33f3-44bd-b79c-f050ce8a43bd")
+	)
+	(fp_line
+		(start 5.099994 21.399838)
+		(end 7.987498 21.399835)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "fd0142c4-134e-4e2c-90e9-ba08893e3877")
+	)
+	(fp_line
+		(start 5.1 -21.595)
+		(end 5.100006 -21.395005)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "4728241c-d4fa-4156-a14c-4564e6653140")
+	)
+	(fp_line
+		(start 5.1 -21.595)
+		(end 7.987504 -21.595003)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "4f5f948d-3635-4f7a-99c4-b2f8f59a72fe")
+	)
+	(fp_line
+		(start 5.1 21.599833)
+		(end 7.987492 21.59984)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "68414f77-2c18-4642-acc0-10da5ca26545")
+	)
+	(fp_line
+		(start 5.100006 -21.395005)
+		(end 7.987498 -21.394998)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "e39347b5-a1b6-42a4-b4de-c010c831fe48")
+	)
+	(fp_line
 		(start -5.6 -22.05)
 		(end 5 -22.05)
 		(stroke
@@ -498,25 +558,29 @@
 		(members "0c6be20e-b8af-43d0-98e5-865ab5739343" "1b1e9784-2685-4e7c-a9ce-e60b83bce143"
 			"208c861d-3f1c-4444-b76a-bfd24c49c077" "2d597bcc-9fec-4461-9810-0c42d76510be"
 			"329c8458-bea4-41ca-8ea2-7302e5e83369" "3fc47a8c-bf1b-4f90-9e0a-ae89212b002a"
+			"4728241c-d4fa-4156-a14c-4564e6653140" "4f5f948d-3635-4f7a-99c4-b2f8f59a72fe"
 			"5553d4bb-044a-44e8-acfd-60d148cf5cfa" "5f7ba3e5-16a9-4129-b693-e7cab0660c08"
 			"a03cf111-4f85-4298-8754-72b484ebe616" "a75fe93c-1789-4426-b0cd-abf3637e9bad"
 			"b0262b75-b260-4b04-972e-11f75f881037" "ba1ddc3e-be5e-40cf-80a9-551fbb495a3c"
 			"be2e2dae-06f6-4616-90da-ce306d1143ea" "be563204-9768-420d-bb59-73e1906cdffc"
 			"c0efaa12-a9a6-400f-9ab8-f20a7a5888ce" "c28d0ef1-1a6e-4a8d-a621-36d4cbbcb4dc"
-			"f89b6572-674e-4215-813c-972acd1acf18" "ff65ce06-1065-43b1-bdf7-53efd5c82500"
+			"e39347b5-a1b6-42a4-b4de-c010c831fe48" "f89b6572-674e-4215-813c-972acd1acf18"
+			"ff65ce06-1065-43b1-bdf7-53efd5c82500"
 		)
 	)
 	(group "Keystone 230-1 Pad 2"
 		(uuid "fb8d6e33-0cab-4055-92b9-edc995723ace")
 		(members "0c104288-8835-4494-a3a5-8e7d3fadb9c1" "2880436c-f831-48bd-a2ce-1a8b169e5095"
-			"7018cee1-5a9c-47d8-bcda-5676c0ec6e35" "72d6fcf9-1c68-4289-bc54-b7659073a4a5"
-			"72e70828-67d3-47f1-8813-d58af6bdf13b" "82f50221-93a4-489d-a2df-77c6becc5519"
-			"911b05bc-7b4e-4e8a-b93d-b3a80986db7e" "a62bb5f1-8df5-4d10-ae1f-8a42c547a91f"
-			"b1525c9b-fc56-487d-b61f-cd781cf31e4d" "b18ed489-d0fe-43a2-a602-8548da5f5866"
-			"b6e97c75-9626-4454-9945-c323029d6362" "bee616a7-1384-48eb-b48c-d1c2aa8cf231"
-			"c3579b78-7836-486b-b9be-a069b66a4df1" "cb1ac65b-f0a7-453a-a273-03089f2f8541"
-			"cf0a57b8-8831-4d75-a30d-afc17e4291e4" "d5cb851b-dcd1-4c30-b272-be9cf23469fb"
-			"db32ff22-985a-4553-9d78-1c45bcdd4094" "e426c719-f97c-44d6-86d1-f5811a59dc1d"
+			"68414f77-2c18-4642-acc0-10da5ca26545" "7018cee1-5a9c-47d8-bcda-5676c0ec6e35"
+			"72d6fcf9-1c68-4289-bc54-b7659073a4a5" "72e70828-67d3-47f1-8813-d58af6bdf13b"
+			"82f50221-93a4-489d-a2df-77c6becc5519" "911b05bc-7b4e-4e8a-b93d-b3a80986db7e"
+			"a62bb5f1-8df5-4d10-ae1f-8a42c547a91f" "b1525c9b-fc56-487d-b61f-cd781cf31e4d"
+			"b18ed489-d0fe-43a2-a602-8548da5f5866" "b6e97c75-9626-4454-9945-c323029d6362"
+			"bee616a7-1384-48eb-b48c-d1c2aa8cf231" "c3579b78-7836-486b-b9be-a069b66a4df1"
+			"cb1ac65b-f0a7-453a-a273-03089f2f8541" "cf0a57b8-8831-4d75-a30d-afc17e4291e4"
+			"d5cb851b-dcd1-4c30-b272-be9cf23469fb" "db32ff22-985a-4553-9d78-1c45bcdd4094"
+			"e0d482e0-33f3-44bd-b79c-f050ce8a43bd" "e426c719-f97c-44d6-86d1-f5811a59dc1d"
+			"fd0142c4-134e-4e2c-90e9-ba08893e3877"
 		)
 	)
 	(group "AAA Cutout"

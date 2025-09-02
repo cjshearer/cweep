@@ -1,8 +1,5 @@
 (fp_lib_table
   (version 7)
-  (lib (name "Seeed Studio XIAO Series Library")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_github_Seeed-Studio_Seeed-Studio-XIAO-Series-Library")(options "")(descr ""))
   (lib (name "cweep")(type "KiCad")(uri "${KIPRJMOD}/footprints/cweep.pretty")(options "")(descr ""))
   (lib (name "BQ25504RGTR")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_ultralibrarian_TI_BQ25504RGTR.pretty")(options "")(descr ""))
-  (lib (name "KAN-15")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_github_jgillick_KiCad-library.pretty")(options "")(descr ""))
-  (lib (name "com_snapeda_Keystone")(type "KiCad")(uri "${KIPRJMOD}/footprints/com_snapeda_Keystone.pretty")(options "")(descr ""))
 )

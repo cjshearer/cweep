@@ -6107,7 +6107,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopOnly"
+		(property "Footprint" "cweep:MountingHole_2.2mm_M2_DIN965_Pad"
 			(at 20.32 137.16 0)
 			(effects
 				(font
@@ -7256,7 +7256,7 @@
 				)
 			)
 		)
-		(property "Footprint" "KAN-15:SW_KAN-15_PHT"
+		(property "Footprint" "cweep:SW_KAN-15_PHT_Reversible"
 			(at 55.88 158.75 0)
 			(effects
 				(font
@@ -7392,7 +7392,7 @@
 				)
 			)
 		)
-		(property "Footprint" "com_snapeda_Keystone:BatteryHolder_Keystone_230-1_1x10440"
+		(property "Footprint" "cweep:BatteryHolder_Keystone_230-1_1x10440"
 			(at 55.626 135.89 90)
 			(effects
 				(font
@@ -8260,7 +8260,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopOnly"
+		(property "Footprint" "cweep:MountingHole_2.2mm_M2_DIN965_Pad"
 			(at 20.32 109.22 0)
 			(effects
 				(font
@@ -8415,7 +8415,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopOnly"
+		(property "Footprint" "cweep:MountingHole_2.2mm_M2_DIN965_Pad"
 			(at 20.32 128.27 0)
 			(effects
 				(font
@@ -9057,7 +9057,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-10xx"
+		(property "Footprint" "cweep:SW_TH_Tactile_Omron_B3F-10xx_Reversible"
 			(at 55.88 109.22 0)
 			(effects
 				(font
@@ -9875,7 +9875,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopOnly"
+		(property "Footprint" "cweep:MountingHole_2.2mm_M2_DIN965_Pad"
 			(at 20.32 146.05 0)
 			(effects
 				(font
@@ -10078,7 +10078,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Seeed Studio XIAO Series Library:XIAO-nRF52840"
+		(property "Footprint" "cweep:XIAO-nRF52840_Reversible"
 			(at 98.6633 132.08 0)
 			(effects
 				(font
@@ -10880,7 +10880,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopOnly"
+		(property "Footprint" "cweep:MountingHole_2.2mm_M2_DIN965_Pad"
 			(at 20.32 119.38 0)
 			(effects
 				(font
@@ -11412,7 +11412,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopOnly"
+		(property "Footprint" "cweep:MountingHole_2.2mm_M2_DIN965_Pad"
 			(at 20.32 154.94 0)
 			(effects
 				(font

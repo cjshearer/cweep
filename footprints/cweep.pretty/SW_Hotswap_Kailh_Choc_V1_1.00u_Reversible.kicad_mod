@@ -773,125 +773,38 @@
 		(layer "B.SilkS")
 		(uuid "8d94c26d-68f1-4681-a678-6e262aca22f0")
 	)
-	(fp_line
+	(fp_rect
 		(start -9 -8.5)
-		(end -9 8.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Dwgs.User")
-		(uuid "8c2b2bd0-3576-48cf-9601-5afdb38eaa75")
-	)
-	(fp_line
-		(start -9 8.5)
 		(end 9 8.5)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
+		(fill no)
 		(layer "Dwgs.User")
-		(uuid "5aa48325-c09d-42d5-8143-a95ce6e9679a")
+		(uuid "adfe36bf-1a27-471f-b989-1e4e2b346851")
 	)
-	(fp_line
-		(start 9 -8.5)
-		(end -9 -8.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Dwgs.User")
-		(uuid "dbb5a20a-6848-43af-bb12-52457750cfae")
-	)
-	(fp_line
-		(start 9 8.5)
-		(end 9 -8.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Dwgs.User")
-		(uuid "7f801e2d-7ac2-4924-afa8-75aed862771c")
-	)
-	(fp_line
+	(fp_rect
 		(start -7.25 -7.25)
-		(end -7.25 7.25)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Eco1.User")
-		(uuid "5b13f1d1-4389-492c-90be-ce9b7c187c52")
-	)
-	(fp_line
-		(start -7.25 -7.25)
-		(end 7.25 -7.25)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Eco1.User")
-		(uuid "6734aa6c-f9ab-43d6-8806-fae08f56b249")
-	)
-	(fp_line
-		(start -7.25 7.25)
-		(end -7.25 -7.25)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Eco1.User")
-		(uuid "81599b45-c354-4253-be34-84c0507f225e")
-	)
-	(fp_line
-		(start -7.25 7.25)
 		(end 7.25 7.25)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
+		(fill no)
 		(layer "Eco1.User")
-		(uuid "2bca9eff-a910-46e4-aa05-5ac804eba682")
+		(uuid "47a2eae4-4b89-4934-820c-53814da14617")
 	)
-	(fp_line
-		(start 7.25 -7.25)
-		(end -7.25 -7.25)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Eco1.User")
-		(uuid "b8932350-0f2d-4c23-8191-6ee9d78a1c5b")
-	)
-	(fp_line
-		(start 7.25 -7.25)
+	(fp_rect
+		(start -7.25 -7.25)
 		(end 7.25 7.25)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
+		(fill no)
 		(layer "Eco1.User")
-		(uuid "19731256-6d81-4605-8d6c-d8ff2f6c2ba9")
-	)
-	(fp_line
-		(start 7.25 7.25)
-		(end -7.25 7.25)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Eco1.User")
-		(uuid "4d31495f-134a-4f01-a94a-3608d8ecdb86")
-	)
-	(fp_line
-		(start 7.25 7.25)
-		(end 7.25 -7.25)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Eco1.User")
-		(uuid "05e69ff4-323c-46e2-8aae-11e009a1cfe2")
+		(uuid "6310987e-cf5b-460a-b507-5011e87d0107")
 	)
 	(fp_line
 		(start -7.6 1.248)
@@ -1642,26 +1555,6 @@
 		(uuid "c38cb9fe-5de7-4b17-a00d-e8794fb10302")
 	)
 	(fp_line
-		(start -7.5 -7.5)
-		(end 7.5 -7.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "B.Fab")
-		(uuid "72637d29-6012-44a4-815d-9d8846ad2d64")
-	)
-	(fp_line
-		(start -7.5 7.5)
-		(end -7.5 -7.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "B.Fab")
-		(uuid "612fdbd2-39ce-4dbc-a9dc-7ece88278886")
-	)
-	(fp_line
 		(start -7.214 5.581)
 		(end -7.275 5.275)
 		(stroke
@@ -1911,45 +1804,16 @@
 		(layer "B.Fab")
 		(uuid "d8fe2f0a-94bc-4d7c-b7eb-474795fbc8a0")
 	)
-	(fp_line
-		(start 7.5 -7.5)
-		(end 7.5 7.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "B.Fab")
-		(uuid "e42ca0c7-daa4-4c5d-854f-3a44804f7f16")
-	)
-	(fp_line
-		(start 7.5 7.5)
-		(end -7.5 7.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "B.Fab")
-		(uuid "cce7b277-2e0e-4b96-832d-d32736b49b94")
-	)
-	(fp_line
+	(fp_rect
 		(start -7.5 -7.5)
-		(end -7.5 7.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "0f2d2a96-fad3-4a7d-82ad-d691668d6194")
-	)
-	(fp_line
-		(start -7.5 7.5)
 		(end 7.5 7.5)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
-		(layer "F.Fab")
-		(uuid "e1bfdb91-a4cd-4a43-923c-22cc06b973a8")
+		(fill no)
+		(layer "B.Fab")
+		(uuid "06711df1-7b6e-4710-aeeb-42198081454a")
 	)
 	(fp_line
 		(start -2.275 7.45)
@@ -2202,26 +2066,6 @@
 		(uuid "6f969a78-eb73-4ec0-9de8-514c43067d84")
 	)
 	(fp_line
-		(start 7.5 -7.5)
-		(end -7.5 -7.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "3244d08f-0130-4243-b964-aea3f832de44")
-	)
-	(fp_line
-		(start 7.5 7.5)
-		(end 7.5 -7.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "e8321771-cee1-4d95-97d3-5c29778cb9c1")
-	)
-	(fp_line
 		(start 7.575 1.425)
 		(end 3.567 1.425)
 		(stroke
@@ -2240,6 +2084,17 @@
 		)
 		(layer "F.Fab")
 		(uuid "b724f156-a6c9-45d3-a76b-6bb2ab8af0ac")
+	)
+	(fp_rect
+		(start -7.5 -7.5)
+		(end 7.5 7.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "92279a18-18d1-4e20-9897-753913182936")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 -2.8 180)
@@ -2539,7 +2394,7 @@
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 		(offset
-			(xyz -8.655 2.2 0)
+			(xyz 0 0 0)
 		)
 		(scale
 			(xyz 1 1 1)
@@ -2550,18 +2405,18 @@
 	)
 	(model "${KIPRJMOD}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Hotswap_Kailh_Choc_V1.wrl"
 		(offset
-			(xyz -8.655 2.2 0)
+			(xyz 0 0 0)
 		)
 		(scale
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz -0 -0 180)
+			(xyz -0 -0 -180)
 		)
 	)
 	(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 		(offset
-			(xyz 41.945 7.55 0.7)
+			(xyz 50.65 5.4 0.7)
 		)
 		(scale
 			(xyz 1 1 1)
