@@ -9934,7 +9934,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_1210_3225Metric_Pad1.42x2.65mm_HandSolder"
+		(property "Footprint" "cweep:L_1210_3225Metric_Pad1.42x2.65mm_HandSolder_Reversible"
 			(at 46.99 36.83 0)
 			(effects
 				(font
