@@ -33840,7 +33840,7 @@
 	(footprint "cweep:SM141K04LV"
 		(layer "F.Cu")
 		(uuid "7d004384-ca54-42f2-acef-ba855dc535ae")
-		(at 21.65 52.639)
+		(at 21.66 49.7)
 		(property "Reference" "SC1"
 			(at 2.95 -22.9 0)
 			(unlocked yes)
