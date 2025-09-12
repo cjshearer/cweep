@@ -49,29 +49,18 @@ Power: Exploring solar panel options for battery charging.
 |-------------|-------|-------|--------|
 | Controller | 2 | Seeed Xiao nRF52840 | [Seeed Studio](https://www.seeedstudio.com/Seeed-XIAO-BLE-nRF52840-p-5201.html) |
 | Controller Sockets | 4 x 7 | 310-87-107-41-001101 | [Octopart](https://octopart.com/310-87-107-41-001101-preci-dip-21424489) |
-| Controller Pins | 28 | TODO | TODO |
-| Reset/Battery Pogo Pins | 4 | 0906-0-15-20-76-14-11-0 | [Octopart](https://octopart.com/0906-0-15-20-76-14-11-0-mill-max-259418) |
-| 3.7V LiPo Battery (25mm x 15mm x 4mm) | 2 | [13853](https://cdn.sparkfun.com/datasheets/Prototyping/spe-00-DTP401525-110mah-en-1.0ver.pdf) | [Octopart](https://octopart.com/prt-13853-sparkfun-76382075) |
+| Controller Pins | 28 | [3320-0-00-15-00-00-03-0](https://datasheet.octopart.com/3320-0-00-15-00-00-03-0-Mill-Max-datasheet-180682269.pdf) | [Octopart](https://octopart.com/3320-0-00-15-00-00-03-0-mill-max-29613931) |
+| Battery/Reset Pogo Pins | 4 | 0906-0-15-20-76-14-11-0 | [Octopart](https://octopart.com/0906-0-15-20-76-14-11-0-mill-max-259418) |
+| Battery | 2 | [ICR10440](https://www.powerstream.com/p/ICR10440-300mAh.pdf) | [Amazon](https://www.amazon.com/dp/B08H4RC1Y5) |
 | Power Switch | 2 | [KAN-15](https://hackaday.io/project/174738-kan-15-led-tactile-switch/log/183418-switches-switches-switches#KAN-15:~:text=8016717020588253%26productId%3D4000960302909-,KAN%2D15,-Finally%2C%20I%20found) | [Amazon](https://www.amazon.com/TWTADE-Latching-Button-Switch-Flashlight/dp/B086M6P1RF) |
 | Reset Button | 2 | [B3F-1020](https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3f.pdf) (adafruit 367) | [Octopart](https://octopart.com/b3f-1020-omron-46944) |
-
-### Switch Matrix
-
-| Description | Count | Value | Source |
-|-------------|-------|-------|--------|
 | Kailh Choc V1 Keycaps | 34 | DDC Choc PBT Blanks | [Keebd](https://keebd.com/products/ddc-choc-pbt-blank-keycaps?variant=43210242785432) |
 | Kailh Choc V1 Switches | 34 | PG1350 (e.g. [Sunset](https://cdn.shopify.com/s/files/1/0523/0847/6068/files/Choc_Sunset_datasheet.pdf))  | [Keebd](https://keebd.com/products/sunset-tactile-choc-switches?variant=41676091981976) |
 | Kailh Choc Hotswap Sockets | 34 | [A5118](https://cdn-shop.adafruit.com/product-files/5118/5118-Choc-Socket.pdf) | [Octopart](https://octopart.com/5118-adafruit+industries-119967299) |
-| Diodes | 34 | 1N4148 | [Octopart](https://octopart.com/search?q=1n4148) |
-
-### Solar Charger
-
-| Description | Count | Value | Source |
-|-------------|-------|-------|--------|
+| Diodes | 34 | [1N4148W](https://www.vishay.com/docs/86356/1n4148w.pdf) | [Octopart](https://octopart.com/1n4148w-e3-08-vishay-46456306) |
 | Solar Cells | 2 | [SM141K04LV](https://waf-e.dubudisk.com/anysolar.dubuplus.com/techsupport@anysolar.biz/O18Ae0B/DubuDisk/www/Gen3/SM141K04LV%20DATA%20SHEET%20202007.pdf) | [Octopart](https://octopart.com/sm141k04lv-anysolar-120091681) |
 | Boost Converter | 2 | [BQ25504](https://www.ti.com/document-viewer/bq25504/datasheet) | [Octopart](https://octopart.com/bq25504rgtr-texas+instruments-20530455) |
-
-TODO: the other components for the solar charger circuit
+| 4.7uF Capacitor (CHV1) | 2 | [C0805C475K9PACTU](https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1006_X5R_SMD) | [Octopart](https://octopart.com/c0805c475k9pactu-kemet-85989) |
 
 ## Credits
 
