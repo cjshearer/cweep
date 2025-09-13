@@ -7713,7 +7713,7 @@
 				)
 			)
 		)
-		(property "Value" "10440"
+		(property "Value" "ICR10440"
 			(at 55.3085 130.81 90)
 			(effects
 				(font
@@ -9182,7 +9182,7 @@
 			(at 55.88 109.22 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 			)
 		)
@@ -10406,7 +10406,7 @@
 			(at 60.96 40.894 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.016 1.016)
 				)
 				(justify left)
 			)
