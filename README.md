@@ -58,8 +58,8 @@ Power: Exploring solar panel options for battery charging.
 | Solar Cell | 2 | [SM141K04LV](https://waf-e.dubudisk.com/anysolar.dubuplus.com/techsupport@anysolar.biz/O18Ae0B/DubuDisk/www/Gen3/SM141K04LV%20DATA%20SHEET%20202007.pdf) | [Octopart](https://octopart.com/sm141k04lv-anysolar-120091681) |
 | Boost Converter | 2 | [BQ25504](https://www.ti.com/document-viewer/bq25504/datasheet) | [Octopart](https://octopart.com/bq25504rgtr-texas+instruments-20530455) |
 | 4.7uF Capacitor (CHV1) | 2 | [C0805C475K9PACTU](https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1006_X5R_SMD) | [Octopart](https://octopart.com/c0805c475k9pactu-kemet-85989) |
-| 10nF Capacitor (CREF1) | 2 | [GCM188R71H103KA37D](https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GCM188R71H103KA37-01.pdf) | [Octopart](https://octopart.com/gcm188r71h103ka37d-murata-7894791) |
-| 10nF Capacitor (CBYP1) | 2 | [C0603C103K9RACTU](https://datasheet.octopart.com/C0603C103K9RACTU-KEMET-datasheet-176289391.pdf) | [Octopart](https://octopart.com/c0603c103k9ractu-kemet-11702903) |
+| 10nF Capacitor, 50V (CREF1) | 2 | [C0603C103K5RACTM](https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD) | [Octopart](https://octopart.com/c0603c103k5ractm-kemet-3907955) |
+| 10nF Capacitor, 6.3V (CBYP1) | 2 | [C0603C103K9RACTU](https://datasheet.octopart.com/C0603C103K9RACTU-KEMET-datasheet-176289391.pdf) | [Octopart](https://octopart.com/c0603c103k9ractu-kemet-11702903) |
 
 
 ## Credits
