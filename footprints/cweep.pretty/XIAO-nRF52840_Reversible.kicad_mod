@@ -719,7 +719,7 @@
 				(size 1 1)
 				(thickness 0.15)
 			)
-			(justify bottom mirror)
+			(justify bottom)
 		)
 	)
 	(fp_text user "11"
@@ -863,7 +863,7 @@
 				(size 1 1)
 				(thickness 0.15)
 			)
-			(justify bottom)
+			(justify bottom mirror)
 		)
 	)
 	(fp_text user "${REFERENCE}"
