@@ -57,9 +57,10 @@ Power: Exploring solar panel options for battery charging.
 | Diodes | 34 | [1N4148W](https://www.vishay.com/docs/86356/1n4148w.pdf) | [Octopart](https://octopart.com/1n4148w-e3-08-vishay-46456306) |
 | Solar Cell | 2 | [SM141K04LV](https://waf-e.dubudisk.com/anysolar.dubuplus.com/techsupport@anysolar.biz/O18Ae0B/DubuDisk/www/Gen3/SM141K04LV%20DATA%20SHEET%20202007.pdf) | [Octopart](https://octopart.com/sm141k04lv-anysolar-120091681) |
 | Boost Converter | 2 | [BQ25504](https://www.ti.com/document-viewer/bq25504/datasheet) | [Octopart](https://octopart.com/bq25504rgtr-texas+instruments-20530455) |
-| 4.7uF Capacitor (CHV1) | 2 | [C0805C475K9PACTU](https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1006_X5R_SMD) | [Octopart](https://octopart.com/c0805c475k9pactu-kemet-85989) |
-| 10nF Capacitor, 50V (CREF1) | 2 | [C0603C103K5RACTM](https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD) | [Octopart](https://octopart.com/c0603c103k5ractm-kemet-3907955) |
-| 10nF Capacitor, 6.3V (CBYP1) | 2 | [C0603C103K9RACTU](https://datasheet.octopart.com/C0603C103K9RACTU-KEMET-datasheet-176289391.pdf) | [Octopart](https://octopart.com/c0603c103k9ractu-kemet-11702903) |
+| 4.7μF Capacitor (CHV1, CSTOR1) | 4 | [CL10A475KP8NNNC](https://datasheet.octopart.com/CL10A475KP8NNNC-Samsung-Electro-Mechanics-datasheet-11791968.pdf) | [Octopart](https://octopart.com/cl10a475kp8nnnc-samsung+electro-mechanics-9301844) |
+| 10nF Capacitor (CREF1, CBYP1) | 4 | [C0603C103K5RACTU](https://octopart.com/c0603c103k5ractu-kemet-133094) | [Octopart](https://datasheet.octopart.com/C0603C103K5RACTU-Kemet-datasheet-11898999.pdf) |
+| 22μH Inductor (LBST1) | 2 | [ASPI-4030S-220M-T](https://datasheet.octopart.com/ASPI-4030S-220M-T-Abracon-datasheet-27893147.pdf) | [Octopart](https://octopart.com/aspi-4030s-220m-t-abracon-29811505) |
+| 4.42MΩ Resistor (ROV1) | 2 | [CRCW06034M42FKEA](https://datasheet.octopart.com/CRCW06034M42FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06034m42fkea-vishay-39804278) |
 
 
 ## Credits
