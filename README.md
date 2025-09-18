@@ -29,18 +29,11 @@ A compact, 34 key, solar powered, split keyboard.
 
 ## Status
 
-PCB Layout: Still iterating on component placement.
-
 Firmware: Planning to use ZMK.
 
 Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
 
-Power: Exploring solar panel options for battery charging.
-
 ## Bill of Materials (BOM)
-
-> [!NOTE]
-> This is a preliminary list of components needed for the keyboard. The final list may change as the design evolves.
 
 | Description | Count | Value | Source |
 |-------------|-------|-------|--------|
