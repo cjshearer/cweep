@@ -61,7 +61,9 @@ Power: Exploring solar panel options for battery charging.
 | 10nF Capacitor (CREF1, CBYP1) | 4 | [C0603C103K5RACTU](https://octopart.com/c0603c103k5ractu-kemet-133094) | [Octopart](https://datasheet.octopart.com/C0603C103K5RACTU-Kemet-datasheet-11898999.pdf) |
 | 22μH Inductor (LBST1) | 2 | [ASPI-4030S-220M-T](https://datasheet.octopart.com/ASPI-4030S-220M-T-Abracon-datasheet-27893147.pdf) | [Octopart](https://octopart.com/aspi-4030s-220m-t-abracon-29811505) |
 | 4.42MΩ Resistor (ROV1) | 2 | [CRCW06034M42FKEA](https://datasheet.octopart.com/CRCW06034M42FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06034m42fkea-vishay-39804278) |
-
+| 5.49MΩ Resistor (ROV2) | 2 | [CRCW06035M49FKEA](https://datasheet.octopart.com/CRCW06035M49FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06035m49fkea-vishay-39809097) |
+| 3.83MΩ Resistor (RUV1) | 2 | [CRCW06033M83FKEA](https://datasheet.octopart.com/CRCW06033M83FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06033m83fkea-vishay-39857567) |
+| 6.04MΩ Resistor (RUV2) | 2 | [CRCW06036M04FKEA](https://datasheet.octopart.com/CRCW06036M04FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06036m04fkea-vishay-39816007) |
 
 ## Credits
 
