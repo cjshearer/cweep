@@ -2,21 +2,14 @@
 
 A compact, 34 key, solar powered, split keyboard.
 
-<img width="45%" alt="bottom" src="https://github.com/user-attachments/assets/c8329a46-f3e5-4f25-a8a2-339172839555" />
-<img width="45%" alt="top" src="https://github.com/user-attachments/assets/4fc40650-b64b-4d59-8e73-ec2571f9aa10" />
+<img width="45%" alt="pcb-3d-bottom" src="https://github.com/user-attachments/assets/c28fda02-9564-4e17-b0ca-ada5ab9a219e" />
+<img width="45%" alt="pcb-3d-top" src="https://github.com/user-attachments/assets/df41547a-2cf3-4b42-bdd0-5630db383ccc" />
 
-<a href="https://github.com/user-attachments/assets/c26093d8-f3e7-4a7d-a30f-303f3c635c93">
-  <img width="45%" alt="B_Cu" src="https://github.com/user-attachments/assets/c26093d8-f3e7-4a7d-a30f-303f3c635c93" />
+<a href="https://github.com/user-attachments/assets/03122a65-4fef-4801-9b5f-ee9880c847fc">
+  <img width="45%" alt="pcb-B" src="https://github.com/user-attachments/assets/03122a65-4fef-4801-9b5f-ee9880c847fc" />
 </a>
-<a href="https://github.com/user-attachments/assets/fa411918-0815-4199-8f95-43fc10f712b4">
-  <img width="45%" alt="F_Cu" src="https://github.com/user-attachments/assets/fa411918-0815-4199-8f95-43fc10f712b4" />
-</a>
-
-<a href="https://github.com/user-attachments/assets/5da62548-fc56-4f94-b4f0-1e69b9bb80f9">
-  <img width="45%" alt="top-zoom-out-3-zccw15-xcw4" src="https://github.com/user-attachments/assets/5da62548-fc56-4f94-b4f0-1e69b9bb80f9" />
-</a>
-<a href="https://github.com/user-attachments/assets/6fd5548f-e36d-4018-b9a2-e0769077f58f">
-  <img width="45%" alt="top-zoom-out-3-zcw3-xcw3" src="https://github.com/user-attachments/assets/6fd5548f-e36d-4018-b9a2-e0769077f58f" />
+<a href="https://github.com/user-attachments/assets/912e3e1f-4ea9-4e20-af10-3da581204814">
+  <img width="45%" alt="pcb-F" src="https://github.com/user-attachments/assets/912e3e1f-4ea9-4e20-af10-3da581204814" />
 </a>
 
 <details>
@@ -24,7 +17,7 @@ A compact, 34 key, solar powered, split keyboard.
     Schematic
   </summary>
 
-  <img alt="schematic" src="https://github.com/user-attachments/assets/b370edf5-2cb7-4d84-97d4-b6aa28b78579" />
+  <img width="90%" alt="schematic" src="https://github.com/user-attachments/assets/7b9ba457-fce0-405f-8e79-04afe27de84a" />
 </details>
 
 ## Status
