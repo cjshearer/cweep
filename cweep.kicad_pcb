@@ -75143,40 +75143,6 @@
 		)
 	)
 	(zone
-		(net 0)
-		(net_name "")
-		(locked yes)
-		(layers "F.Cu" "B.Cu")
-		(uuid "1ea4b99e-e895-47ed-bdbf-f7d37502dc6b")
-		(name "avoid parasitic resistors")
-		(hatch edge 0.5)
-		(connect_pads
-			(clearance 0)
-		)
-		(min_thickness 0.25)
-		(filled_areas_thickness no)
-		(keepout
-			(tracks allowed)
-			(vias allowed)
-			(pads allowed)
-			(copperpour not_allowed)
-			(footprints allowed)
-		)
-		(placement
-			(enabled no)
-			(sheetname "/")
-		)
-		(fill
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-		)
-		(polygon
-			(pts
-				(xy -11.8 65.48) (xy 5 65.48) (xy 5 31.847985) (xy -11.8 31.847985)
-			)
-		)
-	)
-	(zone
 		(net 31)
 		(net_name "GND")
 		(locked yes)
