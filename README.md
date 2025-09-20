@@ -51,6 +51,7 @@ Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
 | 6.04MΩ Resistor (RUV2) | 2 | [CRCW06036M04FKEA](https://datasheet.octopart.com/CRCW06036M04FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06036m04fkea-vishay-39816007) |
 | 16MΩ Resistor (ROC1) | 2 | [RK73B1JTTDD166J](https://datasheet.octopart.com/RK73B1JTTDD166J-KOA-Speer-datasheet-182143539.pdf) | [Octopart](https://octopart.com/rk73b1jttdd166j-koa+speer-20075546) |
 | 3.83MΩ Resistor (ROC2) | 2 | [CRCW06033M83FKEA](https://datasheet.octopart.com/CRCW06033M83FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06033m83fkea-vishay-39857567) |
+| 24AWG Stranded Silicone Wire | ~16in | ¯\\\_(ツ)\_/¯  | [Amazon](https://www.amazon.com/StrivedayTMFlexible-Silicone-Electric-electronic-electrics/dp/B01LH1G2IE) |
 
 ## Credits
 
