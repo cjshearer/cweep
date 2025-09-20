@@ -12,13 +12,18 @@ kicad-cli sch export svg cweep.kicad_sch \
 
 # # Generate SVGs of the front and back PCB layers
 for side in F B; do
-  kicad-cli pcb export svg cweep.kicad_pcb \
-    --output images/pcb-${side}.svg \
-    -l ${side}.Cu,${side}.Mask,${side}.Paste,${side}.SilkS,${side}.Fab,Edge.Cuts \
-    --mode-single \
-    --fit-page-to-board \
-    --exclude-drawing-sheet \
-    "$( [ "$side" = "B" ] && echo "--mirror" )"
+  args=(
+    --output images/pcb-"${side}".svg
+    -l "${side}.Cu,${side}.Mask,${side}.Paste,${side}.SilkS,${side}.Fab,Edge.Cuts"
+    --mode-single
+    --fit-page-to-board
+    --exclude-drawing-sheet
+  )
+  if [ "$side" = "B" ]; then
+    args+=(--mirror)
+  fi
+
+  kicad-cli pcb export svg cweep.kicad_pcb "${args[@]}"
 
   # Add a background color to the SVG (Solarized Dark)
   sed -i 's-</title>-</title>\n  <rect xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="#002B36"/>-' images/pcb-${side}.svg
