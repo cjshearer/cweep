@@ -1,9 +1,8 @@
 ## Overview
 
-A compact, 34 key, solar powered, split keyboard.
+A compact, 34 key, solar powered, reversible, split keyboard.
 
-<img width="45%" alt="pcb-3d-bottom" src="https://github.com/user-attachments/assets/c28fda02-9564-4e17-b0ca-ada5ab9a219e" />
-<img width="45%" alt="pcb-3d-top" src="https://github.com/user-attachments/assets/df41547a-2cf3-4b42-bdd0-5630db383ccc" />
+<img width="45%" alt="pcb-3d-bottom" src="https://github.com/user-attachments/assets/c28fda02-9564-4e17-b0ca-ada5ab9a219e" /> <img width="45%" alt="pcb-3d-top" src="https://github.com/user-attachments/assets/df41547a-2cf3-4b42-bdd0-5630db383ccc" />
 
 <a href="https://github.com/user-attachments/assets/03122a65-4fef-4801-9b5f-ee9880c847fc">
   <img width="45%" alt="pcb-B" src="https://github.com/user-attachments/assets/03122a65-4fef-4801-9b5f-ee9880c847fc" />
