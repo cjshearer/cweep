@@ -18,7 +18,7 @@ for side in F B; do
     --mode-single \
     --fit-page-to-board \
     --exclude-drawing-sheet \
-    $( [ "$side" = "B" ] && echo "--mirror" )
+    "$( [ "$side" = "B" ] && echo "--mirror" )"
 
   # Add a background color to the SVG (Solarized Dark)
   sed -i 's-</title>-</title>\n  <rect xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="#002B36"/>-' images/pcb-${side}.svg
@@ -43,10 +43,10 @@ for side in top bottom; do
   --quality basic \
   --rotate "'-20,0,10'" \
   --side $side \
-  --zoom $(
+  --zoom "$(
     declare -A zoom=(
       [top]=0.95
       [bottom]=0.98
     ) && echo "${zoom[$side]}"
-  )
+  )"
 done
