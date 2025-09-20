@@ -49,6 +49,8 @@ Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
 | 5.49MΩ Resistor (ROV2) | 2 | [CRCW06035M49FKEA](https://datasheet.octopart.com/CRCW06035M49FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06035m49fkea-vishay-39809097) |
 | 3.83MΩ Resistor (RUV1) | 2 | [CRCW06033M83FKEA](https://datasheet.octopart.com/CRCW06033M83FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06033m83fkea-vishay-39857567) |
 | 6.04MΩ Resistor (RUV2) | 2 | [CRCW06036M04FKEA](https://datasheet.octopart.com/CRCW06036M04FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06036m04fkea-vishay-39816007) |
+| 16MΩ Resistor (ROC1) | 2 | [RK73B1JTTDD166J](https://datasheet.octopart.com/RK73B1JTTDD166J-KOA-Speer-datasheet-182143539.pdf) | [Octopart](https://octopart.com/rk73b1jttdd166j-koa+speer-20075546) |
+| 3.83MΩ Resistor (ROC2) | 2 | [CRCW06033M83FKEA](https://datasheet.octopart.com/CRCW06033M83FKEA-Vishay-datasheet-175423584.pdf) | [Octopart](https://octopart.com/crcw06033m83fkea-vishay-39857567) |
 
 ## Credits
 
