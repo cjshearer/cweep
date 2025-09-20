@@ -3,8 +3,9 @@
 # Prepares a release by updating the version number and sha1 in the PCB file.
 # Usage: ./make-release.sh major|minor|patch
 
-current_version=$(grep -oP 'cjshearer/cweep\\n\K[0-9]+\.[0-9]+\.[0-9]+' cweep.kicad_pcb | head -1)
-current_hash=$(grep -oP 'cjshearer/cweep\\n[0-9]+\.[0-9]+\.[0-9]+ - \K[0-9a-f]+' cweep.kicad_pcb | head -1)
+anchor="cjshearer/cweep\\\n"
+current_version=$(grep -oP "$anchor\K[0-9]+\.[0-9]+\.[0-9]+" cweep.kicad_pcb | head -1)
+current_hash=$(grep -oP "$anchor$current_version - \K[0-9a-f]+" cweep.kicad_pcb | head -1)
 
 echo "Current version: $current_version ($current_hash)"
 
@@ -27,7 +28,7 @@ new_hash=$(git rev-parse --short HEAD)
 
 echo "Updating to $new_version ($new_hash)"
 
-sed -i "s#cjshearer/cweep\\\n$current_version - $current_hash#github.com/cjshearer/cweep\\\n$new_version - $new_hash#" cweep.kicad_pcb
+sed -i "s#$anchor$current_version - $current_hash#$anchor$new_version - $new_hash#" cweep.kicad_pcb
 
 git add cweep.kicad_pcb
 git commit -m "build: $current_version -> $new_version"
