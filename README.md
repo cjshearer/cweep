@@ -2,13 +2,13 @@
 
 A compact, 34 key, solar powered, reversible, split keyboard.
 
-<img width="45%" alt="pcb-3d-bottom" src="https://github.com/user-attachments/assets/c28fda02-9564-4e17-b0ca-ada5ab9a219e" /> <img width="45%" alt="pcb-3d-top" src="https://github.com/user-attachments/assets/df41547a-2cf3-4b42-bdd0-5630db383ccc" />
+<img width="45%" alt="pcb-3d-bottom" src="https://github.com/user-attachments/assets/6d0e3b0b-a4ff-4f2b-b129-37da8dbe8f87" /> <img width="45%" alt="pcb-3d-top" src="https://github.com/user-attachments/assets/794b6deb-c4b2-4ddb-a10e-a8dc9752b653" />
 
-<a href="https://github.com/user-attachments/assets/03122a65-4fef-4801-9b5f-ee9880c847fc">
-  <img width="45%" alt="pcb-B" src="https://github.com/user-attachments/assets/03122a65-4fef-4801-9b5f-ee9880c847fc" />
+<a href="https://github.com/user-attachments/assets/fae04a87-7b62-41e5-b021-bcb9aed5c15c">
+  <img width="45%" alt="pcb-B" src="https://github.com/user-attachments/assets/fae04a87-7b62-41e5-b021-bcb9aed5c15c" />
 </a>
-<a href="https://github.com/user-attachments/assets/912e3e1f-4ea9-4e20-af10-3da581204814">
-  <img width="45%" alt="pcb-F" src="https://github.com/user-attachments/assets/912e3e1f-4ea9-4e20-af10-3da581204814" />
+<a href="https://github.com/user-attachments/assets/dc20eb11-6153-4b6a-9adc-733f51b1ce15">
+  <img width="45%" alt="pcb-F" src="https://github.com/user-attachments/assets/dc20eb11-6153-4b6a-9adc-733f51b1ce15" />
 </a>
 
 <details>
