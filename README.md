@@ -36,7 +36,7 @@ Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
 | Kailh Choc V1 Keycaps | 34 | DDC Choc PBT Blanks | [Keebd](https://keebd.com/products/ddc-choc-pbt-blank-keycaps?variant=43210242785432) |
 | Kailh Choc V1 Switches | 34 | [PG1350](https://cdn-shop.adafruit.com/product-files/5113/CHOC+keyswitch_Kailh-CPG135001D01_C400229.pdf) (e.g. [Sunset](https://cdn.shopify.com/s/files/1/0523/0847/6068/files/Choc_Sunset_datasheet.pdf))  | [Keebd](https://keebd.com/products/sunset-tactile-choc-switches?variant=41676091981976) |
 | Kailh Choc Hotswap Sockets | 34 | [A5118](https://cdn-shop.adafruit.com/product-files/5118/5118-Choc-Socket.pdf) | [Octopart](https://octopart.com/5118-adafruit+industries-119967299) |
-| Diodes | 34 | [1N4148W](https://www.vishay.com/docs/86356/1n4148w.pdf) | [Octopart](https://octopart.com/1n4148w-e3-08-vishay-46456306) |
+| Diodes | 34 | [1N4148W](https://datasheet.octopart.com/1N4148W-Diotec-datasheet-178941572.pdf) | [Octopart](https://octopart.com/1n4148w-diotec-42312312) |
 | Solar Cell | 2 | [SM141K04LV](https://waf-e.dubudisk.com/anysolar.dubuplus.com/techsupport@anysolar.biz/O18Ae0B/DubuDisk/www/Gen3/SM141K04LV%20DATA%20SHEET%20202007.pdf) | [Octopart](https://octopart.com/sm141k04lv-anysolar-120091681) |
 | Boost Converter | 2 | [BQ25504](https://www.ti.com/document-viewer/bq25504/datasheet) | [Octopart](https://octopart.com/bq25504rgtr-texas+instruments-20530455) |
 | 4.7μF Capacitor (CHV1, CSTOR1) | 4 | [CL10A475KP8NNNC](https://datasheet.octopart.com/CL10A475KP8NNNC-Samsung-Electro-Mechanics-datasheet-11791968.pdf) | [Octopart](https://octopart.com/cl10a475kp8nnnc-samsung+electro-mechanics-9301844) |
