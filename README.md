@@ -30,7 +30,7 @@ Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
 | Description | Count | Value | Source |
 |-------------|-------|-------|--------|
 | Controller | 2 | [Seeed Xiao nRF52840](https://files.seeedstudio.com/wiki/XIAO/Seeed-Studio-XIAO-Series-SOM-Datasheet.pdf) | [Octopart](https://octopart.com/102010448-seeed+studio-126049022) |
-| Controller Sockets | 4 x 7 | [310-87-107-41-001101](https://datasheet.octopart.com/310-87-107-41-001101-Preci-Dip-datasheet-181135021.pdf) | [Octopart](https://octopart.com/310-87-107-41-001101-preci-dip-21424489) |
+| Controller Sockets | 4 | [311-13-107-41-001000](https://datasheet.octopart.com/311-13-107-41-001000-Mill-Max-datasheet-180674260.pdf) | [Octopart](https://octopart.com/311-13-107-41-001000-mill-max-77886373) |
 | Controller Pins | 28 | [3320-0-00-15-00-00-03-0](https://datasheet.octopart.com/3320-0-00-15-00-00-03-0-Mill-Max-datasheet-180682269.pdf) | [Octopart](https://octopart.com/3320-0-00-15-00-00-03-0-mill-max-29613931) |
 | Battery/Reset Pogo Pins | 4 | [0906-0-15-20-76-14-11-0](https://datasheet.octopart.com/0906-0-15-20-76-14-11-0-Mill-Max-datasheet-180665642.pdf) | [Octopart](https://octopart.com/0906-0-15-20-76-14-11-0-mill-max-259418) |
 | Battery | 2 | [ICR10440](https://www.powerstream.com/p/ICR10440-300mAh.pdf) | [Amazon](https://www.amazon.com/dp/B08H4RC1Y5) |
