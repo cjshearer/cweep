@@ -2,21 +2,18 @@
 
 A compact, 34 key, solar powered, reversible, split keyboard.
 
-<img width="45%" alt="pcb-3d-bottom" src="https://github.com/user-attachments/assets/6d0e3b0b-a4ff-4f2b-b129-37da8dbe8f87" /> <img width="45%" alt="pcb-3d-top" src="https://github.com/user-attachments/assets/794b6deb-c4b2-4ddb-a10e-a8dc9752b653" />
+<a href="https://github.com/user-attachments/assets/642829ea-e7b8-4ff3-9049-28f1e1555cb2"><img width="45%" alt="pcb-3d-bottom" src="https://github.com/user-attachments/assets/6d0e3b0b-a4ff-4f2b-b129-37da8dbe8f87" /></a><a href="https://github.com/user-attachments/assets/ab504e79-e15f-4af2-8a4f-50c7394c724b"><img width="45%" alt="pcb-3d-top" src="https://github.com/user-attachments/assets/794b6deb-c4b2-4ddb-a10e-a8dc9752b653" /></a>
 
-<a href="https://github.com/user-attachments/assets/fae04a87-7b62-41e5-b021-bcb9aed5c15c">
-  <img width="45%" alt="pcb-B" src="https://github.com/user-attachments/assets/fae04a87-7b62-41e5-b021-bcb9aed5c15c" />
-</a>
-<a href="https://github.com/user-attachments/assets/dc20eb11-6153-4b6a-9adc-733f51b1ce15">
-  <img width="45%" alt="pcb-F" src="https://github.com/user-attachments/assets/dc20eb11-6153-4b6a-9adc-733f51b1ce15" />
-</a>
+<a href="https://github.com/user-attachments/assets/e60e4d48-c13d-41c2-b896-f076ac4e2c79"><img width="45%" alt="pcb-B" src="https://github.com/user-attachments/assets/e60e4d48-c13d-41c2-b896-f076ac4e2c79" /></a><a href="https://github.com/user-attachments/assets/00cfc082-f974-4577-bfa2-e2fe745e49d9"><img width="45%" alt="pcb-F" src="https://github.com/user-attachments/assets/00cfc082-f974-4577-bfa2-e2fe745e49d9" /></a>
 
 <details>
   <summary>
     Schematic
   </summary>
 
-  <img width="90%" alt="schematic" src="https://github.com/user-attachments/assets/7b9ba457-fce0-405f-8e79-04afe27de84a" />
+  <a href="https://github.com/user-attachments/assets/647d1b9f-04d2-43af-ba33-3fea434be137">
+    <img width="90%" alt="schematic" src="https://github.com/user-attachments/assets/647d1b9f-04d2-43af-ba33-3fea434be137" />
+  </a>
 </details>
 
 ## Status
