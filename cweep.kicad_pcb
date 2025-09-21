@@ -64194,7 +64194,7 @@
 		(layer "Edge.Cuts")
 		(uuid "f74d7736-9388-4995-92d2-95cf7c6dad99")
 	)
-	(gr_text "cjshearer/cweep\n0.0.0 - 90b1bdc"
+	(gr_text "cjshearer/cweep\n0.1.0 - e322841"
 		(at 38.1 21.85 0)
 		(layer "F.SilkS")
 		(uuid "e140dd7d-ff23-4678-8cac-6f6288f17250")
@@ -64206,7 +64206,7 @@
 			(justify bottom)
 		)
 	)
-	(gr_text "cjshearer/cweep\n0.0.0 - 90b1bdc"
+	(gr_text "cjshearer/cweep\n0.1.0 - e322841"
 		(at 38.1 21.85 -0)
 		(layer "B.SilkS")
 		(uuid "91d69c4b-6dad-43ab-bed1-17b6a9ad5e22")
