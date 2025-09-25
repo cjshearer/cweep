@@ -31,6 +31,7 @@ Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
 | Controller Pins | 28 | [3320-0-00-15-00-00-03-0](https://datasheet.octopart.com/3320-0-00-15-00-00-03-0-Mill-Max-datasheet-180682269.pdf) | [Octopart](https://octopart.com/3320-0-00-15-00-00-03-0-mill-max-29613931) |
 | Battery/Reset Pogo Pins | 4 | [0906-0-15-20-76-14-11-0](https://datasheet.octopart.com/0906-0-15-20-76-14-11-0-Mill-Max-datasheet-180665642.pdf) | [Octopart](https://octopart.com/0906-0-15-20-76-14-11-0-mill-max-259418) |
 | Battery | 2 | [ICR10440](https://www.powerstream.com/p/ICR10440-300mAh.pdf) | [Amazon](https://www.amazon.com/dp/B08H4RC1Y5) |
+| Battery Contacts | 4 | [Keystone 230-1](https://docs.rs-online.com/a10d/0900766b8106e5ee.pdf) | [Octopart](https://octopart.com/230-1-keystone-154879) |
 | Power Switch | 2 | [KAN-15](https://hackaday.io/project/174738-kan-15-led-tactile-switch/log/183418-switches-switches-switches#KAN-15:~:text=8016717020588253%26productId%3D4000960302909-,KAN%2D15,-Finally%2C%20I%20found) | [Amazon](https://us.amazon.com/dp/B0BHH2FBQ5) |
 | Reset Button | 2 | [B3F-1020](https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3f.pdf) (adafruit 367) | [Octopart](https://octopart.com/b3f-1020-omron-46944) |
 | Kailh Choc V1 Keycaps | 34 | DDC Choc PBT Blanks | [Keebd](https://keebd.com/products/ddc-choc-pbt-blank-keycaps?variant=43210242785432) |
