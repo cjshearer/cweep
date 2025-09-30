@@ -1,0 +1,40 @@
+if SHIELD_CWEEP_LEFT
+
+# Name must be less than 16 characters long!
+config ZMK_KEYBOARD_NAME
+    default "cweep"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+if SHIELD_CWEEP_LEFT || SHIELD_CWEEP_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif
+
+if SHIELD_CWEEP_DONGLE
+
+# Name must be less than 16 characters long!
+config ZMK_KEYBOARD_NAME
+    default "cweep"
+
+config ZMK_SPLIT
+    default y
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 2
+
+config BT_MAX_CONN
+    default 7
+
+config BT_MAX_PAIRED
+    default 7
+
+endif

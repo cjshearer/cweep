@@ -1,0 +1,14 @@
+#include "cweep.dtsi"
+
+/ {
+    kscan_dongle: kscan_dongle {
+        compatible = "zmk,kscan-mock";
+        columns = <0>;
+        rows = <0>;
+        events = <0>;
+    };
+};
+
+&physical_layout_cweep {
+    kscan = <&kscan_dongle>;
+};
