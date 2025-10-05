@@ -27,9 +27,13 @@ Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
 Reproducible builds with [Nix](https://nixos.org) thanks to [lilyinstarlight/zmk-nix](https://github.com/lilyinstarlight/zmk-nix):
 
 ```sh
-# build firmware with interactive flash script
-nix build .#flash
-# build firmware and flash yourself
+# flash firmware with xiao dongle, resetting each board first
+nix run .#flash reset reset reset dongle left right
+
+# flash firmware with left as central, resetting each board first
+nix run .#flash reset reset left_central right
+
+# build all firmware and flash it yourself
 nix build .#firmware
 ```
 
