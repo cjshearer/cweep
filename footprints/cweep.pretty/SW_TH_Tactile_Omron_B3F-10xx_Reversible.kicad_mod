@@ -206,6 +206,94 @@
 		(layer "F.Fab")
 		(uuid "a2e1cc7e-233e-41f6-87ec-878f84dc5c6c")
 	)
+	(fp_circle
+		(center -3.250001 2.250001)
+		(end -2.250001 2.250001)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.2")
+		(uuid "618d523d-7571-430d-bc0e-2592be86ca24")
+	)
+	(fp_circle
+		(center -3.25 -2.25)
+		(end -2.25 -2.25)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.2")
+		(uuid "a1016a06-8300-4ded-919c-5a62c6a1d9fa")
+	)
+	(fp_circle
+		(center 3.25 -2.25)
+		(end 4.25 -2.25)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.2")
+		(uuid "5fd6febf-b474-4946-83d7-3693cb439570")
+	)
+	(fp_circle
+		(center 3.250001 2.250001)
+		(end 4.250001 2.250001)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.2")
+		(uuid "80dfd78c-d85c-41b3-b886-04053cf01881")
+	)
+	(fp_circle
+		(center -3.250001 2.250001)
+		(end -2.250001 2.250001)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.4")
+		(uuid "2d7309d7-d6cb-4f89-a167-3cd3c6a59023")
+	)
+	(fp_circle
+		(center -3.25 -2.25)
+		(end -2.25 -2.25)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.4")
+		(uuid "b32edaa5-5f4b-4d27-bee6-4be15a9beaa8")
+	)
+	(fp_circle
+		(center 3.25 -2.25)
+		(end 4.25 -2.25)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.4")
+		(uuid "a20ef8a1-fead-46b2-bdcb-abc5610dd8cc")
+	)
+	(fp_circle
+		(center 3.250001 2.250001)
+		(end 4.250001 2.250001)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(fill no)
+		(layer "User.4")
+		(uuid "0cd8d7d1-661f-4e65-b7e2-3fe0f6c3fd25")
+	)
 	(fp_text user "${REFERENCE}"
 		(at 0 -3.7 0)
 		(unlocked yes)
@@ -265,7 +353,7 @@
 		(uuid "daf085bd-70df-419e-a957-02914568e0f9")
 	)
 	(embedded_fonts no)
-	(model "${KICAD9_3DMODEL_DIR}/Button_Switch_THT.3dshapes/SW_TH_Tactile_Omron_B3F-10xx.stpZ"
+	(model "${KICAD9_3DMODEL_DIR}/Button_Switch_THT.3dshapes/SW_TH_Tactile_Omron_B3F-102x.stpZ"
 		(offset
 			(xyz -3.25 2.25 0)
 		)
