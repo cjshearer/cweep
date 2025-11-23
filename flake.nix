@@ -83,8 +83,10 @@
       devShells = forAllSystems (system: {
         default = zmk-nix.devShells.${system}.default.override {
           extraPackages = with nixpkgs.legacyPackages.${system}; [
-            usbutils
+            entr
+            openscad-unstable
             tio
+            usbutils
           ];
         };
       });
