@@ -360,7 +360,7 @@
 		(start -1.5 -1.5)
 		(end -1.5 1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
 		(layer "User.1")
@@ -370,7 +370,7 @@
 		(start -1.5 1.5)
 		(end 1.5 1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
 		(layer "User.1")
@@ -380,7 +380,7 @@
 		(start 1.5 -1.5)
 		(end -1.5 -1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
 		(layer "User.1")
@@ -390,7 +390,7 @@
 		(start 1.5 1.5)
 		(end 1.5 -1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
 		(layer "User.1")
@@ -400,40 +400,40 @@
 		(start -1.5 -1.5)
 		(end -1.5 1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
-		(layer "User.4")
+		(layer "User.2")
 		(uuid "4572637c-66b3-44e7-a1b2-5fce7163da57")
 	)
 	(fp_line
 		(start -1.5 1.5)
 		(end 1.5 1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
-		(layer "User.4")
+		(layer "User.2")
 		(uuid "05df75b2-77aa-4a61-8156-556f06beacab")
 	)
 	(fp_line
 		(start 1.5 -1.5)
 		(end -1.5 -1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
-		(layer "User.4")
+		(layer "User.2")
 		(uuid "dfc77620-7e3b-4ba4-be95-b0d7ac06d089")
 	)
 	(fp_line
 		(start 1.5 1.5)
 		(end 1.5 -1.5)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type default)
 		)
-		(layer "User.4")
+		(layer "User.2")
 		(uuid "d28fd1e6-42f5-4526-9654-b23e7c1d41b3")
 	)
 	(fp_text user "${REFERENCE}"
