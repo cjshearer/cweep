@@ -30,8 +30,8 @@
 		(33 "B.Fab" user)
 		(39 "User.1" front "F.Right")
 		(41 "User.2" back "B.Right")
-		(43 "User.3" back "F.Left")
-		(45 "User.4" front "B.Left")
+		(43 "User.3" front "F.Left")
+		(45 "User.4" back "B.Left")
 	)
 	(setup
 		(pad_to_mask_clearance 0)
