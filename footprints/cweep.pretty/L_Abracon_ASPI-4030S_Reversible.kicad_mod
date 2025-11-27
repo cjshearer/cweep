@@ -257,6 +257,46 @@
 		(layer "F.Fab")
 		(uuid "d3b392da-50e7-44fb-84e0-8959448aa05b")
 	)
+	(fp_line
+		(start -2 -2)
+		(end 2 -2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.4")
+		(uuid "47833a3c-3c04-4dd6-bc54-d3dc6979ed03")
+	)
+	(fp_line
+		(start -2 2)
+		(end -2 -2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.4")
+		(uuid "255e094a-8df9-41ed-a422-08b7d9e2da43")
+	)
+	(fp_line
+		(start 2 -2)
+		(end 2 2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.4")
+		(uuid "9ad038e3-dbc4-4615-8d32-7fa292312d47")
+	)
+	(fp_line
+		(start 2 2)
+		(end -2 2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.4")
+		(uuid "ec3d09e2-6da1-4fe4-ac05-ccce9e7d193a")
+	)
 	(fp_text user "${REFERENCE}"
 		(at 0 -2.4 0)
 		(unlocked yes)
