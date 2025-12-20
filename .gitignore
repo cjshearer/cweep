@@ -3,7 +3,8 @@ _autosave*
 *.bak
 *.lck
 \#auto_saved_files\#
+case
 cweep-backups
 fp-info-cache
-images/
+images
 result

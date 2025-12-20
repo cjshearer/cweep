@@ -1,7 +1,7 @@
+// /* [Rendering options] */
 // To improve accuracy for small holes, we reduce the minimum arc segment size.
 $fs = 0.1;
-
-show_pcb = true;
+mode = "preview"; // [preview, top, bottom]
 
 // We want the bottom plate to sit flush with the the thickest component the back, the Kailh hot-swap sockets.
 bottom_plate_thickness = 0.063 * 2.54 * 10; // 0.063 inches in mm
@@ -14,60 +14,60 @@ bottom_plate_offset = 0.2;
 // https://docs.keeb.io/choc-stabs#other-random-notes
 top_plate_thickness = 1.2;
 
-pcb_outline_with_drill_holes = "images/cweep-Edge_Cuts-drill.dxf";
-pcb_outline = "images/cweep-Edge_Cuts.dxf";
-front_cuts = "images/cweep-F_Cuts.dxf";
-back_cuts = "images/cweep-B_Cuts.dxf";
-front_fill = "images/cweep-F_Fill.dxf";
-back_fill = "images/cweep-B_Fill.dxf";
+case_dir = "case/";
 
-pcb = "images/cweep.stl";
+back_cuts = str(case_dir, "cweep-B_Cuts.dxf");
+back_fill = str(case_dir, "cweep-B_Fill.dxf");
+front_cuts = str(case_dir, "cweep-F_Cuts.dxf");
+front_fill = str(case_dir, "cweep-F_Fill.dxf");
+pcb = str(case_dir, "cweep.stl");
+pcb_outline = str(case_dir, "cweep-Edge_Cuts.dxf");
+pcb_outline_with_drill_holes = str(case_dir, "cweep-Edge_Cuts-drill.dxf");
 
 // For pin clearance, the bottom plate needs all holes cutout except vias, while the top plate only
 // needs the screw holes. We use a side-effect of fileting to close small via holes:
 // https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#offset
 module plate(close_holes_below = 0.5) {
-  difference() {
-    offset(-close_holes_below / 2)
-      offset(delta=(close_holes_below / 2))
-        import(file=pcb_outline_with_drill_holes);
-  }
+  offset(-close_holes_below / 2)
+    offset(delta=(close_holes_below / 2))
+      import(file=pcb_outline_with_drill_holes);
 }
 
 module top_plate() {
-  linear_extrude(height=top_plate_thickness) {
-    difference() {
-      plate();
-      import(file=front_cuts);
-    }
+  difference() {
+    plate();
+    import(file=front_cuts);
   }
 }
 
 module bottom_plate() {
-  linear_extrude(height=bottom_plate_thickness)
-    difference() {
-      plate();
-      offset(delta=bottom_plate_offset) {
-        import(file=back_cuts);
-      }
-    }
+  difference() {
+    plate();
+    offset(delta=bottom_plate_offset)
+      import(file=back_cuts);
+  }
 }
 
 module pcb() {
   import(file=pcb);
 }
 
-translate(v=[0, 0, -bottom_plate_thickness])
-  color(bottom_plate_color) {
-    bottom_plate();
-  }
+if (mode == "preview") {
+  translate(v=[0, 0, -bottom_plate_thickness - 0.001])
+    color(bottom_plate_color)
+      linear_extrude(height=bottom_plate_thickness)
+        bottom_plate();
 
-if (show_pcb) %pcb();
+  %pcb();
 
-translate(v=[0, 0, pcb_thickness - 0.1]) {
+  translate(v=[0, 0, pcb_thickness - 0.089])
+    linear_extrude(height=top_plate_thickness)
+      top_plate();
+} else if (mode == "top") {
   top_plate();
+} else if (mode == "bottom") {
+  bottom_plate();
 }
-
 // /* [Rendering options] */
 // // Show placeholder PCB in OpenSCAD preview
 // show_pcb = false;
