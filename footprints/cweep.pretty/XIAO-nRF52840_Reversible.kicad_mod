@@ -1,7 +1,7 @@
 (footprint "XIAO-nRF52840_Reversible"
 	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "9.0")
+	(generator_version "9.99")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -10.9 0)
@@ -736,6 +736,52 @@
 		(fill no)
 		(layer "F.Fab")
 		(uuid "5c7e6050-a809-400e-bcff-6669680e79cc")
+	)
+	(fp_circle
+		(center 1.235 5.8785)
+		(end 0.0706 5.8785)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.1")
+		(uuid "ff0babb9-097d-4d92-b0e5-e1bc020c11d3")
+	)
+	(fp_circle
+		(center 4.41 0.1635)
+		(end 3.2456 0.1635)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.1")
+		(uuid "b46d57cf-70f8-4e97-a5bd-17e9b813dcc2")
+	)
+	(fp_poly
+		(pts
+			(xy -6.134997 -9.294) (xy -6.134998 8.985996) (xy -9.174999 8.985992) (xy -9.174998 -9.294004)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.1")
+		(uuid "748d5a62-fa2b-49d5-9446-8bab3bd51615")
+	)
+	(fp_poly
+		(pts
+			(xy 6.065003 8.986002) (xy 6.065003 -9.293997) (xy 9.105003 -9.293996) (xy 9.105003 8.986003)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.1")
+		(uuid "4dbcc8a7-50f6-461c-8d6e-0f0fb87a761f")
 	)
 	(fp_line
 		(start -8.924992 -8.044004)
