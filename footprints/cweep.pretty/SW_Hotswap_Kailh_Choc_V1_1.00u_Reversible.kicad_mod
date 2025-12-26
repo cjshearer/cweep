@@ -2569,17 +2569,6 @@
 		(layer "User.2")
 		(uuid "fe10c65a-4767-4562-8449-e240c8e39cee")
 	)
-	(fp_rect
-		(start -7 -7)
-		(end 7 7)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(fill no)
-		(layer "User.3")
-		(uuid "76c7e801-2e42-4e56-abce-0c669b157ec2")
-	)
 	(fp_text user "${REFERENCE}"
 		(at 0 -2.8 180)
 		(layer "F.SilkS")
