@@ -75,6 +75,8 @@ if [[ "$ENV" == "dev" ]]; then
   find cweep.kicad_pcb | entr -s '
     flock case/.case_gen.lock -c "
       run_with_prefix case_outlines extract_case_outlines
+      # this is just to trigger OpenSCAD to re-render if the GUI is open
+      touch cweep.scad
     "
   ' &
   find cweep.scad case/cweep-*.dxf | entr -ps '
