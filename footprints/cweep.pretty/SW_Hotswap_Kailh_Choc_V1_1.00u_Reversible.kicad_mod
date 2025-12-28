@@ -2125,7 +2125,7 @@
 	)
 	(fp_line
 		(start -6.428386 6.078985)
-		(end -3.525481 6.078985)
+		(end -4.12754 6.078985)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -2152,6 +2152,26 @@
 		)
 		(layer "User.2")
 		(uuid "9f7d72df-a607-497f-9297-41c7abfb0022")
+	)
+	(fp_line
+		(start -4.12754 6.797417)
+		(end -4.12754 6.078985)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.2")
+		(uuid "fb64c944-823d-4e43-83fe-b482d688c5a9")
+	)
+	(fp_line
+		(start -4.12754 6.797417)
+		(end -2.494117 6.79759)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.2")
+		(uuid "c2ef8c9e-693a-4f09-be4f-2e3ebb0b27db")
 	)
 	(fp_line
 		(start -2.426849 7.180926)
@@ -2274,6 +2294,26 @@
 		(uuid "e4a6ffde-2362-4316-82de-c99f6bcb476b")
 	)
 	(fp_line
+		(start 4.127541 6.797417)
+		(end 2.494118 6.79759)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.2")
+		(uuid "499d2cfc-c758-4b37-8da2-461d4e4ce549")
+	)
+	(fp_line
+		(start 4.127541 6.797417)
+		(end 4.127541 6.078985)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.2")
+		(uuid "c69af98e-b7ff-4b06-ac88-ad8a95d741ae")
+	)
+	(fp_line
 		(start 4.549999 1.411525)
 		(end 3.159331 1.411526)
 		(stroke
@@ -2295,7 +2335,7 @@
 	)
 	(fp_line
 		(start 6.428387 6.078985)
-		(end 3.525482 6.078985)
+		(end 4.127541 6.078985)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -2450,17 +2490,6 @@
 	)
 	(fp_curve
 		(pts
-			(xy -3.52548 6.078986) (xy -2.931302 6.065746) (xy -2.415935 6.586479) (xy -2.426849 7.180926)
-		)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(layer "User.2")
-		(uuid "ba266e21-55d1-4f84-b320-c33aee120687")
-	)
-	(fp_curve
-		(pts
 			(xy -3.15933 1.411526) (xy -2.794432 1.407679) (xy -2.453776 1.687324) (xy -2.378364 2.043545)
 		)
 		(stroke
@@ -2469,6 +2498,17 @@
 		)
 		(layer "User.2")
 		(uuid "bc6b47f7-2fce-44be-829a-88b5984fd18f")
+	)
+	(fp_curve
+		(pts
+			(xy -2.494117 6.79759) (xy -2.494117 6.79759) (xy -2.45 6.85) (xy -2.426849 7.180926)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.2")
+		(uuid "ba266e21-55d1-4f84-b320-c33aee120687")
 	)
 	(fp_curve
 		(pts
@@ -2516,6 +2556,17 @@
 	)
 	(fp_curve
 		(pts
+			(xy 2.494118 6.79759) (xy 2.494118 6.79759) (xy 2.450001 6.85) (xy 2.42685 7.180926)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.2")
+		(uuid "8096b43f-4b3e-4ea7-bde0-0f84f8fa65da")
+	)
+	(fp_curve
+		(pts
 			(xy 3.159331 1.411526) (xy 2.794433 1.407679) (xy 2.453777 1.687324) (xy 2.378365 2.043545)
 		)
 		(stroke
@@ -2524,17 +2575,6 @@
 		)
 		(layer "User.2")
 		(uuid "25381685-e1a6-4202-b559-483223593c2c")
-	)
-	(fp_curve
-		(pts
-			(xy 3.525481 6.078986) (xy 2.931303 6.065746) (xy 2.415936 6.586479) (xy 2.42685 7.180926)
-		)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(layer "User.2")
-		(uuid "3b9a2480-9aa4-496a-a5e3-0a971ff3c979")
 	)
 	(fp_curve
 		(pts
