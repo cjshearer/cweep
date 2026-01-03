@@ -73,6 +73,17 @@
 			(type solid)
 		)
 		(fill no)
+		(layer "User.1")
+		(uuid "81468302-ebba-4b7d-83cb-22c58ebd76d9")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 0.8 0)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
 		(layer "User.2")
 		(uuid "c3ac5e65-7391-49a0-83f5-99e130dde32c")
 	)

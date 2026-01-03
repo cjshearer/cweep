@@ -28,17 +28,11 @@ mkdir -p case
 
 function extract_case_outlines() {
   kicad-cli pcb export dxf cweep.kicad_pcb \
-  --mode-single \
-  --output case/cweep-Edge_Cuts-drill.dxf \
-  --output-units mm \
-  -l "Edge.Cuts"
-
-  kicad-cli pcb export dxf cweep.kicad_pcb \
     --drill-shape-opt 0 \
     --mode-multi \
     --output case \
     --output-units mm \
-    -l "Edge.Cuts,User.1,User.2,User.3,User.4"
+    -l "User.1,User.2"
 }
 
 function extract_pcb_model() {

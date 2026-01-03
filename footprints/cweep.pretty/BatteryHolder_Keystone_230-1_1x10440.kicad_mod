@@ -535,6 +535,17 @@
 		(layer "F.Fab")
 		(uuid "b1525c9b-fc56-487d-b61f-cd781cf31e4d")
 	)
+	(fp_rect
+		(start -4.65 -22.045)
+		(end 3.1 22.095)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "User.2")
+		(uuid "73ffb225-e3c4-496b-be64-97f53eda6f62")
+	)
 	(fp_circle
 		(center 9.35 -21.495)
 		(end 8 -21.5)
@@ -556,50 +567,6 @@
 		(fill no)
 		(layer "User.2")
 		(uuid "e98d98d8-9450-4e7a-ae5e-8cf9c7898279")
-	)
-	(fp_rect
-		(start -4.9 -22.8375)
-		(end -5.65 22.8375)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(fill no)
-		(layer "User.4")
-		(uuid "79044e69-daf7-4408-9c51-0706981017c2")
-	)
-	(fp_rect
-		(start -4.9 -22.7875)
-		(end 3.4 -22.345)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(fill no)
-		(layer "User.4")
-		(uuid "765d66d2-8bc0-4b64-90aa-a00ce3ddc591")
-	)
-	(fp_rect
-		(start -4.9 22.345)
-		(end 3.4 22.7875)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(fill no)
-		(layer "User.4")
-		(uuid "80485fd6-3f1e-46d7-9bd5-fa543cc29612")
-	)
-	(fp_rect
-		(start 3.4 -22.8875)
-		(end 5.05 22.8875)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(fill no)
-		(layer "User.4")
-		(uuid "e834f659-0830-4215-8ff8-d57156929860")
 	)
 	(pad "1" thru_hole circle
 		(at 9.35 -21.495 270)
