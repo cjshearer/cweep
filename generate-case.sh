@@ -32,12 +32,14 @@ function extract_case_outlines() {
     --mode-multi \
     --output case \
     --output-units mm \
-    -l "User.1,User.2"
+    -l "User.1,User.2,User.3,User.4,User.5,User.6,User.7"
 }
 
 function extract_pcb_model() {
   kicad-cli pcb export stl cweep.kicad_pcb \
-  --output case/cweep.stl
+  --fuse-shapes \
+  --output case/cweep.stl \
+  --subst-models
 }
 
 function build_case_plate() {
@@ -63,7 +65,7 @@ function run_with_prefix() {
 if [[ "$ENV" == "dev" ]]; then
   # This stl extraction is not needed for case generation, but it's useful to have while developing.
   # However, it takes a while to run, so we only do it on the first run in dev mode.
-  extract_pcb_model
+  # extract_pcb_model
   export -f extract_case_outlines build_case_plate run_with_prefix
   trap "exit 1" SIGINT
   find cweep.kicad_pcb | entr -s '
@@ -72,13 +74,13 @@ if [[ "$ENV" == "dev" ]]; then
       # this is just to trigger OpenSCAD to re-render if the GUI is open
       touch cweep.scad
     "
-  ' &
-  find cweep.scad case/cweep-*.dxf | entr -ps '
-    flock case/.case_gen.lock -c "
-      run_with_prefix case_bottom build_case_plate bottom &
-      run_with_prefix case_top build_case_plate top
-    "
-  '
+  ' # &
+  # find cweep.scad case/cweep-*.dxf | entr -ps '
+  #   flock case/.case_gen.lock -c "
+  #     run_with_prefix case_bottom build_case_plate bottom &
+  #     run_with_prefix case_top build_case_plate top
+  #   "
+  # '
   trap - SIGINT
 else
   extract_case_outlines || exit $?

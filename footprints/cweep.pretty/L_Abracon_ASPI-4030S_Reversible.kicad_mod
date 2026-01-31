@@ -97,205 +97,82 @@
 		(layer "B.SilkS")
 		(uuid "23fff157-2039-4415-8c4a-e761da3624e8")
 	)
-	(fp_line
+	(fp_rect
 		(start -2.3 -2.25)
-		(end 2.3 -2.25)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(layer "B.CrtYd")
-		(uuid "048521ce-c484-491b-bf58-1971b17d8e97")
-	)
-	(fp_line
-		(start -2.3 2.25)
-		(end -2.3 -2.25)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(layer "B.CrtYd")
-		(uuid "ae1bebad-49ca-41b5-8f86-b9719462725a")
-	)
-	(fp_line
-		(start 2.3 -2.25)
 		(end 2.3 2.25)
 		(stroke
 			(width 0.05)
 			(type solid)
 		)
+		(fill no)
 		(layer "B.CrtYd")
-		(uuid "47ff50be-d180-445f-b43c-6e728fb1773a")
+		(uuid "d965e16c-19a3-4b69-b01f-db69a58bcffd")
 	)
-	(fp_line
-		(start 2.3 2.25)
-		(end -2.3 2.25)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(layer "B.CrtYd")
-		(uuid "9998e622-b0c7-4541-a55b-0a71c7cc21ac")
-	)
-	(fp_line
+	(fp_rect
 		(start -2.3 -2.25)
-		(end -2.3 2.25)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "830d42f6-a7ca-4c6e-928c-b5d17525e510")
-	)
-	(fp_line
-		(start -2.3 2.25)
 		(end 2.3 2.25)
 		(stroke
 			(width 0.05)
 			(type solid)
 		)
+		(fill no)
 		(layer "F.CrtYd")
-		(uuid "99da96b7-bf26-45aa-bd7d-72f00db88b21")
+		(uuid "040e13b2-86e3-424b-a44d-0fc42079c1b2")
 	)
-	(fp_line
-		(start 2.3 -2.25)
-		(end -2.3 -2.25)
+	(fp_rect
+		(start -2 -2)
+		(end 2 2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "B.Fab")
+		(uuid "4820c2f9-6406-48da-a814-248364cc2eb4")
+	)
+	(fp_rect
+		(start -2 -2)
+		(end 2 2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "cf9f2a0b-3dbb-4a68-8c80-3e5f7e65d5dd")
+	)
+	(fp_rect
+		(start -2.3 -2.25)
+		(end 2.3 2.25)
 		(stroke
 			(width 0.05)
 			(type solid)
 		)
-		(layer "F.CrtYd")
-		(uuid "107af92c-a2aa-4b23-9c11-304bc13505b1")
+		(fill no)
+		(layer "User.2")
+		(uuid "cf3d8296-a502-469b-807d-84dc2257ddf2")
 	)
-	(fp_line
-		(start 2.3 2.25)
-		(end 2.3 -2.25)
+	(fp_rect
+		(start -2.3 -2.25)
+		(end 2.3 2.25)
 		(stroke
 			(width 0.05)
 			(type solid)
 		)
-		(layer "F.CrtYd")
-		(uuid "0ec9a51b-aa25-4a95-855c-ac0644b314f2")
+		(fill no)
+		(layer "User.3")
+		(uuid "0ef3dbeb-a925-4969-8034-bc26d41b0c34")
 	)
-	(fp_line
-		(start -2 -2)
-		(end -2 2)
+	(fp_rect
+		(start -2.3 -2.25)
+		(end 2.3 2.25)
 		(stroke
-			(width 0.1)
+			(width 0.05)
 			(type solid)
 		)
-		(layer "B.Fab")
-		(uuid "ffc7e40b-d3ea-4b32-bb04-486cf8f22eda")
-	)
-	(fp_line
-		(start -2 2)
-		(end 2 2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "B.Fab")
-		(uuid "e2609956-c057-42d6-a419-cf23edbc0ee6")
-	)
-	(fp_line
-		(start 2 -2)
-		(end -2 -2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "B.Fab")
-		(uuid "8dc53d56-f86c-474b-acd5-b257ea75ed6f")
-	)
-	(fp_line
-		(start 2 2)
-		(end 2 -2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "B.Fab")
-		(uuid "b1060d05-2b81-4cf6-adf3-d049e7bcfaf5")
-	)
-	(fp_line
-		(start -2 -2)
-		(end 2 -2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "221c4288-823f-401a-b5a3-ca60c1672dae")
-	)
-	(fp_line
-		(start -2 2)
-		(end -2 -2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "22172552-25a1-4385-9e50-73066b9b3270")
-	)
-	(fp_line
-		(start 2 -2)
-		(end 2 2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "ea4d4d8e-7c7e-4f4c-92d3-7204a826534a")
-	)
-	(fp_line
-		(start 2 2)
-		(end -2 2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "d3b392da-50e7-44fb-84e0-8959448aa05b")
-	)
-	(fp_line
-		(start -2 -2)
-		(end 2 -2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "User.2")
-		(uuid "47833a3c-3c04-4dd6-bc54-d3dc6979ed03")
-	)
-	(fp_line
-		(start -2 2)
-		(end -2 -2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "User.2")
-		(uuid "255e094a-8df9-41ed-a422-08b7d9e2da43")
-	)
-	(fp_line
-		(start 2 -2)
-		(end 2 2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "User.2")
-		(uuid "9ad038e3-dbc4-4615-8d32-7fa292312d47")
-	)
-	(fp_line
-		(start 2 2)
-		(end -2 2)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "User.2")
-		(uuid "ec3d09e2-6da1-4fe4-ac05-ccce9e7d193a")
+		(fill no)
+		(layer "User.4")
+		(uuid "ab1d54cd-d175-4dce-a52b-a412a1087edb")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 -2.4 0)

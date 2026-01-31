@@ -535,6 +535,45 @@
 		(layer "F.Fab")
 		(uuid "b1525c9b-fc56-487d-b61f-cd781cf31e4d")
 	)
+	(fp_poly
+		(pts
+			(xy 10.1425 22.7875) (xy -5.7 22.7875) (xy -5.7 -22.7875) (xy 10.1425 -22.7875) (xy 10.1425 -20.85)
+			(xy 4.2 -20.85) (xy 4.2 20.85) (xy 10.1425 20.85)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.2")
+		(uuid "aa629a7a-6a83-4d2d-9a94-aa8eb5c69daa")
+	)
+	(fp_poly
+		(pts
+			(xy 10.1425 22.7875) (xy -5.7 22.7875) (xy -5.7 -22.7875) (xy 10.1425 -22.7875) (xy 10.1425 -20.85)
+			(xy 4.2 -20.85) (xy 4.2 20.85) (xy 10.1425 20.85)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.3")
+		(uuid "19f6447e-6663-49c1-977a-893a227d813f")
+	)
+	(fp_poly
+		(pts
+			(xy 10.6425 -20.2) (xy 4.1 -20.2025) (xy 4.1 20.2025) (xy 10.6425 20.2) (xy 10.6425 22.7875) (xy -5.6 22.7875)
+			(xy -5.6 -22.7875) (xy 10.6425 -22.7875)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.4")
+		(uuid "8fcf614c-4e6e-46bb-9a87-1255328a6f26")
+	)
 	(fp_rect
 		(start -4.65 -22.045)
 		(end 3.1 22.095)
@@ -543,7 +582,7 @@
 			(type default)
 		)
 		(fill no)
-		(layer "User.2")
+		(layer "User.5")
 		(uuid "73ffb225-e3c4-496b-be64-97f53eda6f62")
 	)
 	(fp_circle
@@ -554,7 +593,7 @@
 			(type default)
 		)
 		(fill no)
-		(layer "User.2")
+		(layer "User.5")
 		(uuid "9b7a7c01-8bda-4444-a3b9-a4c1203f4142")
 	)
 	(fp_circle
@@ -565,7 +604,7 @@
 			(type default)
 		)
 		(fill no)
-		(layer "User.2")
+		(layer "User.5")
 		(uuid "e98d98d8-9450-4e7a-ae5e-8cf9c7898279")
 	)
 	(pad "1" thru_hole circle

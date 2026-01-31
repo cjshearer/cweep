@@ -153,7 +153,7 @@
           extraPackages = with nixpkgs.legacyPackages.${system}; [
             # used for ./generate-case.sh
             entr
-            kicad-unstable
+            kicad
             openscad-unstable
             self.packages.${system}.dxf-fix
             # used for debugging firmware and flashing
