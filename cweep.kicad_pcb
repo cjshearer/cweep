@@ -60454,9 +60454,9 @@
 			(uuid "8ccde2cb-96ff-4f8d-b562-dc72b4f52cad")
 		)
 		(fp_arc
-			(start -0.000004 5.349999)
-			(mid -0.601041 5.101039)
-			(end -0.849999 4.5)
+			(start 0 5.35)
+			(mid -0.601041 5.101041)
+			(end -0.85 4.5)
 			(stroke
 				(width 0.1)
 				(type default)

@@ -326,9 +326,9 @@
 		(uuid "c7fd9e72-aab0-49b2-be4e-8fee5a5df890")
 	)
 	(fp_arc
-		(start -0.000004 5.349999)
-		(mid -0.601041 5.101039)
-		(end -0.849999 4.5)
+		(start 0 5.35)
+		(mid -0.601041 5.101041)
+		(end -0.85 4.5)
 		(stroke
 			(width 0.1)
 			(type default)
