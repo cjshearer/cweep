@@ -6930,7 +6930,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "cweep:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 34.798 44.45 90)
 			(effects
 				(font
@@ -8040,7 +8040,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "cweep:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 27.178 82.55 90)
 			(effects
 				(font
@@ -8319,7 +8319,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "cweep:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 19.558 82.55 90)
 			(effects
 				(font
@@ -8914,7 +8914,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+		(property "Footprint" "cweep:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 17.4752 48.26 0)
 			(effects
 				(font
@@ -8984,7 +8984,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Connector_Wire:SolderWire-0.127sqmm_1x01_D0.48mm_OD1mm_Relief"
+		(property "Footprint" "cweep:SolderWire-0.127sqmm_1x01_D0.48mm_OD1mm_Relief"
 			(at 16.51 17.78 0)
 			(effects
 				(font
@@ -9050,7 +9050,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "cweep:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 23.622 44.45 90)
 			(effects
 				(font
@@ -9186,7 +9186,7 @@
 				)
 			)
 		)
-		(property "Footprint" "cweep:SW_TH_Tactile_Omron_B3F-10xx_Reversible"
+		(property "Footprint" "cweep:SW_TH_Tactile_Omron_B3F-102x_Reversible"
 			(at 55.88 109.22 0)
 			(effects
 				(font
@@ -9257,7 +9257,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Connector_Wire:SolderWire-0.127sqmm_1x01_D0.48mm_OD1mm_Relief"
+		(property "Footprint" "cweep:SolderWire-0.127sqmm_1x01_D0.48mm_OD1mm_Relief"
 			(at 16.51 25.4 0)
 			(effects
 				(font
@@ -9798,7 +9798,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+		(property "Footprint" "cweep:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 55.5752 93.98 0)
 			(effects
 				(font
@@ -9867,7 +9867,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "cweep:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 27.178 66.04 90)
 			(effects
 				(font
@@ -10411,7 +10411,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm"
+		(property "Footprint" "cweep:VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm"
 			(at 50.8 59.69 0)
 			(effects
 				(font
@@ -11833,7 +11833,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+		(property "Footprint" "cweep:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 31.4452 90.17 0)
 			(effects
 				(font
@@ -11902,7 +11902,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "cweep:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 19.558 66.04 90)
 			(effects
 				(font
@@ -12182,7 +12182,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+		(property "Footprint" "cweep:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 65.0748 93.98 0)
 			(effects
 				(font
