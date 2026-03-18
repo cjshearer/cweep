@@ -3453,7 +3453,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -6556,7 +6556,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -9240,7 +9240,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -11924,7 +11924,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -18489,7 +18489,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -23288,7 +23288,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -26224,7 +26224,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -29160,7 +29160,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -31854,7 +31854,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -36385,7 +36385,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -39993,7 +39993,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -45242,7 +45242,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -48755,7 +48755,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -54030,7 +54030,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -56714,7 +56714,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -64157,7 +64157,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -66841,7 +66841,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3dmodels/com_github_koktoh_keyswitch_model/sunset_tactile.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 -0.035)
 			)
 			(scale
 				(xyz 1 1 1)
