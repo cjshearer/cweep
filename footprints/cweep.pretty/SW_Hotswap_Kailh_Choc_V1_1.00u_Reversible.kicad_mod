@@ -2640,7 +2640,7 @@
 	)
 	(model "${KIPRJMOD}/3dmodels/com_github_klouderone_KEA-choc-keycaps/KEA Choc V1 Choc Spaced Keycap 1u.stp"
 		(offset
-			(xyz 50.65 5.4 0.7)
+			(xyz 50.665 5.4 0.66)
 		)
 		(scale
 			(xyz 1 1 1)
