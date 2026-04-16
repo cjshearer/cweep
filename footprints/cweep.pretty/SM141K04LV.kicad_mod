@@ -1,7 +1,7 @@
 (footprint "SM141K04LV"
-	(version 20241229)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "9.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -22.9 0)
@@ -55,6 +55,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -7.5 22.5)
 		(end -7.5 -22.5)
@@ -117,11 +118,11 @@
 		(layer "F.Fab")
 		(uuid "f030a687-da92-4499-8f9d-bf39f0f83fda")
 	)
-	(fp_text user "-"
-		(at 0 19.42 0)
+	(fp_text user "+"
+		(at 0 -19.6 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "1f1537f6-37ce-4519-bf51-380d5fcf27c0")
+		(uuid "6b6284a0-229c-4822-95dd-ca892dfdd2c0")
 		(effects
 			(font
 				(size 1 1)
@@ -129,11 +130,11 @@
 			)
 		)
 	)
-	(fp_text user "+"
-		(at 0 -19.6 0)
+	(fp_text user "-"
+		(at 0 19.42 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "6b6284a0-229c-4822-95dd-ca892dfdd2c0")
+		(uuid "1f1537f6-37ce-4519-bf51-380d5fcf27c0")
 		(effects
 			(font
 				(size 1 1)

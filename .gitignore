@@ -1,5 +1,6 @@
 _autosave*
 .direnv/
+.history
 *.bak
 *.lck
 \#auto_saved_files\#

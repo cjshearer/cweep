@@ -1,7 +1,7 @@
 (footprint "SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm_Reversible"
-	(version 20241229)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "9.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "SMD Solder Jumper, 1x1.5mm Triangular Pads, 0.3mm gap, open")
 	(tags "solder jumper open")
@@ -57,6 +57,7 @@
 	)
 	(zone_connect 1)
 	(attr exclude_from_pos_files exclude_from_bom allow_soldermask_bridges)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_rect
 		(start -1.225 -0.75)
 		(end 1.225 0.75)

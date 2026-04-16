@@ -1,7 +1,7 @@
 (footprint "L_Abracon_ASPI-4030S_Reversible"
-	(version 20241229)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "9.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "smd shielded power inductor 4x4x3mm, Abracon ASPI-4030S, https://abracon.com/Magnetics/power/ASPI-4030S.pdf")
 	(tags "inductor abracon smd shielded")
@@ -57,6 +57,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -1.99 -2.12)
 		(end 1.99 -2.12)
@@ -254,7 +255,7 @@
 		(uuid "12c224f6-842d-4636-a144-c211238111f8")
 	)
 	(embedded_fonts no)
-	(model "${KICAD9_3DMODEL_DIR}/Inductor_SMD.3dshapes/L_Abracon_ASPI-4030S.stpZ"
+	(model "${KICAD10_3DMODEL_DIR}/Inductor_SMD.3dshapes/L_Abracon_ASPI-4030S.stpZ"
 		(offset
 			(xyz 0 0 0)
 		)
