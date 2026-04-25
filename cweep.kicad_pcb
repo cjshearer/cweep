@@ -68636,7 +68636,7 @@
 		(layer "User.6")
 		(uuid "92f1822c-5392-4123-8f38-9c236a090a84")
 	)
-	(gr_text "cjshearer/cweep\n0.2.1 - 95858cf"
+	(gr_text "cjshearer/cweep\n0.3.0 - b5873a1"
 		(at 38.1 21.85 0)
 		(layer "F.SilkS")
 		(uuid "e140dd7d-ff23-4678-8cac-6f6288f17250")
@@ -68648,7 +68648,7 @@
 			(justify bottom)
 		)
 	)
-	(gr_text "cjshearer/cweep\n0.2.1 - 95858cf"
+	(gr_text "cjshearer/cweep\n0.3.0 - b5873a1"
 		(at 38.1 21.85 -0)
 		(layer "B.SilkS")
 		(uuid "91d69c4b-6dad-43ab-bed1-17b6a9ad5e22")
