@@ -1,12 +1,9 @@
 {
   inputs = {
-    nixos-config.url = "github:cjshearer/nixos-config";
-    nixpkgs.follows = "nixos-config/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    zmk-nix = {
-      url = "github:lilyinstarlight/zmk-nix";
-      inputs.nixpkgs.follows = "nixos-config/nixpkgs";
-    };
+    zmk-nix.url = "github:lilyinstarlight/zmk-nix";
+    zmk-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -17,7 +14,8 @@
       ...
     }:
     let
-      forAllSystems = nixpkgs.lib.genAttrs (nixpkgs.lib.attrNames zmk-nix.packages);
+      byNamePackages = builtins.readDir ./pkgs/by-name;
+      pythonModules = builtins.readDir ./pkgs/python-modules;
       builds = [
         {
           outputName = "cweep_left_central";
@@ -67,72 +65,71 @@
         );
     in
     {
-      packages = forAllSystems (
+      devShells = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (
         system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = self.legacyPackages.${system};
         in
         {
-          case =
-            pkgs.runCommandLocal "case"
-              {
-                src =
-                  with pkgs.lib.fileset;
-                  (toSource {
-                    root = ./.;
-                    fileset = unions [
-                      ./cweep.kicad_pcb
-                      ./cweep.scad
-                      ./generate-case.sh
-                    ];
-                  });
-                nativeBuildInputs = with pkgs; [
-                  entr
-                  kicad-unstable-small
-                  openscad-unstable
-                  self.packages.${system}.dxf-fix
-                ];
-              }
-              ''
-                export HOME=$(pwd)
-                ln -s $src/* .
-
-                ${pkgs.bash}/bin/sh generate-case.sh
-
-                mkdir -p $out
-                mv case/cweep_plate_*.dxf $out/
-              '';
-
-          # The bezier curves in either the KiCad's DXF exporter or OpenSCAD's DXF importer result
-          # in unclosed shapes, so we use this tool to snap endpoints together.
-          dxf-fix = pkgs.stdenvNoCC.mkDerivation {
-            name = "dxf-fix";
-            version = "unstable";
-
-            src = pkgs.fetchFromGitHub {
-              owner = "wenzel-lab";
-              repo = "dxf-fix";
-              rev = "eba92432cce4930adc8ab823e1d4f2599a796d7a";
-              hash = "sha256-svfQ/+oSB8C7NRh0cCf+ZTQ5yJb3xL72ymOn+T7buuo=";
-            };
-
-            postPatch = ''
-              echo "#!${
-                pkgs.python3.withPackages (
-                  p: with p; [
-                    ezdxf
-                    matplotlib
-                    scipy
-                  ]
-                )
-              }/bin/python3" | cat - $src/fix_dxf.py > fix_dxf.py
-            '';
-
-            installPhase = ''
-              install -Dm755 fix_dxf.py $out/bin/dxf-fix
-            '';
+          firmware = zmk-nix.devShells.${system}.default.override {
+            extraPackages = with pkgs; [
+              # used for debugging firmware and flashing
+              tio
+              usbutils
+            ];
           };
 
+          case = pkgs.mkShell {
+            packages = [
+              pkgs.bashInteractive
+              pkgs.cq-editor
+              pkgs.kicad
+              (pkgs.python3.withPackages (
+                p: with p; [
+                  cadquery
+                  kiutils
+                  ocp-vscode
+                  watchdog
+                ]
+              ))
+            ];
+          };
+        }
+      );
+
+      legacyPackages = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = [ self.overlays.packages ];
+        }
+      );
+
+      overlays.packages =
+        final: prev:
+        builtins.mapAttrs (
+          name: _: (final.pkgs.callPackage (./pkgs/by-name + "/${name}/package.nix") { })
+        ) byNamePackages
+        // {
+          pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+            (
+              python-final: python-prev:
+              builtins.mapAttrs (
+                name: _: (python-final.callPackage (./pkgs/python-modules + "/${name}") { })
+              ) pythonModules
+            )
+          ];
+        };
+
+      packages = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlays.packages ];
+          };
+        in
+        {
           firmware = pkgs.runCommandLocal "cweep-all-firmware" { } ''
             mkdir -p $out
             ${nixpkgs.lib.concatMapStringsSep "\n" (build: ''
@@ -147,20 +144,5 @@
           };
         }
       );
-
-      devShells = forAllSystems (system: {
-        default = zmk-nix.devShells.${system}.default.override {
-          extraPackages = with nixpkgs.legacyPackages.${system}; [
-            # used for ./generate-case.sh
-            entr
-            kicad
-            openscad-unstable
-            self.packages.${system}.dxf-fix
-            # used for debugging firmware and flashing
-            tio
-            usbutils
-          ];
-        };
-      });
     };
 }

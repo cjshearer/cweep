@@ -1,0 +1,49 @@
+--- a/src/kiutils/items/common.py
++++ b/src/kiutils/items/common.py
+@@ -512,8 +512,8 @@
+ class Net():
+     """The ``net`` token defines the number and name of a net"""
+ 
+-    number: int = 0
+-    """The ``number`` token defines the integer number of the net"""
++    number: Optional[int] = 0
++    """The ``number`` token defines the integer number of the net when present"""
+ 
+     name: str = ""
+     """The ``name`` token defines the name of the net"""
+@@ -532,14 +532,22 @@
+         Returns:
+             - Net: Object of the class initialized with the given S-Expression
+         """
+-        if not isinstance(exp, list):
++        if not isinstance(exp, list) or len(exp) not in (2, 3):
+             raise Exception("Expression does not have the correct type")
+ 
+         if exp[0] != 'net':
+             raise Exception("Expression does not have the correct type")
+ 
+         object = cls()
+-        object.number = exp[1]
+-        object.name = exp[2]
++
++        # KiCad 10 removed the board-level net table and pads now store only the net name as
++        # `(net "NAME")`. Older files keep the `(net <number> "NAME")` form.
++        if len(exp) == 3:
++            object.number = exp[1]
++            object.name = exp[2]
++        else:
++            object.number = None
++            object.name = exp[1]
++
+         return object
+ 
+     def to_sexpr(self, indent: int = 0, newline: bool = False) -> str:
+@@ -556,4 +564,6 @@
+         """
+         indents = ' '*indent
+         endline = '\n' if newline else ''
+-
+-        return f'{indents}(net {self.number} "{dequote(self.name)}"){endline}'
++        if self.number is None:
++            return f'{indents}(net "{dequote(self.name)}"){endline}'
++        return f'{indents}(net {self.number} "{dequote(self.name)}"){endline}'

@@ -16,9 +16,23 @@ A compact, 34 key, solar powered, reversible, split keyboard.
   </a>
 </details>
 
-## Status
+## Case
 
-Case & Plate: Planning on a thin, steel backplate for magnetic mounting.
+The case is generated from `cweep.py` using CadQuery, with geometry extracted from user layers in `cweep.kicad_pcb`.
+
+Generate case files to `case/`:
+
+```sh
+nix develop .#case --command python ~/repos/cweep/cweep.py
+```
+
+For interactive 3D viewing with live reloads:
+
+```sh
+nix develop .#case --command python ~/repos/cweep/cweep-dev.py
+```
+
+Changes to `cweep.py` or `cweep.kicad_pcb` automatically reload in the browser.
 
 ## Firmware
 
@@ -38,7 +52,6 @@ nix build .#firmware
 ```
 
 Builds in GitHub Actions coming soon.
-
 
 ## Bill of Materials (BOM)
 
