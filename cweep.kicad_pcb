@@ -13374,7 +13374,7 @@
 		)
 		(model "${KIPRJMOD}/3dmodels/com_grabcad_ni_ni/10440.stp"
 			(offset
-				(xyz -0.75 22 1.5)
+				(xyz -0.75 22 1.87)
 			)
 			(scale
 				(xyz 1 1 1)
