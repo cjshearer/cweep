@@ -365,7 +365,7 @@
 			(type default)
 		)
 		(fill no)
-		(layer "User.4")
+		(layer "User.5")
 		(uuid "183865dc-d8b8-4af6-8107-aac3abd37ce0")
 	)
 	(fp_rect
@@ -376,7 +376,7 @@
 			(type default)
 		)
 		(fill no)
-		(layer "User.5")
+		(layer "User.6")
 		(uuid "37d3a614-e51b-42c6-bb4b-a7188593d652")
 	)
 	(fp_text user "${REFERENCE}"

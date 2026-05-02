@@ -103,7 +103,7 @@
 			(type solid)
 		)
 		(fill no)
-		(layer "User.4")
+		(layer "User.5")
 		(uuid "f2e2a353-2ce4-4138-9f51-f2b80cdaf209")
 	)
 	(fp_rect
@@ -114,7 +114,7 @@
 			(type solid)
 		)
 		(fill no)
-		(layer "User.5")
+		(layer "User.6")
 		(uuid "ac821dbc-713f-4690-9586-80df67a78991")
 	)
 	(fp_text user "${REFERENCE}"

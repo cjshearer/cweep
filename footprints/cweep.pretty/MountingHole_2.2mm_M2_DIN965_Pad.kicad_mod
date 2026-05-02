@@ -74,7 +74,7 @@
 			(type solid)
 		)
 		(fill no)
-		(layer "User.7")
+		(layer "User.8")
 		(uuid "c3ac5e65-7391-49a0-83f5-99e130dde32c")
 	)
 	(pad "1" thru_hole circle

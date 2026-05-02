@@ -148,13 +148,13 @@ SKIRT_THICKNESS = 2
 TOP_FILLET_RADIUS = 1
 
 bottom_face = cq.Workplane("XY").sketch()
-for wire in layer_wires.get("User.6", []):
-    bottom_face.face(wire)
 for wire in layer_wires.get("User.7", []):
+    bottom_face.face(wire)
+for wire in layer_wires.get("User.8", []):
     bottom_face.face(wire, mode="s")
 
 # footprint cutouts (e.g kailh hotswap sockets)
-for wire in layer_wires.get("User.5", []):
+for wire in layer_wires.get("User.6", []):
     for offset_wire in wire.offset2D(CUT_TOLERANCE):
         bottom_face.face(offset_wire, mode="s")
 
@@ -162,16 +162,16 @@ bottom_profile = bottom_face.finalize()
 bottom_plate = bottom_profile.extrude(PLATE_BOTTOM_THICKNESS)
 
 top_cut_layers = (
-    ("User.4", PLATE_TOP_SPACER_THICKNESS),
-    ("User.3", PLATE_TOP_SWITCH_THICKNESS),
-    ("User.2", PLATE_TOP_COVER_THICKNESS),
+    ("User.5", PLATE_TOP_SPACER_THICKNESS),
+    ("User.4", PLATE_TOP_SWITCH_THICKNESS),
+    ("User.3", PLATE_TOP_COVER_THICKNESS),
 )
-top_fill_layers = (("User.1", PLATE_TOP_SOLAR_THICKNESS),)
+top_fill_layers = (("User.2", PLATE_TOP_SOLAR_THICKNESS),)
 skirt_height = PLATE_BOTTOM_THICKNESS + PCB_THICKNESS + 0.01
 top_shell_height = skirt_height + sum(thickness for _, thickness in top_cut_layers)
 
 top_plate = cq.Workplane("XY").sketch()
-for wire in layer_wires.get("User.6", []):
+for wire in layer_wires.get("User.7", []):
     for offset_wire in wire.offset2D(SKIRT_THICKNESS):
         top_plate.face(offset_wire)
 
@@ -186,7 +186,7 @@ top_plate = (
 
 # cut mounting holes
 mounting_holes = cq.Sketch()
-for wire in layer_wires.get("User.7", []):
+for wire in layer_wires.get("User.8", []):
     mounting_holes.face(wire, mode="a")
 
 top_plate = (
@@ -198,7 +198,7 @@ top_plate = (
 
 # cutout for PCB body and top plate, leaving skirt that envelops them
 outline_sketch = cq.Sketch()
-for wire in layer_wires.get("User.6", []):
+for wire in layer_wires.get("User.7", []):
     for offset_wire in wire.offset2D(PRINT_TOLERANCE):
         outline_sketch.face(offset_wire)
 top_plate = (
