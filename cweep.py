@@ -40,6 +40,7 @@ if args.preview:
 
 # Transform geometry from PCB file to CadQuery edges -----------------------------------------------
 
+
 def item_to_edges(item):
     """Convert a KiCad PCB graphic item to CadQuery edges (Y-axis flipped to match CQ convention)."""
     t = item.__class__.__name__
@@ -86,50 +87,59 @@ def item_to_edges(item):
         ]
     return []
 
+
 def normalize_wires(wires):
     # Flipping KiCad's Y axis reflects loop winding, so normalize planar wires before sketching.
     normalized = []
     for wire in wires:
-        try:
-            if cq.Face.makeFromWires(wire).normalAt().z < 0:
-                wire = cq.Shape.cast(wire.wrapped.Reversed())
-        except ValueError:
-            pass
+        if cq.Face.makeFromWires(wire).normalAt().z < 0:
+            wire = cq.Shape.cast(wire.wrapped.Reversed())
         normalized.append(wire)
     return normalized
 
 
-layer_wires = defaultdict(list)
+feature_wires = defaultdict(list)
+SOLAR_CELL_FOOTPRINT_LIB_ID = "cweep:SM141K04LV"
 board = Board().from_file(cwd / "cweep.kicad_pcb")
 
 # Transform board graphics and footprint graphics into board space, but assemble each transformed
 # source separately so edgesToWires does not merge unrelated footprint geometry on the same layer.
-for graphic_items, angle, offset in [(board.graphicItems, 0, cq.Vector(0, 0, 0))] + [
+for graphic_items, angle, offset, lib_id in [
+    (board.graphicItems, 0, cq.Vector(0, 0, 0), None)
+] + [
     (
         getattr(fp, "graphicItems", []),
         fp.position.angle or 0,
         cq.Vector(fp.position.X, -fp.position.Y, 0),
+        getattr(fp, "libId", None),
     )
     for fp in board.footprints
 ]:
-    layer_edges = defaultdict(list)
+    feature_edges = defaultdict(list)
+    solar_cell_fab_source_edges = []
     for item in graphic_items:
-        # we only use user layers for case generation, so no need to waste time with others
+        transformed_edges = [
+            e.rotate(cq.Vector(0, 0, 0), cq.Vector(0, 0, 1), angle).translate(offset)
+            for e in item_to_edges(item)
+        ]
+        # we mostly use user layers for case generation, so no need to waste time with others
         if item.layer.startswith("User") and item.layer[-1].isdigit():
-            layer_edges[item.layer].extend(
-                e.rotate(cq.Vector(0, 0, 0), cq.Vector(0, 0, 1), angle).translate(offset)
-                for e in item_to_edges(item)
-            )
+            feature_edges[item.layer].extend(transformed_edges)
+        # we also extract a solar cell outline to generate the solar cell holder
+        #
+        # TODO: see where else we can reuse footprint-based geometry like this to avoid having to
+        # duplicate graphics on both the board and user layers
+        elif lib_id == SOLAR_CELL_FOOTPRINT_LIB_ID and item.layer == "F.Fab":
+            feature_edges[SOLAR_CELL_FOOTPRINT_LIB_ID].extend(transformed_edges)
 
-    for layer, edges in layer_edges.items():
-        wires = normalize_wires(edgesToWires(edges))
-        layer_wires[layer].extend(wires)
+    for feature, edges in feature_edges.items():
+        feature_wires[feature].extend(normalize_wires(edgesToWires(edges)))
 
-for layer, wires in layer_wires.items():
+for feature, wires in feature_wires.items():
     open_wire_count = sum(not wire.wrapped.Closed() for wire in wires)
     if open_wire_count:
         print(
-            f"warning: {layer} has {open_wire_count} open wire(s); "
+            f"warning: {feature} has {open_wire_count} open wire(s); "
             "open wires are kept; face/offset operations may fail",
             file=sys.stderr,
         )
@@ -139,124 +149,159 @@ for layer, wires in layer_wires.items():
 TOLERANCE = 0.2
 PCB_THICKNESS = 1.6
 PLATE_BOTTOM_THICKNESS = 2
-PLATE_TOP_SOLAR_THICKNESS = 5.03
+PLATE_TOP_SOLAR_TOP_THICKNESS = 1.13
+PLATE_TOP_SOLAR_WALL_THICKNESS = 3.9
 PLATE_TOP_COVER_THICKNESS = 0.8
 PLATE_TOP_SWITCH_THICKNESS = 1.3
 PLATE_TOP_SPACER_THICKNESS = 0.9
+SOLAR_CELL_THICKNESS = 2.1
 SKIRT_THICKNESS = 2
 TOP_FILLET_RADIUS = 1
 
-bottom_face = cq.Workplane("XY").sketch()
-for wire in layer_wires.get("User.7", []):
-    bottom_face.face(wire)
-for wire in layer_wires.get("User.8", []):
-    bottom_face.face(wire, mode="s")
 
-# footprint cutouts (e.g kailh hotswap sockets)
-for wire in layer_wires.get("User.6", []):
-    for offset_wire in wire.offset2D(TOLERANCE):
-        bottom_face.face(offset_wire, mode="s")
+def offset_wires(wires, offset):
+    return [offset_wire for wire in wires for offset_wire in wire.offset2D(offset)]
 
-bottom_profile = bottom_face.finalize()
-bottom_plate = bottom_profile.extrude(PLATE_BOTTOM_THICKNESS)
+
+def profile_from_wires(add_wires=(), sub_wires=(), offset=0):
+    sketch = cq.Sketch()
+    for wire in add_wires:
+        sketch.face(wire, mode="a")
+    for wire in sub_wires:
+        sketch.face(wire, mode="s")
+    sketch.clean()
+    return cq.Workplane("XY").workplane(offset=offset).placeSketch(sketch)
+
 
 top_cut_layers = (
     ("User.5", PLATE_TOP_SPACER_THICKNESS),
     ("User.4", PLATE_TOP_SWITCH_THICKNESS),
     ("User.3", PLATE_TOP_COVER_THICKNESS),
 )
-top_fill_layers = (("User.2", PLATE_TOP_SOLAR_THICKNESS),)
+top_fill_layers = (
+    ("User.2", PLATE_TOP_SOLAR_WALL_THICKNESS),
+    ("User.1", PLATE_TOP_SOLAR_TOP_THICKNESS),
+)
 skirt_height = PLATE_BOTTOM_THICKNESS + PCB_THICKNESS + 0.01
 top_shell_height = skirt_height + sum(thickness for _, thickness in top_cut_layers)
+solar_ceiling_top_z = (
+    top_shell_height + PLATE_TOP_SOLAR_WALL_THICKNESS + PLATE_TOP_SOLAR_TOP_THICKNESS
+)
 
-top_plate = cq.Workplane("XY").sketch()
-for wire in layer_wires.get("User.7", []):
-    for offset_wire in wire.offset2D(SKIRT_THICKNESS):
-        top_plate.face(offset_wire)
+board_outline_wires = feature_wires["User.7"]
+mounting_hole_wires = feature_wires["User.8"]
+footprint_cutout_wires = offset_wires(feature_wires["User.6"], TOLERANCE)
+solar_cell_cutout_wires = offset_wires(feature_wires[SOLAR_CELL_FOOTPRINT_LIB_ID], TOLERANCE)
+outer_outline_wires = offset_wires(board_outline_wires, SKIRT_THICKNESS)
+inner_outline_wires = offset_wires(board_outline_wires, TOLERANCE)
 
-# extrude the top plate before cutting the feature holes so we can apply fillets to the edges
+bottom_profile = profile_from_wires(
+    board_outline_wires,
+    mounting_hole_wires + footprint_cutout_wires,
+)
+bottom_plate = bottom_profile.extrude(PLATE_BOTTOM_THICKNESS)
+
+
+# Build the main top body first, then add the solar fills, fillet that main shell, and cut the
+# interior/layer features back out.
 top_plate = (
-    top_plate.finalize()
+    profile_from_wires(outer_outline_wires)
     .extrude(top_shell_height)
     .faces(">Z")
-    .edges()
     .fillet(TOP_FILLET_RADIUS)
+    .cut(profile_from_wires(inner_outline_wires).extrude(skirt_height))
 )
 
-# cut mounting holes
-mounting_holes = cq.Sketch()
-for wire in layer_wires.get("User.8", []):
-    mounting_holes.face(wire, mode="a")
-
-top_plate = (
-    top_plate.faces(">Z")
-    .center(0, 0)
-    .placeSketch(mounting_holes)
-    .cutBlind(top_shell_height)
-)
-
-# cutout for PCB body and top plate, leaving skirt that envelops them
-outline_sketch = cq.Sketch()
-for wire in layer_wires.get("User.7", []):
-    for offset_wire in wire.offset2D(TOLERANCE):
-        outline_sketch.face(offset_wire)
-top_plate = (
-    top_plate.faces("<Z")
-    .center(0, 0)
-    .placeSketch(outline_sketch)
-    .cutBlind(skirt_height)
-)
-
-layer_start = skirt_height
-for layer_name, layer_thickness in top_cut_layers:
-    if not layer_wires.get(layer_name):
-        continue
-
-    feature_sketch = cq.Sketch()
-    for wire in layer_wires.get(layer_name, []):
-        # we apply a cut tolerance to feature cutouts to ensure parts will fit
-        for offset_wire in wire.offset2D(TOLERANCE):
-            feature_sketch.face(offset_wire, mode="a")
-    feature_sketch.clean()
-
-    layer_top = layer_start + layer_thickness
-    offset_from_top = -(top_shell_height - layer_top)
-    top_plate = (
-        top_plate.faces(">Z")
-        .workplane(offset=offset_from_top)
-        .placeSketch(feature_sketch)
-        .cutBlind(-layer_thickness)
-    )
-    layer_start += layer_thickness
-
+# These wires are collected while extruding the main solar/battery compartment, so that we can add a
+# support rib under the solar cell ceiling, as well as a thin wall around the solar cell, without
+# copying those features into yet another user layer
+solar_wall_wires = []
+solar_top_wires = []
+layer_base = top_shell_height
 for layer_name, layer_thickness in top_fill_layers:
-    if not layer_wires.get(layer_name):
-        continue
+    layer_offset_wires = offset_wires(feature_wires[layer_name], -TOLERANCE)
 
-    feature_sketch = cq.Sketch()
-    for wire in layer_wires.get(layer_name, []):
-        for offset_wire in wire.offset2D(-TOLERANCE):
-            feature_sketch.face(offset_wire, mode="a")
-    feature_sketch.clean()
+    if layer_name == "User.2":
+        solar_wall_wires = layer_offset_wires
+    elif layer_name == "User.1":
+        solar_top_wires = layer_offset_wires
 
-    top_plate = (
-        top_plate.faces(">Z")
-        .workplane()
-        .center(0, 0)
-        .placeSketch(feature_sketch)
-        .extrude(layer_thickness)
+    top_plate = top_plate.union(
+        profile_from_wires(layer_offset_wires, offset=layer_base).extrude(
+            layer_thickness
+        )
     )
+    layer_base += layer_thickness
 
-top_plate_right = top_plate
+layer_base = skirt_height
+for layer_name, layer_thickness in top_cut_layers:
+    cut_wires = offset_wires(
+        feature_wires[layer_name] + mounting_hole_wires, TOLERANCE
+    )
+    top_plate = top_plate.cut(
+        profile_from_wires(cut_wires, offset=layer_base).extrude(layer_thickness)
+    )
+    layer_base += layer_thickness
+
+# We protect the edges of the solar cell by adding a thin wall that the cell will sit flush within
+solar_cell_wall = profile_from_wires(
+    solar_top_wires,
+    offset=solar_ceiling_top_z,
+).extrude(SOLAR_CELL_THICKNESS)
+solar_cell_wall = solar_cell_wall.faces(">Z").fillet(TOP_FILLET_RADIUS)
+solar_cell_wall = solar_cell_wall.cut(
+    profile_from_wires(
+        solar_cell_cutout_wires,
+        offset=solar_ceiling_top_z,
+    ).extrude(SOLAR_CELL_THICKNESS)
+)
+top_plate = top_plate.union(solar_cell_wall)
+
+# We add a support rib under the solar cell ceiling that doubles as a holder for the battery below
+solar_wall = cq.Workplane().add(solar_wall_wires)
+solar_top = cq.Workplane().add(solar_top_wires)
+inner_solar_wall_x_edge = (
+    solar_wall.edges("%Line and |Y")
+    .sort(lambda edge: edge.Length())[-1:]
+    .edges(">X")
+    .val()
+)
+inner_solar_wall_y_max = inner_solar_wall_x_edge.vertices(">Y").Center().y + TOLERANCE
+inner_solar_wall_y_min = inner_solar_wall_x_edge.vertices("<Y").Center().y
+solar_support = (
+    cq.Workplane(
+        "XZ",
+        origin=(
+            inner_solar_wall_x_edge.Center().x,
+            inner_solar_wall_y_max,
+            top_shell_height,
+        ),
+    )
+    .lineTo(0, PLATE_TOP_SOLAR_WALL_THICKNESS)
+    .lineTo(PLATE_TOP_SOLAR_WALL_THICKNESS, PLATE_TOP_SOLAR_WALL_THICKNESS)
+    .threePointArc(
+        (
+            PLATE_TOP_SOLAR_WALL_THICKNESS * (1 - 1 / sqrt(2)),
+            PLATE_TOP_SOLAR_WALL_THICKNESS / sqrt(2),
+        ),
+        (0, 0),
+    )
+    .close()
+    .extrude(inner_solar_wall_y_max - inner_solar_wall_y_min)
+)
+
+top_plate_right = top_plate.union(solar_support)
 top_plate_left = top_plate_right.mirror("YZ")
 
 case_dir = cwd / "case"
 case_dir.mkdir(parents=True, exist_ok=True)
 bottom_profile.export(str(case_dir / "bottom_plate.dxf"))
 cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.step"))
-cq.exporters.export(top_plate_right, str(case_dir / "top_plate.step"))
-cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
+cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.stl"))
 cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.step"))
+cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.stl"))
+cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
+cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.stl"))
 
 # Load PCB assembly if present
 pcb_assembly_path = case_dir / "cweep.step"
@@ -267,14 +312,16 @@ if pcb_assembly_path.exists():
     # copper layers between, so we lift it up by the thickness of those other layers
     pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
 
+preview_objects = [
+    bottom_plate,
+    pcb_assembly,
+    top_plate_right,
+]
+preview_colors = [
+    "#707070",
+    "#ffc731",
+    "#5994dc",
+]
+
 if args.preview:
-    show(
-        bottom_plate,
-        pcb_assembly,
-        top_plate_right,
-        colors=[
-            "#707070",
-            "#ffc731",
-            "#5994dc",
-        ],
-    )
+    show(*preview_objects, colors=preview_colors)
