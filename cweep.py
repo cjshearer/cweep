@@ -136,8 +136,7 @@ for layer, wires in layer_wires.items():
 
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
 
-CUT_TOLERANCE = 0.127
-PRINT_TOLERANCE = 0.2
+TOLERANCE = 0.2
 PCB_THICKNESS = 1.6
 PLATE_BOTTOM_THICKNESS = 2
 PLATE_TOP_SOLAR_THICKNESS = 5.03
@@ -155,7 +154,7 @@ for wire in layer_wires.get("User.8", []):
 
 # footprint cutouts (e.g kailh hotswap sockets)
 for wire in layer_wires.get("User.6", []):
-    for offset_wire in wire.offset2D(CUT_TOLERANCE):
+    for offset_wire in wire.offset2D(TOLERANCE):
         bottom_face.face(offset_wire, mode="s")
 
 bottom_profile = bottom_face.finalize()
@@ -199,7 +198,7 @@ top_plate = (
 # cutout for PCB body and top plate, leaving skirt that envelops them
 outline_sketch = cq.Sketch()
 for wire in layer_wires.get("User.7", []):
-    for offset_wire in wire.offset2D(PRINT_TOLERANCE):
+    for offset_wire in wire.offset2D(TOLERANCE):
         outline_sketch.face(offset_wire)
 top_plate = (
     top_plate.faces("<Z")
@@ -216,7 +215,7 @@ for layer_name, layer_thickness in top_cut_layers:
     feature_sketch = cq.Sketch()
     for wire in layer_wires.get(layer_name, []):
         # we apply a cut tolerance to feature cutouts to ensure parts will fit
-        for offset_wire in wire.offset2D(PRINT_TOLERANCE):
+        for offset_wire in wire.offset2D(TOLERANCE):
             feature_sketch.face(offset_wire, mode="a")
     feature_sketch.clean()
 
@@ -236,7 +235,7 @@ for layer_name, layer_thickness in top_fill_layers:
 
     feature_sketch = cq.Sketch()
     for wire in layer_wires.get(layer_name, []):
-        for offset_wire in wire.offset2D(-PRINT_TOLERANCE):
+        for offset_wire in wire.offset2D(-TOLERANCE):
             feature_sketch.face(offset_wire, mode="a")
     feature_sketch.clean()
 
