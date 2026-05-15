@@ -17,13 +17,16 @@ webbrowser.open("http://127.0.0.1:3939")
 
 cwd = Path(__file__).parent
 script = cwd / "cweep.py"
-pcb = cwd / "cweep.kicad_pcb"
+pcb_file = cwd / "cweep.kicad_pcb"
+step_file = cwd / "case" / "cweep.step"
 sys.argv = [script, "--preview"]
 ctx = {"__file__": str(script)}
 
 # We generate a model of the PCB if we can, which is helpful for validating case fitment during
 # development
-if shutil.which("kicad-cli"):
+if shutil.which("kicad-cli") and not (
+    step_file.exists() and step_file.stat().st_mtime > pcb_file.stat().st_mtime
+):
     subprocess.run(
         [
             "kicad-cli",
@@ -39,8 +42,8 @@ if shutil.which("kicad-cli"):
             # "--include-soldermask",
             "--subst-models",
             "--output",
-            str(cwd / "case" / "cweep.step"),
-            str(pcb),
+            str(step_file),
+            str(pcb_file),
         ]
     )
 
@@ -50,7 +53,7 @@ class H(FileSystemEventHandler):
         self.last_modified = {}
 
     def on_modified(self, event):
-        if event is not None and event.src_path not in (str(script), str(pcb)):
+        if event is not None and event.src_path not in (str(script), str(pcb_file)):
             return
         watched_file = event.src_path if event else str(script)
         current_mtime = os.path.getmtime(watched_file)
