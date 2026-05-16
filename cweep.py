@@ -303,6 +303,8 @@ cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.stl"))
 cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
 cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.stl"))
 
+# Preview generated plates with PCB assembly if available ------------------------------------------
+
 # Load PCB assembly if present
 pcb_assembly_path = case_dir / "cweep.step"
 pcb_assembly = None
@@ -312,15 +314,34 @@ if pcb_assembly_path.exists():
     # copper layers between, so we lift it up by the thickness of those other layers
     pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
 
+mounting_hole_locations = cq.Workplane("XY").pushPoints(
+    wire.Center() for wire in mounting_hole_wires
+)
+
+hardware_instances = []
+for model_path, z_min in [
+    ("3dmodels/com_mcmaster/91294A004_hex_drive_flat_head_screw_m2x0.4x6.stp", 0),
+    ("3dmodels/com_grabcad_shrey.g-2/m2x2x3.2_threaded-insert.step", skirt_height),
+]:
+    template = cq.importers.importStep(str(cwd / model_path)).val()
+    template = template.rotate((0, 0, 0), (1, 0, 0), 180)
+    template = template.translate((0, 0, z_min - template.BoundingBox().zmin))
+    hardware_instances.append(
+        mounting_hole_locations.eachpoint(template, clean=False).combine(clean=False)
+    )
+
 preview_objects = [
     bottom_plate,
     pcb_assembly,
     top_plate_right,
+    *hardware_instances,
 ]
 preview_colors = [
     "#707070",
     "#ffc731",
     "#5994dc",
+    "#ff0000",
+    "#00ff00",
 ]
 
 if args.preview:
