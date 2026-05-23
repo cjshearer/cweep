@@ -89,10 +89,10 @@ def item_to_edges(item):
     return []
 
 
-def wires_from_edges(edges):
+def normalize_wires(wires):
     # Flipping KiCad's Y axis reflects loop winding, so normalize planar wires before sketching.
     normalized = []
-    for wire in edgesToWires(edges):
+    for wire in wires:
         if not wire.wrapped.Closed():
             normalized.append(wire)
             continue
@@ -101,6 +101,10 @@ def wires_from_edges(edges):
             wire = cq.Shape.cast(wire.wrapped.Reversed())
         normalized.append(wire)
     return normalized
+
+
+def wires_from_edges(edges):
+    return normalize_wires(edgesToWires(edges))
 
 
 BOARD_FEATURE_NAME = "board_features"
@@ -125,6 +129,7 @@ FEATURE_NAME_BY_LIB_ID = {
 raw_board = Board().from_file(cwd / "cweep.kicad_pcb")
 footprints = list(raw_board.footprints)
 feature_edges = defaultdict(lambda: defaultdict(list))
+footprint_placements = defaultdict(list)
 
 for item in raw_board.graphicItems:
     feature_edges[BOARD_FEATURE_NAME][item.layer].extend(item_to_edges(item))
@@ -133,6 +138,7 @@ for footprint in footprints:
     feature_name = FEATURE_NAME_BY_LIB_ID[footprint.libId]
     footprint_angle = footprint.position.angle or 0
     footprint_offset = kicad_xy(footprint.position.X, footprint.position.Y)
+    footprint_placements[feature_name].append((footprint_angle, footprint_offset))
     footprint_edges = defaultdict(list)
 
     for item in getattr(footprint, "graphicItems", []):
@@ -175,6 +181,77 @@ feature_wire = {
     for feature_name, feature_layers in feature_edges.items()
 }
 
+
+def reconstructed_wires(feature_name, local_edges):
+    return wires_from_edges(
+        [
+            edge.rotate(
+                cq.Vector(0, 0, 0), cq.Vector(0, 0, 1), footprint_angle
+            ).translate(footprint_offset)
+            for footprint_angle, footprint_offset in footprint_placements[feature_name]
+            for edge in local_edges
+        ]
+    )
+
+
+def placed_wires(feature_name, build_local_wires):
+    return normalize_wires(
+        [
+            wire
+            for footprint_angle, footprint_offset in footprint_placements[feature_name]
+            for wire in build_local_wires(
+                cq.Workplane("XY").transformed(
+                    offset=(footprint_offset.x, footprint_offset.y, footprint_offset.z),
+                    rotate=(0, 0, footprint_angle),
+                )
+            ).vals()
+        ]
+    )
+
+
+def sketch_wires(sketch, offset=(0, 0, 0)):
+    # Sketch primitives let us express most footprint cutouts as simple booleans.
+    raw_wires = [
+        wire.translate(offset)
+        for face in sketch._faces.Faces()
+        for wire in face.Wires()
+    ]
+
+    merged = cq.Sketch()
+    for wire in raw_wires:
+        merged.face(wire, mode="a")
+    merged.clean()
+    return [wire for face in merged._faces.Faces() for wire in face.Wires()]
+
+
+def largest_closed_wire(wires):
+    closed_wires = [wire for wire in wires if wire.wrapped.Closed()]
+    if not closed_wires:
+        return None
+    return max(closed_wires, key=lambda wire: cq.Face.makeFromWires(wire).Area())
+
+
+def circular_wires(wires):
+    return [
+        wire
+        for wire in wires
+        if len(wire.Edges()) == 1 and wire.Edges()[0].geomType() == "CIRCLE"
+    ]
+
+
+def placed_sketch_wires(feature_name, build_local_sketch, offset=(0, 0, 0)):
+    local_wires = sketch_wires(build_local_sketch(), offset)
+    return normalize_wires(
+        [
+            wire.rotate(
+                cq.Vector(0, 0, 0), cq.Vector(0, 0, 1), footprint_angle
+            ).translate(footprint_offset)
+            for footprint_angle, footprint_offset in footprint_placements[feature_name]
+            for wire in local_wires
+        ]
+    )
+
+
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
 
 
@@ -203,6 +280,140 @@ PLATE_TOP_SPACER_THICKNESS = 0.9
 SOLAR_CELL_THICKNESS = 2.1
 SKIRT_THICKNESS = 2
 TOP_FILLET_RADIUS = 1
+POWER_SWITCH_ARC_RADIUS = sqrt(4.2 * 4.2 + 4.75 * 4.75)
+
+# Name the Kailh cut profiles by depth; the footprint layer names do not align with the
+# spacer/switch/cover cut stack directly.
+kailh_shallow_cut_wires = placed_wires(
+    "kailh_switches",
+    lambda wp: wp.rect(14.5, 13.8),
+)
+kailh_mid_cut_wires = placed_sketch_wires(
+    "kailh_switches",
+    lambda: cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6, mode="a"),
+)
+kailh_deep_cut_wires = placed_sketch_wires(
+    "kailh_switches",
+    lambda: (
+        cq.Sketch()
+        .rect(15.0, 15.0)
+        .vertices()
+        .fillet(0.85)
+        .reset()
+        .rect(3.0, 17.6, mode="a")
+    ),
+)
+battery_holder_top_wires = placed_sketch_wires(
+    "battery_holder",
+    lambda: (
+        cq.Sketch().rect(16.3425, 45.505).push([(5.17, 0)]).rect(6.0025, 40.4, mode="s")
+    ),
+    offset=(2.47125, 0, 0),
+)
+inductor_top_wires = placed_wires(
+    "inductors",
+    lambda wp: wp.rect(4.6, 4.5),
+)
+capacitor_spacer_wires = placed_wires(
+    "capacitors",
+    lambda wp: wp.center(0.001632, -0.003268).rect(2.8, 0.95),
+)
+resistor_spacer_wires = placed_wires(
+    "resistors",
+    lambda wp: wp.rect(2.8, 0.95),
+)
+power_ic_spacer_wires = placed_wires(
+    "power_ic",
+    lambda wp: wp.rect(3.8, 3.8),
+)
+reset_button_top_wires = placed_sketch_wires(
+    "reset_button",
+    lambda: cq.Sketch().rect(7.5, 6.0).vertices().fillet(0.5),
+    offset=(3.25, -2.25, 0),
+)
+solder_wire_top_wires = placed_sketch_wires(
+    "solder_wires",
+    lambda: cq.Sketch().rect(2.7, 8.6).vertices().fillet(1.0),
+    offset=(0, -2.95, 0),
+)
+microcontroller_cover_wires = placed_sketch_wires(
+    "microcontroller",
+    lambda: cq.Sketch().rect(17.71, 20.955).vertices().fillet(1.905),
+    offset=(0, 0.0905, 0),
+)
+microcontroller_side_wires = placed_sketch_wires(
+    "microcontroller",
+    lambda: (
+        cq.Sketch()
+        .push([(-7.585002, 0.153997), (7.585002, 0.153997)])
+        .rect(2.539996, 17.780002)
+    ),
+) + circular_wires(feature_wire.get("microcontroller").get("F.CrtYd", []))
+
+
+def power_switch_top_sketch():
+    sketch = cq.Sketch().rect(8.4, 9.5).rect(4.3, 14.8, mode="a")
+    for y_sign in [1, -1]:
+        arc = (
+            cq.Workplane("XY")
+            .moveTo(-4.2, y_sign * 4.75)
+            .lineTo(4.2, y_sign * 4.75)
+            .threePointArc((0, y_sign * POWER_SWITCH_ARC_RADIUS), (-4.2, y_sign * 4.75))
+            .close()
+            .val()
+        )
+        sketch.face(arc, mode="a")
+    return sketch
+
+
+power_switch_top_wires = placed_sketch_wires(
+    "power_switch",
+    power_switch_top_sketch,
+)
+board_cover_wires = normalize_wires(
+    cq.Workplane("XY")
+    .pushPoints([(27.40125, -30.59875), (27.40125, -68.80125)])
+    .rect(6.0025, 2.1975)
+    .vals()
+)
+board_switch_wires = normalize_wires(
+    cq.Workplane("XY")
+    .pushPoints([(27.40125, -30.59875), (27.40125, -68.80125)])
+    .rect(6.0025, 2.1975)
+    .vals()
+)
+board_spacer_wires = normalize_wires(
+    cq.Workplane("XY").center(27.40125, -49.7).rect(6.0025, 40.4).vals()
+)
+board_solar_wall_wires = normalize_wires(
+    sketch_wires(
+        cq.Sketch()
+        .rect(17.725, 47.505)
+        .vertices("<X and >Y")
+        .fillet(2.0)
+        .reset()
+        .push([(1.1925, -1.0)])
+        .rect(15.34, 45.505, mode="s"),
+        (20.5375, -48.7, 0),
+    )
+    + sketch_wires(cq.Sketch().rect(5.0, 36.005), (26.9, -49.7, 0))
+)
+board_solar_top_wires = normalize_wires(
+    sketch_wires(
+        cq.Sketch()
+        .rect(17.725, 47.505)
+        .vertices("<X and >Y")
+        .fillet(2.0)
+        .reset()
+        .push([(0.6425, -1.22125)])
+        .rect(6.44, 45.0625, mode="s")
+        .reset()
+        .push([(6.3625, -21.3775)])
+        .rect(5.0, 4.75, mode="s"),
+        (20.5375, -48.7, 0),
+    )
+)
+mounting_hole_wires = feature_wire.get("mounting_holes").get("drill", [])
 
 BOTTOM_CUTOUT_FEATURES = [
     feature_wire.get("battery_holder").get("User.6"),
@@ -214,46 +425,52 @@ BOTTOM_CUTOUT_FEATURES = [
     feature_wire.get("reset_button").get("User.6"),
     feature_wire.get("resistors").get("User.6"),
     feature_wire.get("solder_wires").get("User.6"),
+    mounting_hole_wires,
 ]
 
 TOP_CUT_OPERATIONS = [
     {
         "thickness": PLATE_TOP_SPACER_THICKNESS,
         "features": [
-            feature_wire.get("battery_holder").get("User.5"),
-            feature_wire.get(BOARD_FEATURE_NAME).get("User.5"),
-            feature_wire.get("kailh_switches").get("User.5"),
-            feature_wire.get("microcontroller").get("User.5"),
-            feature_wire.get("power_switch").get("User.5"),
-            feature_wire.get("reset_button").get("User.5"),
-            feature_wire.get("resistors").get("User.5"),
-            feature_wire.get("solder_wires").get("User.5"),
+            battery_holder_top_wires,
+            board_spacer_wires,
+            capacitor_spacer_wires,
+            inductor_top_wires,
+            kailh_shallow_cut_wires,
+            microcontroller_side_wires,
+            power_ic_spacer_wires,
+            power_switch_top_wires,
+            reset_button_top_wires,
+            resistor_spacer_wires,
+            solder_wire_top_wires,
+            mounting_hole_wires,
         ],
     },
     {
         "thickness": PLATE_TOP_SWITCH_THICKNESS,
         "features": [
-            feature_wire.get("battery_holder").get("User.4"),
-            feature_wire.get(BOARD_FEATURE_NAME).get("User.4"),
-            feature_wire.get("inductors").get("User.4"),
-            feature_wire.get("kailh_switches").get("User.4"),
-            feature_wire.get("microcontroller").get("User.4"),
-            feature_wire.get("power_switch").get("User.4"),
-            feature_wire.get("reset_button").get("User.4"),
-            feature_wire.get("solder_wires").get("User.4"),
+            battery_holder_top_wires,
+            board_switch_wires,
+            inductor_top_wires,
+            kailh_mid_cut_wires,
+            microcontroller_side_wires,
+            power_switch_top_wires,
+            reset_button_top_wires,
+            solder_wire_top_wires,
+            mounting_hole_wires,
         ],
     },
     {
         "thickness": PLATE_TOP_COVER_THICKNESS,
         "features": [
-            feature_wire.get("battery_holder").get("User.3"),
-            feature_wire.get(BOARD_FEATURE_NAME).get("User.3"),
-            feature_wire.get("inductors").get("User.3"),
-            feature_wire.get("kailh_switches").get("User.3"),
-            feature_wire.get("microcontroller").get("User.3"),
-            feature_wire.get("power_switch").get("User.3"),
-            feature_wire.get("reset_button").get("User.3"),
-            feature_wire.get("solder_wires").get("User.3"),
+            battery_holder_top_wires,
+            board_cover_wires,
+            inductor_top_wires,
+            kailh_deep_cut_wires,
+            microcontroller_cover_wires,
+            power_switch_top_wires,
+            reset_button_top_wires,
+            solder_wire_top_wires,
         ],
     },
 ]
@@ -261,11 +478,11 @@ TOP_CUT_OPERATIONS = [
 TOP_FILL_OPERATIONS = [
     {
         "thickness": PLATE_TOP_SOLAR_WALL_THICKNESS,
-        "features": [feature_wire.get(BOARD_FEATURE_NAME).get("User.2")],
+        "features": [board_solar_wall_wires],
     },
     {
         "thickness": PLATE_TOP_SOLAR_TOP_THICKNESS,
-        "features": [feature_wire.get(BOARD_FEATURE_NAME).get("User.1")],
+        "features": [board_solar_top_wires],
     },
 ]
 
@@ -276,11 +493,10 @@ solar_ceiling_top_z = top_shell_height + sum(
     op["thickness"] for op in TOP_FILL_OPERATIONS
 )
 
-board_outline_wires = feature_wire.get(BOARD_FEATURE_NAME).get("User.7", [])
-mounting_hole_wires = offset_wires(
-    feature_wire.get("mounting_holes").get("drill", []),
-    TOLERANCE,
+board_outline_wire = largest_closed_wire(
+    feature_wire.get(BOARD_FEATURE_NAME).get("Edge.Cuts", [])
 )
+board_outline_wires = [board_outline_wire] if board_outline_wire else []
 footprint_cutout_wires = offset_wires(
     [wire for wire_group in BOTTOM_CUTOUT_FEATURES for wire in wire_group],
     TOLERANCE,
@@ -324,12 +540,9 @@ for op in TOP_FILL_OPERATIONS:
 
 current_z = skirt_height
 for op in TOP_CUT_OPERATIONS:
-    cut_wires = (
-        offset_wires(
-            [wire for wire_group in op["features"] for wire in wire_group],
-            TOLERANCE,
-        )
-        + mounting_hole_wires
+    cut_wires = offset_wires(
+        [wire for wire_group in op["features"] for wire in wire_group],
+        TOLERANCE,
     )
     top_plate = top_plate.cut(
         profile_from_wires(cut_wires, offset=current_z).extrude(op["thickness"])
@@ -337,15 +550,9 @@ for op in TOP_CUT_OPERATIONS:
     current_z += op["thickness"]
 
 # We protect the edges of the solar cell by adding a thin wall that the cell will sit flush within
-solar_wall_wires = offset_wires(
-    feature_wire.get(BOARD_FEATURE_NAME).get("User.2", []),
-    -TOLERANCE,
-)
+solar_wall_wires = offset_wires(board_solar_wall_wires, -TOLERANCE)
 
-solar_top_wires = offset_wires(
-    feature_wire.get(BOARD_FEATURE_NAME).get("User.1", []),
-    -TOLERANCE,
-)
+solar_top_wires = offset_wires(board_solar_top_wires, -TOLERANCE)
 
 solar_cell_wall = profile_from_wires(
     solar_top_wires,
@@ -436,14 +643,14 @@ preview_objects = [
     bottom_plate,
     # pcb_assembly,
     top_plate_right,
-    # *hardware_instances,
+    *hardware_instances,
 ]
 preview_colors = [
     "#707070",
     # "#ffc731",
     "#5994dc",
-    # "#ff0000",
-    # "#00ff00",
+    "#ff0000",
+    "#00ff00",
 ]
 
 if args.preview:
