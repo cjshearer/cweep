@@ -9,13 +9,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "trame-common";
-  version = "1.1.3";
+  version = "1.2.3";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "trame_common";
-    hash = "sha256-JaOJSCO+v1CdO60rDFRfvu6e7V1jINlPeB7FlcGNgGg=";
+    hash = "sha256-Eltg13VF1zUvuOq8D24OEgcKpq2jHpkoYvFqSfNLc60=";
   };
 
   build-system = [ hatchling ];

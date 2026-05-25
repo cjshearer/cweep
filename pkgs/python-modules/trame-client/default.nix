@@ -12,13 +12,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "trame-client";
-  version = "3.11.4";
+  version = "3.12.2";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "trame_client";
-    hash = "sha256-RvjXTlz9jc8kCgNXp3uoBHrX6Por7OXKY+t6aNJF9+Q=";
+    hash = "sha256-qb+6AibdpKL/NoBevxLmSc1+uUxAZyyEldBnShLV04E=";
   };
 
   build-system = [ setuptools ];

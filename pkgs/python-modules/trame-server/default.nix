@@ -5,29 +5,33 @@
   nix-update-script,
 
   # build-system
-  setuptools,
+  hatchling,
 
   # dependencies
   more-itertools,
+  trame-common,
   wslink,
 }:
 buildPythonPackage (finalAttrs: {
   pname = "trame-server";
-  version = "3.10.0";
+  version = "3.12.4";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "trame_server";
-    hash = "sha256-DDQd6Xb3WP+OYHaZHn8wvhgDhNTzhs8prvo5FbgB0Rg=";
+    hash = "sha256-laDScy/VLrKRLKBYdOuobZHo1+p+SgqIge8/U5KTZF8=";
   };
 
-  build-system = [ setuptools ];
+  build-system = [ hatchling ];
 
   dependencies = [
     more-itertools
+    trame-common
     wslink
   ];
+
+  pythonRelaxDeps = [ "wslink" ];
 
   pythonImportsCheck = [ "trame_server" ];
 

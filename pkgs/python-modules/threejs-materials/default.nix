@@ -6,18 +6,19 @@
   setuptools,
   numpy,
   pillow,
+  platformdirs,
   pygltflib,
   requests,
 }:
 buildPythonPackage (finalAttrs: {
   pname = "threejs-materials";
-  version = "1.0.4";
+  version = "1.1.1";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "threejs_materials";
-    hash = "sha256-MVudu31bh9qjc1Mm91j6rPC5BspsSbc36R3/jRdo2/8=";
+    hash = "sha256-ygDIKXk0ogqW81cNt5GCiPIIBbsbikrlA0LOmGDhz3M=";
   };
 
   build-system = [ setuptools ];
@@ -25,9 +26,12 @@ buildPythonPackage (finalAttrs: {
   dependencies = [
     numpy
     pillow
+    platformdirs
     pygltflib
     requests
   ];
+
+  pythonRelaxDeps = [ "platformdirs" ];
 
   pythonImportsCheck = [ "threejs_materials" ];
 
