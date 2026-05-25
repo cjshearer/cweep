@@ -1,7 +1,6 @@
 {
   lib,
   buildPythonPackage,
-  fetchFromGitHub,
   fetchzip,
   isPy3k,
   python,
@@ -12,6 +11,7 @@
   pybind11,
 
   # dependencies
+  fmt,
   fontconfig,
   freeglut,
   libGLU,
@@ -21,17 +21,19 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "cadquery-ocp";
-  version = "7.8.1.2";
+  version = "7.9.3.1.1";
   pyproject = false;
   disabled = !isPy3k;
 
   # While I would prefer to codegen this from source, the toolchain is truly hideous and I have
   # already spent several days trying to get it to work. For now, we use the pre-generated stubs.
+  # See the following for efforts to get this upstreamed:
+  # - https://github.com/NixOS/nixpkgs/pull/433247
+  # - https://github.com/NixOS/nixpkgs/pull/486070
+  # - https://github.com/NixOS/nixpkgs/pull/491280
   src = fetchzip {
-    # 7.9.3.0 uses "Linux" instead of "ubuntu-20.04" in the release name, so the next update will
-    # require updating more than the version.
-    url = "https://github.com/CadQuery/OCP/releases/download/${finalAttrs.version}/OCP_src_stubs_ubuntu-20.04.zip";
-    hash = "sha256-sg6QEZWNvY9xz5RNA2/bImYI5PpvOyndBKrlNfZgsUI=";
+    url = "https://github.com/CadQuery/OCP/releases/download/${finalAttrs.version}/OCP_src_stubs_Linux.zip";
+    hash = "sha256-gfZFv/evrLHX5TSjAmc6ap45nCbAuNUGkb989BrfqhY=";
     stripRoot = true;
   };
 
@@ -42,18 +44,11 @@ buildPythonPackage (finalAttrs: {
   ];
 
   buildInputs = [
+    fmt
     fontconfig
     freeglut
     libGLU
-    ((opencascade-occt.override { withVtk = true; }).overrideAttrs {
-      version = "7.8.1";
-      src = fetchFromGitHub {
-        owner = "Open-Cascade-SAS";
-        repo = "OCCT";
-        rev = "V7_8_1";
-        sha256 = "sha256-tg71cFx9HZ471T/3No9CeEHi8VSo0ZITIuNfTSNB2qU=";
-      };
-    })
+    (opencascade-occt.override { withVtk = true; })
     rapidjson
     vtk
   ];

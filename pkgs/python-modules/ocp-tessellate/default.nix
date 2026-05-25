@@ -3,7 +3,7 @@
   buildPythonPackage,
   fetchPypi,
   nix-update-script,
-  
+
   # build-system
   setuptools,
 
@@ -17,13 +17,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "ocp-tessellate";
-  version = "3.2.2";
+  version = "3.3.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "ocp_tessellate";
-    hash = "sha256-plZkrbf5jmadpZUkCqrOJl1TaiezbaVXmfzJP1xolLo=";
+    hash = "sha256-83AQMo9fqCHW0wEGENcN0gXrJgIK5CLM1EBajhrKjq0=";
   };
 
   build-system = [ setuptools ];

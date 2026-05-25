@@ -3,7 +3,7 @@
   buildPythonPackage,
   fetchPypi,
   nix-update-script,
-  
+
   # build-system
   setuptools,
 
@@ -25,13 +25,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "ocp-vscode";
-  version = "3.3.4";
+  version = "3.4.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "ocp_vscode";
-    hash = "sha256-tnimMG8VGtB6B/M3K1Tj0dNARwHyKxuglHZ8xzwNLXQ=";
+    hash = "sha256-jK4QuOCnoknrfymraKP7klU6uVj+Nn0t1zxrTJBgN1o=";
   };
 
   build-system = [ setuptools ];

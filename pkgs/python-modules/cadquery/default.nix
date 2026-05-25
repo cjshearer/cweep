@@ -16,15 +16,15 @@
   multimethod,
   nlopt,
   nptyping,
-  path,
+  numba,
   pyparsing,
   runtype,
-  trame-vtk,
+  scipy,
   trame-components,
-  trame,
+  trame-vtk,
   trame-vuetify,
+  trame,
   typing-extensions,
-  typish,
   vtk,
 
   # tests
@@ -34,15 +34,15 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "cadquery";
-  version = "2.7.0";
+  version = "8c17892ed68d4e5a19fe10fd0c0eb2a23f63db5a";
   pyproject = true;
   disabled = !isPy3k;
 
   src = fetchFromGitHub {
     owner = "CadQuery";
     repo = "cadquery";
-    rev = "v${finalAttrs.version}";
-    hash = "sha256-Ia80PKlpkAn6XhxLpmULCXw9q+qb592WgVBiRqraInw=";
+    rev = "${finalAttrs.version}";
+    hash = "sha256-+FoXWscnsY/x5yQGnRDTl6CDWH+Q/y9MFOctVncCH9E=";
   };
 
   build-system = [ setuptools ];
@@ -55,16 +55,15 @@ buildPythonPackage (finalAttrs: {
     multimethod
     nlopt
     nptyping
-    path
+    numba
     pyparsing
     runtype
+    scipy
     trame
     trame-components
     trame-vtk
     trame-vuetify
     typing-extensions
-    # typish will be removed in the next release: https://github.com/CadQuery/cadquery/pull/1967
-    typish
     vtk
   ];
 

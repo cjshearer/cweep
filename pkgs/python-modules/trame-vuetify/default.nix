@@ -12,12 +12,12 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "trame-vuetify";
-  version = "3.2.1";
+  version = "3.2.2";
   pyproject = true;
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "trame_vuetify";
-    hash = "sha256-FXiQSo/FMTuoAzB26i2TOKBQomxozuuyB/trFeGMCkU=";
+    hash = "sha256-DhEexf3+0x5cGJ6vswb08lqs11Uns6VhK7WkysuxjYs=";
   };
 
   build-system = [ setuptools ];
