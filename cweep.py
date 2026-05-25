@@ -37,74 +37,55 @@ if args.preview:
 
     set_defaults(pan_speed=1, zoom_speed=1, timeit=1)
 
-# Transform PCB geometry to CadQuery wires ---------------------------------------------------------
+# Transform PCB geometry to CadQuery sketches ------------------------------------------------------
 
 
 def kicad_xy(x, y):
     return cq.Vector(x, -y, 0)
 
 
-def item_to_edges(item):
+def add_item_to_sketch(sketch: cq.Sketch, item):
     """
-    Convert a KiCad PCB graphic item to CadQuery edges (Y-axis flipped to match CQ convention).
+    Add a KiCad PCB graphic item to a CadQuery sketch (Y-axis flipped to match CQ convention).
     """
     vec = lambda position: kicad_xy(position.X, position.Y)
     # KiCad names graphic items as GrXxx (board) or FpXxx (footprint); strip the 2-char prefix.
     shape = item.__class__.__name__[2:]
     if shape == "Line":
-        return [
-            cq.Edge.makeLine(
-                vec(item.start),
-                vec(item.end),
-            )
-        ]
-    elif shape == "Curve":
-        return [cq.Edge.makeBezier([vec(pt) for pt in item.coordinates])]
-    elif shape == "Poly":
+        return sketch.segment(vec(item.start), vec(item.end))
+    if shape == "Curve":
+        return sketch.bezier([vec(pt) for pt in item.coordinates])
+    if shape == "Poly":
         pts = [vec(pt) for pt in item.coordinates]
-        return [
-            cq.Edge.makeLine(pts[i], pts[(i + 1) % len(pts)]) for i in range(len(pts))
-        ]
-    elif shape == "Arc":
-        return [
-            cq.Edge.makeThreePointArc(
-                vec(item.start),
-                vec(item.mid),
-                vec(item.end),
-            )
-        ]
-    elif shape == "Rect":
-        s, e = item.start, item.end
-        corners = [
-            vec(s),
-            kicad_xy(e.X, s.Y),
-            vec(e),
-            kicad_xy(s.X, e.Y),
-        ]
-        return [cq.Edge.makeLine(corners[i], corners[(i + 1) % 4]) for i in range(4)]
-    elif shape == "Circle":
+        return sketch.polygon(pts).reset()
+    if shape == "Arc":
+        return sketch.arc(vec(item.start), vec(item.mid), vec(item.end))
+    if shape == "Rect":
+        center = kicad_xy(
+            (item.start.X + item.end.X) / 2,
+            (item.start.Y + item.end.Y) / 2,
+        )
+        return (
+            sketch.push([center])
+            .rect(abs(item.end.X - item.start.X), abs(item.end.Y - item.start.Y))
+            .reset()
+        )
+    if shape == "Circle":
         dx = item.end.X - item.center.X
         dy = item.end.Y - item.center.Y
-        return [cq.Edge.makeCircle(sqrt(dx * dx + dy * dy), vec(item.center))]
-    return []
+        return sketch.push([vec(item.center)]).circle(sqrt(dx * dx + dy * dy)).reset()
+    return sketch
 
 
-def normalize_wires(wires):
-    # Flipping KiCad's Y axis reflects loop winding, so normalize planar wires before sketching.
-    normalized = []
-    for wire in wires:
+def finalize_raw_sketch(sketch):
+    finalized = cq.Sketch()
+    for face in sketch.faces().vals():
+        finalized = finalized.face(face, mode="a")
+    for wire in edgesToWires(sketch._edges):
         if not wire.wrapped.Closed():
-            normalized.append(wire)
             continue
-
-        if cq.Face.makeFromWires(wire).normalAt().z < 0:
-            wire = cq.Shape.cast(wire.wrapped.Reversed())
-        normalized.append(wire)
-    return normalized
-
-
-def wires_from_edges(edges):
-    return normalize_wires(edgesToWires(edges))
+        finalized = finalized.face(wire, mode="a")
+    return finalized
 
 
 BOARD_FEATURE_NAME = "board_features"
@@ -128,98 +109,85 @@ FEATURE_NAME_BY_LIB_ID = {
 
 raw_board = Board().from_file(cwd / "cweep.kicad_pcb")
 footprints = list(raw_board.footprints)
-feature_edges = defaultdict(lambda: defaultdict(list))
-feature_local_wire = {}
+feature_sketch = {BOARD_FEATURE_NAME: defaultdict(lambda: cq.Sketch())}
 footprint_placements = defaultdict(list)
 
 for item in raw_board.graphicItems:
-    feature_edges[BOARD_FEATURE_NAME][item.layer].extend(item_to_edges(item))
+    feature_sketch[BOARD_FEATURE_NAME][item.layer] = add_item_to_sketch(
+        feature_sketch[BOARD_FEATURE_NAME][item.layer],
+        item,
+    )
+
+feature_sketch[BOARD_FEATURE_NAME] = {
+    layer_name: finalize_raw_sketch(layer_sketch)
+    for layer_name, layer_sketch in dict(feature_sketch[BOARD_FEATURE_NAME]).items()
+}
 
 for footprint in footprints:
     feature_name = FEATURE_NAME_BY_LIB_ID.get(footprint.libId)
     if feature_name is None:
         continue
-    footprint_angle = footprint.position.angle or 0
-    footprint_offset = kicad_xy(footprint.position.X, footprint.position.Y)
-    footprint_placements[feature_name].append((footprint_angle, footprint_offset))
-    footprint_edges = defaultdict(list)
+    footprint_placements[feature_name].append(
+        (
+            footprint.position.angle or 0,
+            kicad_xy(footprint.position.X, footprint.position.Y),
+        )
+    )
+    if feature_name in feature_sketch:
+        continue
+
+    feature_sketch[feature_name] = defaultdict(lambda: cq.Sketch())
 
     for item in getattr(footprint, "graphicItems", []):
-        footprint_edges[item.layer].extend(item_to_edges(item))
+        feature_sketch[feature_name][item.layer] = add_item_to_sketch(
+            feature_sketch[feature_name][item.layer],
+            item,
+        )
 
-    for pad in getattr(footprint, "pads", []):
+    for pad_index, pad in enumerate(getattr(footprint, "pads", [])):
         pad_position = getattr(pad, "position", None) or getattr(pad, "at", None)
-        if pad_position is not None and pad.shape == "circle":
-            footprint_edges["pads"].append(
-                cq.Edge.makeCircle(
-                    pad.size.X / 2,
-                    kicad_xy(pad_position.X, pad_position.Y),
+        if pad_position is None:
+            continue
+
+        pad_center = kicad_xy(pad_position.X, pad_position.Y)
+        if pad.shape == "circle":
+            feature_sketch[feature_name]["pads"] = (
+                feature_sketch[feature_name]["pads"]
+                .push([pad_center])
+                .circle(pad.size.X / 2)
+                .reset()
+            )
+        elif pad.shape == "roundrect":
+            feature_sketch[feature_name]["pads"] = (
+                feature_sketch[feature_name]["pads"]
+                .push([pad_center])
+                .face(
+                    cq.Sketch()
+                    .rect(pad.size.X, pad.size.Y, tag="pad")
+                    .select("pad")
+                    .vertices()
+                    .fillet(min(pad.size.X, pad.size.Y) * pad.roundrectRatio)
+                    .reset(),
+                    angle=pad_position.angle or 0,
+                    mode="a",
                 )
-            )
-        elif pad_position is not None and pad.shape == "roundrect":
-            pad_edges = (
-                cq.Workplane("XY")
-                .sketch()
-                .rect(pad.size.X, pad.size.Y)
-                .vertices()
-                .fillet(min(pad.size.X, pad.size.Y) * pad.roundrectRatio)
-                .faces()
-                .wires()
-                .val()
-                .Edges()
-            )
-            pad_angle = pad_position.angle or 0
-            if pad_angle:
-                pad_edges = [
-                    edge.rotate(
-                        cq.Vector(0, 0, 0),
-                        cq.Vector(0, 0, 1),
-                        pad_angle,
-                    )
-                    for edge in pad_edges
-                ]
-            footprint_edges["pads"].extend(
-                [edge.translate(kicad_xy(pad_position.X, pad_position.Y)) for edge in pad_edges]
+                .reset()
             )
         drill = getattr(pad, "drill", None)
         # We handle only circular drills for now
-        if (
-            pad_position is None
-            or drill is None
-            or drill.diameter is None
-            or drill.oval
-        ):
-            continue
-        footprint_edges["drill"].append(
-            cq.Edge.makeCircle(
-                drill.diameter / 2,
-                kicad_xy(pad_position.X, pad_position.Y),
+        if drill and drill.diameter and not drill.oval:
+            feature_sketch[feature_name]["drill"] = (
+                feature_sketch[feature_name]["drill"]
+                .push([pad_center])
+                .circle(drill.diameter / 2)
+                .reset()
             )
-        )
 
-    if feature_name not in feature_local_wire:
-        feature_local_wire[feature_name] = {
-            layer_name: wires_from_edges(edges)
-            for layer_name, edges in footprint_edges.items()
-        }
-
-    for layer_name, layer_edges in footprint_edges.items():
-        feature_edges[feature_name][layer_name].extend(
-            [
-                edge.rotate(
-                    cq.Vector(0, 0, 0), cq.Vector(0, 0, 1), footprint_angle
-                ).translate(footprint_offset)
-                for edge in layer_edges
-            ]
-        )
-
-feature_wire = {
-    feature_name: {
-        layer_name: wires_from_edges(edges)
-        for layer_name, edges in feature_layers.items()
-    }
-    for feature_name, feature_layers in feature_edges.items()
-}
+    feature_sketch[feature_name] = dict(feature_sketch[feature_name])
+    for layer_name, layer_sketch in feature_sketch[feature_name].items():
+        if not layer_sketch._edges:
+            continue
+        feature_sketch[feature_name][layer_name] = finalize_raw_sketch(layer_sketch)
 
 
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
@@ -236,9 +204,7 @@ TOP_FILLET_RADIUS = 1
 POWER_SWITCH_ARC_RADIUS = sqrt(4.2 * 4.2 + 4.75 * 4.75)
 
 TOP_CUT_TOTAL_THICKNESS = (
-    PLATE_TOP_SPACER_THICKNESS
-    + PLATE_TOP_SWITCH_THICKNESS
-    + PLATE_TOP_COVER_THICKNESS
+    PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNESS + PLATE_TOP_COVER_THICKNESS
 )
 TOP_CUT_LOWER_THICKNESS = PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNESS
 
@@ -257,8 +223,8 @@ top_shell_height = skirt_height + TOP_CUT_TOTAL_THICKNESS
 # the main case bodies. Pick some nice data structure that represents this association and makes it
 # easy to combine the sketches for each layer, given the operations we will need to do to find which
 # sketch is "active" at a given height.
-# 
-# feature_sketch.example_feature = {   
+#
+# feature_sketch.example_feature = {
 #     bottom_or_same_recognizable_name_for_this_sketch_that_should_be_ordered_from_bottom_to_top = {
 #         sketch = (
 #             cq.Sketch()
@@ -274,20 +240,20 @@ top_shell_height = skirt_height + TOP_CUT_TOTAL_THICKNESS
 #         # whether this sketch is used to cut out the bottom plate, which has only one layer
 #         bottom_plate = True
 #     }
-#     
+#
 #     ....
-#     
+#
 #     other_feature = {
 #         ...
 #     }
 # }
-# 
+#
 # features.other_feature = ...the rest of the feature sketches
-# 
+#
 # then we combine the sketches into spans that the cuts should be applied along, where if two spans
 # overlap, say we make a rect from 0 to 5 and a circle from 2 to 7, we would get 0-2 rect, 2-5 rect
 # +circle, 5-7 circle.
-# 
+#
 # bottom_plate_combined_sketches = cq.Sketch()
 # for start, end, active_sketches in sketch_spans:
 #     top_plate_combined_sketches = cq.Sketch()
@@ -303,7 +269,7 @@ top_shell_height = skirt_height + TOP_CUT_TOTAL_THICKNESS
 #       .placeSketch(top_plate_combined_sketches)
 #       .cutBlind(end - start)
 #     )
-#     
+#
 # bottom_plate_combined_sketches = bottom_plate_combined_sketches.wires().offset(TOLERANCE).finalize()
 # bottom_plate = (
 #     bottom_plate.faces(">Z")
@@ -317,399 +283,6 @@ top_shell_height = skirt_height + TOP_CUT_TOTAL_THICKNESS
 # although moving the tolerances to be applied globally will result in some slight differences,
 # since we are not currently applying those everywhere the way that we should be.
 
-
-
-# TODO: build this as a single fluent API call, without unioning separate extrusions. When you're
-# done with one layer, just put a sketch on the top face and extrude the next.
-def build_kailh_switches_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .sketch()
-        .rect(14.5, 13.8)
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_TOP_SPACER_THICKNESS)
-        .union(
-            cq.Workplane("XY")
-            .workplane(offset=skirt_height + PLATE_TOP_SPACER_THICKNESS)
-            .sketch()
-            .rect(13.8, 13.8)
-            .rect(3.0, 17.6, mode="a")
-            .faces()
-            .wires()
-            .offset(TOLERANCE)
-            .finalize()
-            .extrude(PLATE_TOP_SWITCH_THICKNESS),
-            clean=False,
-        )
-        .union(
-            cq.Workplane("XY")
-            .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
-            .sketch()
-            .rect(15.0, 15.0, tag="upper")
-            .select("upper")
-            .vertices()
-            .fillet(0.85)
-            .reset()
-            .rect(3.0, 17.6, mode="a")
-            .faces()
-            .wires()
-            .offset(TOLERANCE)
-            .finalize()
-            .extrude(PLATE_TOP_COVER_THICKNESS),
-            clean=False,
-        )
-    )
-
-
-def build_battery_holder_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .center(2.47125, 0)
-        .sketch()
-        # main battery cutout
-        .rect(16.3425, 45.505)
-        # cutouts for battery contacts
-        .push([(5.17, 0)])
-        .rect(6.0025, 40.4, mode="s")
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(TOP_CUT_TOTAL_THICKNESS)
-    )
-
-def build_battery_holder_bottom_cutout():
-    return (
-        cq.Workplane("XY")
-        .center(-0.775, -0.025)
-        .sketch()
-        .rect(7.75, 44.14)
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_BOTTOM_THICKNESS)
-    )
-
-
-def build_inductors_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .sketch()
-        .rect(4.6, 4.5)
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(TOP_CUT_TOTAL_THICKNESS)
-    )
-
-
-def build_capacitors_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .center(0.001632, -0.003268)
-        .sketch()
-        .rect(2.8, 0.95)
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_TOP_SPACER_THICKNESS)
-    )
-
-def build_resistors_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .sketch()
-        .rect(2.8, 0.95)
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_TOP_SPACER_THICKNESS)
-    )
-
-def build_power_ic_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .sketch()
-        .rect(3.8, 3.8)
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_TOP_SPACER_THICKNESS)
-    )
-
-def build_reset_button_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .center(3.25, -2.25)
-        .sketch()
-        .rect(7.5, 6.0)
-        .vertices()
-        .fillet(0.5)
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(TOP_CUT_TOTAL_THICKNESS)
-    )
-
-
-def build_reset_button_bottom_cutout():
-    sketch = cq.Sketch()
-    for pad_wire in feature_local_wire.get("reset_button", {}).get("pads", []):
-        sketch.face(pad_wire, mode="a")
-    return cq.Workplane("XY").placeSketch(sketch).extrude(PLATE_BOTTOM_THICKNESS)
-
-
-def build_solder_wires_cutout():
-    return (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .center(0, -2.95)
-        .sketch()
-        .rect(2.7, 8.6)
-        .vertices()
-        .fillet(1.0)
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(TOP_CUT_TOTAL_THICKNESS)
-    )
-
-def build_microcontroller_cutout():
-    lower_stage = (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .sketch()
-        .push([(-7.585002, 0.153997), (7.585002, 0.153997)])
-        .rect(2.539996, 17.780002, tag="controller_sockets")
-        .select("controller_sockets")
-        .wires()
-        .offset(TOLERANCE)
-        .reset()
-    )
-    # We cut holes for the pogo pins for the battery and reset pins
-    for courtyard_wire in feature_local_wire.get("microcontroller", {}).get(
-        "F.CrtYd", []
-    ):
-        if (
-            len(courtyard_wire.Edges()) != 1
-            or courtyard_wire.Edges()[0].geomType() != "CIRCLE"
-        ):
-            continue
-        lower_stage = (
-            lower_stage.push([(courtyard_wire.Center().x, courtyard_wire.Center().y)])
-            .circle(
-                (courtyard_wire.BoundingBox().xmax - courtyard_wire.BoundingBox().xmin)
-                / 2
-                + TOLERANCE,
-                mode="a",
-            )
-            .reset()
-        )
-    lower_cutout = lower_stage.finalize().extrude(TOP_CUT_LOWER_THICKNESS)
-    upper_cutout = (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
-        .center(0, 0.0905)
-        .sketch()
-        .rect(17.71, 20.955, tag="controller_body")
-        .select("controller_body")
-        .vertices()
-        .fillet(1.905)
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_TOP_COVER_THICKNESS)
-    )
-    return lower_cutout.union(upper_cutout, clean=False)
-
-
-def build_microcontroller_bottom_cutout():
-    return (
-        cq.Workplane("XY")
-        .center(0, 0.0905)
-        .sketch()
-        .rect(17.71, 20.955)
-        .vertices()
-        .fillet(1.905)
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_BOTTOM_THICKNESS)
-    )
-
-def build_power_switch_cutout():
-    sketch = (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .sketch()
-        .rect(8.4, 9.5)
-        .rect(4.3, 14.8, mode="a")
-    )
-    for y_sign in [1, -1]:
-        arc = (
-            cq.Workplane("XY")
-            .moveTo(-4.2, y_sign * 4.75)
-            .lineTo(4.2, y_sign * 4.75)
-            .threePointArc((0, y_sign * POWER_SWITCH_ARC_RADIUS), (-4.2, y_sign * 4.75))
-            .close()
-            .val()
-        )
-        sketch = sketch.face(arc, mode="a")
-    return (
-        sketch.faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(TOP_CUT_TOTAL_THICKNESS)
-    )
-
-def build_power_switch_bottom_cutout():
-    power_switch_pads = feature_local_wire.get("power_switch").get("pads", [])
-    return (
-        cq.Workplane("XY")
-        .sketch()
-        .face(power_switch_pads[0], mode="a")
-        .face(power_switch_pads[1], mode="a")
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_BOTTOM_THICKNESS)
-    )
-
-
-def build_board_cutout():
-    body = (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height)
-        .center(27.40125, -49.7)
-        .sketch()
-        .rect(6.0025, 40.4)
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_TOP_SPACER_THICKNESS)
-    )
-    tabs = (
-        cq.Workplane("XY")
-        .workplane(offset=skirt_height + PLATE_TOP_SPACER_THICKNESS)
-        .center(27.40125, -49.7)
-        .sketch()
-        .push([(0, 19.10125), (0, -19.10125)])
-        .rect(6.0025, 2.1975)
-        .faces()
-        .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(PLATE_TOP_SWITCH_THICKNESS + PLATE_TOP_COVER_THICKNESS)
-    )
-    return body.union(tabs, clean=False)
-
-
-def build_bottom_cutout_from_top(top_cutout):
-    lowered_top_cutout = cq.Workplane().add(
-        top_cutout.val().translate((0, 0, -skirt_height))
-    )
-    sketch = cq.Workplane("XY").sketch()
-    for face in lowered_top_cutout.faces("<Z").vals():
-        sketch = sketch.face(face.outerWire(), mode="a")
-        for inner_wire in face.innerWires():
-            sketch = sketch.face(inner_wire, mode="s")
-    return sketch.finalize().extrude(PLATE_BOTTOM_THICKNESS)
-
-def build_inductors_bottom_cutout():
-    return None
-
-
-def build_kailh_switches_bottom_cutout():
-    front_fab_wires = feature_local_wire.get("kailh_switches", {}).get("F.Fab", [])
-    back_fab_wires = feature_local_wire.get("kailh_switches", {}).get("B.Fab", [])
-    drill_wires = feature_local_wire.get("kailh_switches", {}).get("drill", [])
-    # the F.Fab layer also has a square wire around the whole switch footprint
-    front_socket_wire = min(
-        front_fab_wires,
-        key=lambda wire: cq.Face.makeFromWires(wire).Area(),
-    )
-    back_socket_wire = back_fab_wires[0]
-
-    drill_points_by_radius = defaultdict(list)
-    for drill_wire in drill_wires:
-        drill_bb = drill_wire.BoundingBox()
-        drill_radius = round((drill_bb.xmax - drill_bb.xmin) / 2 + TOLERANCE, 6)
-        drill_points_by_radius[drill_radius].append(
-            (drill_wire.Center().x, drill_wire.Center().y)
-        )
-
-    (
-        guide_hole_radius,
-        top_contact_radius,
-        lower_socket_radius,
-        center_hole_radius,
-    ) = sorted(drill_points_by_radius)
-    guide_hole_points = sorted(drill_points_by_radius[guide_hole_radius])
-    top_contact_points = sorted(drill_points_by_radius[top_contact_radius])
-    lower_socket_points = sorted(drill_points_by_radius[lower_socket_radius])
-    center_hole_points = drill_points_by_radius[center_hole_radius]
-
-    top_y = max(wire.Center().y for wire in drill_wires)
-    top_drill_wires = sorted(
-        [wire for wire in drill_wires if abs(wire.Center().y - top_y) < 1e-6],
-        key=lambda wire: wire.Center().x,
-    )
-    bridge_specs = []
-    for top_drill_wire in [top_drill_wires[0], top_drill_wires[-1]]:
-        top_drill_bb = top_drill_wire.BoundingBox()
-        socket_wire = min(
-            [back_socket_wire, front_socket_wire],
-            key=lambda wire: abs(wire.Center().x - top_drill_wire.Center().x),
-        )
-        socket_top_y = socket_wire.BoundingBox().ymax
-        bridge_specs.append(
-            (
-                (
-                    top_drill_wire.Center().x,
-                    (top_drill_wire.Center().y + socket_top_y) / 2,
-                ),
-                top_drill_bb.xmax - top_drill_bb.xmin + 2 * TOLERANCE,
-                top_drill_wire.Center().y - socket_top_y + 2 * TOLERANCE,
-            )
-        )
-
-    return (
-        cq.Workplane("XY")
-        .sketch()
-        .face(back_socket_wire, mode="a")
-        .face(front_socket_wire, mode="a")
-        .push(top_contact_points)
-        .circle(top_contact_radius, mode="a")
-        .push(lower_socket_points)
-        .circle(lower_socket_radius, mode="a")
-        .push(center_hole_points)
-        .circle(center_hole_radius, mode="a")
-        .push(guide_hole_points)
-        .circle(guide_hole_radius, mode="a")
-        .push([bridge_specs[0][0]])
-        .rect(bridge_specs[0][1], bridge_specs[0][2], mode="a")
-        .push([bridge_specs[1][0]])
-        .rect(bridge_specs[1][1], bridge_specs[1][2], mode="a")
-        .finalize()
-        .extrude(PLATE_BOTTOM_THICKNESS)
-    )
 
 def build_top_solar_component():
     solar_wall_thickness = 3.9
@@ -788,7 +361,16 @@ def build_top_solar_component():
             cq.Workplane("XY")
             .workplane(offset=solar_ceiling_top_z)
             .sketch()
-            .face(feature_wire.get("solar_cell").get("F.Fab", [])[0], mode="a")
+            .face(
+                feature_sketch["solar_cell"]["F.Fab"].moved(
+                    cq.Location(
+                        footprint_placements["solar_cell"][0][1],
+                        cq.Vector(0, 0, 1),
+                        footprint_placements["solar_cell"][0][0],
+                    )
+                ),
+                mode="a",
+            )
             .wires()
             .offset(TOLERANCE)
             .finalize()
@@ -830,101 +412,215 @@ def build_top_solar_component():
         .union(solar_cell_guard)
     )
 
-def build_mounting_holes_cutout():
-    sketch = cq.Workplane("XY").workplane(offset=skirt_height).sketch()
-    for wire in feature_wire.get("mounting_holes").get("drill", []):
-        sketch = sketch.face(wire, mode="a")
-    return (
-        sketch.faces()
+
+# TODO: inline this into the feature_sketch data structure below, making it clear exactly where this
+# is used.
+# MVP only: keep the span pipeline small until we prove the memory profile is stable.
+feature_cut_sketches = {
+    "board_cutout": {
+        "placements": [(0, cq.Vector(0, 0, 0))],
+        "stages": {
+            "body": {
+                "sketch": (
+                    cq.Workplane("XY")
+                    .center(27.40125, -49.7)
+                    .sketch()
+                    .rect(6.0025, 40.4)
+                ),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
+                },
+            },
+            "tabs": {
+                "sketch": (
+                    cq.Workplane("XY")
+                    .center(27.40125, -49.7)
+                    .sketch()
+                    .push([(0, 19.10125), (0, -19.10125)])
+                    .rect(6.0025, 2.1975)
+                ),
+                "top_plate": {
+                    "start": skirt_height + PLATE_TOP_SPACER_THICKNESS,
+                    "end": top_shell_height,
+                },
+            },
+        },
+    },
+    "mounting_holes": {
+        "placements": footprint_placements["mounting_holes"],
+        "stages": {
+            "drill": {
+                "sketch": mounting_hole_sketch,
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": skirt_height + TOP_CUT_LOWER_THICKNESS,
+                },
+                "bottom_plate": True,
+            },
+        },
+    },
+    "microcontroller": {
+        "placements": footprint_placements["microcontroller"],
+        "stages": {
+            "lower": {
+                "sketch": (
+                    cq.Workplane("XY")
+                    .sketch()
+                    .push([(-7.585002, 0.153997), (7.585002, 0.153997)])
+                    .rect(2.539996, 17.780002, tag="controller_sockets")
+                    .select("controller_sockets")
+                    .reset()
+                    .face(feature_sketch["microcontroller"]["F.CrtYd"].edges("%CIRCLE"))
+                ),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": skirt_height + TOP_CUT_LOWER_THICKNESS,
+                },
+            },
+            "upper": {
+                "sketch": (
+                    cq.Workplane("XY")
+                    .center(0, 0.0905)
+                    .sketch()
+                    .rect(17.71, 20.955, tag="controller_body")
+                    .select("controller_body")
+                    .vertices()
+                    .fillet(1.905)
+                ),
+                "top_plate": {
+                    "start": skirt_height + TOP_CUT_LOWER_THICKNESS,
+                    "end": top_shell_height,
+                },
+            },
+            "bottom": {
+                "sketch": (
+                    cq.Workplane("XY")
+                    .center(0, 0.0905)
+                    .sketch()
+                    .rect(17.71, 20.955)
+                    .vertices()
+                    .fillet(1.905)
+                ),
+                "bottom_plate": True,
+            },
+        },
+    },
+}
+
+top_boundaries = sorted(
+    {
+        boundary
+        for feature in feature_cut_sketches.values()
+        for stage in feature["stages"].values()
+        if stage.get("top_plate") is not None
+        for boundary in (
+            stage["top_plate"]["start"],
+            stage["top_plate"]["end"],
+        )
+    }
+)
+
+top_spans = []
+for start, end in zip(top_boundaries, top_boundaries[1:]):
+    active_stages = []
+    for feature in feature_cut_sketches.values():
+        for stage in feature["stages"].values():
+            top_plate = stage.get("top_plate")
+            if top_plate is None:
+                continue
+            if top_plate["start"] >= end or top_plate["end"] <= start:
+                continue
+            active_stages.append((feature["placements"], stage))
+    if active_stages:
+        top_spans.append((start, end, active_stages))
+
+board_outline_sketch = cq.Sketch().face(
+    feature_sketch.get(BOARD_FEATURE_NAME, {})
+    .get("Edge.Cuts")
+    .wires(cq.selectors.LengthNthSelector(-1))
+)
+
+top_plate_right = (
+    cq.Workplane("XY")
+    .placeSketch(board_outline_sketch)
+    .extrude(PLATE_BOTTOM_THICKNESS)
+    .faces("<Z")
+    .wires()
+    .toPending()
+    .offset2D(SKIRT_THICKNESS)
+    .extrude(top_shell_height)
+    .faces(">Z")
+    .fillet(TOP_FILLET_RADIUS)
+    # TODO: move this to be a feature like the others, so that it can take advantage of the same cut
+    # pipeline we already have
+    .cut(
+        cq.Workplane("XY")
+        .placeSketch(board_outline_sketch)
+        .extrude(PLATE_BOTTOM_THICKNESS)
+        .faces("<Z")
         .wires()
-        .offset(TOLERANCE)
-        .finalize()
-        .extrude(TOP_CUT_LOWER_THICKNESS)
+        .toPending()
+        .offset2D(TOLERANCE)
+        .extrude(skirt_height)
+    )
+    .union(build_top_solar_component())
+)
+
+bottom_plate = (
+    cq.Workplane("XY").placeSketch(board_outline_sketch).extrude(PLATE_BOTTOM_THICKNESS)
+)
+
+for start, end, active_stages in top_spans:
+    span_sketch = cq.Workplane("XY").sketch()
+    for placements, stage in active_stages:
+        for footprint_angle, footprint_offset in placements:
+            span_sketch = span_sketch.face(
+                stage["sketch"].moved(
+                    cq.Location(
+                        footprint_offset,
+                        cq.Vector(0, 0, 1),
+                        footprint_angle,
+                    )
+                ),
+                mode="a",
+            )
+
+    top_plate_right = top_plate_right.cut(
+        cq.Workplane("XY")
+        .workplane(offset=start)
+        .placeSketch(span_sketch.faces().wires().offset(TOLERANCE).finalize().val())
+        .extrude(end - start)
     )
 
-board_outline_candidates = [
-    wire
-    for wire in feature_wire.get(BOARD_FEATURE_NAME).get("Edge.Cuts", [])
-    if wire.wrapped.Closed()
-]
-board_outline_wires = [
-    max(board_outline_candidates, key=lambda wire: cq.Face.makeFromWires(wire).Area())
-] if board_outline_candidates else []
-outer_outline_wires = [
-    offset_wire
-    for wire in board_outline_wires
-    for offset_wire in wire.offset2D(SKIRT_THICKNESS)
-]
-inner_outline_wires = [
-    offset_wire
-    for wire in board_outline_wires
-    for offset_wire in wire.offset2D(TOLERANCE)
-]
-
-
-def build_bottom_plate_body():
-    sketch = cq.Sketch()
-    for wire in board_outline_wires:
-        sketch.face(wire, mode="a")
-    return cq.Workplane("XY").placeSketch(sketch).extrude(PLATE_BOTTOM_THICKNESS)
-
-def build_top_plate_body():
-    outer_sketch = cq.Workplane("XY").sketch()
-    for wire in outer_outline_wires:
-        outer_sketch = outer_sketch.face(wire, mode="a")
-    inner_sketch = cq.Workplane("XY").sketch()
-    for wire in inner_outline_wires:
-        inner_sketch = inner_sketch.face(wire, mode="a")
-    return (
-        outer_sketch.finalize()
-        .extrude(top_shell_height)
-        .faces(">Z")
-        .fillet(TOP_FILLET_RADIUS)
-        .cut(inner_sketch.finalize().extrude(skirt_height))
-        .union(build_top_solar_component())
-    )
-
-
-
-def transform_cutout(cutout, footprint_angle, footprint_offset):
-    return cutout.rotate((0, 0, 0), (0, 0, 1), footprint_angle).translate(
-        (footprint_offset.x, footprint_offset.y, footprint_offset.z)
-    )
-
-
-top_plate_right = build_top_plate_body().cut(build_board_cutout())
-for feature_name in sorted(footprint_placements):
-    build_top_cutout = globals().get(f"build_{feature_name}_cutout")
-    if build_top_cutout is None:
-        continue
-
-    cutout = build_top_cutout()
-    if cutout is None:
-        continue
-
-    for footprint_angle, footprint_offset in footprint_placements[feature_name]:
-        top_plate_right = top_plate_right.cut(
-            transform_cutout(cutout, footprint_angle, footprint_offset)
-        )
-
-bottom_plate = build_bottom_plate_body()
-for feature_name in sorted(footprint_placements):
-    build_bottom_cutout = globals().get(f"build_{feature_name}_bottom_cutout")
-    if build_bottom_cutout is None:
-        build_top_cutout = globals().get(f"build_{feature_name}_cutout")
-        if build_top_cutout is None:
+bottom_cutout_sketch = cq.Workplane("XY").sketch()
+bottom_has_faces = False
+for feature in feature_cut_sketches.values():
+    for stage in feature["stages"].values():
+        if not stage.get("bottom_plate"):
             continue
-        cutout = build_bottom_cutout_from_top(build_top_cutout())
-    else:
-        cutout = build_bottom_cutout()
 
-    if cutout is None:
-        continue
+        for footprint_angle, footprint_offset in feature["placements"]:
+            bottom_cutout_sketch = bottom_cutout_sketch.face(
+                stage["sketch"].moved(
+                    cq.Location(
+                        footprint_offset,
+                        cq.Vector(0, 0, 1),
+                        footprint_angle,
+                    )
+                ),
+                mode="a",
+            )
+            bottom_has_faces = True
 
-    for footprint_angle, footprint_offset in footprint_placements[feature_name]:
-        bottom_plate = bottom_plate.cut(
-            transform_cutout(cutout, footprint_angle, footprint_offset)
+if bottom_has_faces:
+    bottom_plate = bottom_plate.cut(
+        cq.Workplane("XY")
+        .placeSketch(
+            bottom_cutout_sketch.faces().wires().offset(TOLERANCE).finalize().val()
         )
+        .extrude(PLATE_BOTTOM_THICKNESS)
+    )
 
 top_plate_left = top_plate_right.mirror("YZ")
 
@@ -950,7 +646,12 @@ if pcb_assembly_path.exists():
     pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
 
 mounting_hole_locations = cq.Workplane("XY").pushPoints(
-    wire.Center() for wire in feature_wire.get("mounting_holes").get("drill", [])
+    face.Center()
+    for footprint_angle, footprint_offset in footprint_placements["mounting_holes"]
+    for face in feature_sketch["mounting_holes"]["drill"]
+    .moved(cq.Location(footprint_offset, cq.Vector(0, 0, 1), footprint_angle))
+    .faces()
+    .vals()
 )
 
 hardware_instances = []
