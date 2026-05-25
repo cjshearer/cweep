@@ -245,6 +245,80 @@ TOP_CUT_LOWER_THICKNESS = PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNES
 skirt_height = PLATE_BOTTOM_THICKNESS + PCB_THICKNESS + 0.01
 top_shell_height = skirt_height + TOP_CUT_TOTAL_THICKNESS
 
+# TODO: I think we can improve the speed of this script by going back to using sketches as
+# intermediate objects, where sketches are assembled for each layer and a single cut operation is
+# performed per layer, rather than constructing many objects and performing 3d boolean operations
+# between them and the main case bodies. Let's try adapting our approach to do this. The overall
+# pipeline should look something like:
+#
+# this needs a nice way to associate each sketch with the height to which it should be extruded. We
+# will later combine all features that begin extrusions at the same height, or those that fall
+# within the cut range, so that we can minimize the number of cut operations we need to perform on
+# the main case bodies. Pick some nice data structure that represents this association and makes it
+# easy to combine the sketches for each layer, given the operations we will need to do to find which
+# sketch is "active" at a given height.
+# 
+# feature_sketch.example_feature = {   
+#     bottom_or_same_recognizable_name_for_this_sketch_that_should_be_ordered_from_bottom_to_top = {
+#         sketch = (
+#             cq.Sketch()
+#             .create_some_shapes_to_be_used_in_a_layer_height_range()
+#             ....,
+#             # don't apply tolerance offset here. We'll apply it layer for combined sketches
+#         ),
+#         # ranges to be applied to this sketch for the top plate
+#         top_plate = {
+#             start = 0, # the height at which the cut should start for these shapes
+#             end = 5, # the height at which the cut should end for these shapes,
+#         }
+#         # whether this sketch is used to cut out the bottom plate, which has only one layer
+#         bottom_plate = True
+#     }
+#     
+#     ....
+#     
+#     other_feature = {
+#         ...
+#     }
+# }
+# 
+# features.other_feature = ...the rest of the feature sketches
+# 
+# then we combine the sketches into spans that the cuts should be applied along, where if two spans
+# overlap, say we make a rect from 0 to 5 and a circle from 2 to 7, we would get 0-2 rect, 2-5 rect
+# +circle, 5-7 circle.
+# 
+# bottom_plate_combined_sketches = cq.Sketch()
+# for start, end, active_sketches in sketch_spans:
+#     top_plate_combined_sketches = cq.Sketch()
+#     for active_sketch in active_sketches:
+#         top_plate_combined_sketches = top_plate_combined_sketches.face(active_sketch)
+#         if active_sketch.bottom_plate:
+#             bottom_plate_combined_sketches = bottom_plate_combined_sketches.face(active_sketch)
+#     top_plate_combined_sketches = top_plate_combined_sketches.wires().offset(TOLERANCE).finalize()
+#     top_plate = (
+#       top_plate.faces(">Z")
+#       .workplane(offset=start)
+#       .center(0, 0)
+#       .placeSketch(top_plate_combined_sketches)
+#       .cutBlind(end - start)
+#     )
+#     
+# bottom_plate_combined_sketches = bottom_plate_combined_sketches.wires().offset(TOLERANCE).finalize()
+# bottom_plate = (
+#     bottom_plate.faces(">Z")
+#     .workplane(offset=0)
+#     .center(0, 0)
+#     .placeSketch(bottom_plate_combined_sketches)
+#     .cutBlind(PLATE_BOTTOM_THICKNESS)
+# )
+#
+# Be sure to save the current volume of the plates as a reference. They should be largely the same,
+# although moving the tolerances to be applied globally will result in some slight differences,
+# since we are not currently applying those everywhere the way that we should be.
+
+
+
 # TODO: build this as a single fluent API call, without unioning separate extrusions. When you're
 # done with one layer, just put a sketch on the top face and extrude the next.
 def build_kailh_switches_cutout():
