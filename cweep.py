@@ -18,6 +18,7 @@ Prior art:
 import argparse
 from collections import defaultdict
 from math import sqrt
+import os
 from pathlib import Path
 
 import cadquery as cq
@@ -413,10 +414,111 @@ def build_top_solar_component():
     )
 
 
-# TODO: inline this into the feature_sketch data structure below, making it clear exactly where this
-# is used.
-# MVP only: keep the span pipeline small until we prove the memory profile is stable.
-feature_cut_sketches = {
+mounting_hole_sketch = feature_sketch.get("mounting_holes", {}).get(
+    "drill", cq.Sketch()
+)
+reset_button_bottom_sketch = feature_sketch.get("reset_button", {}).get(
+    "pads", cq.Sketch()
+)
+power_switch_bottom_sketch = feature_sketch.get("power_switch", {}).get(
+    "pads", cq.Sketch()
+)
+
+power_switch_top_sketch = cq.Sketch().rect(8.4, 9.5).rect(4.3, 14.8, mode="a")
+for y_sign in [1, -1]:
+    power_switch_arc = (
+        cq.Workplane("XY")
+        .moveTo(-4.2, y_sign * 4.75)
+        .lineTo(4.2, y_sign * 4.75)
+        .threePointArc((0, y_sign * POWER_SWITCH_ARC_RADIUS), (-4.2, y_sign * 4.75))
+        .close()
+        .val()
+    )
+    power_switch_top_sketch = power_switch_top_sketch.face(power_switch_arc, mode="a")
+
+kailh_bottom_sketch = cq.Sketch()
+kailh_front_socket_faces = (
+    feature_sketch.get("kailh_switches", {}).get("F.Fab", cq.Sketch()).faces().vals()
+)
+kailh_back_socket_faces = (
+    feature_sketch.get("kailh_switches", {}).get("B.Fab", cq.Sketch()).faces().vals()
+)
+kailh_drill_faces = (
+    feature_sketch.get("kailh_switches", {}).get("drill", cq.Sketch()).faces().vals()
+)
+if kailh_front_socket_faces and kailh_back_socket_faces and kailh_drill_faces:
+    kailh_front_socket_face = min(
+        kailh_front_socket_faces, key=lambda face: face.Area()
+    )
+    kailh_back_socket_face = kailh_back_socket_faces[0]
+
+    drill_points_by_radius = defaultdict(list)
+    for drill_face in kailh_drill_faces:
+        drill_bounding_box = drill_face.BoundingBox()
+        drill_radius = round((drill_bounding_box.xmax - drill_bounding_box.xmin) / 2, 6)
+        drill_points_by_radius[drill_radius].append(
+            (drill_face.Center().x, drill_face.Center().y)
+        )
+
+    (
+        guide_hole_radius,
+        top_contact_radius,
+        lower_socket_radius,
+        center_hole_radius,
+    ) = sorted(drill_points_by_radius)
+    guide_hole_points = sorted(drill_points_by_radius[guide_hole_radius])
+    top_contact_points = sorted(drill_points_by_radius[top_contact_radius])
+    lower_socket_points = sorted(drill_points_by_radius[lower_socket_radius])
+    center_hole_points = drill_points_by_radius[center_hole_radius]
+
+    top_y = max(drill_face.Center().y for drill_face in kailh_drill_faces)
+    top_drill_faces = sorted(
+        [
+            drill_face
+            for drill_face in kailh_drill_faces
+            if abs(drill_face.Center().y - top_y) < 1e-6
+        ],
+        key=lambda drill_face: drill_face.Center().x,
+    )
+    bridge_specs = []
+    for top_drill_face in [top_drill_faces[0], top_drill_faces[-1]]:
+        top_drill_bounding_box = top_drill_face.BoundingBox()
+        socket_face = min(
+            [kailh_back_socket_face, kailh_front_socket_face],
+            key=lambda face: abs(face.Center().x - top_drill_face.Center().x),
+        )
+        socket_top_y = socket_face.BoundingBox().ymax
+        bridge_specs.append(
+            (
+                (
+                    top_drill_face.Center().x,
+                    (top_drill_face.Center().y + socket_top_y) / 2,
+                ),
+                top_drill_bounding_box.xmax - top_drill_bounding_box.xmin,
+                top_drill_face.Center().y - socket_top_y,
+            )
+        )
+
+    kailh_bottom_sketch = (
+        cq.Sketch()
+        .face(kailh_back_socket_face, mode="a")
+        .face(kailh_front_socket_face, mode="a")
+        .push(top_contact_points)
+        .circle(top_contact_radius, mode="a")
+        .push(lower_socket_points)
+        .circle(lower_socket_radius, mode="a")
+        .push(center_hole_points)
+        .circle(center_hole_radius, mode="a")
+        .push(guide_hole_points)
+        .circle(guide_hole_radius, mode="a")
+        .push([bridge_specs[0][0]])
+        .rect(bridge_specs[0][1], bridge_specs[0][2], mode="a")
+        .push([bridge_specs[1][0]])
+        .rect(bridge_specs[1][1], bridge_specs[1][2], mode="a")
+        .reset()
+    )
+
+all_feature_cut_sketches = {
     "board_cutout": {
         "placements": [(0, cq.Vector(0, 0, 0))],
         "stages": {
@@ -460,6 +562,169 @@ feature_cut_sketches = {
             },
         },
     },
+    "battery_holder": {
+        "placements": footprint_placements["battery_holder"],
+        "stages": {
+            "top": {
+                "sketch": (
+                    cq.Sketch()
+                    .push([(2.47125, 0)])
+                    .rect(16.3425, 45.505)
+                    .reset()
+                    .push([(7.64125, 0)])
+                    .rect(6.0025, 40.4, mode="s")
+                    .reset()
+                ),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": top_shell_height,
+                },
+            },
+            "bottom": {
+                "sketch": cq.Sketch()
+                .push([(-0.775, -0.025)])
+                .rect(7.75, 44.14)
+                .reset(),
+                "bottom_plate": True,
+            },
+        },
+    },
+    "kailh_switches": {
+        "placements": footprint_placements["kailh_switches"],
+        "stages": {
+            "lower": {
+                "sketch": cq.Sketch().rect(14.5, 13.8),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
+                },
+            },
+            "middle": {
+                "sketch": cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6, mode="a"),
+                "top_plate": {
+                    "start": skirt_height + PLATE_TOP_SPACER_THICKNESS,
+                    "end": skirt_height + TOP_CUT_LOWER_THICKNESS,
+                },
+            },
+            "upper": {
+                "sketch": (
+                    cq.Sketch()
+                    .rect(15.0, 15.0, tag="upper")
+                    .select("upper")
+                    .vertices()
+                    .fillet(0.85)
+                    .reset()
+                    .rect(3.0, 17.6, mode="a")
+                ),
+                "top_plate": {
+                    "start": skirt_height + TOP_CUT_LOWER_THICKNESS,
+                    "end": top_shell_height,
+                },
+            },
+            "bottom": {
+                "sketch": kailh_bottom_sketch,
+                "bottom_plate": True,
+            },
+        },
+    },
+    "inductors": {
+        "placements": footprint_placements["inductors"],
+        "stages": {
+            "top": {
+                "sketch": cq.Sketch().rect(4.6, 4.5),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": top_shell_height,
+                },
+            },
+        },
+    },
+    "capacitors": {
+        "placements": footprint_placements["capacitors"],
+        "stages": {
+            "body": {
+                "sketch": (
+                    cq.Sketch().push([(0.001632, -0.003268)]).rect(2.8, 0.95).reset()
+                ),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
+                },
+                "bottom_plate": True,
+            },
+        },
+    },
+    "resistors": {
+        "placements": footprint_placements["resistors"],
+        "stages": {
+            "body": {
+                "sketch": cq.Sketch().rect(2.8, 0.95),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
+                },
+                "bottom_plate": True,
+            },
+        },
+    },
+    "power_ic": {
+        "placements": footprint_placements["power_ic"],
+        "stages": {
+            "body": {
+                "sketch": cq.Sketch().rect(3.8, 3.8),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
+                },
+                "bottom_plate": True,
+            },
+        },
+    },
+    "reset_button": {
+        "placements": footprint_placements["reset_button"],
+        "stages": {
+            "top": {
+                "sketch": (
+                    cq.Sketch()
+                    .push([(3.25, -2.25)])
+                    .rect(7.5, 6.0, tag="button")
+                    .select("button")
+                    .vertices()
+                    .fillet(0.5)
+                    .reset()
+                ),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": top_shell_height,
+                },
+            },
+            "bottom": {
+                "sketch": reset_button_bottom_sketch,
+                "bottom_plate": True,
+            },
+        },
+    },
+    "solder_wires": {
+        "placements": footprint_placements["solder_wires"],
+        "stages": {
+            "body": {
+                "sketch": (
+                    cq.Sketch()
+                    .push([(0, -2.95)])
+                    .rect(2.7, 8.6, tag="wire")
+                    .select("wire")
+                    .vertices()
+                    .fillet(1.0)
+                    .reset()
+                ),
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": top_shell_height,
+                },
+                "bottom_plate": True,
+            },
+        },
+    },
     "microcontroller": {
         "placements": footprint_placements["microcontroller"],
         "stages": {
@@ -471,7 +736,11 @@ feature_cut_sketches = {
                     .rect(2.539996, 17.780002, tag="controller_sockets")
                     .select("controller_sockets")
                     .reset()
-                    .face(feature_sketch["microcontroller"]["F.CrtYd"].edges("%CIRCLE"))
+                    .face(
+                        feature_sketch.get("microcontroller")
+                        .get("F.CrtYd")
+                        .edges("%CIRCLE")
+                    )
                 ),
                 "top_plate": {
                     "start": skirt_height,
@@ -506,34 +775,51 @@ feature_cut_sketches = {
             },
         },
     },
+    "power_switch": {
+        "placements": footprint_placements["power_switch"],
+        "stages": {
+            "top": {
+                "sketch": power_switch_top_sketch,
+                "top_plate": {
+                    "start": skirt_height,
+                    "end": top_shell_height,
+                },
+            },
+            "bottom": {
+                "sketch": power_switch_bottom_sketch,
+                "bottom_plate": True,
+            },
+        },
+    },
 }
 
-top_boundaries = sorted(
-    {
-        boundary
-        for feature in feature_cut_sketches.values()
-        for stage in feature["stages"].values()
-        if stage.get("top_plate") is not None
-        for boundary in (
-            stage["top_plate"]["start"],
-            stage["top_plate"]["end"],
-        )
-    }
+# Keep restore work incremental until each added feature is measured.
+RESTORED_FEATURE_BATCHES = (
+    ("battery_holder",),
+    ("power_ic",),
+    ("reset_button",),
+    ("power_switch",),
+    ("solder_wires",),
+    ("inductors",),
+    ("capacitors",),
+    ("resistors",),
 )
-
-top_spans = []
-for start, end in zip(top_boundaries, top_boundaries[1:]):
-    active_stages = []
-    for feature in feature_cut_sketches.values():
-        for stage in feature["stages"].values():
-            top_plate = stage.get("top_plate")
-            if top_plate is None:
-                continue
-            if top_plate["start"] >= end or top_plate["end"] <= start:
-                continue
-            active_stages.append((feature["placements"], stage))
-    if active_stages:
-        top_spans.append((start, end, active_stages))
+RESTORE_BATCH_COUNT = int(os.environ.get("CWEEP_RESTORE_BATCH_COUNT", "0"))
+if not 0 <= RESTORE_BATCH_COUNT <= len(RESTORED_FEATURE_BATCHES):
+    raise ValueError(
+        "CWEEP_RESTORE_BATCH_COUNT must be between 0 and "
+        f"{len(RESTORED_FEATURE_BATCHES)}"
+    )
+ENABLED_RESTORED_FEATURES = [
+    feature_name
+    for batch in RESTORED_FEATURE_BATCHES[:RESTORE_BATCH_COUNT]
+    for feature_name in batch
+]
+BASE_FEATURE_NAMES = ("board_cutout", "mounting_holes", "microcontroller")
+feature_cut_sketches = {
+    feature_name: all_feature_cut_sketches[feature_name]
+    for feature_name in (*BASE_FEATURE_NAMES, *ENABLED_RESTORED_FEATURES)
+}
 
 board_outline_sketch = cq.Sketch().face(
     feature_sketch.get(BOARD_FEATURE_NAME, {})
@@ -571,47 +857,50 @@ bottom_plate = (
     cq.Workplane("XY").placeSketch(board_outline_sketch).extrude(PLATE_BOTTOM_THICKNESS)
 )
 
-for start, end, active_stages in top_spans:
-    span_sketch = cq.Workplane("XY").sketch()
-    for placements, stage in active_stages:
-        for footprint_angle, footprint_offset in placements:
-            span_sketch = span_sketch.face(
-                stage["sketch"].moved(
-                    cq.Location(
-                        footprint_offset,
-                        cq.Vector(0, 0, 1),
-                        footprint_angle,
-                    )
-                ),
-                mode="a",
-            )
-
-    top_plate_right = top_plate_right.cut(
-        cq.Workplane("XY")
-        .workplane(offset=start)
-        .placeSketch(span_sketch.faces().wires().offset(TOLERANCE).finalize().val())
-        .extrude(end - start)
-    )
-
 bottom_cutout_sketch = cq.Workplane("XY").sketch()
 bottom_has_faces = False
 for feature in feature_cut_sketches.values():
+    placements_by_angle = defaultdict(list)
+    for footprint_angle, footprint_offset in feature["placements"]:
+        placements_by_angle[footprint_angle].append(footprint_offset)
+
     for stage in feature["stages"].values():
-        if not stage.get("bottom_plate"):
+        top_plate = stage.get("top_plate")
+        bottom_plate_enabled = stage.get("bottom_plate")
+        if top_plate is None and not bottom_plate_enabled:
             continue
 
-        for footprint_angle, footprint_offset in feature["placements"]:
-            bottom_cutout_sketch = bottom_cutout_sketch.face(
-                stage["sketch"].moved(
-                    cq.Location(
-                        footprint_offset,
-                        cq.Vector(0, 0, 1),
-                        footprint_angle,
-                    )
-                ),
-                mode="a",
+        top_stage_sketch = cq.Workplane("XY").sketch()
+        top_has_faces = False
+        bottom_stage_has_faces = False
+        for footprint_angle, footprint_offsets in placements_by_angle.items():
+            if top_plate is not None:
+                top_stage_sketch = (
+                    top_stage_sketch.push(footprint_offsets)
+                    .face(stage["sketch"], angle=footprint_angle, mode="a")
+                    .reset()
+                )
+                top_has_faces = True
+
+            if bottom_plate_enabled:
+                bottom_cutout_sketch = (
+                    bottom_cutout_sketch.push(footprint_offsets)
+                    .face(stage["sketch"], angle=footprint_angle, mode="a")
+                    .reset()
+                )
+                bottom_stage_has_faces = True
+
+        if top_has_faces:
+            top_plate_right = top_plate_right.cut(
+                cq.Workplane("XY")
+                .workplane(offset=top_plate["start"])
+                .placeSketch(
+                    top_stage_sketch.faces().wires().offset(TOLERANCE).finalize().val()
+                )
+                .extrude(top_plate["end"] - top_plate["start"])
             )
-            bottom_has_faces = True
+
+        bottom_has_faces = bottom_has_faces or bottom_stage_has_faces
 
 if bottom_has_faces:
     bottom_plate = bottom_plate.cut(
