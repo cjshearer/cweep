@@ -83,7 +83,7 @@ FEATURE_NAME_BY_LIB_ID = {
     "cweep:SM141K04LV": "solar_cell",
     "cweep:MountingHole_2.2mm_M2_DIN965_Pad": "mounting_holes",
     "cweep:SW_Hotswap_Kailh_Choc_V1_1.00u_Reversible": "kailh_switches",
-    "cweep:BatteryHolder_Keystone_230-1_1x10440": "battery_holder",
+    "cweep:BatteryHolder_Keystone_230-1_1x10440": "battery_cutout",
     "cweep:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder": "capacitors",
     "cweep:D_SOD-123_Reversible": "diodes",
     "cweep:L_Abracon_ASPI-4030S_Reversible": "inductors",
@@ -277,18 +277,15 @@ feature_stages = {
             },
         },
     },
-    "battery_holder": {
-        "placements": footprint_placements["battery_holder"],
+    "battery_cutout": {
+        "placements": footprint_placements["battery_cutout"],
         "stages": {
             "top": {
                 "sketch": (
-                    cq.Sketch()
-                    .push([(2.47125, 0)])
-                    .rect(16.3425, 45.505)
-                    .reset()
-                    .push([(7.64125, 0)])
-                    .rect(6.0025, 40.4, mode="s")
-                    .reset()
+                    feature_sketch.get("battery_cutout").get("Edge.Cuts")
+                    .face(
+                        feature_sketch.get("battery_cutout").get("F.CrtYd")
+                    )
                 ),
                 "operations": (
                     {
