@@ -45,20 +45,22 @@ def kicad_xy(x, y):
 
 def add_item_to_sketch(sketch: cq.Sketch, item):
     """
-    Add a KiCad PCB graphic item to a CadQuery sketch (Y-axis flipped to match CQ convention).
+    Add a KiCad PCB graphic item to a CadQuery sketch.
+
+    Mirroring KiCad's Y axis into CadQuery reverses loop winding, so directional primitives are
+    imported with reversed traversal to preserve assembled face orientation.
     """
     vec = lambda position: kicad_xy(position.X, position.Y)
     # KiCad names graphic items as GrXxx (board) or FpXxx (footprint); strip the 2-char prefix.
     shape = item.__class__.__name__[2:]
     if shape == "Line":
-        return sketch.segment(vec(item.start), vec(item.end))
+        return sketch.segment(vec(item.end), vec(item.start))
     if shape == "Curve":
-        return sketch.bezier([vec(pt) for pt in item.coordinates])
+        return sketch.bezier([vec(pt) for pt in reversed(item.coordinates)])
     if shape == "Poly":
-        pts = [vec(pt) for pt in item.coordinates]
-        return sketch.polygon(pts).reset()
+        return sketch.polygon([vec(pt) for pt in reversed(item.coordinates)]).reset()
     if shape == "Arc":
-        return sketch.arc(vec(item.start), vec(item.mid), vec(item.end))
+        return sketch.arc(vec(item.end), vec(item.mid), vec(item.start))
     if shape == "Rect":
         center = kicad_xy(
             (item.start.X + item.end.X) / 2,
