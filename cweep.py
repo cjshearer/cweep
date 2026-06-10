@@ -38,33 +38,29 @@ if args.preview:
 
 # Transform PCB geometry to CadQuery sketches ------------------------------------------------------
 
-
-def kicad_xy(x, y):
-    return cq.Vector(x, -y, 0)
-
-
 def add_item_to_sketch(sketch: cq.Sketch, item):
-    """
-    Add a KiCad PCB graphic item to a CadQuery sketch.
-
-    Mirroring KiCad's Y axis into CadQuery reverses loop winding, so directional primitives are
-    imported with reversed traversal to preserve assembled face orientation.
-    """
-    vec = lambda position: kicad_xy(position.X, position.Y)
     # KiCad names graphic items as GrXxx (board) or FpXxx (footprint); strip the 2-char prefix.
     shape = item.__class__.__name__[2:]
     if shape == "Line":
-        return sketch.segment(vec(item.end), vec(item.start))
+        return sketch.segment(
+            cq.Vector(item.start.X, item.start.Y, 0),
+            cq.Vector(item.end.X, item.end.Y, 0)
+        )
     if shape == "Curve":
-        return sketch.bezier([vec(pt) for pt in reversed(item.coordinates)])
+        return sketch.bezier([cq.Vector(pt.X, pt.Y, 0) for pt in item.coordinates])
     if shape == "Poly":
-        return sketch.polygon([vec(pt) for pt in reversed(item.coordinates)]).reset()
+        return sketch.polygon([cq.Vector(pt.X, pt.Y, 0) for pt in item.coordinates])
     if shape == "Arc":
-        return sketch.arc(vec(item.end), vec(item.mid), vec(item.start))
+        return sketch.arc(
+            cq.Vector(item.start.X, item.start.Y, 0),
+            cq.Vector(item.mid.X, item.mid.Y, 0),
+            cq.Vector(item.end.X, item.end.Y, 0),
+        )
     if shape == "Rect":
-        center = kicad_xy(
+        center = cq.Vector(
             (item.start.X + item.end.X) / 2,
             (item.start.Y + item.end.Y) / 2,
+            0
         )
         return (
             sketch.push([center])
@@ -74,7 +70,11 @@ def add_item_to_sketch(sketch: cq.Sketch, item):
     if shape == "Circle":
         dx = item.end.X - item.center.X
         dy = item.end.Y - item.center.Y
-        return sketch.push([vec(item.center)]).circle(sqrt(dx * dx + dy * dy)).reset()
+        return (
+            sketch.push([cq.Vector(item.center.X, item.center.Y, 0)])
+            .circle(sqrt(dx * dx + dy * dy))
+            .reset()
+        )
     return sketch
 
 BOARD_FEATURE_NAME = "board_features"
@@ -111,10 +111,14 @@ for footprint in footprints:
     feature_name = FEATURE_NAME_BY_LIB_ID.get(footprint.libId)
     if feature_name is None:
         continue
+    # KiCad's Y axis is flipped compared to CadQuery, so we negate the Y coordinate to preserve
     footprint_placements[feature_name].append(
-        (
-            footprint.position.angle or 0,
-            kicad_xy(footprint.position.X, footprint.position.Y),
+        # orientation.
+        cq.Location(
+            footprint.position.X,
+            -footprint.position.Y,
+            0,
+            rz=footprint.position.angle or 0,
         )
     )
     if feature_name in feature_sketch:
@@ -133,7 +137,9 @@ for footprint in footprints:
         if pad_position is None:
             continue
 
-        pad_center = kicad_xy(pad_position.X, pad_position.Y)
+        # KiCad's Y axis is flipped compared to CadQuery, so we negate the Y coordinate to preserve
+        # orientation.
+        pad_center = pad_position.X, -pad_position.Y
         if pad.shape == "circle":
             feature_sketch[feature_name]["pads"] = (
                 feature_sketch[feature_name]["pads"]
@@ -174,6 +180,10 @@ for feature_name, layers in feature_sketch.items():
         except Exception:
             pass
 
+        # KiCad's Y axis is flipped compared to CadQuery, so we mirror the sketches to preserve
+        # orientation.
+        layers[layer_name] = sketch.moved(cq.Location(rx=180))
+
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
 
 
@@ -196,13 +206,15 @@ TOP_CUT_LOWER_THICKNESS = PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNES
 skirt_height = PLATE_BOTTOM_THICKNESS + PCB_THICKNESS + 0.01
 top_shell_height = skirt_height + TOP_CUT_TOTAL_THICKNESS
 
-
 ORIGIN = cq.Vector(0, 0, 0)
-SOLAR_WALL_THICKNESS = 3.9
 SOLAR_TOP_THICKNESS = 1.13
 SOLAR_CELL_THICKNESS = 2.1
-SOLAR_TOP_Z = top_shell_height + SOLAR_WALL_THICKNESS
+SOLAR_TOP_Z = top_shell_height + 4.195
+SOLAR_WALL_THICKNESS = 1.112
 SOLAR_CEILING_TOP_Z = SOLAR_TOP_Z + SOLAR_TOP_THICKNESS
+
+print(f"top_shell_height: {top_shell_height}, top of solar cell: {SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS}")
+# from top_shell_height (8.852) to top of solar cell (13.445) is 4.597mm
 
 board_outline_sketch = (
     feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
@@ -211,7 +223,7 @@ board_outline_sketch = (
 
 feature_stages = {
     "plate_shells": {
-        "placements": [(0, ORIGIN)],
+        "placements": [cq.Location()],
         "stages": {
             "bottom_plate": {
                 "sketch": board_outline_sketch,
@@ -284,8 +296,9 @@ feature_stages = {
                 "sketch": (
                     feature_sketch.get("battery_cutout").get("Edge.Cuts")
                     .face(
-                        feature_sketch.get("battery_cutout").get("F.CrtYd")
+                        feature_sketch.get("battery_cutout").get("F.CrtYd"),
                     )
+                    .clean()
                 ),
                 "operations": (
                     {
@@ -293,25 +306,25 @@ feature_stages = {
                         "kind": "cut",
                         "start": skirt_height,
                         "end": top_shell_height,
-                        "offset": TOLERANCE,
+                        # "offset": TOLERANCE,
                     },
                 ),
             },
-            "bottom": {
-                "sketch": cq.Sketch()
-                .push([(-0.775, -0.025)])
-                .rect(7.75, 44.14)
-                .reset(),
-                "operations": (
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
+            # "bottom": {
+            #     "sketch": cq.Sketch()
+            #     .push([(-0.775, -0.025)])
+            #     .rect(7.75, 44.14)
+            #     .reset(),
+            #     "operations": (
+            #         {
+            #             "target": "bottom_plate",
+            #             "kind": "cut",
+            #             "start": 0,
+            #             "end": PLATE_BOTTOM_THICKNESS,
+            #             "offset": TOLERANCE,
+            #         },
+            #     ),
+            # },
         },
     },
     "kailh_switches": {
@@ -330,8 +343,7 @@ feature_stages = {
                 ),
             },
             "middle": {
-                "batch_mode": "per-switch",
-                "sketch": cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6),
+                "sketch": cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6).clean(),
                 "operations": (
                     {
                         "target": "top_plate_right",
@@ -342,8 +354,10 @@ feature_stages = {
                     },
                 ),
             },
+            # TODO: the upper cutout causes memory usage to spike and my machine to crash when
+            # combined with the above cuts. If I disable the above cuts, the upper cutout doesn't
+            # exactly work, as the whole top shell body is gone (except the solar component)
             "upper": {
-                "batch_mode": "per-switch",
                 "sketch": (
                     cq.Sketch()
                     .rect(15.0, 15.0, tag="upper")
@@ -352,6 +366,7 @@ feature_stages = {
                     .fillet(0.85)
                     .reset()
                     .rect(3.0, 17.6)
+                    .clean()
                 ),
                 "operations": (
                     {
@@ -363,19 +378,19 @@ feature_stages = {
                     },
                 ),
             },
-            "bottom": {
-                # TODO (not for AI): move User.6 wires to "User.Drawings" or something like that
-                "sketch": feature_sketch["kailh_switches"]["User.6"],
-                "operations": (
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
+            # "bottom": {
+            #     # TODO (not for AI): move User.6 wires to "User.Drawings" or something like that
+            #     "sketch": feature_sketch["kailh_switches"]["User.6"],
+            #     "operations": (
+            #         {
+            #             "target": "bottom_plate",
+            #             "kind": "cut",
+            #             "start": 0,
+            #             "end": PLATE_BOTTOM_THICKNESS,
+            #             "offset": TOLERANCE,
+            #         },
+            #     ),
+            # },
         },
     },
     "inductors": {
@@ -650,111 +665,66 @@ feature_stages = {
         },
     },
     "solar_component": {
-        "placements": [(0, ORIGIN)],
+        "placements": footprint_placements["solar_cell"],
         "stages": {
-            "wall_and_support": {
+            "main_body": {
                 "sketch": (
-                    cq.Workplane("XY")
-                    .sketch()
-                    .push([(20.5375, -48.7)])
-                    .rect(17.725, 47.505, tag="solar_outer")
-                    .select("solar_outer")
-                    .vertices("<X and >Y")
-                    .fillet(2.0)
-                    .reset()
-                    .push([(21.73, -49.7)])
-                    .rect(15.34, 45.505, mode="s")
-                    .reset()
-                    .push([(26.9, -49.7)])
-                    .rect(5.0, 36.005, mode="a")
+                    cq.Sketch()
+                    .face(
+                        feature_sketch["solar_cell"]["F.Fab"]
+                        .faces(cq.selectors.AreaNthSelector(-1))
+                        .wires()
+                        .val()
+                    )
                 ),
                 "operations": (
                     {
                         "target": "top_plate_right",
                         "kind": "union",
                         "start": top_shell_height,
-                        "end": SOLAR_TOP_Z,
-                        "apply": lambda solid: solid.union(
-                            cq.Workplane(
-                                "XZ",
-                                origin=(
-                                    21.73 - 15.34 / 2 - TOLERANCE,
-                                    -49.7 + 45.505 / 2 + TOLERANCE,
-                                    top_shell_height,
-                                ),
-                            )
-                            .lineTo(0, SOLAR_WALL_THICKNESS)
-                            .lineTo(SOLAR_WALL_THICKNESS, SOLAR_WALL_THICKNESS)
-                            .threePointArc(
-                                (
-                                    SOLAR_WALL_THICKNESS * (1 - 1 / sqrt(2)),
-                                    SOLAR_WALL_THICKNESS / sqrt(2),
-                                ),
-                                (0, 0),
-                            )
-                            .close()
-                            .extrude(45.505 + TOLERANCE)
-                        ),
-                    },
-                ),
-            },
-            "top": {
-                "sketch": (
-                    cq.Workplane("XY")
-                    .sketch()
-                    .push([(20.5375, -48.7)])
-                    .rect(17.725, 47.505, tag="solar_outer")
-                    .select("solar_outer")
-                    .vertices("<X and >Y")
-                    .fillet(2.0)
-                    .reset()
-                    .push([(21.18, -49.92125)])
-                    .rect(6.44, 45.0625, mode="s")
-                    .reset()
-                    .push([(26.9, -70.0775)])
-                    .rect(5.0, 4.75, mode="s")
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "union",
-                        "start": SOLAR_TOP_Z,
-                        "end": SOLAR_CEILING_TOP_Z,
-                    },
-                ),
-            },
-            "guard": {
-                "sketch": (
-                    cq.Workplane("XY")
-                    .sketch()
-                    .push([(20.5375, -48.7)])
-                    .rect(17.725, 47.505, tag="solar_outer")
-                    .select("solar_outer")
-                    .vertices("<X and >Y")
-                    .fillet(2.0)
-                    .reset()
-                    .push([(21.18, -49.92125)])
-                    .rect(6.44, 45.0625, mode="s")
-                    .reset()
-                    .push([(26.9, -70.0775)])
-                    .rect(5.0, 4.75, mode="s")
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "union",
-                        "start": SOLAR_CEILING_TOP_Z,
                         "end": SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS,
-                        "apply": lambda solid: solid.faces(">Z").fillet(
-                            TOP_FILLET_RADIUS
+                        # This offset closes the gap between the left edge of the solar cell box and
+                        # the rounded offset edge of the main plate body
+                        "offset": SOLAR_WALL_THICKNESS,
+                        "apply": (
+                            lambda solid: 
+                            solid.faces(">Z")
+                            # Walls around cutout for solar cell will be flush with the cell and
+                            # will be rounded to meet the edge of the cell
+                            .fillet(TOP_FILLET_RADIUS)
                         ),
                     },
-                ),
-            },
-            "cell_cut": {
-                "placements": footprint_placements["solar_cell"],
-                "sketch": feature_sketch["solar_cell"]["F.Fab"],
-                "operations": (
+                    # Main battery compartment will be cutout, leaving a support rib on the left
+                    # that doubles as a battery holder
+                    {
+                        "target": "top_plate_right",
+                        "kind": "cut",
+                        "start": top_shell_height,
+                        "end": SOLAR_TOP_Z,
+                        "offset": TOLERANCE,
+                        # "apply": lambda solid: solid.union(
+                        #     cq.Workplane(
+                        #         "XZ",
+                        #         origin=(
+                        #             21.73 - 15.34 / 2 - TOLERANCE,
+                        #             -49.7 + 45.505 / 2 + TOLERANCE,
+                        #             top_shell_height,
+                        #         ),
+                        #     )
+                        #     .lineTo(0, SOLAR_WALL_THICKNESS)
+                        #     .lineTo(SOLAR_WALL_THICKNESS, SOLAR_WALL_THICKNESS)
+                        #     .threePointArc(
+                        #         (
+                        #             SOLAR_WALL_THICKNESS * (1 - 1 / sqrt(2)),
+                        #             SOLAR_WALL_THICKNESS / sqrt(2),
+                        #         ),
+                        #         (0, 0),
+                        #     )
+                        #     .close()
+                        #     .extrude(45.505 + TOLERANCE)
+                        # ),
+                    },
+                    # Cutout for the solar cell to sit within
                     {
                         "target": "top_plate_right",
                         "kind": "cut",
@@ -762,156 +732,254 @@ feature_stages = {
                         "end": SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS,
                         "offset": TOLERANCE,
                     },
+
                 ),
             },
+            # "wire_chase": {
+            #     "sketch": (
+            #         cq.Sketch()
+            #         .rect(17.326, 47.505)
+            #     ),
+            #     "operations": (
+            #         {
+            #             "target": "top_plate_right",
+            #             "kind": "cut",
+            #             "start": top_shell_height,
+            #             "end": SOLAR_CEILING_TOP_Z,
+            #             "offset": TOLERANCE,
+            #         }
+            #     ),
+            # },
+            # "wall_and_support": {
+            #     "sketch": (
+            #         cq.Workplane("XY")
+            #         .sketch()
+            #         .rect(17.326, 47.505, tag="solar_outer")
+            #         .select("solar_outer")
+            #         .vertices("<X and >Y")
+            #         .fillet(1.55)
+            #         .reset()
+            #         # .push([(0.9975, -1.0)])
+            #         # .rect(15.35, 45.505, mode="s")
+            #         # .reset()
+            #         # block above solar circuitry 6.3625 - 6.2135 = 0.149mm 
+            #         # .push([(6.4625, -1.0)])
+            #         # .rect(4.8, 36.005)
+            #     ),
+            #     "operations": (
+            #         {
+            #             "target": "top_plate_right",
+            #             "kind": "union",
+            #             "start": top_shell_height,
+            #             "end": SOLAR_TOP_Z,
+            #             # "apply": lambda solid: solid.union(
+            #             #     cq.Workplane(
+            #             #         "XZ",
+            #             #         origin=(
+            #             #             21.73 - 15.34 / 2 - TOLERANCE,
+            #             #             -49.7 + 45.505 / 2 + TOLERANCE,
+            #             #             top_shell_height,
+            #             #         ),
+            #             #     )
+            #             #     .lineTo(0, SOLAR_WALL_THICKNESS)
+            #             #     .lineTo(SOLAR_WALL_THICKNESS, SOLAR_WALL_THICKNESS)
+            #             #     .threePointArc(
+            #             #         (
+            #             #             SOLAR_WALL_THICKNESS * (1 - 1 / sqrt(2)),
+            #             #             SOLAR_WALL_THICKNESS / sqrt(2),
+            #             #         ),
+            #             #         (0, 0),
+            #             #     )
+            #             #     .close()
+            #             #     .extrude(45.505 + TOLERANCE)
+            #             # ),
+            #         },
+            #     ),
+            # },
+            # "top": {
+            #     "sketch": (
+            #         cq.Workplane("XY")
+            #         .sketch()
+            #         .rect(17.326, 47.505, tag="solar_outer")
+            #         .select("solar_outer")
+            #         .vertices("<X and >Y")
+            #         .fillet(1.55)
+            #         .reset()
+            #         .push([(0.6425, -1.22125)])
+            #         .rect(6.44, 45.0625, mode="s")
+            #         .reset()
+            #         .push([(6.3625, -21.3775)])
+            #         .rect(5.0, 4.75, mode="s")
+            #     ),
+            #     "operations": (
+            #         {
+            #             "target": "top_plate_right",
+            #             "kind": "union",
+            #             "start": SOLAR_TOP_Z,
+            #             "end": SOLAR_CEILING_TOP_Z,
+            #         },
+            #     ),
+            # },
+            # "guard": {
+            #     "sketch": (
+            #         cq.Workplane("XY")
+            #         .sketch()
+            #         .rect(17.326, 47.505, tag="solar_outer")
+            #         .select("solar_outer")
+            #         .vertices("<X and >Y")
+            #         .fillet(1.55)
+            #         .reset()
+            #         .push([(0.6425, -1.22125)])
+            #         .rect(6.44, 45.0625, mode="s")
+            #         .reset()
+            #         .push([(6.3625, -21.3775)])
+            #         .rect(5.0, 4.75, mode="s")
+            #     ),
+            #     "operations": (
+            #         {
+            #             "target": "top_plate_right",
+            #             "kind": "union",
+            #             "start": SOLAR_CEILING_TOP_Z,
+            #             "end": SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS,
+            #             "apply": lambda solid: solid.faces(">Z").fillet(
+            #                 TOP_FILLET_RADIUS
+            #             ),
+            #         },
+            #     ),
+            # },
         },
     },
 }
 
-model_solids = {
-    "top_plate_right": None,
-    "bottom_plate": None,
+plates = {
+    "top_plate_right": cq.Workplane("XY").tag("base"),
+    "bottom_plate": cq.Workplane("XY").tag("base"),
 }
-for feature in feature_stages.values():
+for feature_name, feature in feature_stages.items():
+    if feature_name not in {
+        "solar_component",
+        "plate_shells",
+        "battery_cutout",
+        "kailh_switches",
+        "inductors",
+        "capacitors",
+        "resistors",
+        "power_ic",
+        "reset_button",
+        "solder_wires",
+        # TODO: this one is currently broken
+        # "microcontroller",
+        "power_switch",
+        # TODO: mounting holes are missing
+        # "mounting_holes",
+    }:
+        continue
     for stage in feature["stages"].values():
-        placements = stage.get("placements", feature["placements"])
-        if stage.get("batch_mode", "combined") == "per-switch":
-            stage_batches = [
-                {footprint_angle: [footprint_offset]}
-                for footprint_angle, footprint_offset in placements
-            ]
-        else:
-            placements_by_angle = defaultdict(list)
-            for footprint_angle, footprint_offset in placements:
-                placements_by_angle[footprint_angle].append(footprint_offset)
-            stage_batches = [placements_by_angle]
+        for operation in stage["operations"]:
+            sketch = stage["sketch"].copy()
+            if operation.get("offset") != None:
+                sketch = (
+                    sketch.faces()
+                    .wires()
+                    .offset(operation["offset"])
+                    .clean()
+                )
+            stage_profile = (
+                cq.Sketch()
+                .push(feature["placements"])
+                .face(sketch)
+                # Cuts with overlapping edges will break the model, so we clean the profile to merge
+                # any overlapping edges into one
+                .clean()
+                .reset()
+            )
 
-        for placements_by_angle in stage_batches:
-            profiles_by_offset = {}
-            for operation in stage["operations"]:
-                target = operation["target"]
-                offset = operation.get("offset", 0)
-                if offset not in profiles_by_offset:
-                    placed_stage_sketch = cq.Workplane("XY").sketch()
-                    has_faces = False
-                    for footprint_angle, footprint_offsets in placements_by_angle.items():
-                        placed_stage_sketch = (
-                            placed_stage_sketch.push(footprint_offsets)
-                            .face(stage["sketch"], angle=footprint_angle, mode="a")
-                            .reset()
-                        )
-                        has_faces = True
+            if operation["kind"] == "union":
+                plates[operation["target"]] = (
+                    plates[operation["target"]]
+                    .workplaneFromTagged("base")
+                    .workplane(offset=operation["start"])
+                    .placeSketch(stage_profile)
+                    .extrude(operation["end"] - operation["start"])
+                )
 
-                    if not has_faces:
-                        profiles_by_offset[offset] = None
-                    elif offset:
-                        profiles_by_offset[offset] = (
-                            placed_stage_sketch.faces()
-                            .wires()
-                            .offset(offset)
-                            .clean()
-                        )
-                    else:
-                        profiles_by_offset[offset] = placed_stage_sketch
+            elif operation["kind"] == "cut":
+                plates[operation["target"]] = (
+                    plates[operation["target"]]
+                    .workplaneFromTagged("base")
+                    .workplane(offset=operation["start"])
+                    .placeSketch(stage_profile)
+                    .cutBlind(operation["end"] - operation["start"])
+                )
 
-                stage_profile = profiles_by_offset[offset]
-                if stage_profile is None:
-                    continue
+            else:
+                raise ValueError(f"Unsupported pipeline operation: {operation['kind']}")
 
-                target_solid = model_solids[target]
+            apply = operation.get("apply")
+            if apply is not None:
+                plates[operation["target"]] = apply(plates[operation["target"]])
 
-                if operation["kind"] == "union":
-                    new_workplane = cq.Workplane("XY")
-                    if target_solid is None:
-                        new_workplane = new_workplane.tag("base")
-                    new_solid = (
-                        new_workplane
-                        .workplane(offset=operation["start"])
-                        .placeSketch(stage_profile)
-                        .extrude(operation["end"] - operation["start"])
-                    )
-                    if target_solid is None:
-                        model_solids[target] = new_solid
-                    else:
-                        model_solids[target] = target_solid.union(new_solid)
-                elif operation["kind"] == "cut":
-                    if target_solid is None:
-                        raise ValueError(f"{target} must exist before cut stages")
-                    
-                    model_solids[target] = (
-                        target_solid
-                        .workplaneFromTagged("base")
-                        .workplane(offset=operation["start"])
-                        .placeSketch(stage_profile)
-                        .cutBlind(operation["end"] - operation["start"])
-                    )
+top_plate_right = plates["top_plate_right"]
+bottom_plate = plates["bottom_plate"]
 
-                else:
-                    raise ValueError(f"Unsupported pipeline operation: {operation['kind']}")
-                
-                apply = operation.get("apply")
-                if apply is not None:
-                    model_solids[target] = apply(model_solids[target])
-
-top_plate_right = model_solids["top_plate_right"]
-bottom_plate = model_solids["bottom_plate"]
-
-top_plate_left = top_plate_right.mirror("YZ")
+# top_plate_left = top_plate_right.mirror("YZ")
 
 case_dir = cwd / "case"
-case_dir.mkdir(parents=True, exist_ok=True)
-cq.exporters.export(bottom_plate.faces("<Z"), str(case_dir / "bottom_plate.dxf"))
-cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.step"))
-cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.stl"))
-cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.step"))
-cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.stl"))
-cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
-cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.stl"))
+# case_dir.mkdir(parents=True, exist_ok=True)
+# cq.exporters.export(bottom_plate.faces("<Z"), str(case_dir / "bottom_plate.dxf"))
+# cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.step"))
+# cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.stl"))
+# cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.step"))
+# cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.stl"))
+# cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
+# cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.stl"))
 
 # Preview generated plates with PCB assembly if available ------------------------------------------
 
 pcb_assembly_path = case_dir / "cweep.step"
-pcb_assembly = None
-if pcb_assembly_path.exists():
-    pcb_assembly = cq.importers.importStep(str(pcb_assembly_path))
-    # the model's z-origin is set based on the bottom of the PCB body, not the PCB solder mask or
-    # copper layers between, so we lift it up by the thickness of those other layers
-    pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
+# pcb_assembly = None
+# if pcb_assembly_path.exists():
+#     pcb_assembly = cq.importers.importStep(str(pcb_assembly_path))
+#     # the model's z-origin is set based on the bottom of the PCB body, not the PCB solder mask or
+#     # copper layers between, so we lift it up by the thickness of those other layers
+#     pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
 
-mounting_hole_locations = cq.Workplane("XY").pushPoints(
-    face.Center()
-    for footprint_angle, footprint_offset in footprint_placements["mounting_holes"]
-    for face in feature_sketch["mounting_holes"]["drill"]
-    .moved(cq.Location(footprint_offset, cq.Vector(0, 0, 1), footprint_angle))
-    .faces()
-    .vals()
-)
+# mounting_hole_locations = cq.Workplane("XY").pushPoints(
+#     face.Center()
+#     for footprint_angle, footprint_offset in footprint_placements["mounting_holes"]
+#     for face in feature_sketch["mounting_holes"]["drill"]
+#     .moved(cq.Location(footprint_offset, cq.Vector(0, 0, 1), footprint_angle))
+#     .faces()
+#     .vals()
+# )
 
-hardware_instances = []
-for model_path, z_min in [
-    ("3dmodels/com_mcmaster/91294A004_hex_drive_flat_head_screw_m2x0.4x6.stp", 0),
-    ("3dmodels/com_grabcad_shrey.g-2/m2x2x3.2_threaded-insert.step", skirt_height),
-]:
-    template = cq.importers.importStep(str(cwd / model_path)).val()
-    template = template.rotate((0, 0, 0), (1, 0, 0), 180)
-    template = template.translate((0, 0, z_min - template.BoundingBox().zmin))
-    hardware_instances.append(
-        mounting_hole_locations.eachpoint(template, clean=False).combine(clean=False)
-    )
+# hardware_instances = []
+# for model_path, z_min in [
+#     ("3dmodels/com_mcmaster/91294A004_hex_drive_flat_head_screw_mfs2x0.4x6.stp", 0),
+#     ("3dmodels/com_grabcad_shrey.g-2/m2x2x3.2_threaded-insert.step", skirt_height),
+# ]:
+#     template = cq.importers.importStep(str(cwd / model_path)).val()
+#     template = template.rotate((0, 0, 0), (1, 0, 0), 180)
+#     template = template.translate((0, 0, z_min - template.BoundingBox().zmin))
+#     hardware_instances.append(
+#         mounting_hole_locations.eachpoint(template, clean=False).combine(clean=False)
+#     )
 
 preview_objects = [
-    bottom_plate,
-    pcb_assembly,
+    # bottom_plate,
+    # pcb_assembly,
     top_plate_right,
-    *hardware_instances,
 ]
 preview_colors = [
-    "#707070",
+    # "#707070",
+    "#ffc731",
     "#ffc731",
     "#5994dc",
-    "#ff0000",
-    "#00ff00",
+    # "#ff0000",
+    # "#00ff00",
 ]
 
 if args.preview:
     show(*preview_objects, colors=preview_colors)
+
+
