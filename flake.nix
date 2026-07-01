@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:cjshearer/nixpkgs/feat/add-cadquery";
 
     zmk-nix.url = "github:lilyinstarlight/zmk-nix";
     zmk-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +14,6 @@
       ...
     }:
     let
-      byNamePackages = builtins.readDir ./pkgs/by-name;
       pythonModules = builtins.readDir ./pkgs/python-modules;
       builds = [
         {
@@ -84,11 +83,13 @@
               pkgs.bashInteractive
               pkgs.cq-editor
               pkgs.kicad
+              pkgs.ruff
               (pkgs.python3.withPackages (
                 p: with p; [
                   cadquery
                   kiutils
                   ocp-vscode
+                  pyinstrument
                   watchdog
                 ]
               ))
@@ -105,21 +106,16 @@
         }
       );
 
-      overlays.packages =
-        final: prev:
-        builtins.mapAttrs (
-          name: _: (final.pkgs.callPackage (./pkgs/by-name + "/${name}/package.nix") { })
-        ) byNamePackages
-        // {
-          pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-            (
-              python-final: python-prev:
-              builtins.mapAttrs (
-                name: _: (python-final.callPackage (./pkgs/python-modules + "/${name}") { })
-              ) pythonModules
-            )
-          ];
-        };
+      overlays.packages = final: prev: {
+        pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+          (
+            python-final: python-prev:
+            builtins.mapAttrs (
+              name: _: (python-final.callPackage (./pkgs/python-modules + "/${name}") { })
+            ) pythonModules
+          )
+        ];
+      };
 
       packages = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (
         system:
