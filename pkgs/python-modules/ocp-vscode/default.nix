@@ -25,13 +25,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "ocp-vscode";
-  version = "3.4.0";
+  version = "4.0.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "ocp_vscode";
-    hash = "sha256-jK4QuOCnoknrfymraKP7klU6uVj+Nn0t1zxrTJBgN1o=";
+    hash = "sha256-+iljg0WvOg5Xgnly9gyd3JmYEF67vKnLgdMY9sysX3o=";
   };
 
   build-system = [ setuptools ];

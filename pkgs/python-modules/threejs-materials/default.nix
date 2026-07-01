@@ -12,13 +12,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "threejs-materials";
-  version = "1.1.1";
+  version = "1.2.1";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "threejs_materials";
-    hash = "sha256-ygDIKXk0ogqW81cNt5GCiPIIBbsbikrlA0LOmGDhz3M=";
+    hash = "sha256-FnnSSpVQRuL0DMMH7wY6TWPtEruu9VXODr3NKtLGBhc=";
   };
 
   build-system = [ setuptools ];
@@ -31,7 +31,10 @@ buildPythonPackage (finalAttrs: {
     requests
   ];
 
-  pythonRelaxDeps = [ "platformdirs" ];
+  pythonRelaxDeps = [
+    "pillow"
+    "platformdirs"
+  ];
 
   pythonImportsCheck = [ "threejs_materials" ];
 

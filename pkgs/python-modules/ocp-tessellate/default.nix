@@ -17,13 +17,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "ocp-tessellate";
-  version = "3.3.0";
+  version = "3.4.1";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "ocp_tessellate";
-    hash = "sha256-83AQMo9fqCHW0wEGENcN0gXrJgIK5CLM1EBajhrKjq0=";
+    hash = "sha256-Y/84fWW3qNmgpUloq6dCC/2x029ii2KImpgcVVjxG5A=";
   };
 
   build-system = [ setuptools ];
