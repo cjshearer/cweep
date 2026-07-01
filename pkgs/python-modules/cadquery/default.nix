@@ -34,15 +34,15 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "cadquery";
-  version = "8c17892ed68d4e5a19fe10fd0c0eb2a23f63db5a";
+  version = "2.8.0";
   pyproject = true;
   disabled = !isPy3k;
 
   src = fetchFromGitHub {
     owner = "CadQuery";
     repo = "cadquery";
-    rev = "${finalAttrs.version}";
-    hash = "sha256-+FoXWscnsY/x5yQGnRDTl6CDWH+Q/y9MFOctVncCH9E=";
+    rev = "v${finalAttrs.version}";
+    hash = "sha256-A+d1TvCK7wp05Ib4enTiPdrq4ctPQX2XxZysGLuURTU=";
   };
 
   build-system = [ setuptools ];
@@ -78,10 +78,6 @@ buildPythonPackage (finalAttrs: {
     "cadquery-ocp"
     "casadi"
   ];
-
-  # This fails upstream: https://github.com/CadQuery/OCP/issues/192
-  # OCP.Standard.Standard_Failure: BRepFill : The continuity is not G0 G1 or G2
-  disabledTests = [ "test_cap" ];
 
   pythonImportsCheck = [ "cadquery" ];
 
