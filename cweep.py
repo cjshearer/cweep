@@ -38,13 +38,53 @@ if args.preview:
 
 # Transform PCB geometry to CadQuery sketches ------------------------------------------------------
 
+
+def offset_profile(sketch: cq.Sketch, amount: float):
+    """Return a fresh sketch containing the offset of each face in *sketch*.
+
+    Moves each face to the origin before extracting wires so that
+    ``Wire.offset2D`` operates on geometry that is centred at (0,0).
+    This works around an OCC kernel bug where offsetting a circle wire
+    that carries a non-identity ``TopLoc_Location`` doubles the centre
+    point.  See CadQuery issues #896, #2046.
+    """
+    source = sketch.copy().reset().clean()
+    source_faces = source.faces().vals()
+    if not source_faces:
+        return source
+
+    result = cq.Sketch()
+    for source_face in source_faces:
+        source_normal_z = source_face.normalAt().z
+        centre = source_face.Center()
+        to_origin = cq.Location(cq.Vector(-centre.x, -centre.y, 0))
+        back = cq.Location(cq.Vector(centre.x, centre.y, 0))
+
+        face_at_origin = source_face.moved(to_origin)
+
+        for offset_wire in face_at_origin.outerWire().offset2D(amount):
+            offset_face = cq.Face.makeFromWires(offset_wire).moved(back)
+            if offset_face.normalAt().z * source_normal_z < 0:
+                offset_face = offset_face.reverse()
+            result = result.face(offset_face, mode="a")
+
+        for inner_wire in face_at_origin.innerWires():
+            for offset_wire in inner_wire.offset2D(-amount):
+                offset_face = cq.Face.makeFromWires(offset_wire).moved(back)
+                if offset_face.normalAt().z * source_normal_z < 0:
+                    offset_face = offset_face.reverse()
+                result = result.face(offset_face, mode="s")
+
+    return result.clean().reset()
+
+
 def add_item_to_sketch(sketch: cq.Sketch, item):
     # KiCad names graphic items as GrXxx (board) or FpXxx (footprint); strip the 2-char prefix.
     shape = item.__class__.__name__[2:]
     if shape == "Line":
         return sketch.segment(
             cq.Vector(item.start.X, item.start.Y, 0),
-            cq.Vector(item.end.X, item.end.Y, 0)
+            cq.Vector(item.end.X, item.end.Y, 0),
         )
     if shape == "Curve":
         return sketch.bezier([cq.Vector(pt.X, pt.Y, 0) for pt in item.coordinates])
@@ -58,9 +98,7 @@ def add_item_to_sketch(sketch: cq.Sketch, item):
         )
     if shape == "Rect":
         center = cq.Vector(
-            (item.start.X + item.end.X) / 2,
-            (item.start.Y + item.end.Y) / 2,
-            0
+            (item.start.X + item.end.X) / 2, (item.start.Y + item.end.Y) / 2, 0
         )
         return (
             sketch.push([center])
@@ -76,6 +114,7 @@ def add_item_to_sketch(sketch: cq.Sketch, item):
             .reset()
         )
     return sketch
+
 
 BOARD_FEATURE_NAME = "board_features"
 
@@ -175,14 +214,21 @@ for footprint in footprints:
 
 for feature_name, layers in feature_sketch.items():
     for layer_name, sketch in list(layers.items()):
+        # Lines, curves, and arcs added to the sketch are not automatically assembled into faces, so
+        # we attempt to assemble them here.
         try:
             layers[layer_name] = sketch.assemble()
         except Exception:
             pass
 
         # KiCad's Y axis is flipped compared to CadQuery, so we mirror the sketches to preserve
-        # orientation.
-        layers[layer_name] = sketch.moved(cq.Location(rx=180))
+        # orientation. Because this flips the normals of the faces, we also reverse the faces to
+        # ensure the normals point in the correct direction.
+        layers[layer_name] = sketch.faces("+Z")
+        if layers[layer_name]._selection:
+            layers[layer_name] = sketch.map(lambda f: f.reverse()).replace()
+        layers[layer_name] = layers[layer_name].reset().moved(cq.Location(rx=180))
+
 
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
 
@@ -196,7 +242,6 @@ PLATE_TOP_SPACER_THICKNESS = 0.9
 SCREW_LENGTH = 6
 SKIRT_THICKNESS = 2
 TOP_FILLET_RADIUS = 1
-POWER_SWITCH_ARC_RADIUS = sqrt(4.2 * 4.2 + 4.75 * 4.75)
 
 TOP_CUT_TOTAL_THICKNESS = (
     PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNESS + PLATE_TOP_COVER_THICKNESS
@@ -213,714 +258,595 @@ SOLAR_TOP_Z = top_shell_height + 4.195
 SOLAR_WALL_THICKNESS = 1.112
 SOLAR_CEILING_TOP_Z = SOLAR_TOP_Z + SOLAR_TOP_THICKNESS
 
-print(f"top_shell_height: {top_shell_height}, top of solar cell: {SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS}")
+print(
+    f"top_shell_height: {top_shell_height}, top of solar cell: {SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS}"
+)
 # from top_shell_height (8.852) to top of solar cell (13.445) is 4.597mm
 
-board_outline_sketch = (
-    feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
-    .faces(cq.selectors.AreaNthSelector(-1))
+board_outline_sketch = feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
+
+# =============================================================================
+# Build 3D plates
+# =============================================================================
+
+top_plate_right = cq.Workplane("XY").tag("base")
+bottom_plate = cq.Workplane("XY").tag("base")
+
+# ----------------------------------------------------------------- Plate shells
+
+# --- bottom_plate: board outline -> solid base ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch().push([cq.Location()]).face(board_outline_sketch).clean().reset()
+    )
+    .extrude(PLATE_BOTTOM_THICKNESS)
 )
 
-feature_stages = {
-    "plate_shells": {
-        "placements": [cq.Location()],
-        "stages": {
-            "bottom_plate": {
-                "sketch": board_outline_sketch,
-                "operations": (
-                    {
-                        "target": "bottom_plate",
-                        "kind": "union",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                    },
-                ),
-            },
-            "top_shell": {
-                "sketch": board_outline_sketch,
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "union",
-                        "start": 0,
-                        "end": top_shell_height,
-                        "offset": SKIRT_THICKNESS,
-                        "apply": lambda solid: solid.faces(">Z").fillet(TOP_FILLET_RADIUS),
-                    },
-                ),
-            },
-            "inner_clearance": {
-                "sketch": board_outline_sketch,
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": skirt_height,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "mounting_holes": {
-        "placements": footprint_placements["mounting_holes"],
-        "stages": {
-            "drill": {
-                "sketch": feature_sketch.get("mounting_holes").get("drill"),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        # we give the screw a little extra room so it doesn't bottom out and rip out
-                        # the insert
-                        "end": SCREW_LENGTH + TOLERANCE,
-                        "offset": TOLERANCE,
-                    },
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "battery_cutout": {
-        "placements": footprint_placements["battery_cutout"],
-        "stages": {
-            "top": {
-                "sketch": (
-                    feature_sketch.get("battery_cutout").get("Edge.Cuts")
-                    .face(
-                        feature_sketch.get("battery_cutout").get("F.CrtYd"),
-                    )
-                    .clean()
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": top_shell_height,
-                        # "offset": TOLERANCE,
-                    },
-                ),
-            },
-            # "bottom": {
-            #     "sketch": cq.Sketch()
-            #     .push([(-0.775, -0.025)])
-            #     .rect(7.75, 44.14)
-            #     .reset(),
-            #     "operations": (
-            #         {
-            #             "target": "bottom_plate",
-            #             "kind": "cut",
-            #             "start": 0,
-            #             "end": PLATE_BOTTOM_THICKNESS,
-            #             "offset": TOLERANCE,
-            #         },
-            #     ),
-            # },
-        },
-    },
-    "kailh_switches": {
-        "placements": footprint_placements["kailh_switches"],
-        "stages": {
-            "lower": {
-                "sketch": cq.Sketch().rect(14.5, 13.8),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-            "middle": {
-                "sketch": cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6).clean(),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height + PLATE_TOP_SPACER_THICKNESS,
-                        "end": skirt_height + TOP_CUT_LOWER_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-            # TODO: the upper cutout causes memory usage to spike and my machine to crash when
-            # combined with the above cuts. If I disable the above cuts, the upper cutout doesn't
-            # exactly work, as the whole top shell body is gone (except the solar component)
-            "upper": {
-                "sketch": (
-                    cq.Sketch()
-                    .rect(15.0, 15.0, tag="upper")
-                    .select("upper")
-                    .vertices()
-                    .fillet(0.85)
-                    .reset()
-                    .rect(3.0, 17.6)
-                    .clean()
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height + TOP_CUT_LOWER_THICKNESS,
-                        "end": top_shell_height,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-            # "bottom": {
-            #     # TODO (not for AI): move User.6 wires to "User.Drawings" or something like that
-            #     "sketch": feature_sketch["kailh_switches"]["User.6"],
-            #     "operations": (
-            #         {
-            #             "target": "bottom_plate",
-            #             "kind": "cut",
-            #             "start": 0,
-            #             "end": PLATE_BOTTOM_THICKNESS,
-            #             "offset": TOLERANCE,
-            #         },
-            #     ),
-            # },
-        },
-    },
-    "inductors": {
-        "placements": footprint_placements["inductors"],
-        "stages": {
-            "top": {
-                "sketch": cq.Sketch().rect(4.6, 4.5),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": top_shell_height,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "capacitors": {
-        "placements": footprint_placements["capacitors"],
-        "stages": {
-            "body": {
-                "sketch": (
-                    # TODO(not for AI): fix whatever caused copilot to bring in these origins -
-                    # likely some quirk in how the capacitor footprint was drawn in KiCad
-                    cq.Sketch().push([(0.001632, -0.003268)]).rect(2.8, 0.95).reset()
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "resistors": {
-        "placements": footprint_placements["resistors"],
-        "stages": {
-            "body": {
-                "sketch": cq.Sketch().rect(2.8, 0.95),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "power_ic": {
-        "placements": footprint_placements["power_ic"],
-        "stages": {
-            "body": {
-                "sketch": cq.Sketch().rect(3.8, 3.8),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": skirt_height + PLATE_TOP_SPACER_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "reset_button": {
-        "placements": footprint_placements["reset_button"],
-        "stages": {
-            "top": {
-                "sketch": (
-                    cq.Sketch()
-                    .push([(3.25, -2.25)])
-                    .rect(7.5, 6.0, tag="button")
-                    .select("button")
-                    .vertices()
-                    .fillet(0.5)
-                    .reset()
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": top_shell_height,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-            "bottom": {
-                "sketch": feature_sketch.get("reset_button", {}).get("pads"),
-                "operations": (
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "solder_wires": {
-        "placements": footprint_placements["solder_wires"],
-        "stages": {
-            "body": {
-                "sketch": (
-                    cq.Sketch()
-                    .push([(0, -2.95)])
-                    .rect(2.7, 8.6, tag="wire")
-                    .select("wire")
-                    .vertices()
-                    .fillet(1.0)
-                    .reset()
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": top_shell_height,
-                        "offset": TOLERANCE,
-                    },
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "microcontroller": {
-        "placements": footprint_placements["microcontroller"],
-        "stages": {
-            "lower": {
-                "sketch": (
-                    cq.Workplane("XY")
-                    .sketch()
-                    .push([(-7.585002, 0.153997), (7.585002, 0.153997)])
-                    .rect(2.539996, 17.780002, tag="controller_sockets")
-                    .select("controller_sockets")
-                    .reset()
-                    .face(
-                        # TODO(not for AI): see if we can somehow start with this as the base
-                        # sketch, instead of placing it on top of the sockets
-                        feature_sketch.get("microcontroller")
-                        .get("F.CrtYd")
-                        .wires("%CIRCLE")
-                        .clean()
-                    )
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": skirt_height + TOP_CUT_LOWER_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-            "upper": {
-                "sketch": (
-                    cq.Workplane("XY")
-                    .center(0, 0.0905)
-                    .sketch()
-                    .rect(17.71, 20.955, tag="controller_body")
-                    .select("controller_body")
-                    .vertices()
-                    .fillet(1.905)
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height + TOP_CUT_LOWER_THICKNESS,
-                        "end": top_shell_height,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-            "bottom": {
-                "sketch": (
-                    cq.Workplane("XY")
-                    .center(0, 0.0905)
-                    .sketch()
-                    .rect(17.71, 20.955)
-                    .vertices()
-                    .fillet(1.905)
-                ),
-                "operations": (
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    # TODO: this is missing despite being enabled
-    "power_switch": {
-        "placements": footprint_placements["power_switch"],
-        "stages": {
-            "top": {
-                "sketch": (
-                    cq.Sketch()
-                    .rect(4.3, 14.8)
-                    .arc((4.2, 4.75), (0, POWER_SWITCH_ARC_RADIUS), (-4.2, 4.75))
-                    .segment((-4.2, -4.75), (-4.2, 4.75))
-                    .arc((-4.2, -4.75), (0, -POWER_SWITCH_ARC_RADIUS), (4.2, -4.75))
-                    .close()
-                    .assemble()
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": skirt_height,
-                        "end": top_shell_height,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-            "bottom": {
-                "sketch": feature_sketch.get("power_switch", {}).get("pads", cq.Sketch()),
-                "operations": (
-                    {
-                        "target": "bottom_plate",
-                        "kind": "cut",
-                        "start": 0,
-                        "end": PLATE_BOTTOM_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
-                ),
-            },
-        },
-    },
-    "solar_component": {
-        "placements": footprint_placements["solar_cell"],
-        "stages": {
-            "main_body": {
-                "sketch": (
-                    cq.Sketch()
-                    .face(
-                        feature_sketch["solar_cell"]["F.Fab"]
-                        .faces(cq.selectors.AreaNthSelector(-1))
-                        .wires()
-                        .val()
-                    )
-                ),
-                "operations": (
-                    {
-                        "target": "top_plate_right",
-                        "kind": "union",
-                        "start": top_shell_height,
-                        "end": SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS,
-                        # This offset closes the gap between the left edge of the solar cell box and
-                        # the rounded offset edge of the main plate body
-                        "offset": SOLAR_WALL_THICKNESS,
-                        "apply": (
-                            lambda solid: 
-                            solid.faces(">Z")
-                            # Walls around cutout for solar cell will be flush with the cell and
-                            # will be rounded to meet the edge of the cell
-                            .fillet(TOP_FILLET_RADIUS)
-                        ),
-                    },
-                    # Main battery compartment will be cutout, leaving a support rib on the left
-                    # that doubles as a battery holder
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": top_shell_height,
-                        "end": SOLAR_TOP_Z,
-                        "offset": TOLERANCE,
-                        # "apply": lambda solid: solid.union(
-                        #     cq.Workplane(
-                        #         "XZ",
-                        #         origin=(
-                        #             21.73 - 15.34 / 2 - TOLERANCE,
-                        #             -49.7 + 45.505 / 2 + TOLERANCE,
-                        #             top_shell_height,
-                        #         ),
-                        #     )
-                        #     .lineTo(0, SOLAR_WALL_THICKNESS)
-                        #     .lineTo(SOLAR_WALL_THICKNESS, SOLAR_WALL_THICKNESS)
-                        #     .threePointArc(
-                        #         (
-                        #             SOLAR_WALL_THICKNESS * (1 - 1 / sqrt(2)),
-                        #             SOLAR_WALL_THICKNESS / sqrt(2),
-                        #         ),
-                        #         (0, 0),
-                        #     )
-                        #     .close()
-                        #     .extrude(45.505 + TOLERANCE)
-                        # ),
-                    },
-                    # Cutout for the solar cell to sit within
-                    {
-                        "target": "top_plate_right",
-                        "kind": "cut",
-                        "start": SOLAR_CEILING_TOP_Z,
-                        "end": SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS,
-                        "offset": TOLERANCE,
-                    },
+# --- top_shell: board outline -> main body with skirt ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push([cq.Location()])
+        .face(offset_profile(board_outline_sketch, SKIRT_THICKNESS))
+        .clean()
+        .reset()
+    )
+    .extrude(top_shell_height)
+)
+# apply: fillet the top face of the shell
+top_plate_right = top_plate_right.faces(">Z").fillet(TOP_FILLET_RADIUS)
 
-                ),
-            },
-            # "wire_chase": {
-            #     "sketch": (
-            #         cq.Sketch()
-            #         .rect(17.326, 47.505)
-            #     ),
-            #     "operations": (
-            #         {
-            #             "target": "top_plate_right",
-            #             "kind": "cut",
-            #             "start": top_shell_height,
-            #             "end": SOLAR_CEILING_TOP_Z,
-            #             "offset": TOLERANCE,
-            #         }
-            #     ),
-            # },
-            # "wall_and_support": {
-            #     "sketch": (
-            #         cq.Workplane("XY")
-            #         .sketch()
-            #         .rect(17.326, 47.505, tag="solar_outer")
-            #         .select("solar_outer")
-            #         .vertices("<X and >Y")
-            #         .fillet(1.55)
-            #         .reset()
-            #         # .push([(0.9975, -1.0)])
-            #         # .rect(15.35, 45.505, mode="s")
-            #         # .reset()
-            #         # block above solar circuitry 6.3625 - 6.2135 = 0.149mm 
-            #         # .push([(6.4625, -1.0)])
-            #         # .rect(4.8, 36.005)
-            #     ),
-            #     "operations": (
-            #         {
-            #             "target": "top_plate_right",
-            #             "kind": "union",
-            #             "start": top_shell_height,
-            #             "end": SOLAR_TOP_Z,
-            #             # "apply": lambda solid: solid.union(
-            #             #     cq.Workplane(
-            #             #         "XZ",
-            #             #         origin=(
-            #             #             21.73 - 15.34 / 2 - TOLERANCE,
-            #             #             -49.7 + 45.505 / 2 + TOLERANCE,
-            #             #             top_shell_height,
-            #             #         ),
-            #             #     )
-            #             #     .lineTo(0, SOLAR_WALL_THICKNESS)
-            #             #     .lineTo(SOLAR_WALL_THICKNESS, SOLAR_WALL_THICKNESS)
-            #             #     .threePointArc(
-            #             #         (
-            #             #             SOLAR_WALL_THICKNESS * (1 - 1 / sqrt(2)),
-            #             #             SOLAR_WALL_THICKNESS / sqrt(2),
-            #             #         ),
-            #             #         (0, 0),
-            #             #     )
-            #             #     .close()
-            #             #     .extrude(45.505 + TOLERANCE)
-            #             # ),
-            #         },
-            #     ),
-            # },
-            # "top": {
-            #     "sketch": (
-            #         cq.Workplane("XY")
-            #         .sketch()
-            #         .rect(17.326, 47.505, tag="solar_outer")
-            #         .select("solar_outer")
-            #         .vertices("<X and >Y")
-            #         .fillet(1.55)
-            #         .reset()
-            #         .push([(0.6425, -1.22125)])
-            #         .rect(6.44, 45.0625, mode="s")
-            #         .reset()
-            #         .push([(6.3625, -21.3775)])
-            #         .rect(5.0, 4.75, mode="s")
-            #     ),
-            #     "operations": (
-            #         {
-            #             "target": "top_plate_right",
-            #             "kind": "union",
-            #             "start": SOLAR_TOP_Z,
-            #             "end": SOLAR_CEILING_TOP_Z,
-            #         },
-            #     ),
-            # },
-            # "guard": {
-            #     "sketch": (
-            #         cq.Workplane("XY")
-            #         .sketch()
-            #         .rect(17.326, 47.505, tag="solar_outer")
-            #         .select("solar_outer")
-            #         .vertices("<X and >Y")
-            #         .fillet(1.55)
-            #         .reset()
-            #         .push([(0.6425, -1.22125)])
-            #         .rect(6.44, 45.0625, mode="s")
-            #         .reset()
-            #         .push([(6.3625, -21.3775)])
-            #         .rect(5.0, 4.75, mode="s")
-            #     ),
-            #     "operations": (
-            #         {
-            #             "target": "top_plate_right",
-            #             "kind": "union",
-            #             "start": SOLAR_CEILING_TOP_Z,
-            #             "end": SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS,
-            #             "apply": lambda solid: solid.faces(">Z").fillet(
-            #                 TOP_FILLET_RADIUS
-            #             ),
-            #         },
-            #     ),
-            # },
-        },
-    },
-}
+# --- inner_clearance: hollow out the skirt area ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push([cq.Location()])
+        .face(offset_profile(board_outline_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(skirt_height)
+)
+# --------------------------------------------------------------- Mounting holes
 
-plates = {
-    "top_plate_right": cq.Workplane("XY").tag("base"),
-    "bottom_plate": cq.Workplane("XY").tag("base"),
-}
-for feature_name, feature in feature_stages.items():
-    if feature_name not in {
-        "solar_component",
-        "plate_shells",
-        "battery_cutout",
-        "kailh_switches",
-        "inductors",
-        "capacitors",
-        "resistors",
-        "power_ic",
-        "reset_button",
-        "solder_wires",
-        # TODO: this one is currently broken
-        # "microcontroller",
-        "power_switch",
-        # TODO: mounting holes are missing
-        # "mounting_holes",
-    }:
-        continue
-    for stage in feature["stages"].values():
-        for operation in stage["operations"]:
-            sketch = stage["sketch"].copy()
-            if operation.get("offset") != None:
-                sketch = (
-                    sketch.faces()
-                    .wires()
-                    .offset(operation["offset"])
-                    .clean()
-                )
-            stage_profile = (
-                cq.Sketch()
-                .push(feature["placements"])
-                .face(sketch)
-                # Cuts with overlapping edges will break the model, so we clean the profile to merge
-                # any overlapping edges into one
-                .clean()
-                .reset()
-            )
+_mounting_holes_sketch = feature_sketch.get("mounting_holes").get("drill")
+_mounting_holes_placements = footprint_placements["mounting_holes"]
 
-            if operation["kind"] == "union":
-                plates[operation["target"]] = (
-                    plates[operation["target"]]
-                    .workplaneFromTagged("base")
-                    .workplane(offset=operation["start"])
-                    .placeSketch(stage_profile)
-                    .extrude(operation["end"] - operation["start"])
-                )
+# --- drill: screw holes through top plate ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_mounting_holes_placements)
+        .face(offset_profile(_mounting_holes_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(SCREW_LENGTH + TOLERANCE - skirt_height)
+)
 
-            elif operation["kind"] == "cut":
-                plates[operation["target"]] = (
-                    plates[operation["target"]]
-                    .workplaneFromTagged("base")
-                    .workplane(offset=operation["start"])
-                    .placeSketch(stage_profile)
-                    .cutBlind(operation["end"] - operation["start"])
-                )
+# --- drill: screw holes through bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_mounting_holes_placements)
+        .face(offset_profile(_mounting_holes_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
 
-            else:
-                raise ValueError(f"Unsupported pipeline operation: {operation['kind']}")
+# --------------------------------------------------------------- Battery cutout
 
-            apply = operation.get("apply")
-            if apply is not None:
-                plates[operation["target"]] = apply(plates[operation["target"]])
+_battery_placements = footprint_placements["battery_cutout"]
+_battery_top_sketch = (
+    feature_sketch.get("battery_cutout")
+    .get("Edge.Cuts")
+    .face(feature_sketch.get("battery_cutout").get("F.CrtYd"))
+    .clean()
+)
+_battery_bottom_sketch = cq.Sketch().push([(-0.775, -0.025)]).rect(7.75, 44.14).reset()
 
-top_plate_right = plates["top_plate_right"]
-bottom_plate = plates["bottom_plate"]
+# --- top: battery cutout through top plate ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch().push(_battery_placements).face(_battery_top_sketch).clean().reset()
+    )
+    .cutBlind(top_shell_height - skirt_height)
+)
+
+# --- bottom: battery access through bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_battery_placements)
+        .face(offset_profile(_battery_bottom_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# ------------------------------------------------------------- Kailh switches
+
+# _kailh_placements = footprint_placements["kailh_switches"]
+# _kailh_bottom_sketch = feature_sketch["kailh_switches"]["User.6"]
+
+# # --- lower: wide clearance for switch body ---
+# top_plate_right = (
+#     top_plate_right.workplaneFromTagged("base")
+#     .workplane(offset=skirt_height)
+#     .placeSketch(
+#         cq.Sketch()
+#         .push(_kailh_placements)
+#         .face(offset_profile(cq.Sketch().rect(14.5, 13.8), TOLERANCE))
+#         .clean()
+#         .reset()
+#     )
+#     .cutBlind(PLATE_TOP_SPACER_THICKNESS)
+# )
+
+# # --- middle: tighter fit through switch plate layer ---
+# top_plate_right = (
+#     top_plate_right.workplaneFromTagged("base")
+#     .workplane(offset=skirt_height + PLATE_TOP_SPACER_THICKNESS)
+#     .placeSketch(
+#         cq.Sketch()
+#         .push(_kailh_placements)
+#         .face(
+#             offset_profile(
+#                 cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6).clean(), TOLERANCE
+#             )
+#         )
+#         .clean()
+#         .reset()
+#     )
+#     .cutBlind(PLATE_TOP_SWITCH_THICKNESS)
+# )
+
+# # --- upper: final switch opening with filleted corners ---
+# top_plate_right = (
+#     top_plate_right.workplaneFromTagged("base")
+#     .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
+#     .placeSketch(
+#         cq.Sketch()
+#         .push(_kailh_placements)
+#         .face(
+#             offset_profile(
+#                 cq.Sketch()
+#                 .rect(15.0, 15.0, tag="upper")
+#                 .select("upper")
+#                 .vertices()
+#                 .fillet(0.85)
+#                 .reset()
+#                 .rect(3.0, 17.6)
+#                 .clean(),
+#                 TOLERANCE,
+#             )
+#         )
+#         .clean()
+#         .reset()
+#     )
+#     .cutBlind(PLATE_TOP_COVER_THICKNESS)
+# )
+
+# # --- bottom: switch pad relief on bottom plate ---
+# bottom_plate = (
+#     bottom_plate.workplaneFromTagged("base")
+#     .workplane()
+#     .placeSketch(
+#         cq.Sketch()
+#         .push(_kailh_placements)
+#         .face(offset_profile(_kailh_bottom_sketch, TOLERANCE))
+#         .clean()
+#         .reset()
+#     )
+#     .cutBlind(PLATE_BOTTOM_THICKNESS)
+# )
+
+# ---------------------------------------------------------------- Inductors
+_inductors_placements = footprint_placements["inductors"]
+
+# --- top: inductor clearance ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_inductors_placements)
+        .face(offset_profile(cq.Sketch().rect(4.6, 4.5), TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(top_shell_height - skirt_height)
+)
+
+# ---------------------------------------------------------------- Capacitors
+
+_capacitors_placements = footprint_placements["capacitors"]
+_capacitors_sketch = cq.Sketch().push([(0.001632, -0.003268)]).rect(2.8, 0.95).reset()
+
+# --- body: capacitor clearance on top plate ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_capacitors_placements)
+        .face(offset_profile(_capacitors_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_TOP_SPACER_THICKNESS)
+)
+
+# --- body: capacitor clearance on bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_capacitors_placements)
+        .face(offset_profile(_capacitors_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# ----------------------------------------------------------------- Resistors
+
+_resistors_placements = footprint_placements["resistors"]
+_resistors_sketch = cq.Sketch().rect(2.8, 0.95)
+
+# --- body: resistor clearance on top plate ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_resistors_placements)
+        .face(offset_profile(_resistors_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_TOP_SPACER_THICKNESS)
+)
+
+# --- body: resistor clearance on bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_resistors_placements)
+        .face(offset_profile(_resistors_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# ------------------------------------------------------------------ Power IC
+
+_power_ic_placements = footprint_placements["power_ic"]
+_power_ic_sketch = cq.Sketch().rect(3.8, 3.8)
+
+# --- body: power IC clearance on top plate ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_power_ic_placements)
+        .face(offset_profile(_power_ic_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_TOP_SPACER_THICKNESS)
+)
+
+# --- body: power IC clearance on bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_power_ic_placements)
+        .face(offset_profile(_power_ic_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# --------------------------------------------------------------- Reset button
+
+_reset_placements = footprint_placements["reset_button"]
+_reset_top_sketch = (
+    cq.Sketch()
+    .rect(7.5, 6.0, tag="button")
+    .select("button")
+    .vertices()
+    .fillet(0.5)
+    .reset()
+)
+_reset_bottom_sketch = feature_sketch.get("reset_button", {}).get("pads")
+
+# --- top: reset button opening ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_reset_placements)
+        .face(offset_profile(_reset_top_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(top_shell_height - skirt_height)
+)
+
+# --- bottom: reset button pad relief ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_reset_placements)
+        .face(offset_profile(_reset_bottom_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# -------------------------------------------------------------- Solder wires
+
+_solder_wires_placements = footprint_placements["solder_wires"]
+_solder_wires_sketch = (
+    cq.Sketch()
+    .push([(0, -2.95)])
+    .rect(2.7, 8.6, tag="wire")
+    .select("wire")
+    .vertices()
+    .fillet(1.0)
+    .reset()
+)
+
+# --- body: solder wire slot ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_solder_wires_placements)
+        .face(offset_profile(_solder_wires_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(top_shell_height - skirt_height)
+)
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_solder_wires_placements)
+        .face(offset_profile(_solder_wires_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# ------------------------------------------------------------ Microcontroller
+
+_mcu_placements = footprint_placements["microcontroller"]
+_mcu_lower_sketch = (
+    cq.Workplane("XY")
+    .sketch()
+    .push([(-7.585002, 0.153997), (7.585002, 0.153997)])
+    .rect(2.539996, 17.780002, tag="controller_sockets")
+    .select("controller_sockets")
+    .reset()
+    .face(feature_sketch.get("microcontroller").get("F.CrtYd").wires("%CIRCLE").clean())
+)
+_mcu_upper_sketch = (
+    cq.Workplane("XY")
+    .center(0, 0.0905)
+    .sketch()
+    .rect(17.71, 20.955, tag="controller_body")
+    .select("controller_body")
+    .vertices()
+    .fillet(1.905)
+)
+_mcu_bottom_sketch = (
+    cq.Workplane("XY")
+    .center(0, 0.0905)
+    .sketch()
+    .rect(17.71, 20.955)
+    .vertices()
+    .fillet(1.905)
+)
+
+# --- lower: MCU socket cutouts + courtyard ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_mcu_placements)
+        .face(offset_profile(_mcu_lower_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(TOP_CUT_LOWER_THICKNESS)
+)
+
+# --- upper: MCU body clearance ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
+    .placeSketch(
+        cq.Sketch()
+        .push(_mcu_placements)
+        .face(offset_profile(_mcu_upper_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_TOP_COVER_THICKNESS)
+)
+
+# --- bottom: MCU relief on bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_mcu_placements)
+        .face(offset_profile(_mcu_bottom_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# -------------------------------------------------------------- Power switch
+
+_power_switch_arc_radius = sqrt(4.2 * 4.2 + 4.75 * 4.75)
+_power_switch_placements = footprint_placements["power_switch"]
+_power_switch_top_sketch = (
+    cq.Sketch()
+    .rect(4.3, 14.8)
+    .arc((4.2, 4.75), (0, _power_switch_arc_radius), (-4.2, 4.75))
+    .segment((-4.2, -4.75), (-4.2, 4.75))
+    .arc((-4.2, -4.75), (0, -_power_switch_arc_radius), (4.2, -4.75))
+    .close()
+    .assemble()
+)
+_power_switch_bottom_sketch = feature_sketch["power_switch"]["pads"]
+
+# --- top: power switch opening ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_power_switch_placements)
+        .face(offset_profile(_power_switch_top_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(top_shell_height - skirt_height)
+)
+
+# --- bottom: power switch pad relief ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_power_switch_placements)
+        .face(offset_profile(_power_switch_bottom_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# ------------------------------------------------------------ Solar component
+
+_solar_placements = footprint_placements["solar_cell"]
+_solar_main_sketch = cq.Sketch().face(
+    feature_sketch["solar_cell"]["F.Fab"]
+    .faces(cq.selectors.AreaNthSelector(-1))
+    .wires()
+    .val()
+)
+
+# --- main_body: build solar housing as a standalone solid ---
+solar_housing = (
+    cq.Workplane("XY")
+    .tag("solar_base")
+    .workplane(offset=top_shell_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_solar_placements)
+        .face(offset_profile(_solar_main_sketch, SOLAR_WALL_THICKNESS))
+        .clean()
+        .reset()
+    )
+    .extrude(SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS - top_shell_height)
+)
+# apply: fillet the top face; walls around cutout flush with cell
+solar_housing = solar_housing.faces(">Z").fillet(TOP_FILLET_RADIUS)
+
+print(SOLAR_CEILING_TOP_Z - top_shell_height - SOLAR_CELL_THICKNESS)
+front_of_solar_housing = solar_housing.faces("<Y")
+front_of_solar_housing_width = front_of_solar_housing.val().BoundingBox().xlen
+front_of_solar_housing_height = SOLAR_CEILING_TOP_Z - top_shell_height 
+selected = (
+    front_of_solar_housing
+    .workplane(centerOption="CenterOfBoundBox")
+    .sketch()
+    .push([(0, -1.1/2)])
+    .rect(front_of_solar_housing_width, front_of_solar_housing_height)
+)
+
+
+# selected = (
+#     solar_housing.faces("<Y")
+#     .tag("solar_face")
+#     .workplaneFromTagged("solar_face")
+#     .sketch()
+#     .face(solar_housing.faces("<Y").val())
+#     .faces()
+#     .offset(-2, mode="r")
+#     .vertices(">Z")
+#     .fillet(4)
+#     .reset()
+#     .faces()
+# )
+# # Convert Sketch to Workplane so ocp_vscode preserves world-space position
+# selected = cq.Workplane("XY").newObject(selected.vals())
+
+# # --- front cutout: extrude selected face through the housing wall ---
+# cut_face = selected.vals()[0]
+# cut_tool = cq.Solid.extrudeLinear(cut_face, cq.Vector(0, SOLAR_WALL_THICKNESS, 0))
+# solar_housing = solar_housing.cut(cut_tool)
+
+# --- main_body: solar cell pocket ---
+solar_housing = (
+    solar_housing.workplaneFromTagged("solar_base")
+    .workplane(offset=SOLAR_CEILING_TOP_Z)
+    .placeSketch(
+        cq.Sketch()
+        .push(_solar_placements)
+        .face(offset_profile(_solar_main_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(SOLAR_CELL_THICKNESS)
+)
+
+# --- main_body: union solar housing onto the top plate ---
+top_plate_right = top_plate_right.union(solar_housing)
+
 
 # top_plate_left = top_plate_right.mirror("YZ")
 
@@ -966,20 +892,18 @@ pcb_assembly_path = case_dir / "cweep.step"
 #     )
 
 preview_objects = [
-    # bottom_plate,
-    # pcb_assembly,
+    bottom_plate,
     top_plate_right,
+    selected,
+    # pcb_assembly,
 ]
 preview_colors = [
-    # "#707070",
-    "#ffc731",
-    "#ffc731",
+    "#707070",
     "#5994dc",
+    "#ffc731",
     # "#ff0000",
     # "#00ff00",
 ]
 
 if args.preview:
     show(*preview_objects, colors=preview_colors)
-
-
