@@ -14,13 +14,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "trame-server";
-  version = "3.12.4";
+  version = "3.12.5";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "trame_server";
-    hash = "sha256-laDScy/VLrKRLKBYdOuobZHo1+p+SgqIge8/U5KTZF8=";
+    hash = "sha256-4sUkWEOAZVM3a1h/m9OSsSI7+4a1XGg7X4ymLDvjVRk=";
   };
 
   build-system = [ hatchling ];

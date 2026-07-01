@@ -13,13 +13,13 @@
 }:
 buildPythonPackage (finalAttrs: {
   pname = "trame-vtk";
-  version = "2.11.8";
+  version = "2.11.13";
   pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) version;
     pname = "trame_vtk";
-    hash = "sha256-vvSjXYbVe/m0r0TdqPNh+RexQeT2JMmrcni2xI0XHnQ=";
+    hash = "sha256-kSgFz6RijUkOAGvhaKaGAJgJUhYIC/Puz1UQtPH8q5I=";
   };
 
   build-system = [ hatchling ];

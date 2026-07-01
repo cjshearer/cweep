@@ -58,8 +58,6 @@ buildPythonPackage (finalAttrs: {
     "websockets"
   ];
 
-  # pythonRemoveDeps = [ "pyaml" ];
-
   pythonImportsCheck = [ "ocp_vscode" ];
 
   passthru.updateScript = nix-update-script { };

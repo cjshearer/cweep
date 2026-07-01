@@ -20,9 +20,16 @@ buildPythonPackage (finalAttrs: {
 
   dependencies = [ trame-client ];
 
-  postPatch = ''
-    # Ensure PEP 420 namespace package layout (split across trame-* packages)
-    find trame -type f -name '__init__.py' -delete
+  # The wheel ships zero-byte __init__.py namespace markers under trame/ so that setuptools includes
+  # the trame/widgets/ directory (needed for cadquery which imports `trame.widgets.trame`).
+  # Deleting them postPatch would cause setuptools to omit the entire trame/ tree; instead clean
+  # them up postInstall to avoid buildEnv conflicts with other trame-* packages that contribute to
+  # the same PEP 420 namespace.
+  postInstall = ''
+    rm -rf $out/lib/*/site-packages/trame/__init__.py
+    rm -rf $out/lib/*/site-packages/trame/modules
+    find $out/lib/*/site-packages/trame -name '__init__.py' -delete
+    find $out/lib/*/site-packages/trame -name '__pycache__' -exec rm -rf {} + 2>/dev/null || true
   '';
 
   pythonImportsCheck = [ "trame_components" ];
