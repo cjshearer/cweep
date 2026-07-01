@@ -17,6 +17,7 @@ Prior art:
 
 import argparse
 from collections import defaultdict
+from typing import cast
 from math import sqrt
 from pathlib import Path
 
@@ -232,24 +233,31 @@ for feature_name, layers in feature_sketch.items():
 
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
 
-
 TOLERANCE = 0.2
-PCB_THICKNESS = 1.6
+
+PCB_THICKNESS = raw_board.general.thickness
+
 PLATE_BOTTOM_THICKNESS = 2
 PLATE_TOP_COVER_THICKNESS = 0.8
 PLATE_TOP_SWITCH_THICKNESS = 1.3
 PLATE_TOP_SPACER_THICKNESS = 0.9
-SCREW_LENGTH = 6
 SKIRT_THICKNESS = 2
 TOP_FILLET_RADIUS = 1
 
-TOP_CUT_TOTAL_THICKNESS = (
-    PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNESS + PLATE_TOP_COVER_THICKNESS
-)
 TOP_CUT_LOWER_THICKNESS = PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNESS
 
 skirt_height = PLATE_BOTTOM_THICKNESS + PCB_THICKNESS + 0.01
-top_shell_height = skirt_height + TOP_CUT_TOTAL_THICKNESS
+top_shell_height = (
+    skirt_height
+    + PLATE_TOP_SPACER_THICKNESS
+    + PLATE_TOP_SWITCH_THICKNESS
+    + PLATE_TOP_COVER_THICKNESS
+)
+
+SCREW_LENGTH = 6
+INDUCTOR_HEIGHT = 3
+MAX_0603_HEIGHT = 1
+BATTERY_TAB_WIDTH = 5.08
 
 ORIGIN = cq.Vector(0, 0, 0)
 SOLAR_TOP_THICKNESS = 1.13
@@ -257,10 +265,8 @@ SOLAR_CELL_THICKNESS = 2.1
 SOLAR_TOP_Z = top_shell_height + 4.195
 SOLAR_WALL_THICKNESS = 1.112
 SOLAR_CEILING_TOP_Z = SOLAR_TOP_Z + SOLAR_TOP_THICKNESS
+BATTERY_HEIGHT_ABOVE_TOP_SHELL = 3.905
 
-print(
-    f"top_shell_height: {top_shell_height}, top of solar cell: {SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS}"
-)
 # from top_shell_height (8.852) to top of solar cell (13.445) is 4.597mm
 
 board_outline_sketch = feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
@@ -318,7 +324,7 @@ top_plate_right = (
 _mounting_holes_sketch = feature_sketch.get("mounting_holes").get("drill")
 _mounting_holes_placements = footprint_placements["mounting_holes"]
 
-# --- drill: screw holes through top plate ---
+# --- drill: holes for heat-set brass inserts in top plate  ---
 top_plate_right = (
     top_plate_right.workplaneFromTagged("base")
     .workplane(offset=skirt_height)
@@ -349,12 +355,7 @@ bottom_plate = (
 # --------------------------------------------------------------- Battery cutout
 
 _battery_placements = footprint_placements["battery_cutout"]
-_battery_top_sketch = (
-    feature_sketch.get("battery_cutout")
-    .get("Edge.Cuts")
-    .face(feature_sketch.get("battery_cutout").get("F.CrtYd"))
-    .clean()
-)
+_battery_top_sketch = feature_sketch.get("battery_cutout").get("Edge.Cuts").clean()
 _battery_bottom_sketch = cq.Sketch().push([(-0.775, -0.025)]).rect(7.75, 44.14).reset()
 
 # --- top: battery cutout through top plate ---
@@ -364,7 +365,8 @@ top_plate_right = (
     .placeSketch(
         cq.Sketch().push(_battery_placements).face(_battery_top_sketch).clean().reset()
     )
-    .cutBlind(top_shell_height - skirt_height)
+    .tag("battery_top_sketch")
+    # .cutBlind(top_shell_height - skirt_height)
 )
 
 # --- bottom: battery access through bottom plate ---
@@ -383,82 +385,214 @@ bottom_plate = (
 
 # ------------------------------------------------------------- Kailh switches
 
-# _kailh_placements = footprint_placements["kailh_switches"]
-# _kailh_bottom_sketch = feature_sketch["kailh_switches"]["User.6"]
+_kailh_placements = footprint_placements["kailh_switches"]
+_kailh_bottom_sketch = feature_sketch["kailh_switches"]["User.6"]
 
-# # --- lower: wide clearance for switch body ---
-# top_plate_right = (
-#     top_plate_right.workplaneFromTagged("base")
-#     .workplane(offset=skirt_height)
-#     .placeSketch(
-#         cq.Sketch()
-#         .push(_kailh_placements)
-#         .face(offset_profile(cq.Sketch().rect(14.5, 13.8), TOLERANCE))
-#         .clean()
-#         .reset()
-#     )
-#     .cutBlind(PLATE_TOP_SPACER_THICKNESS)
-# )
+# --- lower: wide clearance for switch body ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_kailh_placements)
+        .face(offset_profile(cq.Sketch().rect(14.5, 13.8), TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_TOP_SPACER_THICKNESS)
+)
 
-# # --- middle: tighter fit through switch plate layer ---
-# top_plate_right = (
-#     top_plate_right.workplaneFromTagged("base")
-#     .workplane(offset=skirt_height + PLATE_TOP_SPACER_THICKNESS)
-#     .placeSketch(
-#         cq.Sketch()
-#         .push(_kailh_placements)
-#         .face(
-#             offset_profile(
-#                 cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6).clean(), TOLERANCE
-#             )
-#         )
-#         .clean()
-#         .reset()
-#     )
-#     .cutBlind(PLATE_TOP_SWITCH_THICKNESS)
-# )
+# --- middle: tighter fit through switch plate layer ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height + PLATE_TOP_SPACER_THICKNESS)
+    .placeSketch(
+        cq.Sketch()
+        .push(_kailh_placements)
+        .face(
+            offset_profile(
+                cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6).clean(), TOLERANCE
+            )
+        )
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_TOP_SWITCH_THICKNESS)
+)
 
-# # --- upper: final switch opening with filleted corners ---
-# top_plate_right = (
-#     top_plate_right.workplaneFromTagged("base")
-#     .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
-#     .placeSketch(
-#         cq.Sketch()
-#         .push(_kailh_placements)
-#         .face(
-#             offset_profile(
-#                 cq.Sketch()
-#                 .rect(15.0, 15.0, tag="upper")
-#                 .select("upper")
-#                 .vertices()
-#                 .fillet(0.85)
-#                 .reset()
-#                 .rect(3.0, 17.6)
-#                 .clean(),
-#                 TOLERANCE,
-#             )
-#         )
-#         .clean()
-#         .reset()
-#     )
-#     .cutBlind(PLATE_TOP_COVER_THICKNESS)
-# )
+# --- upper: final switch opening with filleted corners ---
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
+    .placeSketch(
+        cq.Sketch()
+        .push(_kailh_placements)
+        .face(
+            offset_profile(
+                cq.Sketch()
+                .rect(15.0, 15.0, tag="upper")
+                .select("upper")
+                .vertices()
+                .fillet(0.85)
+                .reset()
+                .rect(3.0, 17.6)
+                .clean(),
+                TOLERANCE,
+            )
+        )
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_TOP_COVER_THICKNESS)
+)
 
-# # --- bottom: switch pad relief on bottom plate ---
-# bottom_plate = (
-#     bottom_plate.workplaneFromTagged("base")
-#     .workplane()
-#     .placeSketch(
-#         cq.Sketch()
-#         .push(_kailh_placements)
-#         .face(offset_profile(_kailh_bottom_sketch, TOLERANCE))
-#         .clean()
-#         .reset()
-#     )
-#     .cutBlind(PLATE_BOTTOM_THICKNESS)
-# )
+# --- bottom: switch pad relief on bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_kailh_placements)
+        .face(offset_profile(_kailh_bottom_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
+
+# ------------------------------------------------------------ Solar housing
+
+_solar_placements = footprint_placements["solar_cell"]
+_solar_main_sketch = cq.Sketch().face(
+    feature_sketch["solar_cell"]["F.Fab"]
+    .faces(cq.selectors.AreaNthSelector(-1))
+    .wires()
+    .val()
+)
+
+# --- main_body: build solar housing as a standalone solid ---
+solar_housing = (
+    cq.Workplane("XY")
+    .tag("solar_base")
+    .workplane(offset=top_shell_height)
+    .placeSketch(
+        cq.Sketch()
+        .push(_solar_placements)
+        .face(offset_profile(_solar_main_sketch, SOLAR_WALL_THICKNESS))
+        .clean()
+        .reset()
+    )
+    .extrude(SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS - top_shell_height)
+)
+# apply: fillet the top face; walls around cutout flush with cell
+solar_housing = solar_housing.faces(">Z").fillet(TOP_FILLET_RADIUS)
+
+# Cut a rounded rectangular opening in the front of the solar housing to leave room for the battery
+# and a chase for the solar cell wires to the PCB.
+front_solar_housing = solar_housing.faces("<Y")
+back_solar_housing = solar_housing.faces(">Y")
+
+# The battery opening width is set so that the filleted top corners of the opening meet the inner
+# walls of the battery cutout in the top plate below. The gap from the solar housing front face's
+# left edge to the battery cutout's left edge determines how much to shrink the opening from each
+# side.
+battery_cutout_width = front_solar_housing.val().BoundingBox().xlen - 2 * (
+    top_plate_right.workplaneFromTagged("battery_top_sketch")
+    .val()
+    .vertices("<X")
+    .val()
+    .Center()
+    .x
+    - front_solar_housing.val().BoundingBox().xmin
+)
+battery_cutout_center = front_solar_housing.val().BoundingBox().center.z
+battery_cutout_height = BATTERY_HEIGHT_ABOVE_TOP_SHELL
+battery_cutout_rect_height = top_shell_height + battery_cutout_height - skirt_height
+
+# The wire chase sits above the battery opening, tall enough to bridge from the battery cutout top
+# to the solar cell ceiling.
+solar_wire_chase_height = SOLAR_CEILING_TOP_Z - top_shell_height - battery_cutout_height
+
+# Narrow the chase by the corner fillet radius on both sides.
+solar_wire_chase_width = battery_cutout_width - 2 * battery_cutout_height
+# Center the chase vertically between the battery opening top and cell ceiling.
+solar_wire_chase_center = (
+    top_shell_height + battery_cutout_height + SOLAR_CEILING_TOP_Z
+) / 2 - battery_cutout_center
+
+
+small_gap_between_solar_housing_front_and_battery_edge_cut = (
+    front_solar_housing.val().Center().y
+    - top_plate_right.workplaneFromTagged("battery_top_sketch")
+    .val()
+    .vertices("<Y")
+    .val()
+    .Y
+)
+
+solar_housing = cast(
+    cq.Workplane,
+    front_solar_housing.workplane(
+        centerOption="CenterOfBoundBox",
+        # We extend the cutout beyond the front face of the solar housing by ~0.175mm, so that this
+        # cutout does the work that the battery_top_sketch would do
+        offset=small_gap_between_solar_housing_front_and_battery_edge_cut,
+    )
+    .sketch()
+    # align the cutout with the bottom of the solar housing
+    .push([(0, skirt_height + battery_cutout_rect_height / 2 - battery_cutout_center)])
+    .rect(battery_cutout_width, battery_cutout_rect_height)
+    .reset()
+    .vertices(">Y")
+    .fillet(battery_cutout_height)
+    .push([(0, solar_wire_chase_center)])
+    .rect(solar_wire_chase_width, solar_wire_chase_height)
+    .clean()
+    .reset()
+    .finalize()
+    .tag("solar_housing_battery_cutout"),
+)
+
+# --- main_body: solar cell pocket ---
+solar_housing = (
+    solar_housing.workplaneFromTagged("solar_base")
+    .workplane(offset=SOLAR_CEILING_TOP_Z)
+    .placeSketch(
+        cq.Sketch()
+        .push(_solar_placements)
+        .face(offset_profile(_solar_main_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(SOLAR_CELL_THICKNESS)
+)
+
+top_plate_right = (
+    top_plate_right.union(solar_housing)
+    # We perform this cutout after union-ing with the rest of the body, so that the cutout can
+    # affect the top shell, where a portion of the top shell around the solar circuitry that does
+    # not support the solar housing
+    .workplaneFromTagged("solar_housing_battery_cutout")
+    # cut through front to the back of the solar housing, leaving the solar housing wall intact
+    .cutBlind(
+        -(
+            front_solar_housing.val().distance(back_solar_housing.val())
+            + small_gap_between_solar_housing_front_and_battery_edge_cut
+            - SOLAR_WALL_THICKNESS
+            + TOLERANCE
+        )
+    )
+    # Cut out space for battery tabs, which extend just above the top shell
+    .workplaneFromTagged("base")
+    .workplane(offset=skirt_height)
+    .placeSketch(
+        feature_sketch.get("battery_cutout").get("F.CrtYd").moved(_battery_placements)
+    )
+    .cutBlind(BATTERY_TAB_WIDTH - PCB_THICKNESS + TOLERANCE)
+)
 
 # ---------------------------------------------------------------- Inductors
+
 _inductors_placements = footprint_placements["inductors"]
 
 # --- top: inductor clearance ---
@@ -468,17 +602,20 @@ top_plate_right = (
     .placeSketch(
         cq.Sketch()
         .push(_inductors_placements)
-        .face(offset_profile(cq.Sketch().rect(4.6, 4.5), TOLERANCE))
+        .face(offset_profile(cq.Sketch().rect(4.6, 4.5), 2 * TOLERANCE))
         .clean()
         .reset()
     )
-    .cutBlind(top_shell_height - skirt_height)
+    .cutBlind(INDUCTOR_HEIGHT + TOLERANCE)
 )
 
-# ---------------------------------------------------------------- Capacitors
+# ---------------------------------------------------------------- 0603 Components
 
-_capacitors_placements = footprint_placements["capacitors"]
-_capacitors_sketch = cq.Sketch().push([(0.001632, -0.003268)]).rect(2.8, 0.95).reset()
+_0603_placements = (
+    footprint_placements["capacitors"] + footprint_placements["resistors"]
+)
+_0603_sketch = cq.Sketch().rect(2.8, 0.95)
+
 
 # --- body: capacitor clearance on top plate ---
 top_plate_right = (
@@ -486,12 +623,12 @@ top_plate_right = (
     .workplane(offset=skirt_height)
     .placeSketch(
         cq.Sketch()
-        .push(_capacitors_placements)
-        .face(offset_profile(_capacitors_sketch, TOLERANCE))
+        .push(_0603_placements)
+        .face(offset_profile(_0603_sketch, 2 * TOLERANCE))
         .clean()
         .reset()
     )
-    .cutBlind(PLATE_TOP_SPACER_THICKNESS)
+    .cutBlind(MAX_0603_HEIGHT + TOLERANCE)
 )
 
 # --- body: capacitor clearance on bottom plate ---
@@ -500,41 +637,8 @@ bottom_plate = (
     .workplane()
     .placeSketch(
         cq.Sketch()
-        .push(_capacitors_placements)
-        .face(offset_profile(_capacitors_sketch, TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
-)
-
-# ----------------------------------------------------------------- Resistors
-
-_resistors_placements = footprint_placements["resistors"]
-_resistors_sketch = cq.Sketch().rect(2.8, 0.95)
-
-# --- body: resistor clearance on top plate ---
-top_plate_right = (
-    top_plate_right.workplaneFromTagged("base")
-    .workplane(offset=skirt_height)
-    .placeSketch(
-        cq.Sketch()
-        .push(_resistors_placements)
-        .face(offset_profile(_resistors_sketch, TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_TOP_SPACER_THICKNESS)
-)
-
-# --- body: resistor clearance on bottom plate ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_resistors_placements)
-        .face(offset_profile(_resistors_sketch, TOLERANCE))
+        .push(_0603_placements)
+        .face(offset_profile(_0603_sketch, 2 * TOLERANCE))
         .clean()
         .reset()
     )
@@ -553,11 +657,11 @@ top_plate_right = (
     .placeSketch(
         cq.Sketch()
         .push(_power_ic_placements)
-        .face(offset_profile(_power_ic_sketch, TOLERANCE))
+        .face(offset_profile(_power_ic_sketch, 2 * TOLERANCE))
         .clean()
         .reset()
     )
-    .cutBlind(PLATE_TOP_SPACER_THICKNESS)
+    .cutBlind(MAX_0603_HEIGHT + TOLERANCE)
 )
 
 # --- body: power IC clearance on bottom plate ---
@@ -567,7 +671,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_power_ic_placements)
-        .face(offset_profile(_power_ic_sketch, TOLERANCE))
+        .face(offset_profile(_power_ic_sketch, 2 * TOLERANCE))
         .clean()
         .reset()
     )
@@ -662,7 +766,6 @@ _mcu_lower_sketch = (
     .sketch()
     .push([(-7.585002, 0.153997), (7.585002, 0.153997)])
     .rect(2.539996, 17.780002, tag="controller_sockets")
-    .select("controller_sockets")
     .reset()
     .face(feature_sketch.get("microcontroller").get("F.CrtYd").wires("%CIRCLE").clean())
 )
@@ -715,7 +818,6 @@ top_plate_right = (
 # --- bottom: MCU relief on bottom plate ---
 bottom_plate = (
     bottom_plate.workplaneFromTagged("base")
-    .workplane()
     .placeSketch(
         cq.Sketch()
         .push(_mcu_placements)
@@ -769,140 +871,61 @@ bottom_plate = (
     .cutBlind(PLATE_BOTTOM_THICKNESS)
 )
 
-# ------------------------------------------------------------ Solar component
-
-_solar_placements = footprint_placements["solar_cell"]
-_solar_main_sketch = cq.Sketch().face(
-    feature_sketch["solar_cell"]["F.Fab"]
-    .faces(cq.selectors.AreaNthSelector(-1))
-    .wires()
-    .val()
-)
-
-# --- main_body: build solar housing as a standalone solid ---
-solar_housing = (
-    cq.Workplane("XY")
-    .tag("solar_base")
-    .workplane(offset=top_shell_height)
-    .placeSketch(
-        cq.Sketch()
-        .push(_solar_placements)
-        .face(offset_profile(_solar_main_sketch, SOLAR_WALL_THICKNESS))
-        .clean()
-        .reset()
-    )
-    .extrude(SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS - top_shell_height)
-)
-# apply: fillet the top face; walls around cutout flush with cell
-solar_housing = solar_housing.faces(">Z").fillet(TOP_FILLET_RADIUS)
-
-print(SOLAR_CEILING_TOP_Z - top_shell_height - SOLAR_CELL_THICKNESS)
-front_of_solar_housing = solar_housing.faces("<Y")
-front_of_solar_housing_width = front_of_solar_housing.val().BoundingBox().xlen
-front_of_solar_housing_height = SOLAR_CEILING_TOP_Z - top_shell_height 
-selected = (
-    front_of_solar_housing
-    .workplane(centerOption="CenterOfBoundBox")
-    .sketch()
-    .push([(0, -1.1/2)])
-    .rect(front_of_solar_housing_width, front_of_solar_housing_height)
-)
-
-
-# selected = (
-#     solar_housing.faces("<Y")
-#     .tag("solar_face")
-#     .workplaneFromTagged("solar_face")
-#     .sketch()
-#     .face(solar_housing.faces("<Y").val())
-#     .faces()
-#     .offset(-2, mode="r")
-#     .vertices(">Z")
-#     .fillet(4)
-#     .reset()
-#     .faces()
-# )
-# # Convert Sketch to Workplane so ocp_vscode preserves world-space position
-# selected = cq.Workplane("XY").newObject(selected.vals())
-
-# # --- front cutout: extrude selected face through the housing wall ---
-# cut_face = selected.vals()[0]
-# cut_tool = cq.Solid.extrudeLinear(cut_face, cq.Vector(0, SOLAR_WALL_THICKNESS, 0))
-# solar_housing = solar_housing.cut(cut_tool)
-
-# --- main_body: solar cell pocket ---
-solar_housing = (
-    solar_housing.workplaneFromTagged("solar_base")
-    .workplane(offset=SOLAR_CEILING_TOP_Z)
-    .placeSketch(
-        cq.Sketch()
-        .push(_solar_placements)
-        .face(offset_profile(_solar_main_sketch, TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(SOLAR_CELL_THICKNESS)
-)
-
-# --- main_body: union solar housing onto the top plate ---
-top_plate_right = top_plate_right.union(solar_housing)
-
-
-# top_plate_left = top_plate_right.mirror("YZ")
+top_plate_left = top_plate_right.mirror("YZ")
 
 case_dir = cwd / "case"
-# case_dir.mkdir(parents=True, exist_ok=True)
-# cq.exporters.export(bottom_plate.faces("<Z"), str(case_dir / "bottom_plate.dxf"))
-# cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.step"))
-# cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.stl"))
-# cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.step"))
-# cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.stl"))
-# cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
-# cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.stl"))
+case_dir.mkdir(parents=True, exist_ok=True)
+cq.exporters.export(bottom_plate.faces("<Z"), str(case_dir / "bottom_plate.dxf"))
+cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.step"))
+cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.stl"))
+cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.step"))
+cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.stl"))
+cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
+cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.stl"))
 
 # Preview generated plates with PCB assembly if available ------------------------------------------
 
 pcb_assembly_path = case_dir / "cweep.step"
-# pcb_assembly = None
-# if pcb_assembly_path.exists():
-#     pcb_assembly = cq.importers.importStep(str(pcb_assembly_path))
-#     # the model's z-origin is set based on the bottom of the PCB body, not the PCB solder mask or
-#     # copper layers between, so we lift it up by the thickness of those other layers
-#     pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
+pcb_assembly = None
+if pcb_assembly_path.exists():
+    pcb_assembly = cq.importers.importStep(str(pcb_assembly_path))
+    # the model's z-origin is set based on the bottom of the PCB body, not the PCB solder mask or
+    # copper layers between, so we lift it up by the thickness of those other layers
+    pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
 
-# mounting_hole_locations = cq.Workplane("XY").pushPoints(
-#     face.Center()
-#     for footprint_angle, footprint_offset in footprint_placements["mounting_holes"]
-#     for face in feature_sketch["mounting_holes"]["drill"]
-#     .moved(cq.Location(footprint_offset, cq.Vector(0, 0, 1), footprint_angle))
-#     .faces()
-#     .vals()
-# )
+mounting_hole_locations = cq.Workplane("XY").pushPoints(
+    face.Center()
+    for footprint_location in footprint_placements["mounting_holes"]
+    for face in feature_sketch["mounting_holes"]["drill"]
+    .moved(footprint_location)
+    .faces()
+    .vals()
+)
 
-# hardware_instances = []
-# for model_path, z_min in [
-#     ("3dmodels/com_mcmaster/91294A004_hex_drive_flat_head_screw_mfs2x0.4x6.stp", 0),
-#     ("3dmodels/com_grabcad_shrey.g-2/m2x2x3.2_threaded-insert.step", skirt_height),
-# ]:
-#     template = cq.importers.importStep(str(cwd / model_path)).val()
-#     template = template.rotate((0, 0, 0), (1, 0, 0), 180)
-#     template = template.translate((0, 0, z_min - template.BoundingBox().zmin))
-#     hardware_instances.append(
-#         mounting_hole_locations.eachpoint(template, clean=False).combine(clean=False)
-#     )
+hardware_instances = []
+for model_path, z_min in [
+    ("3dmodels/com_mcmaster/91294A004_hex_drive_flat_head_screw_m2x0.4x6.stp", 0),
+    ("3dmodels/com_grabcad_shrey.g-2/m2x2x3.2_threaded-insert.step", skirt_height),
+]:
+    template = cq.importers.importStep(str(cwd / model_path)).val()
+    template = template.rotate((0, 0, 0), (1, 0, 0), 180)
+    template = template.translate((0, 0, z_min - template.BoundingBox().zmin))
+    hardware_instances.append(
+        mounting_hole_locations.eachpoint(template, clean=False).combine(clean=False)
+    )
 
 preview_objects = [
     bottom_plate,
     top_plate_right,
-    selected,
-    # pcb_assembly,
+    pcb_assembly,
+    *hardware_instances,
 ]
 preview_colors = [
     "#707070",
     "#5994dc",
     "#ffc731",
-    # "#ff0000",
-    # "#00ff00",
+    "#ff0000",
+    "#00ff00",
 ]
 
 if args.preview:
