@@ -256,105 +256,27 @@
 		(layer "Edge.Cuts")
 		(uuid "c6787b58-c0a9-4de1-9553-9fffa6546b45")
 	)
-	(fp_line
-		(start 5 -22.7875)
-		(end 10.6425 -22.7875)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "b0262b75-b260-4b04-972e-11f75f881037")
-	)
-	(fp_line
-		(start 5 -21.545)
-		(end 5 -22.7875)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "2d597bcc-9fec-4461-9810-0c42d76510be")
-	)
-	(fp_line
-		(start 5 -20.2025)
-		(end 5 -21.545)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "F.CrtYd")
-		(uuid "a75fe93c-1789-4426-b0cd-abf3637e9bad")
-	)
-	(fp_line
-		(start 5 20.2025)
-		(end 5 21.545)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "F.CrtYd")
-		(uuid "bee616a7-1384-48eb-b48c-d1c2aa8cf231")
-	)
-	(fp_line
-		(start 5 21.545)
-		(end 5 22.7875)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "a62bb5f1-8df5-4d10-ae1f-8a42c547a91f")
-	)
-	(fp_line
-		(start 5 22.7875)
-		(end 10.6425 22.7875)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "e426c719-f97c-44d6-86d1-f5811a59dc1d")
-	)
-	(fp_line
-		(start 10.6425 -22.7875)
+	(fp_rect
+		(start 4.1 -22.7875)
 		(end 10.6425 -20.2025)
 		(stroke
 			(width 0.1)
-			(type solid)
+			(type default)
 		)
+		(fill no)
 		(layer "F.CrtYd")
-		(uuid "be563204-9768-420d-bb59-73e1906cdffc")
+		(uuid "fb96f9c0-fd7a-4e93-8353-1de29cdd9a23")
 	)
-	(fp_line
-		(start 10.6425 -20.2025)
-		(end 5 -20.2025)
+	(fp_rect
+		(start 4.1 20.2025)
+		(end 10.6425 22.7875)
 		(stroke
 			(width 0.1)
-			(type solid)
+			(type default)
 		)
+		(fill no)
 		(layer "F.CrtYd")
-		(uuid "5f7ba3e5-16a9-4129-b693-e7cab0660c08")
-	)
-	(fp_line
-		(start 10.6425 20.2025)
-		(end 5 20.2025)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "c3579b78-7836-486b-b9be-a069b66a4df1")
-	)
-	(fp_line
-		(start 10.6425 22.7875)
-		(end 10.6425 20.2025)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "cf0a57b8-8831-4d75-a30d-afc17e4291e4")
+		(uuid "0c866004-47d2-4338-9e41-33386d6ac87e")
 	)
 	(fp_line
 		(start -3.43 -21.595)

@@ -6828,7 +6828,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 114.554 38.354 0)
 			(hide yes)
 			(show_name no)
@@ -7497,7 +7497,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 127.254 38.354 0)
 			(hide yes)
 			(show_name no)
@@ -7759,7 +7759,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 127.254 73.914 0)
 			(hide yes)
 			(show_name no)
@@ -8216,7 +8216,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 152.654 73.914 0)
 			(hide yes)
 			(show_name no)
@@ -8320,7 +8320,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 127.254 56.134 0)
 			(hide yes)
 			(show_name no)
@@ -9077,7 +9077,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 114.554 73.914 0)
 			(hide yes)
 			(show_name no)
@@ -9432,7 +9432,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 152.654 56.134 0)
 			(hide yes)
 			(show_name no)
@@ -10094,7 +10094,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 139.954 73.914 0)
 			(hide yes)
 			(show_name no)
@@ -10198,7 +10198,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 139.954 56.134 0)
 			(hide yes)
 			(show_name no)
@@ -10388,7 +10388,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 101.854 73.914 0)
 			(hide yes)
 			(show_name no)
@@ -11281,7 +11281,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm"
+		(property "Footprint" "cweep:VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm"
 			(at 50.8 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -11580,7 +11580,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 101.854 91.694 0)
 			(hide yes)
 			(show_name no)
@@ -11684,7 +11684,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 152.654 38.354 0)
 			(hide yes)
 			(show_name no)
@@ -11788,7 +11788,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 114.554 91.694 0)
 			(hide yes)
 			(show_name no)
@@ -12051,7 +12051,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 139.954 38.354 0)
 			(hide yes)
 			(show_name no)
@@ -12155,7 +12155,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 114.554 56.134 0)
 			(hide yes)
 			(show_name no)
@@ -12761,7 +12761,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 101.854 38.354 0)
 			(hide yes)
 			(show_name no)
@@ -13434,7 +13434,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "cweep:D_SOD-123_Reversible"
 			(at 101.854 56.134 0)
 			(hide yes)
 			(show_name no)
