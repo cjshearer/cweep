@@ -876,15 +876,7 @@ bottom_plate = (
 
 _power_switch_arc_radius = sqrt(4.2 * 4.2 + 4.75 * 4.75)
 _power_switch_placements = footprint_placements["power_switch"]
-_power_switch_top_sketch = (
-    cq.Sketch()
-    .rect(4.3, 14.8)
-    .arc((4.2, 4.75), (0, _power_switch_arc_radius), (-4.2, 4.75))
-    .segment((-4.2, -4.75), (-4.2, 4.75))
-    .arc((-4.2, -4.75), (0, -_power_switch_arc_radius), (4.2, -4.75))
-    .close()
-    .assemble()
-)
+_power_switch_top_sketch = feature_sketch["power_switch"]["F.Fab"]
 _power_switch_bottom_sketch = feature_sketch["power_switch"]["pads"]
 
 # --- top: power switch opening ---
