@@ -436,6 +436,7 @@ bottom_plate = (
 
 _kailh_placements = footprint_placements["kailh_switches"]
 _kailh_bottom_sketch = feature_sketch["kailh_switches"]["User.6"]
+_kailh_lower_sketch = feature_sketch["kailh_switches"]["User.5"]
 
 # --- lower: wide clearance for switch body ---
 top_plate_right = (
@@ -444,7 +445,7 @@ top_plate_right = (
     .placeSketch(
         cq.Sketch()
         .push(_kailh_placements)
-        .face(offset_profile(cq.Sketch().rect(14.5, 13.8), TOLERANCE))
+        .face(offset_profile(_kailh_lower_sketch, TOLERANCE))
         .clean()
         .reset()
     )
@@ -643,6 +644,7 @@ top_plate_right = (
 # ---------------------------------------------------------------- Inductors
 
 _inductors_placements = footprint_placements["inductors"]
+_inductors_sketch = feature_sketch["inductors"]["F.CrtYd"]
 
 # --- top: inductor clearance ---
 top_plate_right = (
@@ -651,7 +653,7 @@ top_plate_right = (
     .placeSketch(
         cq.Sketch()
         .push(_inductors_placements)
-        .face(offset_profile(cq.Sketch().rect(4.6, 4.5), 2 * TOLERANCE))
+        .face(offset_profile(_inductors_sketch, 2 * TOLERANCE))
         .clean()
         .reset()
     )
@@ -663,7 +665,7 @@ top_plate_right = (
 _0603_placements = (
     footprint_placements["capacitors"] + footprint_placements["resistors"]
 )
-_0603_sketch = cq.Sketch().rect(2.8, 0.95)
+_0603_sketch = feature_sketch["capacitors"]["User.5"]
 
 
 # --- body: capacitor clearance on top plate ---
@@ -697,7 +699,7 @@ bottom_plate = (
 # ------------------------------------------------------------------ Power IC
 
 _power_ic_placements = footprint_placements["power_ic"]
-_power_ic_sketch = cq.Sketch().rect(3.8, 3.8)
+_power_ic_sketch = feature_sketch["power_ic"]["User.5"]
 
 # --- body: power IC clearance on top plate ---
 top_plate_right = (
@@ -730,14 +732,7 @@ bottom_plate = (
 # --------------------------------------------------------------- Reset button
 
 _reset_placements = footprint_placements["reset_button"]
-_reset_top_sketch = (
-    cq.Sketch()
-    .rect(7.5, 6.0, tag="button")
-    .select("button")
-    .vertices()
-    .fillet(0.5)
-    .reset()
-)
+_reset_top_sketch = feature_sketch["reset_button"]["User.3"]
 _reset_bottom_sketch = feature_sketch.get("reset_button", {}).get("pads")
 
 # --- top: reset button opening ---
