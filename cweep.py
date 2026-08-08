@@ -40,6 +40,53 @@ if args.preview:
 # Transform PCB geometry to CadQuery sketches ------------------------------------------------------
 
 
+def _fix_offset_edges(wire: cq.Wire):
+    """Return *wire* with any ``OffsetCurve`` edges replaced by B-splines.
+
+    ``Wire.offset2D`` can produce edges whose underlying geometry is an ``OffsetCurve`` (curve type
+    7).  The OCC STEP exporter silently drops any face whose boundary contains such an edge.
+
+    Uses ``GeomAPI_PointsToBSpline`` (OCCT's canonical curve-to-BSpline converter) to approximate
+    each OffsetCurve edge as a B-spline.
+    """
+    from OCP.BRepAdaptor import BRepAdaptor_Curve
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_MakeEdge, BRepBuilderAPI_MakeWire
+    from OCP.GeomAPI import GeomAPI_PointsToBSpline
+    from OCP.GeomAbs import GeomAbs_C2, GeomAbs_OffsetCurve
+    from OCP.TColgp import TColgp_HArray1OfPnt
+
+    if not any(
+        BRepAdaptor_Curve(e.wrapped).GetType() == GeomAbs_OffsetCurve
+        for e in wire.Edges()
+    ):
+        return wire
+
+    new_edges = []
+    for edge in wire.Edges():
+        adaptor = BRepAdaptor_Curve(edge.wrapped)
+        if adaptor.GetType() != GeomAbs_OffsetCurve:
+            new_edges.append(edge.wrapped)
+            continue
+        u0, u1 = adaptor.FirstParameter(), adaptor.LastParameter()
+        n = max(10, int(edge.Length() / 0.5))
+        pts = TColgp_HArray1OfPnt(1, n)
+        for j in range(n):
+            pts.SetValue(j + 1, adaptor.Value(u0 + (u1 - u0) * j / (n - 1)))
+        approx = GeomAPI_PointsToBSpline(pts, 1, 8, GeomAbs_C2, 0.001)
+        if approx.IsDone():
+            p0 = adaptor.Value(u0)
+            p1 = adaptor.Value(u1)
+            new_edges.append(BRepBuilderAPI_MakeEdge(approx.Curve(), p0, p1).Edge())
+        else:
+            new_edges.append(edge.wrapped)
+
+    builder = BRepBuilderAPI_MakeWire()
+    for e in new_edges:
+        builder.Add(e)
+    builder.Build()
+    return cq.Wire.cast(builder.Wire())
+
+
 def offset_profile(sketch: cq.Sketch, amount: float):
     """Return a fresh sketch containing the offset of each face in *sketch*.
 
@@ -64,6 +111,7 @@ def offset_profile(sketch: cq.Sketch, amount: float):
         face_at_origin = source_face.moved(to_origin)
 
         for offset_wire in face_at_origin.outerWire().offset2D(amount):
+            offset_wire = _fix_offset_edges(offset_wire)
             offset_face = cq.Face.makeFromWires(offset_wire).moved(back)
             if offset_face.normalAt().z * source_normal_z < 0:
                 offset_face = offset_face.reverse()
@@ -71,6 +119,7 @@ def offset_profile(sketch: cq.Sketch, amount: float):
 
         for inner_wire in face_at_origin.innerWires():
             for offset_wire in inner_wire.offset2D(-amount):
+                offset_wire = _fix_offset_edges(offset_wire)
                 offset_face = cq.Face.makeFromWires(offset_wire).moved(back)
                 if offset_face.normalAt().z * source_normal_z < 0:
                     offset_face = offset_face.reverse()
