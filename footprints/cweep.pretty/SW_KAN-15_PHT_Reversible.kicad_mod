@@ -513,7 +513,7 @@
 		(uuid "e434a622-2869-414b-b5aa-7412d4b6393a")
 	)
 	(fp_line
-		(start -2.15 5.963762)
+		(start -2.15 5.963763)
 		(end -2.15 7.4)
 		(stroke
 			(width 0.05)
@@ -543,7 +543,7 @@
 		(uuid "3f57a9a3-af8d-49c2-99ba-16be3259ef28")
 	)
 	(fp_line
-		(start 2.15 5.963762)
+		(start 2.15 5.963763)
 		(end 2.15 7.4)
 		(stroke
 			(width 0.05)
