@@ -34,8 +34,6 @@
 		(45 "User.4" front "F.Plate.Switch")
 		(47 "User.5" front "F.Plate.Spacer")
 		(49 "User.6" back "B.Plate")
-		(51 "User.7" user "Plate.Outline")
-		(53 "User.8" user "Plate.Holes")
 	)
 	(setup
 		(pad_to_mask_clearance 0)
@@ -12606,17 +12604,6 @@
 			(layer "F.CrtYd")
 			(uuid "31a3a095-e864-4c73-ba78-4ef947f7dae9")
 		)
-		(fp_circle
-			(center 0 0)
-			(end 0.8 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.8")
-			(uuid "b3ac5e6c-9982-4ee1-84a9-23988907f84f")
-		)
 		(pad "1" thru_hole circle
 			(at 0 0)
 			(size 3.8 3.8)
@@ -13368,17 +13355,6 @@
 			(fill no)
 			(layer "F.CrtYd")
 			(uuid "1bfb4163-1b7c-44dc-bb8e-f58829f46ac6")
-		)
-		(fp_circle
-			(center 0 0)
-			(end 0.8 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.8")
-			(uuid "49690fd3-10e0-4eb5-b776-c1215789c9f6")
 		)
 		(pad "1" thru_hole circle
 			(at 0 0)
@@ -33970,17 +33946,6 @@
 			(layer "F.CrtYd")
 			(uuid "46f6ef43-d10e-4cd4-90a2-c8daac20849b")
 		)
-		(fp_circle
-			(center 0 0)
-			(end 0.8 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.8")
-			(uuid "ecae6c17-d749-4948-a6d8-d0a2ede79a9d")
-		)
 		(pad "1" thru_hole circle
 			(at 0 0)
 			(size 3.8 3.8)
@@ -37319,17 +37284,6 @@
 			(fill no)
 			(layer "F.CrtYd")
 			(uuid "c065cdc3-025c-460b-89b7-06f9cf9ad22f")
-		)
-		(fp_circle
-			(center 0 0)
-			(end 0.8 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.8")
-			(uuid "d21b1e82-b30d-439c-aae5-f16a487c97bc")
 		)
 		(pad "1" thru_hole circle
 			(at 0 0)
@@ -52216,17 +52170,6 @@
 			(fill no)
 			(layer "F.CrtYd")
 			(uuid "b54cd704-b441-47bc-909f-b7049a32ab70")
-		)
-		(fp_circle
-			(center 0 0)
-			(end 0.8 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.8")
-			(uuid "dfe2c143-986e-47ed-a8e8-2f8eb44720b8")
 		)
 		(pad "1" thru_hole circle
 			(at 0 0)
@@ -67116,17 +67059,6 @@
 			(layer "F.CrtYd")
 			(uuid "37e76234-9df5-4b2a-a700-04e6566f8a9a")
 		)
-		(fp_circle
-			(center 0 0)
-			(end 0.8 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.8")
-			(uuid "b6918cb0-d22f-4287-a30e-818088fac4aa")
-		)
 		(pad "1" thru_hole circle
 			(at 0 0)
 			(size 3.8 3.8)
@@ -69126,69 +69058,6 @@
 		(fill no)
 		(layer "User.5")
 		(uuid "620204ee-9a9b-472a-99a8-3c10868b1aa0")
-	)
-	(gr_line
-		(start 12.875 73.2425)
-		(end 12.875 26.1575)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.7")
-		(uuid "0b1266b5-797f-4101-81f5-6d23b466ce9c")
-	)
-	(gr_line
-		(start 12.875 73.2425)
-		(end 12.875 90.25)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.7")
-		(uuid "647c185a-ceb5-4901-ae42-946ef112ebd4")
-	)
-	(gr_curve
-		(pts
-			(xy 49.1 95.45) (xy 34.6 90.15) (xy 37.3 90.15) (xy 12.875 90.25)
-		)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.7")
-		(uuid "2880c176-4b95-4012-bc3b-70da83d2518c")
-	)
-	(gr_curve
-		(pts
-			(xy 120.87502 34.75) (xy 94.5 1.95) (xy 39.4 12.35) (xy 12.875 26.1575)
-		)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.7")
-		(uuid "63f6e355-f478-41f0-a268-8d46aa3eb3a4")
-	)
-	(gr_curve
-		(pts
-			(xy 120.87502 82.65) (xy 104.8 96.65) (xy 65.1 85.45) (xy 49.1 95.45)
-		)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.7")
-		(uuid "e93809ae-1b7a-49a8-b7b7-adab9ab3b220")
-	)
-	(gr_line
-		(start 120.87502 82.65)
-		(end 120.87502 34.75)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.7")
-		(uuid "92f1822c-5392-4123-8f38-9c236a090a84")
 	)
 	(gr_text "cjshearer/cweep\n0.3.0 - b5873a1"
 		(at 38.1 21.85 0)
