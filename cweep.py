@@ -17,9 +17,9 @@ Prior art:
 
 import argparse
 from collections import defaultdict
-from typing import cast
 from math import sqrt
 from pathlib import Path
+from typing import cast
 
 import cadquery as cq
 from kiutils.board import Board
@@ -51,8 +51,8 @@ def _fix_offset_edges(wire: cq.Wire):
     """
     from OCP.BRepAdaptor import BRepAdaptor_Curve
     from OCP.BRepBuilderAPI import BRepBuilderAPI_MakeEdge, BRepBuilderAPI_MakeWire
-    from OCP.GeomAPI import GeomAPI_PointsToBSpline
     from OCP.GeomAbs import GeomAbs_C2, GeomAbs_OffsetCurve
+    from OCP.GeomAPI import GeomAPI_PointsToBSpline
     from OCP.TColgp import TColgp_HArray1OfPnt
 
     if not any(
