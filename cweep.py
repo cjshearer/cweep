@@ -837,7 +837,8 @@ top_plate_right = (
     .placeSketch(
         cq.Sketch()
         .push(_mcu_placements)
-        .face(offset_profile(_mcu_upper_sketch, TOLERANCE))
+        # The xiao nrf52480 dimensions vary enough to warrant more tolerance
+        .face(offset_profile(_mcu_upper_sketch, TOLERANCE * 2))
         .clean()
         .reset()
     )
