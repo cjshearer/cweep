@@ -460,7 +460,7 @@ top_plate_right = (
         .push(_kailh_placements)
         .face(
             offset_profile(
-                cq.Sketch().rect(13.6, 13.6).rect(3.0, 17.6).clean(), TOLERANCE
+                cq.Sketch().rect(13.45, 13.45).rect(3.0, 17.6).clean(), TOLERANCE
             )
         )
         .clean()
