@@ -804,47 +804,33 @@ bottom_plate = (
 # ------------------------------------------------------------ Microcontroller
 
 _mcu_placements = footprint_placements["microcontroller"]
-_mcu_lower_sketch = (
-    cq.Workplane("XY")
-    .sketch()
-    .push([(-7.585002, 0.153997), (7.585002, 0.153997)])
-    .rect(2.539996, 17.780002, tag="controller_sockets")
-    .reset()
-    .face(feature_sketch.get("microcontroller").get("F.CrtYd").wires("%CIRCLE").clean())
-)
-_mcu_upper_sketch = (
-    cq.Workplane("XY")
-    .center(0, 0.0905)
-    .sketch()
-    .rect(17.71, 20.955, tag="controller_body")
-    .select("controller_body")
-    .vertices()
-    .fillet(1.905)
-)
+
+_mcu_sockets_and_pins_sketch = feature_sketch["microcontroller"]["F.Fab"]
+_mcu_upper_sketch = feature_sketch["microcontroller"]["Eco1.User"]
+
+_mcu_fab_bbox = _mcu_sockets_and_pins_sketch.val().BoundingBox()
 _mcu_bottom_sketch = (
-    cq.Workplane("XY")
-    .center(0, 0.0905)
-    .sketch()
-    .rect(17.71, 20.955)
+    cq.Sketch()
+    .rect(_mcu_fab_bbox.xlen, _mcu_fab_bbox.ylen)
     .vertices()
-    .fillet(1.905)
+    .fillet(_mcu_upper_sketch.edges("%CIRCLE").val().radius())
 )
 
-# --- lower: MCU socket cutouts + courtyard ---
+# --- lower: MCU sockets and pins cutout ---
 top_plate_right = (
     top_plate_right.workplaneFromTagged("base")
     .workplane(offset=skirt_height)
     .placeSketch(
         cq.Sketch()
         .push(_mcu_placements)
-        .face(offset_profile(_mcu_lower_sketch, TOLERANCE))
+        .face(offset_profile(_mcu_sockets_and_pins_sketch, TOLERANCE))
         .clean()
         .reset()
     )
     .cutBlind(TOP_CUT_LOWER_THICKNESS)
 )
 
-# --- upper: MCU body clearance ---
+# --- upper: MCU body cutout ---
 top_plate_right = (
     top_plate_right.workplaneFromTagged("base")
     .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
@@ -858,7 +844,7 @@ top_plate_right = (
     .cutBlind(PLATE_TOP_COVER_THICKNESS)
 )
 
-# --- bottom: MCU relief on bottom plate ---
+# --- bottom: MCU pin and jumper pad clearance ---
 bottom_plate = (
     bottom_plate.workplaneFromTagged("base")
     .placeSketch(
