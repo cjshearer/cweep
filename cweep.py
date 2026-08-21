@@ -436,7 +436,6 @@ bottom_plate = (
 
 _kailh_placements = footprint_placements["kailh_switches"]
 _kailh_bottom_sketch = feature_sketch["kailh_switches"]["User.6"]
-_kailh_lower_sketch = feature_sketch["kailh_switches"]["User.5"]
 
 # --- lower: wide clearance for switch body ---
 top_plate_right = (
@@ -445,7 +444,7 @@ top_plate_right = (
     .placeSketch(
         cq.Sketch()
         .push(_kailh_placements)
-        .face(offset_profile(_kailh_lower_sketch, TOLERANCE))
+        .face(offset_profile(cq.Sketch().rect(15, 13.6), TOLERANCE))
         .clean()
         .reset()
     )
@@ -461,7 +460,7 @@ top_plate_right = (
         .push(_kailh_placements)
         .face(
             offset_profile(
-                cq.Sketch().rect(13.8, 13.8).rect(3.0, 17.6).clean(), TOLERANCE
+                cq.Sketch().rect(13.6, 13.6).rect(3.0, 17.6).clean(), TOLERANCE
             )
         )
         .clean()
@@ -473,7 +472,7 @@ top_plate_right = (
 # --- upper: final switch opening with filleted corners ---
 top_plate_right = (
     top_plate_right.workplaneFromTagged("base")
-    .workplane(offset=skirt_height + TOP_CUT_LOWER_THICKNESS)
+    .workplane(offset=top_shell_height)
     .placeSketch(
         cq.Sketch()
         .push(_kailh_placements)
@@ -493,7 +492,7 @@ top_plate_right = (
         .clean()
         .reset()
     )
-    .cutBlind(PLATE_TOP_COVER_THICKNESS)
+    .cutBlind(-(0.8 + TOLERANCE))
 )
 
 # --- bottom: switch pad relief on bottom plate ---
