@@ -410,37 +410,6 @@ bottom_plate = (
     .cutBlind(PLATE_BOTTOM_THICKNESS)
 )
 
-# --------------------------------------------------------------- Battery cutout
-
-_battery_placements = footprint_placements["battery_cutout"]
-_battery_top_sketch = feature_sketch.get("battery_cutout").get("Edge.Cuts").clean()
-_battery_bottom_sketch = cq.Sketch().push([(-0.775, -0.025)]).rect(7.75, 44.14).reset()
-
-# --- top: battery cutout through top plate ---
-top_plate_right = (
-    top_plate_right.workplaneFromTagged("base")
-    .workplane(offset=skirt_height)
-    .placeSketch(
-        cq.Sketch().push(_battery_placements).face(_battery_top_sketch).clean().reset()
-    )
-    .tag("battery_top_sketch")
-    # .cutBlind(top_shell_height - skirt_height)
-)
-
-# --- bottom: battery access through bottom plate ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_battery_placements)
-        .face(offset_profile(_battery_bottom_sketch, TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
-)
-
 # ------------------------------------------------------------- Kailh switches
 
 _kailh_placements = footprint_placements["kailh_switches"]
@@ -518,7 +487,7 @@ bottom_plate = (
     .cutBlind(PLATE_BOTTOM_THICKNESS)
 )
 
-# ------------------------------------------------------------ Solar housing
+# ------------------------------------------------------------ Solar housing and battery cutout
 
 # The solar housing is defined directly in this file: a cell of SOLAR_CELL_WIDTH x SOLAR_CELL_HEIGHT
 # surrounded by SOLAR_WALL_THICKNESS of wall.  Its position is derived so that the housing wall's
@@ -546,6 +515,48 @@ solar_housing = (
     )
     .extrude(SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS - top_shell_height)
 )
+
+_battery_placements = footprint_placements["battery_cutout"]
+_battery_top_sketch = feature_sketch.get("battery_cutout").get("Edge.Cuts").clean()
+_battery_top_sketch_placed = (
+    cq.Sketch().push(_battery_placements).face(_battery_top_sketch).clean().reset()
+)
+
+# The Edge.Cuts outline is the battery holder body with two small tabs jutting out of the ends of
+# its right side.  The body's long sides are the outline's two longest edges, so their bounding box
+# is the body rectangle; center the bottom access hole on that, ignoring the tabs.
+_battery_bottom_center = (
+    cq.Workplane("XY")
+    .add(_battery_top_sketch.val())
+    .edges(
+        cq.selectors.LengthNthSelector(0, directionMax=False)
+        + cq.selectors.LengthNthSelector(1, directionMax=False)
+    )
+    .combine()
+    .val()
+    .BoundingBox()
+    .center
+)
+
+_battery_bottom_sketch = (
+    cq.Sketch()
+    .push([_battery_bottom_center])
+    .rect(7.75, 44.14)
+    .reset()
+)
+# --- bottom: battery access through bottom plate ---
+bottom_plate = (
+    bottom_plate.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(
+        cq.Sketch()
+        .push(_battery_placements)
+        .face(offset_profile(_battery_bottom_sketch, TOLERANCE))
+        .clean()
+        .reset()
+    )
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
+)
 # apply: fillet the top face; walls around cutout flush with cell
 solar_housing = solar_housing.faces(">Z").fillet(TOP_FILLET_RADIUS)
 
@@ -559,12 +570,7 @@ back_solar_housing = solar_housing.faces(">Y")
 # left edge to the battery cutout's left edge determines how much to shrink the opening from each
 # side.
 battery_cutout_width = front_solar_housing.val().BoundingBox().xlen - 2 * (
-    top_plate_right.workplaneFromTagged("battery_top_sketch")
-    .val()
-    .vertices("<X")
-    .val()
-    .Center()
-    .x
+    _battery_top_sketch_placed.vertices("<X").val().Center().x
     - front_solar_housing.val().BoundingBox().xmin
 )
 battery_cutout_center = front_solar_housing.val().BoundingBox().center.z
@@ -585,11 +591,7 @@ solar_wire_chase_center = (
 
 small_gap_between_solar_housing_front_and_battery_edge_cut = (
     front_solar_housing.val().Center().y
-    - top_plate_right.workplaneFromTagged("battery_top_sketch")
-    .val()
-    .vertices("<Y")
-    .val()
-    .Y
+    - _battery_top_sketch_placed.vertices("<Y").val().Y
 )
 
 solar_housing = cast(
