@@ -340,15 +340,12 @@ bottom_plate = (
 )
 
 # --- top_shell: board outline -> main body with skirt ---
+_plate_top_outline = offset_profile(board_outline_sketch, SKIRT_THICKNESS)
 top_plate_right = (
     top_plate_right.workplaneFromTagged("base")
     .workplane()
     .placeSketch(
-        cq.Sketch()
-        .push([cq.Location()])
-        .face(offset_profile(board_outline_sketch, SKIRT_THICKNESS))
-        .clean()
-        .reset()
+        cq.Sketch().face(_plate_top_outline).clean().reset()
     )
     .extrude(top_shell_height)
 )
@@ -368,6 +365,7 @@ top_plate_right = (
     )
     .cutBlind(skirt_height)
 )
+
 # --------------------------------------------------------------- Mounting holes
 
 _mounting_holes_sketch = feature_sketch.get("mounting_holes").get("drill")
