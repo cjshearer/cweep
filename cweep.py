@@ -309,10 +309,21 @@ MAX_0603_HEIGHT = 1
 BATTERY_TAB_WIDTH = 5.08
 
 ORIGIN = cq.Vector(0, 0, 0)
+SOLAR_CELL_WIDTH = 15
+SOLAR_CELL_HEIGHT = 45
+# TODO: The thickness of the face that the solar cell rests on. This could probably be better
+# derived as providing a target height of the solar housing, and then letting the solar cell top
+# face take up whatever space is left
 SOLAR_TOP_THICKNESS = 1.13
 SOLAR_CELL_THICKNESS = 2.1
 SOLAR_TOP_Z = top_shell_height + 4.195
-SOLAR_WALL_THICKNESS = 1.112
+# TODO: derive solar center from the left edge of the case, the left edge of the kailh user.drawings
+# (identify a particular switch footprint as the one that is 3rd from top), then the bottom will
+# similarly be the top of the kailh user.drawings switch (identify this switch as the left-most
+# switch), and the top will continue to be driven by the top left corner of the pcb outline. From
+# there, the solar wall thickness will be whatever space is left between the solar cell footprint
+# and the defined solar cell area.
+SOLAR_WALL_THICKNESS = 1.6375
 SOLAR_CEILING_TOP_Z = SOLAR_TOP_Z + SOLAR_TOP_THICKNESS
 BATTERY_HEIGHT_ABOVE_TOP_SHELL = 3.905
 
@@ -509,12 +520,16 @@ bottom_plate = (
 
 # ------------------------------------------------------------ Solar housing
 
-_solar_placements = footprint_placements["solar_cell"]
-_solar_main_sketch = cq.Sketch().face(
-    feature_sketch["solar_cell"]["F.Fab"]
-    .faces(cq.selectors.AreaNthSelector(-1))
-    .wires()
-    .val()
+# The solar housing is defined directly in this file: a cell of SOLAR_CELL_WIDTH x SOLAR_CELL_HEIGHT
+# surrounded by SOLAR_WALL_THICKNESS of wall.  Its position is derived so that the housing wall's
+# top-left corner overlaps the top-left corner of the top plate's outline.
+_solar_main_sketch = cq.Sketch().rect(SOLAR_CELL_WIDTH, SOLAR_CELL_HEIGHT).clean()
+
+_plate_top_left = _plate_top_outline.wires().vertices("<X").vertices(">Y").val()
+_solar_center = cq.Location(
+    _plate_top_left.X + SOLAR_CELL_WIDTH / 2 + SOLAR_WALL_THICKNESS,
+    _plate_top_left.Y - SOLAR_CELL_HEIGHT / 2,
+    0,
 )
 
 # --- main_body: build solar housing as a standalone solid ---
@@ -524,7 +539,7 @@ solar_housing = (
     .workplane(offset=top_shell_height)
     .placeSketch(
         cq.Sketch()
-        .push(_solar_placements)
+        .push([_solar_center])
         .face(offset_profile(_solar_main_sketch, SOLAR_WALL_THICKNESS))
         .clean()
         .reset()
@@ -606,7 +621,7 @@ solar_housing = (
     .workplane(offset=SOLAR_CEILING_TOP_Z)
     .placeSketch(
         cq.Sketch()
-        .push(_solar_placements)
+        .push(footprint_placements["solar_cell"])
         .face(offset_profile(_solar_main_sketch, TOLERANCE))
         .clean()
         .reset()
@@ -614,12 +629,17 @@ solar_housing = (
     .cutBlind(SOLAR_CELL_THICKNESS)
 )
 
+# --- main_body: fuse the housing with the top plate ---
+top_plate_right = top_plate_right.union(solar_housing)
+
+# We fill a void beneath the solar housing's left wall left by the top shell's fillet
+top_plate_right = top_plate_right.faces("-Z").faces("<X").extrude(-TOP_FILLET_RADIUS)
+
 top_plate_right = (
-    top_plate_right.union(solar_housing)
+    top_plate_right.workplaneFromTagged("solar_housing_battery_cutout")
     # We perform this cutout after union-ing with the rest of the body, so that the cutout can
     # affect the top shell, where a portion of the top shell around the solar circuitry that does
     # not support the solar housing
-    .workplaneFromTagged("solar_housing_battery_cutout")
     # cut through front to the back of the solar housing, leaving the solar housing wall intact
     .cutBlind(
         -(
