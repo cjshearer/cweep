@@ -73,11 +73,10 @@ def _fix_offset_edges(wire: cq.Wire):
 def offset_profile(sketch: cq.Sketch, amount: float):
     """Return a fresh sketch containing the offset of each face in *sketch*.
 
-    Moves each face to the origin before extracting wires so that
-    ``Wire.offset2D`` operates on geometry that is centred at (0,0).
-    This works around an OCC kernel bug where offsetting a circle wire
-    that carries a non-identity ``TopLoc_Location`` doubles the centre
-    point.  See CadQuery issues #896, #2046.
+    Moves each face to the origin before extracting wires so that ``Wire.offset2D`` operates on
+    geometry that is centred at (0,0). This works around an OCC kernel bug where offsetting a circle
+    wire that carries a non-identity ``TopLoc_Location`` doubles the centre point.  See CadQuery
+    issues #896, #2046.
     """
     source = sketch.copy().reset().clean()
     source_faces = source.faces().vals()
@@ -317,9 +316,7 @@ BATTERY_HEIGHT_ABOVE_TOP_SHELL = 3.905
 
 board_outline_sketch = feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
 
-# =============================================================================
-# Build 3D plates
-# =============================================================================
+# Build 3D plates ----------------------------------------------------------------------------------
 
 top_plate_right = cq.Workplane("XY").tag("base")
 bottom_plate = cq.Workplane("XY").tag("base")
@@ -622,8 +619,8 @@ top_plate_right = (
     top_plate_right.workplaneFromTagged("solar_housing_battery_cutout")
     # We perform this cutout after union-ing with the rest of the body, so that the cutout can
     # affect the top shell, where a portion of the top shell around the solar circuitry that does
-    # not support the solar housing
-    # cut through front to the back of the solar housing, leaving the solar housing wall intact
+    # not support the solar housing cut through front to the back of the solar housing, leaving the
+    # solar housing wall intact
     .cutBlind(
         -(
             front_solar_housing.val().distance(back_solar_housing.val())
