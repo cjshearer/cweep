@@ -266,6 +266,9 @@ for feature_name, layers in feature_sketch.items():
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
 
 TOLERANCE = 0.2
+# The first term is the cutting tolerance; the second accounts for the maximum powder coating
+# thickness on the backplate.
+BACKPLATE_TOLERANCE = TOLERANCE + 0.12
 
 PCB_THICKNESS = raw_board.general.thickness
 
@@ -338,9 +341,7 @@ _plate_top_outline = offset_profile(board_outline_sketch, SKIRT_THICKNESS)
 top_plate_right = (
     top_plate_right.workplaneFromTagged("base")
     .workplane()
-    .placeSketch(
-        cq.Sketch().face(_plate_top_outline).clean().reset()
-    )
+    .placeSketch(cq.Sketch().face(_plate_top_outline).clean().reset())
     .extrude(top_shell_height)
 )
 # apply: fillet the top face of the shell
@@ -386,7 +387,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_mounting_holes_placements)
-        .face(offset_profile(_mounting_holes_sketch, TOLERANCE))
+        .face(offset_profile(_mounting_holes_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -463,7 +464,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_kailh_placements)
-        .face(offset_profile(_kailh_bottom_sketch, TOLERANCE))
+        .face(offset_profile(_kailh_bottom_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -522,10 +523,7 @@ _battery_bottom_center = (
 )
 
 _battery_bottom_sketch = (
-    cq.Sketch()
-    .push([_battery_bottom_center])
-    .rect(7.75, 44.14)
-    .reset()
+    cq.Sketch().push([_battery_bottom_center]).rect(7.75, 44.14).reset()
 )
 # --- bottom: battery access through bottom plate ---
 bottom_plate = (
@@ -534,7 +532,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_battery_placements)
-        .face(offset_profile(_battery_bottom_sketch, TOLERANCE))
+        .face(offset_profile(_battery_bottom_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -691,7 +689,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_0603_placements)
-        .face(offset_profile(_0603_sketch, 2 * TOLERANCE))
+        .face(offset_profile(_0603_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -724,7 +722,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_power_ic_placements)
-        .face(offset_profile(_power_ic_sketch, 2 * TOLERANCE))
+        .face(offset_profile(_power_ic_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -758,7 +756,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_reset_placements)
-        .face(offset_profile(_reset_bottom_sketch, TOLERANCE))
+        .face(offset_profile(_reset_bottom_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -797,7 +795,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_solder_wires_placements)
-        .face(offset_profile(_solder_wires_sketch, TOLERANCE))
+        .face(offset_profile(_solder_wires_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -854,7 +852,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_mcu_placements)
-        .face(offset_profile(_mcu_bottom_sketch, TOLERANCE))
+        .face(offset_profile(_mcu_bottom_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
@@ -888,7 +886,7 @@ bottom_plate = (
     .placeSketch(
         cq.Sketch()
         .push(_power_switch_placements)
-        .face(offset_profile(_power_switch_bottom_sketch, TOLERANCE))
+        .face(offset_profile(_power_switch_bottom_sketch, BACKPLATE_TOLERANCE))
         .clean()
         .reset()
     )
