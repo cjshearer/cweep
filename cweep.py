@@ -41,19 +41,19 @@ if args.preview:
 
 
 def _fix_offset_edges(wire: cq.Wire):
-    """Return *wire* with any ``OffsetCurve`` edges replaced by B-splines.
+    """Return *wire* with any ``OffsetCurve`` edges converted to NURBS.
 
     ``Wire.offset2D`` can produce edges whose underlying geometry is an ``OffsetCurve`` (curve type
     7).  The OCC STEP exporter silently drops any face whose boundary contains such an edge.
+    ``BRepBuilderAPI_NurbsConvert`` rewrites each such edge as a B-spline while preserving its
+    geometry exactly, so that offsets of any size stay valid.
 
-    Uses ``GeomAPI_PointsToBSpline`` (OCCT's canonical curve-to-BSpline converter) to approximate
-    each OffsetCurve edge as a B-spline.
+    ``Wire.Edges`` is not guaranteed to be returned in traversal order, so the converted edges are
+    reassembled with ``Wire.assembleEdges``.
     """
     from OCP.BRepAdaptor import BRepAdaptor_Curve
-    from OCP.BRepBuilderAPI import BRepBuilderAPI_MakeEdge, BRepBuilderAPI_MakeWire
-    from OCP.GeomAbs import GeomAbs_C2, GeomAbs_OffsetCurve
-    from OCP.GeomAPI import GeomAPI_PointsToBSpline
-    from OCP.TColgp import TColgp_HArray1OfPnt
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_NurbsConvert
+    from OCP.GeomAbs import GeomAbs_OffsetCurve
 
     if not any(
         BRepAdaptor_Curve(e.wrapped).GetType() == GeomAbs_OffsetCurve
@@ -61,30 +61,13 @@ def _fix_offset_edges(wire: cq.Wire):
     ):
         return wire
 
-    new_edges = []
-    for edge in wire.Edges():
-        adaptor = BRepAdaptor_Curve(edge.wrapped)
-        if adaptor.GetType() != GeomAbs_OffsetCurve:
-            new_edges.append(edge.wrapped)
-            continue
-        u0, u1 = adaptor.FirstParameter(), adaptor.LastParameter()
-        n = max(10, int(edge.Length() / 0.5))
-        pts = TColgp_HArray1OfPnt(1, n)
-        for j in range(n):
-            pts.SetValue(j + 1, adaptor.Value(u0 + (u1 - u0) * j / (n - 1)))
-        approx = GeomAPI_PointsToBSpline(pts, 1, 8, GeomAbs_C2, 0.001)
-        if approx.IsDone():
-            p0 = adaptor.Value(u0)
-            p1 = adaptor.Value(u1)
-            new_edges.append(BRepBuilderAPI_MakeEdge(approx.Curve(), p0, p1).Edge())
-        else:
-            new_edges.append(edge.wrapped)
-
-    builder = BRepBuilderAPI_MakeWire()
-    for e in new_edges:
-        builder.Add(e)
-    builder.Build()
-    return cq.Wire.cast(builder.Wire())
+    edges = [
+        cq.Edge.cast(BRepBuilderAPI_NurbsConvert(edge.wrapped).Shape())
+        if BRepAdaptor_Curve(edge.wrapped).GetType() == GeomAbs_OffsetCurve
+        else edge
+        for edge in wire.Edges()
+    ]
+    return cq.Wire.assembleEdges(edges)
 
 
 def offset_profile(sketch: cq.Sketch, amount: float):
