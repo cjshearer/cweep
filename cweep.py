@@ -319,19 +319,11 @@ board_outline_sketch = feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
 # Build 3D plates ----------------------------------------------------------------------------------
 
 top_plate_right = cq.Workplane("XY").tag("base")
-bottom_plate = cq.Workplane("XY").tag("base")
 
 # ----------------------------------------------------------------- Plate shells
 
-# --- bottom_plate: board outline -> solid base ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch().push([cq.Location()]).face(board_outline_sketch).clean().reset()
-    )
-    .extrude(PLATE_BOTTOM_THICKNESS)
-)
+# --- bottom_plate: accumulate cutouts in a 2D profile, extruded once at the end ---
+_bottom_profile = cq.Sketch().face(board_outline_sketch).clean().reset()
 
 # --- top_shell: board outline -> main body with skirt ---
 _plate_top_outline = offset_profile(board_outline_sketch, SKIRT_THICKNESS)
@@ -378,17 +370,11 @@ top_plate_right = (
 )
 
 # --- drill: screw holes through bottom plate ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_mounting_holes_placements)
-        .face(offset_profile(_mounting_holes_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_mounting_holes_placements)
+    .face(offset_profile(_mounting_holes_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 
 # ------------------------------------------------------------- Kailh switches
@@ -455,17 +441,11 @@ top_plate_right = (
 )
 
 # --- bottom: switch pad relief on bottom plate ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_kailh_placements)
-        .face(offset_profile(_kailh_bottom_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_kailh_placements)
+    .face(offset_profile(_kailh_bottom_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 
 # ------------------------------------------------------------ Solar housing and battery cutout
@@ -523,17 +503,11 @@ _battery_bottom_sketch = (
     cq.Sketch().push([_battery_bottom_center]).rect(7.75, 44.14).reset()
 )
 # --- bottom: battery access through bottom plate ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_battery_placements)
-        .face(offset_profile(_battery_bottom_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_battery_placements)
+    .face(offset_profile(_battery_bottom_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 # apply: fillet the top face; walls around cutout flush with cell
 solar_housing = solar_housing.faces(">Z").fillet(TOP_FILLET_RADIUS)
@@ -680,17 +654,11 @@ top_plate_right = (
 )
 
 # --- body: capacitor clearance on bottom plate ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_0603_placements)
-        .face(offset_profile(_0603_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_0603_placements)
+    .face(offset_profile(_0603_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 
 # ------------------------------------------------------------------ Power IC
@@ -713,17 +681,11 @@ top_plate_right = (
 )
 
 # --- body: power IC clearance on bottom plate ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_power_ic_placements)
-        .face(offset_profile(_power_ic_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_power_ic_placements)
+    .face(offset_profile(_power_ic_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 
 # --------------------------------------------------------------- Reset button
@@ -747,17 +709,11 @@ top_plate_right = (
 )
 
 # --- bottom: reset button pad relief ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_reset_placements)
-        .face(offset_profile(_reset_bottom_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_reset_placements)
+    .face(offset_profile(_reset_bottom_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 
 # -------------------------------------------------------------- Solder wires
@@ -786,17 +742,11 @@ top_plate_right = (
     )
     .cutBlind(top_shell_height - skirt_height)
 )
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_solder_wires_placements)
-        .face(offset_profile(_solder_wires_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_solder_wires_placements)
+    .face(offset_profile(_solder_wires_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 
 # ------------------------------------------------------------ Microcontroller
@@ -844,16 +794,11 @@ top_plate_right = (
 )
 
 # --- bottom: MCU pin and jumper pad clearance ---
-bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .placeSketch(
-        cq.Sketch()
-        .push(_mcu_placements)
-        .face(offset_profile(_mcu_bottom_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+_bottom_profile = (
+    _bottom_profile.push(_mcu_placements)
+    .face(offset_profile(_mcu_bottom_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
 )
 
 # -------------------------------------------------------------- Power switch
@@ -877,17 +822,17 @@ top_plate_right = (
 )
 
 # --- bottom: power switch pad relief ---
+_bottom_profile = (
+    _bottom_profile.push(_power_switch_placements)
+    .face(offset_profile(_power_switch_bottom_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
+)
+
 bottom_plate = (
-    bottom_plate.workplaneFromTagged("base")
-    .workplane()
-    .placeSketch(
-        cq.Sketch()
-        .push(_power_switch_placements)
-        .face(offset_profile(_power_switch_bottom_sketch, BACKPLATE_TOLERANCE))
-        .clean()
-        .reset()
-    )
-    .cutBlind(PLATE_BOTTOM_THICKNESS)
+    cq.Workplane("XY")
+    .placeSketch(_bottom_profile.clean().reset())
+    .extrude(PLATE_BOTTOM_THICKNESS)
 )
 
 top_plate_left = top_plate_right.mirror("YZ")
