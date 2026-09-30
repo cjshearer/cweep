@@ -296,16 +296,15 @@ BATTERY_TAB_WIDTH = 5.08
 ORIGIN = cq.Vector(0, 0, 0)
 SOLAR_CELL_WIDTH = 15
 SOLAR_CELL_HEIGHT = 45
-# TODO: The thickness of the face that the solar cell rests on. This could probably be better
-# derived as providing a target height of the solar housing, and then letting the solar cell top
-# face take up whatever space is left
-SOLAR_TOP_THICKNESS = 1.13
 SOLAR_CELL_THICKNESS = 2.1
 SOLAR_TOP_Z = top_shell_height + 4.195
+# The solar cell's top face is the top of the housing; the face it rests on takes up the rest.
+SOLAR_HOUSING_HEIGHT = 7.425
+SOLAR_TOP_THICKNESS = (
+    SOLAR_HOUSING_HEIGHT - (SOLAR_TOP_Z - top_shell_height) - SOLAR_CELL_THICKNESS
+)
 SOLAR_CEILING_TOP_Z = SOLAR_TOP_Z + SOLAR_TOP_THICKNESS
 BATTERY_HEIGHT_ABOVE_TOP_SHELL = 3.905
-
-# from top_shell_height (8.852) to top of solar cell (13.445) is 4.597mm
 
 board_outline_sketch = feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
 
@@ -466,7 +465,7 @@ solar_housing = (
         .clean()
         .reset()
     )
-    .extrude(SOLAR_CEILING_TOP_Z + SOLAR_CELL_THICKNESS - top_shell_height)
+    .extrude(SOLAR_HOUSING_HEIGHT)
 )
 
 _battery_placements = footprint_placements["battery_cutout"]
