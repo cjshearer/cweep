@@ -297,13 +297,16 @@ ORIGIN = cq.Vector(0, 0, 0)
 SOLAR_CELL_WIDTH = 15
 SOLAR_CELL_HEIGHT = 45
 SOLAR_CELL_THICKNESS = 2.1
-SOLAR_TOP_Z = top_shell_height + 4.195
+# Height of the battery compartment below the face the solar cell rests on.
+SOLAR_COMPARTMENT_HEIGHT = 4.195
 # The solar cell's top face is the top of the housing; the face it rests on takes up the rest.
 SOLAR_HOUSING_HEIGHT = 7.425
 SOLAR_TOP_THICKNESS = (
-    SOLAR_HOUSING_HEIGHT - (SOLAR_TOP_Z - top_shell_height) - SOLAR_CELL_THICKNESS
+    SOLAR_HOUSING_HEIGHT - SOLAR_COMPARTMENT_HEIGHT - SOLAR_CELL_THICKNESS
 )
-SOLAR_CEILING_TOP_Z = SOLAR_TOP_Z + SOLAR_TOP_THICKNESS
+SOLAR_CEILING_TOP_Z = top_shell_height + SOLAR_COMPARTMENT_HEIGHT + SOLAR_TOP_THICKNESS
+# The front battery slot's top edge above the shell (and the slot's top-corner fillet radius); it
+# sits 0.29mm below the ceiling underside, leaving a lip of front wall.
 BATTERY_HEIGHT_ABOVE_TOP_SHELL = 3.905
 
 board_outline_sketch = feature_sketch.get(BOARD_FEATURE_NAME).get("Edge.Cuts")
