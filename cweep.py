@@ -575,7 +575,7 @@ solar_housing = (
     .workplane(offset=SOLAR_CEILING_TOP_Z)
     .placeSketch(
         cq.Sketch()
-        .push(footprint_placements["solar_cell"])
+        .push([_solar_center])
         .face(offset_profile(_solar_main_sketch, TOLERANCE))
         .clean()
         .reset()
