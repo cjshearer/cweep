@@ -110,6 +110,93 @@ def offset_profile(sketch: cq.Sketch, amount: float):
     return result.clean().reset()
 
 
+def _offset_wire(wire: cq.Wire, amount: float, grow: bool):
+    """Offset *wire* by ``±amount``, choosing the sign that grows or shrinks its enclosed area.
+
+    The sign of ``Wire.offset2D`` depends on the wire's orientation, so it is picked by area
+    instead.  Circle wires are moved to the origin first, because ``offset2D`` doubles the centre of
+    a located circle (see :func:`offset_profile`).  ``_fix_offset_edges`` converts the resulting
+    ``OffsetCurve`` edges to NURBS, without which an offset of the offset fails.
+    """
+    edges = wire.Edges()
+    if len(edges) == 1 and edges[0].geomType() == "CIRCLE":
+        centre = cq.Face.makeFromWires(wire).Center()
+        wire = wire.moved(cq.Location(cq.Vector(-centre.x, -centre.y, 0)))
+        back = cq.Location(cq.Vector(centre.x, centre.y, 0))
+    else:
+        back = cq.Location()
+
+    area = cq.Face.makeFromWires(wire).Area()
+    for distance in (amount, -amount):
+        try:
+            wires = [_fix_offset_edges(w) for w in wire.offset2D(distance)]
+        except ValueError:
+            continue
+        if (sum(cq.Face.makeFromWires(w).Area() for w in wires) > area) == grow:
+            return [w.moved(back) for w in wires]
+    return None
+
+
+def _offset_face(face: cq.Face, amount: float, erode: bool) -> list[cq.Face]:
+    """Erode or dilate a planar *face* by *amount*: its outer wire and holes move oppositely."""
+    outer = _offset_wire(face.outerWire(), amount, grow=not erode)
+    if outer is None:
+        return []
+
+    wires = list(outer)
+    for inner in face.innerWires():
+        offset = _offset_wire(inner, amount, grow=erode)
+        wires.extend(offset if offset else [inner])
+
+    wires.sort(key=lambda w: cq.Face.makeFromWires(w).Area(), reverse=True)
+    result = cq.Sketch().face(cq.Face.makeFromWires(wires[0]))
+    for wire in wires[1:]:
+        result = result.face(cq.Face.makeFromWires(wire), mode="s")
+    return result.clean().reset().faces().vals()
+
+
+def open_profile(sketch: cq.Sketch, amount: float) -> cq.Sketch:
+    """Return *sketch* with material thinner than ``2 * amount`` removed (morphological opening).
+
+    Each face is eroded and then dilated by *amount*, so cutouts separated by less than ``2 *
+    amount`` merge and no web thinner than that survives.  Material islands left disconnected by the
+    merged cutouts are dropped.  The result is rebuilt on the opened outer boundary so the part
+    outline follows any cutout that merged into it.
+    """
+    faces = sketch.faces().vals()
+    original_holes = [inner for face in faces for inner in face.innerWires()]
+
+    opened_faces = []
+    holes = cq.Sketch()
+    for face in faces:
+        for eroded in _offset_face(face, amount, erode=True):
+            for opened in _offset_face(eroded, amount, erode=False):
+                opened_faces.append(opened)
+                for inner in opened.innerWires():
+                    holes = holes.face(cq.Face.makeFromWires(inner), mode="a")
+
+    outline = max(opened_faces, key=lambda f: f.Area()).outerWire()
+    profile = (
+        cq.Sketch()
+        .face(cq.Face.makeFromWires(outline))
+        .face(holes.clean().reset(), mode="s")
+        .clean()
+        .reset()
+    )
+
+    # The erosion can erase a cutout whose neighbour is only marginally wider than the minimum web,
+    # so put back any original cutout whose centre the opening filled in.
+    material = cq.Workplane("XY").placeSketch(profile).extrude(1).val()
+    for original in original_holes:
+        centre = cq.Face.makeFromWires(original).Center()
+        if material.isInside(cq.Vector(centre.x, centre.y, 0.5)):
+            profile = profile.face(cq.Face.makeFromWires(original), mode="s").clean().reset()
+
+    # Any but the largest face is a material island disconnected by the merged cutouts; drop it.
+    main = max(profile.faces().vals(), key=lambda f: f.Area())
+    return cq.Sketch().face(main).clean().reset()
+
+
 def add_item_to_sketch(sketch: cq.Sketch, item):
     # KiCad names graphic items as GrXxx (board) or FpXxx (footprint); strip the 2-char prefix.
     shape = item.__class__.__name__[2:]
@@ -268,6 +355,8 @@ TOLERANCE = 0.2
 # The first term is the cutting tolerance; the second accounts for the maximum powder coating
 # thickness on the backplate.
 BACKPLATE_TOLERANCE = TOLERANCE + 0.12
+# Minimum material between backplate cutouts that sheet metal fabrication can reliably cut.
+MIN_BACKPLATE_WEB = 1.0
 
 PCB_THICKNESS = raw_board.general.thickness
 
@@ -823,17 +912,22 @@ _bottom_profile = (
     .reset()
 )
 
-bottom_plate = (
-    cq.Workplane("XY")
-    .placeSketch(_bottom_profile.clean().reset())
-    .extrude(PLATE_BOTTOM_THICKNESS)
-)
+# --- backplate: open the cutouts so no web is thinner than MIN_BACKPLATE_WEB ---
+_bottom_profile = open_profile(_bottom_profile, MIN_BACKPLATE_WEB / 2)
+
+_bottom_plane = cq.Workplane("XY").placeSketch(_bottom_profile.clean().reset())
+
+bottom_plate = _bottom_plane.extrude(PLATE_BOTTOM_THICKNESS)
 
 top_plate_left = top_plate_right.mirror("YZ")
 
 case_dir = cwd / "case"
 case_dir.mkdir(parents=True, exist_ok=True)
-cq.exporters.export(bottom_plate.faces("<Z"), str(case_dir / "bottom_plate.dxf"))
+cq.exporters.export(
+    _bottom_plane,
+    str(case_dir / "bottom_plate.dxf"),
+    opt={"approx": "spline"},
+)
 cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.step"))
 cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.stl"))
 cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.step"))
