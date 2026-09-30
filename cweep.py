@@ -302,13 +302,6 @@ SOLAR_CELL_HEIGHT = 45
 SOLAR_TOP_THICKNESS = 1.13
 SOLAR_CELL_THICKNESS = 2.1
 SOLAR_TOP_Z = top_shell_height + 4.195
-# TODO: derive solar center from the left edge of the case, the left edge of the kailh user.drawings
-# (identify a particular switch footprint as the one that is 3rd from top), then the bottom will
-# similarly be the top of the kailh user.drawings switch (identify this switch as the left-most
-# switch), and the top will continue to be driven by the top left corner of the pcb outline. From
-# there, the solar wall thickness will be whatever space is left between the solar cell footprint
-# and the defined solar cell area.
-SOLAR_WALL_THICKNESS = 1.6375
 SOLAR_CEILING_TOP_Z = SOLAR_TOP_Z + SOLAR_TOP_THICKNESS
 BATTERY_HEIGHT_ABOVE_TOP_SHELL = 3.905
 
@@ -451,15 +444,14 @@ _bottom_profile = (
 # ------------------------------------------------------------ Solar housing and battery cutout
 
 # The solar housing is defined directly in this file: a cell of SOLAR_CELL_WIDTH x SOLAR_CELL_HEIGHT
-# surrounded by SOLAR_WALL_THICKNESS of wall.  Its position is derived so that the housing wall's
-# top-left corner overlaps the top-left corner of the top plate's outline.
+# surrounded by SOLAR_WALL_THICKNESS of wall.  The cell takes its position from its PCB footprint,
+# and the wall is the space left between the cell's left edge and the top plate's left edge.
 _solar_main_sketch = cq.Sketch().rect(SOLAR_CELL_WIDTH, SOLAR_CELL_HEIGHT).clean()
 
 _plate_top_left = _plate_top_outline.wires().vertices("<X").vertices(">Y").val()
-_solar_center = cq.Location(
-    _plate_top_left.X + SOLAR_CELL_WIDTH / 2 + SOLAR_WALL_THICKNESS,
-    _plate_top_left.Y - SOLAR_CELL_HEIGHT / 2,
-    0,
+_solar_center = footprint_placements["solar_cell"][0]
+SOLAR_WALL_THICKNESS = (
+    _solar_center.toTuple()[0][0] - SOLAR_CELL_WIDTH / 2 - _plate_top_left.X
 )
 
 # --- main_body: build solar housing as a standalone solid ---
