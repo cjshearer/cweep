@@ -926,7 +926,7 @@ case_dir.mkdir(parents=True, exist_ok=True)
 cq.exporters.export(
     _bottom_plane,
     str(case_dir / "bottom_plate.dxf"),
-    opt={"approx": "spline"},
+    opt={"approx": "arc"},
 )
 cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.step"))
 cq.exporters.export(bottom_plate, str(case_dir / "bottom_plate.stl"))
