@@ -352,15 +352,15 @@ for feature_name, layers in feature_sketch.items():
 # Build 3D plates based on extracted edges and specified dimensions --------------------------------
 
 TOLERANCE = 0.2
-# The first term is the cutting tolerance; the second accounts for the maximum powder coating
-# thickness on the backplate.
-BACKPLATE_TOLERANCE = TOLERANCE + 0.12
-# Minimum material between backplate cutouts that sheet metal fabrication can reliably cut.
-MIN_BACKPLATE_WEB = 1.0
+# The backplate is fiber laser cut and powder coated (SendCutSend): grow each cutout by the cut
+# tolerance plus the maximum coating thickness added to one side.
+BACKPLATE_TOLERANCE = 0.127 + 0.127
+# Minimum material between backplate cutouts that the fiber laser can reliably cut.
+MIN_BACKPLATE_WEB = 0.813
 
 PCB_THICKNESS = raw_board.general.thickness
 
-PLATE_BOTTOM_THICKNESS = 2
+PLATE_BOTTOM_THICKNESS = 1.88
 PLATE_TOP_COVER_THICKNESS = 0.8
 PLATE_TOP_SWITCH_THICKNESS = 1.3
 PLATE_TOP_SPACER_THICKNESS = 0.9
