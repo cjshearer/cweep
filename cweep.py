@@ -365,6 +365,9 @@ PLATE_TOP_COVER_THICKNESS = 0.8
 PLATE_TOP_SWITCH_THICKNESS = 1.3
 PLATE_TOP_SPACER_THICKNESS = 0.9
 SKIRT_THICKNESS = 2
+# The backplate is offset outward so it laps into the skirt wall, leaving a half-thickness wall
+# around it instead of being widened to the full shell outline.
+BACKPLATE_EDGE_OFFSET = SKIRT_THICKNESS / 2
 TOP_FILLET_RADIUS = 1
 
 TOP_CUT_LOWER_THICKNESS = PLATE_TOP_SPACER_THICKNESS + PLATE_TOP_SWITCH_THICKNESS
@@ -406,11 +409,18 @@ top_plate_right = cq.Workplane("XY").tag("base")
 
 # ----------------------------------------------------------------- Plate shells
 
+# The top shell is offset outward from the board outline.  The bottom plate is offset less, so it
+# laps into the skirt wall instead of sharing the shell's outline.
+_plate_top_outline = offset_profile(board_outline_sketch, SKIRT_THICKNESS)
+# The recess in the shell wall that houses the backplate, and the backplate itself, grown less by
+# the cut tolerance so it fits into the recess.
+_bottom_recess_outline = offset_profile(board_outline_sketch, BACKPLATE_EDGE_OFFSET)
+_bottom_outline = offset_profile(board_outline_sketch, BACKPLATE_EDGE_OFFSET - TOLERANCE)
+
 # --- bottom_plate: accumulate cutouts in a 2D profile, extruded once at the end ---
-_bottom_profile = cq.Sketch().face(board_outline_sketch).clean().reset()
+_bottom_profile = cq.Sketch().face(_bottom_outline).clean().reset()
 
 # --- top_shell: board outline -> main body with skirt ---
-_plate_top_outline = offset_profile(board_outline_sketch, SKIRT_THICKNESS)
 top_plate_right = (
     top_plate_right.workplaneFromTagged("base")
     .workplane()
@@ -432,6 +442,13 @@ top_plate_right = (
         .reset()
     )
     .cutBlind(skirt_height)
+)
+# Clear the lower skirt to the recess so the backplate laps into the wall.
+top_plate_right = (
+    top_plate_right.workplaneFromTagged("base")
+    .workplane()
+    .placeSketch(cq.Sketch().face(_bottom_recess_outline).clean().reset())
+    .cutBlind(PLATE_BOTTOM_THICKNESS)
 )
 
 # --------------------------------------------------------------- Mounting holes
