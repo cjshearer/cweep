@@ -190,7 +190,9 @@ def open_profile(sketch: cq.Sketch, amount: float) -> cq.Sketch:
     for original in original_holes:
         centre = cq.Face.makeFromWires(original).Center()
         if material.isInside(cq.Vector(centre.x, centre.y, 0.5)):
-            profile = profile.face(cq.Face.makeFromWires(original), mode="s").clean().reset()
+            profile = (
+                profile.face(cq.Face.makeFromWires(original), mode="s").clean().reset()
+            )
 
     # Any but the largest face is a material island disconnected by the merged cutouts; drop it.
     main = max(profile.faces().vals(), key=lambda f: f.Area())
@@ -415,7 +417,9 @@ _plate_top_outline = offset_profile(board_outline_sketch, SKIRT_THICKNESS)
 # The recess in the shell wall that houses the backplate, and the backplate itself, grown less by
 # the cut tolerance so it fits into the recess.
 _bottom_recess_outline = offset_profile(board_outline_sketch, BACKPLATE_EDGE_OFFSET)
-_bottom_outline = offset_profile(board_outline_sketch, BACKPLATE_EDGE_OFFSET - TOLERANCE)
+_bottom_outline = offset_profile(
+    board_outline_sketch, BACKPLATE_EDGE_OFFSET - TOLERANCE
+)
 
 # --- bottom_plate: accumulate cutouts in a 2D profile, extruded once at the end ---
 _bottom_profile = cq.Sketch().face(_bottom_outline).clean().reset()
@@ -606,6 +610,22 @@ _battery_bottom_sketch = (
 _bottom_profile = (
     _bottom_profile.push(_battery_placements)
     .face(offset_profile(_battery_bottom_sketch, BACKPLATE_TOLERANCE), mode="s")
+    .clean()
+    .reset()
+)
+
+# --- bottom: battery tab pad relief ---
+# 
+# The tabs pass through the bottom plate and their solder beads up around the pads, so cut the pads
+# out of the plate.
+_bottom_profile = (
+    _bottom_profile.push(_battery_placements)
+    .face(
+        offset_profile(
+            feature_sketch.get("battery_cutout").get("pads"), BACKPLATE_TOLERANCE
+        ),
+        mode="s",
+    )
     .clean()
     .reset()
 )
@@ -952,50 +972,51 @@ cq.exporters.export(top_plate_left, str(case_dir / "top_plate_left.stl"))
 cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.step"))
 cq.exporters.export(top_plate_right, str(case_dir / "top_plate_right.stl"))
 
-# Preview generated plates with PCB assembly if available ------------------------------------------
+# Preview generated plates with PCB assembly if applicable -----------------------------------------
+if args.preview:
+    pcb_assembly_path = case_dir / "cweep.step"
+    pcb_assembly = None
+    if pcb_assembly_path.exists():
+        pcb_assembly = cq.importers.importStep(str(pcb_assembly_path))
+        # the model's z-origin is set based on the bottom of the PCB body, not the PCB solder mask
+        # or copper layers between, so we lift it up by the thickness of those other layers
+        pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
 
-pcb_assembly_path = case_dir / "cweep.step"
-pcb_assembly = None
-if pcb_assembly_path.exists():
-    pcb_assembly = cq.importers.importStep(str(pcb_assembly_path))
-    # the model's z-origin is set based on the bottom of the PCB body, not the PCB solder mask or
-    # copper layers between, so we lift it up by the thickness of those other layers
-    pcb_assembly = pcb_assembly.translate((0, 0, PLATE_BOTTOM_THICKNESS + 0.05))
-
-mounting_hole_locations = cq.Workplane("XY").pushPoints(
-    face.Center()
-    for footprint_location in footprint_placements["mounting_holes"]
-    for face in feature_sketch["mounting_holes"]["drill"]
-    .moved(footprint_location)
-    .faces()
-    .vals()
-)
-
-hardware_instances = []
-for model_path, z_min in [
-    ("3dmodels/com_mcmaster/91294A004_hex_drive_flat_head_screw_m2x0.4x6.stp", 0),
-    ("3dmodels/com_grabcad_shrey.g-2/m2x2x3.2_threaded-insert.step", skirt_height),
-]:
-    template = cq.importers.importStep(str(cwd / model_path)).val()
-    template = template.rotate((0, 0, 0), (1, 0, 0), 180)
-    template = template.translate((0, 0, z_min - template.BoundingBox().zmin))
-    hardware_instances.append(
-        mounting_hole_locations.eachpoint(template, clean=False).combine(clean=False)
+    mounting_hole_locations = cq.Workplane("XY").pushPoints(
+        face.Center()
+        for footprint_location in footprint_placements["mounting_holes"]
+        for face in feature_sketch["mounting_holes"]["drill"]
+        .moved(footprint_location)
+        .faces()
+        .vals()
     )
 
-preview_objects = [
-    bottom_plate,
-    top_plate_right,
-    pcb_assembly,
-    *hardware_instances,
-]
-preview_colors = [
-    "#707070",
-    "#5994dc",
-    "#ffc731",
-    "#ff0000",
-    "#00ff00",
-]
+    hardware_instances = []
+    for model_path, z_min in [
+        ("3dmodels/com_mcmaster/91294A004_hex_drive_flat_head_screw_m2x0.4x6.stp", 0),
+        ("3dmodels/com_grabcad_shrey.g-2/m2x2x3.2_threaded-insert.step", skirt_height),
+    ]:
+        template = cq.importers.importStep(str(cwd / model_path)).val()
+        template = template.rotate((0, 0, 0), (1, 0, 0), 180)
+        template = template.translate((0, 0, z_min - template.BoundingBox().zmin))
+        hardware_instances.append(
+            mounting_hole_locations.eachpoint(template, clean=False).combine(
+                clean=False
+            )
+        )
 
-if args.preview:
+    preview_objects = [
+        bottom_plate,
+        top_plate_right,
+        pcb_assembly,
+        *hardware_instances,
+    ]
+    preview_colors = [
+        "#707070",
+        "#5994dc",
+        "#ffc731",
+        "#ff0000",
+        "#00ff00",
+    ]
+
     show(*preview_objects, colors=preview_colors)
